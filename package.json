@@ -2,7 +2,21 @@
   "name": "astropilot",
   "version": "0.1.0",
   "private": true,
+  "description": "Dateibasiertes Content-Framework mit Standard-Theme für Astro.",
   "type": "module",
+  "files": [
+    "src/lib/astropilot/",
+    "src/package/",
+    "src/themes/default/",
+    "README.md"
+  ],
+  "exports": {
+    ".": "./src/package/index.ts",
+    "./content": "./src/package/content.ts",
+    "./config": "./src/package/config.ts",
+    "./page": "./src/package/page.astro",
+    "./package.json": "./package.json"
+  },
   "engines": {
     "node": ">=24.0.0"
   },
@@ -15,20 +29,24 @@
     "validate": "node --import tsx scripts/validate-content.ts",
     "test": "node --import tsx --test tests/**/*.test.ts",
     "test:a11y": "node --import tsx scripts/test-a11y.ts",
-    "test:source": "node --import tsx scripts/check-source-files.ts"
+    "test:source": "node --import tsx scripts/check-source-files.ts",
+    "pack:check": "npm pack --dry-run"
+  },
+  "peerDependencies": {
+    "astro": "^7.3.3"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.3.1",
     "@astrojs/sitemap": "^3.7.4",
     "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.3",
-    "astro": "^7.3.3",
     "daisyui": "^5.7.42",
     "remark-parse": "^11.0.0",
     "tailwindcss": "^4.3.3",
     "unified": "^11.0.5",
     "unist-util-visit": "^5.1.0",
-    "yaml": "^2.9.1"
+    "yaml": "^2.9.1",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
@@ -38,6 +56,7 @@
     "playwright": "^1.63.0",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
-    "vitest": "^5.0.1"
+    "vitest": "^5.0.1",
+    "astro": "^7.3.3"
   }
 }

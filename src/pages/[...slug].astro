@@ -1,22 +1,8 @@
 ---
-import { getCollection, render } from 'astro:content';
-import { assemblePages } from '../lib/astropilot/pages';
-import { loadSiteConfig } from '../lib/astropilot/site-config';
-import PageLayout from '../themes/default/layouts/PageLayout.astro';
-import Hero from '../themes/default/components/Hero.astro';
-import Section from '../themes/default/components/Section.astro';
+import AstroPilotPage, { getAstroPilotStaticPaths } from 'astropilot/page';
 
-export async function getStaticPaths() {
-  const pages = assemblePages(await getCollection('pages'), await getCollection('documents'));
-  return pages.map((page) => ({ params: { slug: page.route === '/' ? undefined : page.route.slice(1, -1) }, props: { page } }));
-}
+export const getStaticPaths = getAstroPilotStaticPaths;
 
 const { page } = Astro.props;
-const site = loadSiteConfig();
-const hero = page.hero ? await render(page.hero) : undefined;
-const sections = await Promise.all(page.sections.map(async (section) => ({ section, rendered: await render(section) })));
 ---
-<PageLayout site={site} title={page.entry.data.title} description={page.entry.data.description} route={page.route}>
-  {hero ? <Hero title={page.entry.data.title} hero={page.hero!} Content={hero.Content} /> : <div class="site-shell py-12 sm:py-16"><h1 id="page-title" class="text-4xl font-bold tracking-tight sm:text-5xl">{page.entry.data.title}</h1></div>}
-  {sections.map(({ section, rendered }) => <Section section={section} Content={rendered.Content} />)}
-</PageLayout>
+<AstroPilotPage page={page} />

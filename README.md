@@ -2,6 +2,59 @@
 
 AstroPilot ist derzeit ein lokal entwickeltes, dateibasiertes Content-Framework auf Astro. Dieses Repository ist eine lauffähige Beispielwebsite, **kein veröffentlichtes npm-Paket** und keine Aussage über die Verfügbarkeit des Paketnamens.
 
+## Lokale Paketnutzung vorbereiten
+
+AstroPilot stellt eine kleine öffentliche Paketoberfläche bereit:
+
+- `astropilot/content` mit `createAstroPilotCollections()`
+- `astropilot/config` mit `createAstroPilotConfig()`
+- `astropilot/page` mit der gemeinsamen Route und `getAstroPilotStaticPaths()`
+
+Die eigene Demo verwendet diese Imports bereits selbst. Für einen späteren lokalen Verbraucher wird ein Tarball mit `npm pack` erzeugt und dort installiert. Das Paket bleibt bis zu einem bewussten Veröffentlichungsauftrag `private` und wird nicht in die npm-Registry veröffentlicht.
+
+Ein Verbraucherprojekt benötigt dann eigene Inhalte sowie diese drei kleinen Einbindungen:
+
+```ts
+// src/content.config.ts
+import { createAstroPilotCollections } from 'astropilot/content';
+
+export const collections = createAstroPilotCollections();
+```
+
+```ts
+// astro.config.ts
+import { defineConfig } from 'astro/config';
+import { createAstroPilotConfig } from 'astropilot/config';
+
+export default defineConfig(createAstroPilotConfig());
+```
+
+```astro
+---
+// src/pages/[...slug].astro
+import AstroPilotPage, { getAstroPilotStaticPaths } from 'astropilot/page';
+
+export const getStaticPaths = getAstroPilotStaticPaths;
+const { page } = Astro.props;
+---
+
+<AstroPilotPage page={page} />
+```
+
+Die Content-Dateien gehören dabei ausschließlich dem Verbraucherprojekt. Den installierbaren Stand prüfst du ohne Registry-Veröffentlichung so:
+
+```sh
+# im AstroPilot-Repository
+npm pack
+
+# im separaten Astro-Verbraucherprojekt
+npm install /absoluter/pfad/zu/astropilot-0.1.0.tgz
+npm run check
+npm run build
+```
+
+Die resultierende `.tgz` ist in diesem Repository ignoriert. Ein frisches temporäres Verbraucherprojekt mit eigener `site.yaml` und Markdown-Section wurde auf diese Weise erfolgreich geprüft.
+
 ## Starten
 
 Voraussetzung ist Node.js 24 LTS oder neuer (getestet mit 24.20.0).
