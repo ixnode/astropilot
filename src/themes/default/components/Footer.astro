@@ -1,0 +1,12 @@
+---
+import type { SiteConfig } from '../../../lib/astropilot/types';
+import { contentHref } from '../../../lib/astropilot/urls';
+interface Props { site: SiteConfig; }
+const { site } = Astro.props;
+---
+<footer class="border-t border-base-300 bg-base-200">
+  <div class="site-shell flex flex-wrap items-center justify-between gap-4 py-8 text-sm">
+    <p>{site.footer.text}</p>
+    <nav aria-label="Fußnavigation"><ul class="flex flex-wrap gap-4">{site.footer.links.map((link) => <li><a href={contentHref(link.href, site)}>{link.label}</a></li>)}</ul></nav>
+  </div>
+</footer>

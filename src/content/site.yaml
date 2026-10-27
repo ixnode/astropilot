@@ -1,0 +1,19 @@
+name: AstroPilot
+url: https://example.com
+base: /
+language: de
+header:
+  links:
+    - label: Startseite
+      href: /
+    - label: FAQ
+      href: /faq/
+    - label: Info
+      href: /info/
+    - label: Kontakt
+      href: /kontakt/
+footer:
+  text: Eine Beispielwebsite mit AstroPilot.
+  links:
+    - label: Kontakt
+      href: /kontakt/

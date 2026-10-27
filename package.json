@@ -1,0 +1,43 @@
+{
+  "name": "astropilot",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "npm run validate && astro build && node --import tsx scripts/verify-build.ts",
+    "build:demo": "ASTROPILOT_BASE=/demo/ npm run build",
+    "preview": "astro preview",
+    "check": "npm run validate && astro check",
+    "validate": "node --import tsx scripts/validate-content.ts",
+    "test": "node --import tsx --test tests/**/*.test.ts",
+    "test:a11y": "node --import tsx scripts/test-a11y.ts",
+    "test:source": "node --import tsx scripts/check-source-files.ts"
+  },
+  "dependencies": {
+    "@astrojs/markdown-remark": "^7.3.1",
+    "@astrojs/sitemap": "^3.7.4",
+    "@tailwindcss/typography": "^0.5.20",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.3.3",
+    "daisyui": "^5.7.42",
+    "remark-parse": "^11.0.0",
+    "tailwindcss": "^4.3.3",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.1.0",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
+    "axe-core": "^4.13.0",
+    "playwright": "^1.63.0",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.1"
+  }
+}

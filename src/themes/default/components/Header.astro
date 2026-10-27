@@ -1,0 +1,20 @@
+---
+import type { Link, SiteConfig } from '../../../lib/astropilot/types';
+import { contentHref } from '../../../lib/astropilot/urls';
+
+interface Props { site: SiteConfig; route: string; }
+const { site, route } = Astro.props;
+const isActive = (link: Link) => link.href === route;
+---
+<header class="border-b border-base-300 bg-base-100">
+  <div class="site-shell flex flex-wrap items-center justify-between gap-x-8 gap-y-3 py-4">
+    <a class="text-lg font-bold no-underline" href={contentHref('/', site)}>{site.name}</a>
+    <nav aria-label="Hauptnavigation">
+      <ul class="flex flex-wrap items-center gap-x-2 gap-y-1">
+        {site.header.links.map((link) => (
+          <li><a class="btn btn-ghost btn-sm" href={contentHref(link.href, site)} aria-current={isActive(link) ? 'page' : undefined}>{link.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>

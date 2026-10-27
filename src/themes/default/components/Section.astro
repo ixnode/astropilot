@@ -1,0 +1,11 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { toneOf } from '../../../lib/astropilot/pages';
+
+interface Props { section: CollectionEntry<'documents'>; Content: Awaited<ReturnType<typeof import('astro:content').render>>['Content']; }
+const { section, Content } = Astro.props;
+const toneClass = { default: 'tone-default', muted: 'tone-muted', brand: 'tone-brand' }[toneOf(section)];
+---
+<section class:list={[toneClass, 'py-12 sm:py-16']}>
+  <div class="site-shell max-w-4xl"><div class="content-prose"><Content /></div></div>
+</section>
