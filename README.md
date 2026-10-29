@@ -85,15 +85,15 @@ npm run build:demo  # prüft den Build einmalig mit Base /demo/
 pages/
 ├── page.yaml            # Startseite
 ├── hero.md              # optional
-├── 01-einleitung.md     # Abschnitte, numerisch sortiert
+├── 01-section.einleitung.md  # Abschnitte, numerisch sortiert
 └── faq/
     ├── page.yaml
-    └── 01-fragen.md
+    └── 01-section.fragen.md
 ```
 
 `page.yaml` benötigt einen nicht leeren `title` und eine `description`. Sein Ordner wird direkt zur URL: `faq/page.yaml` wird `/faq/`; eine tiefere `leistungen/monitoring/page.yaml` wird `/leistungen/monitoring/`.
 
-Ein `hero.md` aktiviert den gemeinsamen Hero. Löschen Sie die Datei, um stattdessen die schlichte sichtbare `h1` oberhalb der Sections zu verwenden. Sections heißen `NN-name.md`, beginnen mit einer `h2` und können `tone: default`, `muted` oder `brand` im Frontmatter setzen. Interne Links bleiben immer website-root-relativ, etwa `/faq/`; AstroPilot wendet `base` einmalig an. Überschrift-IDs werden aus Dateiname und Überschrift gebildet, etwa `01-einleitung-inhalte-die-im-projekt-bleiben`, damit Sprunglinks über zusammengesetzte Markdown-Dateien eindeutig sind.
+Ein `hero.md` aktiviert den gemeinsamen Hero. Löschen Sie die Datei, um stattdessen die schlichte sichtbare `h1` oberhalb der Sections zu verwenden. Sections heißen verbindlich `NN-section.name.md`, beginnen mit einer `h2` und können `tone: default`, `muted` oder `brand` im Frontmatter setzen. Interne Links bleiben immer website-root-relativ, etwa `/faq/`; AstroPilot wendet `base` einmalig an. Überschrift-IDs werden aus Dateiname und Überschrift gebildet, etwa `01-section.einleitung-inhalte-die-im-projekt-bleiben`, damit Sprunglinks über zusammengesetzte Markdown-Dateien eindeutig sind.
 
 ## Struktur und Theme
 

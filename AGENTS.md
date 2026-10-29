@@ -41,22 +41,22 @@ src/content/
 └── pages/
     ├── page.yaml
     ├── hero.md
-    ├── 01-einleitung.md
-    ├── 02-vorteile.md
-    ├── 03-weiterlesen.md
+    ├── 01-section.einleitung.md
+    ├── 02-section.vorteile.md
+    ├── 03-section.weiterlesen.md
     ├── faq/
     │   ├── page.yaml
     │   ├── hero.md
-    │   ├── 01-allgemeine-fragen.md
-    │   └── 02-inhalte-pflegen.md
+    │   ├── 01-section.allgemeine-fragen.md
+    │   └── 02-section.inhalte-pflegen.md
     ├── info/
     │   ├── page.yaml
     │   ├── hero.md
-    │   ├── 01-ueber-astropilot.md
-    │   └── 02-arbeitsweise.md
+    │   ├── 01-section.ueber-astropilot.md
+    │   └── 02-section.arbeitsweise.md
     └── kontakt/
         ├── page.yaml
-        └── 01-kontakt.md
+        └── 01-section.kontakt.md
 ```
 
 ### Globale Konfiguration: `site.yaml`
@@ -121,7 +121,7 @@ Eine kurze Einführung in die Inhalte dieser Seite.
 - Ohne Hero rendert das Layout eine schlichte sichtbare `h1` vor den Sections.
 - Hauptseite, FAQ und Info nutzen dieselbe Hero-Komponente mit jeweils eigenen Inhalten. Keine drei kopierten Implementierungen.
 
-### Sections: `NN-name.md`
+### Sections: `NN-section.name.md`
 
 ```md
 ---
@@ -136,7 +136,7 @@ Hier steht normaler Markdown-Inhalt.
 ```
 
 - Nur direkt im Seitenordner liegende Dateien gehören zur jeweiligen Seite; keine Vermischung mit Unterseiten.
-- Numerische Präfixe mit mindestens zwei Ziffern; numerisch sortieren. Doppelte Nummern sind Fehler. Lücken sind erlaubt.
+- Numerische Präfixe mit mindestens zwei Ziffern sowie das verbindliche Literal `section.`; numerisch sortieren. Doppelte Nummern sind Fehler. Lücken sind erlaubt.
 - `tone`: ausschließlich `default`, `muted`, `brand`; fehlender Wert bedeutet `default`.
 - Eine Datei wird als ein semantischer Inhaltsabschnitt dargestellt. Sie beginnt inhaltlich mit einer sinnvollen `h2`; weitere Ebenen müssen logisch folgen. Keine `h1` im Hero- oder Section-Markdown.
 - Keine eigene Section-Direktive, keine Steuerkommentare, kein MDX, keine CSS-Klassen oder Inline-Styles in Content-Dateien.

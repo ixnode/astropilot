@@ -12,7 +12,7 @@ export interface AssembledPage {
   sections: DocumentEntry[];
 }
 
-const sectionName = /(?:^|\/)(\d{2,})-[a-z0-9][a-z0-9-]*(?:\.md)?$/;
+const sectionName = /(?:^|\/)(\d{2,})-section\.[a-z0-9][a-z0-9-]*(?:\.md)?$/;
 
 export function assemblePages(pageEntries: PageEntry[], documentEntries: DocumentEntry[]): AssembledPage[] {
   const pages = pageEntries.map((entry) => {
