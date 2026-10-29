@@ -1,0 +1,4 @@
+interface:
+    display_name: "Release Minor"
+    short_description: "Prepare the next minor release"
+    default_prompt: "Use $release-minor to prepare the next minor release for this repository."

@@ -1,0 +1,4 @@
+interface:
+    display_name: "OCM"
+    short_description: "Create a one-line commit message"
+    default_prompt: "Use $ocm to generate a one-line commit message for the current uncommitted changes."

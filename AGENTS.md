@@ -189,6 +189,12 @@ Bei Framework-Entwicklung dürfen Core, Theme und Astro-Konfiguration im vereinb
 Bei reinen Inhaltsaufträgen bearbeite nur Inhalte, freigegebene Website-Einstellungen und Assets. Erweitere nicht ungefragt das Inhaltsmodell oder Styles, um einen Inhalt passend zu machen.
 Diese Regeln sind Verhaltensanweisungen, keine technische Sandbox. Behaupte nicht, ein Agent mit vollständigem Dateizugriff könne das Layout unmöglich verändern.
 
+## Repository-lokale Codex-Skills und Versionen
+
+- Die projektbezogenen Workflows liegen unter `.codex/skills/`. Nutze sie, wenn der Nutzer sie ausdrücklich mit ihrem Namen oder Kürzel aufruft.
+- Release-Workflows bereiten einen Release vor; `npm publish`, einen GitHub-Release, Tags oder einen Push nur auf ausdrücklichen Auftrag ausführen.
+- Die veröffentlichbare Version muss in `package.json`, `VERSION` und `CHANGELOG.md` übereinstimmen. Der Changelog folgt Keep a Changelog und SemVer.
+
 ## Prüfungen und Dokumentation
 
 Stelle mindestens diese Befehle bereit:

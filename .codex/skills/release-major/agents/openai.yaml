@@ -1,0 +1,4 @@
+interface:
+    display_name: "Release Major"
+    short_description: "Prepare the next major release"
+    default_prompt: "Use $release-major to prepare the next major release for this repository."

@@ -1,0 +1,4 @@
+interface:
+    display_name: "Release Patch"
+    short_description: "Prepare the next patch release"
+    default_prompt: "Use $release-patch to prepare the next patch release for this repository."
