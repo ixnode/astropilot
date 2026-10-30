@@ -6,10 +6,10 @@ interface Props { title: string; hero: CollectionEntry<'documents'>; Content: Aw
 const { title, hero, Content } = Astro.props;
 const toneClass = { default: 'tone-default', muted: 'tone-muted', brand: 'tone-brand' }[toneOf(hero)];
 ---
-<section class:list={[toneClass, 'py-14 sm:py-20']} aria-labelledby="page-title">
+<section class:list={[toneClass, 'py-section-hero']} aria-labelledby="page-title">
   <div class="site-shell max-w-4xl">
     {hero.data.eyebrow && <p class="mb-3 text-sm font-bold tracking-widest uppercase">{hero.data.eyebrow}</p>}
-    <h1 id="page-title" class="max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl">{title}</h1>
+    <h1 id="page-title" class="max-w-3xl text-display font-bold tracking-tight">{title}</h1>
     <div class="content-prose mt-6 max-w-3xl"><Content /></div>
   </div>
 </section>

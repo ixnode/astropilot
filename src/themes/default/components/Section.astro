@@ -6,6 +6,6 @@ interface Props { section: CollectionEntry<'documents'>; Content: Awaited<Return
 const { section, Content } = Astro.props;
 const toneClass = { default: 'tone-default', muted: 'tone-muted', brand: 'tone-brand' }[toneOf(section)];
 ---
-<section class:list={[toneClass, 'py-12 sm:py-16']}>
+<section class:list={[toneClass, 'py-section']}>
   <div class="site-shell max-w-4xl"><div class="content-prose"><Content /></div></div>
 </section>
