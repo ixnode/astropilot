@@ -18,6 +18,7 @@ Das Repository muss nach Installation seiner Entwicklungsabhängigkeiten unmitte
 - Trenne Inhaltsmodell und Seitenzusammenstellung von Darstellung. Der Kern darf keine DaisyUI-Klassen kennen und keine konkreten Demo-Seiten voraussetzen.
 - Lade Markdown über Astro. Verwende für YAML vorhandene Loader bzw. einen kleinen etablierten YAML-Parser, wenn die Singleton-Konfiguration das erfordert. Parse YAML nicht selbst.
 - Halte wiederverwendbare Logik in `src/lib/astropilot/` und das Standard-Theme in `src/themes/default/`. Kleine Standarddateien verbinden diese mit Astro. Das sind interne Grenzen, noch keine eigene Theme-Plattform.
+- Der einzige Style-Einstieg des Standard-Themes ist `src/themes/default/styles/theme.css`. Gliedere neue Theme-Regeln nach Zweck in `foundation/`, `components/` oder `themes/`; die dokumentierte Importreihenfolge ist Teil der Cascade und wird nur mit anschließender Prüfung geändert.
 - Demo-Inhalte bleiben in `src/content/`; sie gehören später nicht fest in den Framework-Kern.
 - Prüfe zu Beginn kompatible stabile Versionen in der offiziellen Dokumentation. Verwende eine unterstützte Node-LTS-Version, dokumentiere sie und lege eine Lockdatei an. Keine geratenen Versionsnummern.
 

@@ -1,0 +1,4 @@
+/* Markdown typography rendered by Astro Content Collections. */
+@layer components {
+  .content-prose { @apply prose max-w-none prose-headings:scroll-mt-8 prose-a:text-primary prose-a:font-medium prose-a:decoration-2 prose-a:underline; }
+}

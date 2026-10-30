@@ -1,0 +1,4 @@
+/* Shared design tokens for the default AstroPilot theme. */
+@theme {
+  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+}

@@ -1,0 +1,30 @@
+/*
+ * Default-theme stylesheet entry point.
+ *
+ * Import order is intentional: Tailwind and DaisyUI establish the framework,
+ * foundation files establish shared behavior, and component/theme files add
+ * the AstroPilot-specific presentation. Keep this order stable unless the
+ * resulting cascade is verified.
+ */
+
+/* Framework */
+@import "tailwindcss";
+
+/* Foundation */
+@import "./foundation/tokens.css";
+@import "./foundation/base.css";
+@import "./foundation/prose.css";
+@import "./foundation/focus.css";
+
+/* Shared theme components */
+@import "./components/site-shell.css";
+@import "./components/skip-link.css";
+@import "./themes/section-tones.css";
+
+@plugin "daisyui";
+@plugin "@tailwindcss/typography";
+
+/* Tailwind does not scan installed packages by default; include this default theme explicitly. */
+@source "../components";
+@source "../layouts";
+@source "../../../package";

@@ -1,0 +1,6 @@
+/* Element-level defaults shared by every AstroPilot page. */
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply min-h-screen bg-base-100 text-base-content; }
+  a { @apply underline underline-offset-4; }
+}

@@ -1,0 +1,9 @@
+/* Semantic content tones map to the default theme's static color surfaces. */
+@layer components {
+  .tone-default { @apply bg-base-100; }
+  .tone-muted { @apply bg-base-200; }
+  .tone-brand { @apply bg-primary text-primary-content; }
+  .tone-brand .content-prose, .tone-brand .content-prose :where(h2,h3,h4,p,li,strong,code) { @apply text-primary-content; }
+  .tone-brand .content-prose a { @apply text-primary-content decoration-current; }
+  .tone-brand .content-prose :not(pre) > code { @apply bg-base-100 text-base-content; }
+}
