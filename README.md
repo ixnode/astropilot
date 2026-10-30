@@ -1,5 +1,7 @@
 # AstroPilot
 
+[![GitHub Release](https://img.shields.io/github/v/release/ixnode/astropilot?display_name=tag&sort=semver)](https://github.com/ixnode/astropilot/releases)
+
 AstroPilot ist derzeit ein lokal entwickeltes, dateibasiertes Content-Framework auf Astro. Dieses Repository ist eine lauffähige Beispielwebsite, **kein veröffentlichtes npm-Paket** und keine Aussage über die Verfügbarkeit des Paketnamens.
 
 ## Lokale Paketnutzung vorbereiten
