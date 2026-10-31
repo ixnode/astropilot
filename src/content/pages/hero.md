@@ -1,9 +1,9 @@
 ---
-title: Energie verstehen und gezielt optimieren
+title: Statische Websites mit Astro gestalten
 eyebrow: Willkommen bei AstroPilot
 tone: brand
 ---
 
-Eine schlanke Grundlage für statische Websites: Inhalte liegen verständlich in Markdown und YAML, das Layout bleibt eine Entwicklungsaufgabe.
+AstroPilot zeigt, wie sich Inhalte, Layouts und wiederverwendbare Komponenten in einem schlanken Astro-Projekt zusammenbringen lassen.
 
-[So funktioniert AstroPilot](/info/)
+[So funktioniert die Struktur](/info/)

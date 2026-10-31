@@ -1,9 +1,9 @@
 ---
-title: Über AstroPilot und die Arbeitsweise
+title: Eine klare Grundlage für Astro-Projekte
 eyebrow: Das Konzept
 tone: brand
 ---
 
-AstroPilot nutzt die erprobten Mechanismen von Astro und ergänzt nur die Regeln, die eine konsistente Inhaltsstruktur brauchen.
+AstroPilot nutzt die erprobten Mechanismen von Astro und ergänzt nur die Regeln, die für konsistente Inhaltsseiten und wiederverwendbare Komponenten nötig sind.
 
-[Zur Startseite](/)
+[Astro-Demo ansehen](/)

@@ -1,9 +1,9 @@
 ---
-title: Häufige Fragen zu AstroPilot
+title: Häufige Fragen zu Astro
 eyebrow: Fragen und Antworten
 tone: muted
 ---
 
-Hier finden Sie die wichtigsten Hinweise zur Arbeit mit Inhalten und Seiten im Beispielprojekt.
+Hier finden Sie die wichtigsten Hinweise zur Arbeit mit statischen Seiten, Markdown-Inhalten und wiederverwendbaren Komponenten.
 
-[Mehr über die Arbeitsweise](/info/)
+[Mehr über die Projektstruktur](/info/)

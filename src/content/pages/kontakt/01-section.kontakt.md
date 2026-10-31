@@ -2,6 +2,6 @@
 tone: default
 ---
 
-## Sprechen wir über Ihre Inhalte
+## Sprechen wir über Ihr Astro-Projekt
 
-Diese Adresse ist ein Beispiel für die Demo: [hallo@example.com](mailto:hallo@example.com). Ein Formular oder Backend gehört nicht zum Umfang dieser statischen Beispielwebsite.
+Diese Adresse ist ein Beispiel für die Demo: [hallo@example.com](mailto:hallo@example.com). Ein Formular oder Backend gehört nicht zum Umfang dieser statischen Astro-Beispielwebsite.

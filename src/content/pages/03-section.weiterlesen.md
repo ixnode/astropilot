@@ -2,8 +2,8 @@
 tone: brand
 ---
 
-## Bereit für den nächsten Inhalt
+## Bereit für Komponenten-Beispiele
 
-Die Beispielseite zeigt drei Hintergrundvarianten. Sie sind semantisch über `tone` gewählt und können in einem späteren Theme anders dargestellt werden.
+Die drei Bereiche zeigen die semantischen Hintergrundvarianten `default`, `muted` und `brand`. Als Nächstes kann diese Demo konkrete Tailwind- und DaisyUI-Komponenten in derselben Inhaltsstruktur vorstellen.
 
-[Kontakt zur Demo aufnehmen](/kontakt/)
+[Mehr über AstroPilot erfahren](/info/)

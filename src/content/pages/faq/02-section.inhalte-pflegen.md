@@ -6,8 +6,8 @@ tone: muted
 
 ### Wie füge ich einen Abschnitt hinzu?
 
-Legen Sie im Seitenordner eine Markdown-Datei mit einem numerischen Präfix wie `03-neuer-abschnitt.md` an. Der Inhalt beginnt mit einer Überschrift zweiter Ebene.
+Legen Sie im Seitenordner eine Markdown-Datei mit einem numerischen Präfix wie `03-section.neuer-abschnitt.md` an. Der Inhalt beginnt mit einer Überschrift zweiter Ebene.
 
-### Wo ändere ich die Navigation?
+### Wo kommen Komponenten-Beispiele hin?
 
-Die Links des Headers und Footers stehen zentral in `src/content/site.yaml`.
+Das Theme liefert das Layout und die geprüften Bausteine. Neue Beispiele für Tailwind- oder DaisyUI-Komponenten können als klar abgegrenzte Theme-Komponenten ergänzt und über diese Inhaltsseiten erklärt werden.

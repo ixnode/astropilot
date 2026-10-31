@@ -4,10 +4,10 @@ tone: default
 
 ## Allgemeine Fragen
 
-### Was ist AstroPilot?
+### Was zeigt AstroPilot?
 
-AstroPilot ist eine dateibasierte Grundlage für statische Astro-Websites. Es trennt Inhalte von der Darstellung, ohne ein CMS-Backend einzuführen.
+AstroPilot ist eine dateibasierte Grundlage für statische Astro-Websites. Die Demo zeigt, wie Markdown-Inhalte, gemeinsame Layouts und Komponenten zusammenwirken, ohne ein CMS-Backend einzuführen.
 
-### Für wen eignet sich der Ansatz?
+### Warum Astro für diese Art von Website?
 
-Für Teams, die Inhalte versioniert im Projekt verwalten und dabei auf ein festes, geprüftes Layout setzen möchten.
+Astro liefert statische Seiten effizient aus und unterstützt Komponenten aus verschiedenen UI-Ansätzen. Das eignet sich gut für Landingpages und Inhaltsseiten mit klarer Struktur.
