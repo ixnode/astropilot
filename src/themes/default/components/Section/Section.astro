@@ -7,5 +7,5 @@ const { section, Content } = Astro.props;
 const toneClass = { default: 'tone-default', muted: 'tone-muted', brand: 'tone-brand' }[toneOf(section)];
 ---
 <section class:list={[toneClass, 'ap-section']}>
-  <div class="ap-section__inner site-shell"><div class="content-prose"><Content /></div></div>
+  <div class="ap-section__inner site-shell"><div class="ap-section__content content-prose"><Content /></div></div>
 </section>

@@ -3,7 +3,7 @@
     @apply py-section;
   }
 
-  .ap-section__inner {
+  .ap-section__content {
     @apply max-w-4xl;
   }
 }

@@ -22,6 +22,7 @@ Das Repository muss nach Installation seiner Entwicklungsabhängigkeiten unmitte
 - Gliedere Theme-Styles nachvollziehbar: `styles/foundation/` enthält ausschließlich globale Grundlagen ohne konkrete Astro-Komponente (Tokens, Basis, Fokus, Layout-Hilfen und Prosa); `styles/themes/` enthält ausschließlich semantische Zuordnungen wie Inhalts-Tones.
 - Jede Standard-Theme-Komponente und jedes Layout liegt in einem eigenen PascalCase-Ordner mit der gleichnamigen `.astro`- und `.css`-Datei, etwa `components/Header/Header.astro` und `components/Header/Header.css`. Die CSS-Datei enthält ausschließlich die Darstellung dieses Bausteins; leere oder fachfremde CSS-Dateien sind nicht zulässig.
 - Theme-eigene CSS-Klassen erhalten den Präfix `ap-` und folgen innerhalb eines Bausteins einer klaren Block-Element-Benennung, etwa `ap-header` und `ap-header__inner`. DaisyUI-Klassen bleiben für ihre echten UI-Bausteine erlaubt.
+- Verwende für Header, Footer, Hero, Section und die H1-Fallback-Ansicht dieselbe äußere Inhaltskante über `site-shell`. Begrenze die Lesebreite bei Bedarf innerhalb dieses Containers; unterschiedliche äußere Einrückungen für diese Standardbereiche sind nicht zulässig.
 - Demo-Inhalte bleiben in `src/content/`; sie gehören später nicht fest in den Framework-Kern.
 - Prüfe zu Beginn kompatible stabile Versionen in der offiziellen Dokumentation. Verwende eine unterstützte Node-LTS-Version, dokumentiere sie und lege eine Lockdatei an. Keine geratenen Versionsnummern.
 
