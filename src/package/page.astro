@@ -2,9 +2,9 @@
 import { getCollection, render } from 'astro:content';
 import { assemblePages, type AssembledPage } from '../lib/astropilot/pages';
 import { loadSiteConfig } from '../lib/astropilot/site-config';
-import PageLayout from '../themes/default/layouts/PageLayout.astro';
-import Hero from '../themes/default/components/Hero.astro';
-import Section from '../themes/default/components/Section.astro';
+import PageLayout from '../themes/default/layouts/PageLayout/PageLayout.astro';
+import Hero from '../themes/default/components/Hero/Hero.astro';
+import Section from '../themes/default/components/Section/Section.astro';
 
 export async function getAstroPilotStaticPaths() {
   const pages = assemblePages(await getCollection('pages'), await getCollection('documents'));

@@ -18,7 +18,10 @@ Das Repository muss nach Installation seiner Entwicklungsabhängigkeiten unmitte
 - Trenne Inhaltsmodell und Seitenzusammenstellung von Darstellung. Der Kern darf keine DaisyUI-Klassen kennen und keine konkreten Demo-Seiten voraussetzen.
 - Lade Markdown über Astro. Verwende für YAML vorhandene Loader bzw. einen kleinen etablierten YAML-Parser, wenn die Singleton-Konfiguration das erfordert. Parse YAML nicht selbst.
 - Halte wiederverwendbare Logik in `src/lib/astropilot/` und das Standard-Theme in `src/themes/default/`. Kleine Standarddateien verbinden diese mit Astro. Das sind interne Grenzen, noch keine eigene Theme-Plattform.
-- Der einzige Style-Einstieg des Standard-Themes ist `src/themes/default/styles/theme.css`. Gliedere neue Theme-Regeln nach Zweck in `foundation/`, `components/` oder `themes/`; die dokumentierte Importreihenfolge ist Teil der Cascade und wird nur mit anschließender Prüfung geändert.
+- Der einzige Style-Einstieg des Standard-Themes ist `src/themes/default/styles/theme.css`. Seine dokumentierte Importreihenfolge ist Teil der Cascade und wird nur mit anschließender Prüfung geändert.
+- Gliedere Theme-Styles nachvollziehbar: `styles/foundation/` enthält ausschließlich globale Grundlagen ohne konkrete Astro-Komponente (Tokens, Basis, Fokus, Layout-Hilfen und Prosa); `styles/themes/` enthält ausschließlich semantische Zuordnungen wie Inhalts-Tones.
+- Jede Standard-Theme-Komponente und jedes Layout liegt in einem eigenen PascalCase-Ordner mit der gleichnamigen `.astro`- und `.css`-Datei, etwa `components/Header/Header.astro` und `components/Header/Header.css`. Die CSS-Datei enthält ausschließlich die Darstellung dieses Bausteins; leere oder fachfremde CSS-Dateien sind nicht zulässig.
+- Theme-eigene CSS-Klassen erhalten den Präfix `ap-` und folgen innerhalb eines Bausteins einer klaren Block-Element-Benennung, etwa `ap-header` und `ap-header__inner`. DaisyUI-Klassen bleiben für ihre echten UI-Bausteine erlaubt.
 - Demo-Inhalte bleiben in `src/content/`; sie gehören später nicht fest in den Framework-Kern.
 - Prüfe zu Beginn kompatible stabile Versionen in der offiziellen Dokumentation. Verwende eine unterstützte Node-LTS-Version, dokumentiere sie und lege eine Lockdatei an. Keine geratenen Versionsnummern.
 

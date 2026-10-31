@@ -1,0 +1,17 @@
+@layer components {
+  .ap-header {
+    @apply border-b border-base-300 bg-base-100;
+  }
+
+  .ap-header__inner {
+    @apply flex flex-wrap items-center justify-between gap-x-8 gap-y-3 py-5;
+  }
+
+  .ap-header__brand {
+    @apply text-lg font-bold no-underline;
+  }
+
+  .ap-header__links {
+    @apply flex flex-wrap items-center gap-x-2 gap-y-1;
+  }
+}

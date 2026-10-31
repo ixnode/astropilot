@@ -99,9 +99,9 @@ Ein `hero.md` aktiviert den gemeinsamen Hero. Löschen Sie die Datei, um stattde
 
 ## Struktur und Theme
 
-Die kleine, wiederverwendbare Inhalts- und URL-Logik liegt in `src/lib/astropilot/`. Sie kennt weder Demo-Texte noch Tailwind- oder DaisyUI-Klassen. Das Standard-Theme liegt in `src/themes/default/` und umfasst Layout, Header, Hero, Sections, Footer und dessen Styles. DaisyUI wird dort tatsächlich für Navigation und Theme-Elemente genutzt.
+Die kleine, wiederverwendbare Inhalts- und URL-Logik liegt in `src/lib/astropilot/`. Sie kennt weder Demo-Texte noch Tailwind- oder DaisyUI-Klassen. Das Standard-Theme liegt in `src/themes/default/` und umfasst Layout, Header, Hero, Sections und Footer. DaisyUI wird dort tatsächlich für Navigation und Theme-Elemente genutzt.
 
-Der Einstieg für das Default-Theme ist `src/themes/default/styles/theme.css`. Er dokumentiert die Importreihenfolge und gliedert die Styles in `foundation/` für globale Regeln und Tokens, `components/` für wiederverwendbare Theme-Bausteine sowie `themes/` für semantische Farbvarianten. Neue Regeln gehören in die kleinste passende Gruppe; `theme.css` bleibt der einzige zentrale Import. Das Standard-Theme heißt `astropilot`, ist bewusst hell und definiert seine semantischen DaisyUI-Tokens, Schriftgrößen, Abstände, Radien und Schatten zentral in den Theme- und Foundation-Dateien.
+Der Einstieg für das Default-Theme ist `src/themes/default/styles/theme.css`. Er dokumentiert die Importreihenfolge und bleibt der einzige zentrale Import. Globale Grundlagen liegen in `styles/foundation/`, semantische Inhaltsvarianten in `styles/themes/`. Jeder sichtbare Baustein ist als Paar lokal organisiert, beispielsweise `components/Header/Header.astro` und `components/Header/Header.css`; das Layout folgt mit `layouts/PageLayout/` demselben Muster. Theme-eigene Klassen beginnen mit `ap-`, etwa `ap-header` und `ap-header__inner`. Das Standard-Theme heißt `astropilot`, ist bewusst hell und definiert seine semantischen DaisyUI-Tokens, Schriftgrößen, Abstände, Radien und Schatten zentral in den Theme- und Foundation-Dateien.
 
 Ein anderes Theme kann diese Komponenten und die technische CSS-Einbindung ersetzen, ohne Markdown oder YAML zu migrieren. Das ist noch kein konfigurierbarer Theme-Loader und bewusst keine Aussage, dass jede UI-Bibliothek per Schalter austauschbar wäre.
 
