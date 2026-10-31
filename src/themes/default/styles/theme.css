@@ -11,6 +11,23 @@
 /* Framework */
 @import "tailwindcss";
 
+/* Foundation */
+@import "./foundation/tokens.css";
+@import "./foundation/base.css";
+@import "./foundation/prose.css";
+@import "./foundation/focus.css";
+@import "./foundation/layout.css";
+
+/* Semantic content variants */
+@import "./themes/section-tones.css";
+
+/* Theme components and layout */
+@import "../components/Header/Header.css";
+@import "../components/Footer/Footer.css";
+@import "../components/Hero/Hero.css";
+@import "../components/Section/Section.css";
+@import "../layouts/PageLayout/PageLayout.css";
+
 @plugin "daisyui" {
   themes: false;
 }
@@ -50,23 +67,6 @@
   --depth: 0;
   --noise: 0;
 }
-
-/* Foundation */
-@import "./foundation/tokens.css";
-@import "./foundation/base.css";
-@import "./foundation/prose.css";
-@import "./foundation/focus.css";
-@import "./foundation/layout.css";
-
-/* Semantic content variants */
-@import "./themes/section-tones.css";
-
-/* Theme components and layout */
-@import "../components/Header/Header.css";
-@import "../components/Footer/Footer.css";
-@import "../components/Hero/Hero.css";
-@import "../components/Section/Section.css";
-@import "../layouts/PageLayout/PageLayout.css";
 
 @plugin "@tailwindcss/typography";
 
