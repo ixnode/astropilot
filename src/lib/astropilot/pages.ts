@@ -12,7 +12,8 @@ export interface AssembledPage {
   sections: DocumentEntry[];
 }
 
-const sectionName = /(?:^|\/)(\d{2,})-section\.[a-z0-9][a-z0-9-]*(?:\.md)?$/;
+// Astro's glob loader normalizes `01-section.example.md` to `01-sectionexample` for entry IDs.
+const sectionName = /(?:^|\/)(\d{2,})-section[a-z0-9][a-z0-9-]*$/;
 
 export function assemblePages(pageEntries: PageEntry[], documentEntries: DocumentEntry[]): AssembledPage[] {
   const pages = pageEntries.map((entry) => {
