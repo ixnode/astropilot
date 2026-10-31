@@ -28,7 +28,7 @@
     "check": "npm run validate && astro check",
     "validate": "node --import tsx scripts/validate-content.ts",
     "test": "node --import tsx --test tests/**/*.test.ts",
-    "test:a11y": "node --import tsx scripts/test-a11y.ts",
+    "test:a11y": "npm run build && node --import tsx scripts/test-a11y.ts",
     "test:source": "node --import tsx scripts/check-source-files.ts",
     "pack:check": "npm pack --dry-run"
   },

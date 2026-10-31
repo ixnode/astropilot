@@ -1,4 +1,5 @@
 ---
+title: Häufige Fragen zu AstroPilot
 eyebrow: Fragen und Antworten
 tone: muted
 ---

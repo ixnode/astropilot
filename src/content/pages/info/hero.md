@@ -1,4 +1,5 @@
 ---
+title: Über AstroPilot und die Arbeitsweise
 eyebrow: Das Konzept
 tone: brand
 ---

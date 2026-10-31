@@ -18,6 +18,7 @@ export function createAstroPilotCollections(contentDirectory = './src/content/pa
   const documents = defineCollection({
     loader: glob({ base: contentDirectory, pattern: '**/*.md' }),
     schema: z.object({
+      title: z.string().trim().min(1).optional(),
       eyebrow: z.string().trim().min(1).optional(),
       tone,
     }),

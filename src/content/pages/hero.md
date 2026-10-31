@@ -1,4 +1,5 @@
 ---
+title: Energie verstehen und gezielt optimieren
 eyebrow: Willkommen bei AstroPilot
 tone: brand
 ---

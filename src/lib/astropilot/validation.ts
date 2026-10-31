@@ -11,6 +11,7 @@ import { routeFromPageId } from './urls';
 
 const pageSchema = z.object({ title: z.string().trim().min(1), description: z.string().trim().min(1) });
 const markdownSchema = z.object({ tone: z.enum(tones).optional(), eyebrow: z.string().trim().min(1).optional() }).strict();
+const heroSchema = markdownSchema.extend({ title: z.string().trim().min(1) });
 const sectionPattern = /^\d{2,}-section\.[a-z0-9][a-z0-9-]*\.md$/;
 
 function filesIn(directory: string): string[] {
@@ -64,7 +65,7 @@ export function validateAstroPilotContent(contentRoot = resolve(process.cwd(), '
     if (!pageDirectories.has(directory)) fail(contentRoot, path, 'hero or section file has no directly associated page.yaml');
     if (filename !== 'hero.md' && !sectionPattern.test(filename)) fail(contentRoot, path, 'invalid content filename; expected hero.md or NN-section.name.md');
     const { frontmatter, tree } = frontmatterAndTree(path);
-    const metadata = markdownSchema.safeParse(frontmatter);
+    const metadata = (filename === 'hero.md' ? heroSchema : markdownSchema).safeParse(frontmatter);
     if (!metadata.success) fail(contentRoot, path, `invalid frontmatter: ${metadata.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join('; ')}`);
     const route = directory === '' ? '/' : `/${directory}/`;
     const seen = headingsByRoute.get(route)!;

@@ -101,7 +101,7 @@ title: Energie verstehen und gezielt optimieren
 description: Eine aussagekräftige Beschreibung dieser Beispielseite.
 ```
 
-- `title` und `description` sind nicht leere Pflichtfelder.
+- `title` und `description` sind nicht leere Pflichtfelder und werden für HTML-Metadaten verwendet: `title` für den `<title>`-Tag, `description` für die Meta-Description.
 - Jeder Ordner mit `page.yaml` definiert eine Seite; Ordner ohne diese Datei dürfen als reine Gruppierung für tiefere Seiten dienen.
 - Der relative Ordnerpfad bestimmt die URL: Wurzel → `/`, `faq/` → `/faq/`, `leistungen/monitoring/` → `/leistungen/monitoring/`.
 - Keine zusätzlichen Slug-Overrides oder Übersetzungssysteme in dieser Phase.
@@ -111,6 +111,7 @@ description: Eine aussagekräftige Beschreibung dieser Beispielseite.
 
 ```md
 ---
+title: Energie verstehen und gezielt optimieren
 eyebrow: Willkommen bei AstroPilot
 tone: brand
 ---
@@ -121,9 +122,9 @@ Eine kurze Einführung in die Inhalte dieser Seite.
 ```
 
 - Die Existenz der Datei aktiviert den Hero. Keine weitere Aktivierungsoption in `page.yaml`.
-- `eyebrow` ist optional; `tone` hat einen dokumentierten Standard.
-- Die gemeinsame Hero-Komponente zeigt den Seitentitel als `h1` und rendert den Markdown-Inhalt.
-- Ohne Hero rendert das Layout eine schlichte sichtbare `h1` vor den Sections.
+- `title` ist ein nicht leerer Pflichtwert und wird als sichtbare `h1` gerendert; `eyebrow` ist optional; `tone` hat einen dokumentierten Standard.
+- Die gemeinsame Hero-Komponente rendert Titel und Markdown-Inhalt vollständig aus `hero.md`.
+- Ohne Hero rendert das Layout `page.yaml.title` als schlichte sichtbare `h1` vor den Sections. Dies ist der einzige vorgesehene sichtbare Fallback für Seiten ohne Hero.
 - Hauptseite, FAQ und Info nutzen dieselbe Hero-Komponente mit jeweils eigenen Inhalten. Keine drei kopierten Implementierungen.
 
 ### Sections: `NN-section.name.md`

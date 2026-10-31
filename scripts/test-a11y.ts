@@ -1,9 +1,31 @@
 import { spawn } from 'node:child_process';
+import { createServer } from 'node:net';
+import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
 import AxeBuilder from '@axe-core/playwright';
 
-const port = 4325;
-const server = spawn('npm', ['run', 'dev', '--', '--host', '127.0.0.1', '--port', String(port)], { stdio: 'ignore' });
+async function findFreePort(): Promise<number> {
+  const probe = createServer();
+  let port: number | undefined;
+  await new Promise<void>((resolve, reject) => {
+    probe.once('error', reject);
+    probe.listen(0, '127.0.0.1', () => {
+      const address = probe.address();
+      if (!address || typeof address === 'string') {
+        reject(new Error('Could not determine a free local port'));
+        return;
+      }
+      port = address.port;
+      probe.close((error) => error ? reject(error) : resolve());
+    });
+  });
+  if (port === undefined) throw new Error('Could not determine a free local port');
+  return port;
+}
+
+const port = await findFreePort();
+const astroCli = fileURLToPath(new URL('../node_modules/astro/bin/astro.mjs', import.meta.url));
+const astroServer = spawn(process.execPath, [astroCli, 'preview', '--host', '127.0.0.1', '--port', String(port)], { stdio: 'ignore' });
 const baseUrl = `http://127.0.0.1:${port}`;
 
 async function waitForServer(): Promise<void> {
@@ -11,7 +33,7 @@ async function waitForServer(): Promise<void> {
     try { if ((await fetch(baseUrl)).ok) return; } catch { /* server is starting */ }
     await new Promise((resolve) => setTimeout(resolve, 250));
   }
-  throw new Error('Astro dev server did not start');
+  throw new Error('Astro preview server did not start');
 }
 
 try {
@@ -35,5 +57,5 @@ try {
   await browser.close();
   console.log('Axe, keyboard-focus, and viewport-overflow checks passed for four routes on mobile and desktop.');
 } finally {
-  server.kill('SIGTERM');
+  astroServer.kill('SIGTERM');
 }
