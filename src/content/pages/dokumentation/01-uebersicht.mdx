@@ -3,6 +3,12 @@ tone: default
 fullWidth: true
 ---
 
+import einstiegImage from './_assets/einstieg.png';
+import inhalteImage from './_assets/inhalte.png';
+import layoutImage from './_assets/layout.png';
+import themeImage from './_assets/theme.png';
+import pruefenImage from './_assets/pruefen.png';
+import paketImage from './_assets/paket.png';
 import { Card, CardActions } from 'astropilot/components';
 import { Column, Columns } from 'astropilot/components';
 import { Eyebrow } from 'astropilot/components';
@@ -15,7 +21,7 @@ Die Dokumentation ist nach Aufgaben gegliedert. Jede Unterseite bleibt eine norm
 
 <Columns>
     <Column span={4}>
-        <Card>
+        <Card image={einstiegImage} imageAlt="Abstrakte Darstellung eines Browserfensters, Terminals und Startpfeils">
             ### Einstieg
 
             Voraussetzungen, Installation und der erste lokale Start.
@@ -27,7 +33,7 @@ Die Dokumentation ist nach Aufgaben gegliedert. Jede Unterseite bleibt eine norm
     </Column>
 
     <Column span={4}>
-        <Card>
+        <Card image={inhalteImage} imageAlt="Abstrakte Darstellung von strukturierten Inhalts- und Konfigurationsdateien">
             ### Inhalte
 
             `site.yaml`, `page.yaml`, Hero-Frontmatter und Sections.
@@ -39,7 +45,7 @@ Die Dokumentation ist nach Aufgaben gegliedert. Jede Unterseite bleibt eine norm
     </Column>
 
     <Column span={4}>
-        <Card>
+        <Card image={layoutImage} imageAlt="Abstrakte Darstellung eines responsiven Rasters mit modularen Inhaltskarten">
             ### Layout und Komponenten
 
             MDX-Layouts sowie verfügbare AstroPilot-Komponenten.
@@ -54,7 +60,7 @@ Die Dokumentation ist nach Aufgaben gegliedert. Jede Unterseite bleibt eine norm
 
 <Columns>
     <Column span={4}>
-        <Card>
+        <Card image={themeImage} imageAlt="Abstrakte Darstellung von Farbwerten, Typografie und Design-Tokens">
             ### Theme
 
             Semantische Tones, Theme-Klassen und die CSS-Struktur.
@@ -66,7 +72,7 @@ Die Dokumentation ist nach Aufgaben gegliedert. Jede Unterseite bleibt eine norm
     </Column>
 
     <Column span={4}>
-        <Card>
+        <Card image={pruefenImage} imageAlt="Abstrakte Darstellung einer Website-Prüfung mit Schild und Fokusmarkierung">
             ### Prüfen
 
             Entwicklungsbefehle, Tests, Build und Barrierefreiheitsprüfung.
@@ -78,7 +84,7 @@ Die Dokumentation ist nach Aufgaben gegliedert. Jede Unterseite bleibt eine norm
     </Column>
 
     <Column span={4}>
-        <Card>
+        <Card image={paketImage} imageAlt="Abstrakte Darstellung eines wiederverwendbaren Moduls zwischen zwei Projekten">
             ### Paket
 
             Das Framework lokal in einem separaten Astro-Projekt testen.
