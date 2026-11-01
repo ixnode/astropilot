@@ -6,7 +6,7 @@ tone: muted
 
 ### Wie füge ich einen Abschnitt hinzu?
 
-Legen Sie im Seitenordner eine Markdown-Datei mit einem numerischen Präfix wie `03-section.neuer-abschnitt.md` an. Der Inhalt beginnt mit einer Überschrift zweiter Ebene.
+Legen Sie im Seitenordner eine Markdown-Datei mit einem numerischen Präfix wie `03-neuer-abschnitt.md` an. Der Inhalt beginnt mit einer Überschrift zweiter Ebene.
 
 ### Wo kommen Komponenten-Beispiele hin?
 

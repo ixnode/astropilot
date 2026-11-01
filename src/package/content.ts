@@ -8,7 +8,11 @@ export function createAstroPilotCollections(contentDirectory = './src/content/pa
   const tone = z.enum(tones).default('default');
 
   const pages = defineCollection({
-    loader: glob({ base: contentDirectory, pattern: '**/page.yaml' }),
+    loader: glob({
+      base: contentDirectory,
+      pattern: '**/page.yaml',
+      generateId: ({ entry }) => entry.replace(/\.yaml$/, ''),
+    }),
     schema: z.object({
       title: z.string().trim().min(1),
       description: z.string().trim().min(1),
@@ -16,7 +20,11 @@ export function createAstroPilotCollections(contentDirectory = './src/content/pa
   });
 
   const documents = defineCollection({
-    loader: glob({ base: contentDirectory, pattern: '**/*.{md,mdx}' }),
+    loader: glob({
+      base: contentDirectory,
+      pattern: '**/*.{md,mdx}',
+      generateId: ({ entry }) => entry.replace(/\.(?:md|mdx)$/, ''),
+    }),
     schema: z.object({
       title: z.string().trim().min(1).optional(),
       eyebrow: z.string().trim().min(1).optional(),

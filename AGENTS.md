@@ -46,22 +46,22 @@ src/content/
 └── pages/
     ├── page.yaml
     ├── hero.md
-    ├── 01-section.einleitung.mdx # MDX-Layout-Section
-    ├── 02-section.vorteile.md
-    ├── 03-section.weiterlesen.md
+    ├── 01-einleitung.mdx # MDX-Layout-Section
+    ├── 02-vorteile.md
+    ├── 03-weiterlesen.md
     ├── faq/
     │   ├── page.yaml
     │   ├── hero.md
-    │   ├── 01-section.allgemeine-fragen.md
-    │   └── 02-section.inhalte-pflegen.md
+    │   ├── 01-allgemeine-fragen.md
+    │   └── 02-inhalte-pflegen.md
     ├── info/
     │   ├── page.yaml
     │   ├── hero.md
-    │   ├── 01-section.ueber-astropilot.md
-    │   └── 02-section.arbeitsweise.md
+    │   ├── 01-ueber-astropilot.md
+    │   └── 02-arbeitsweise.md
     └── kontakt/
         ├── page.yaml
-        └── 01-section.kontakt.md
+        └── 01-kontakt.md
 ```
 
 ### Globale Konfiguration: `site.yaml`
@@ -127,7 +127,7 @@ Eine kurze Einführung in die Inhalte dieser Seite.
 - Ohne Hero rendert das Layout `page.yaml.title` als schlichte sichtbare `h1` vor den Sections. Dies ist der einzige vorgesehene sichtbare Fallback für Seiten ohne Hero.
 - Hauptseite, FAQ und Info nutzen dieselbe Hero-Komponente mit jeweils eigenen Inhalten. Keine drei kopierten Implementierungen.
 
-### Sections: `NN-section.name.md` und `NN-section.name.mdx`
+### Sections: `NN-name.md` und `NN-name.mdx`
 
 ```md
 ---
@@ -142,7 +142,7 @@ Hier steht normaler Markdown-Inhalt.
 ```
 
 - Nur direkt im Seitenordner liegende Dateien gehören zur jeweiligen Seite; keine Vermischung mit Unterseiten.
-- Numerische Präfixe mit mindestens zwei Ziffern sowie das verbindliche Literal `section.`; numerisch sortieren. Doppelte Nummern sind Fehler. Lücken sind erlaubt. Normale Sections verwenden `.md`; eine `.mdx`-Datei ist ausschließlich für dokumentierte MDX-Layout-Komponenten zulässig.
+- Numerische Präfixe mit mindestens zwei Ziffern und einem sprechenden, kleingeschriebenen Namen mit Bindestrichen; numerisch sortieren. Doppelte Nummern sind Fehler. Lücken sind erlaubt. Normale Sections verwenden `.md`; eine `.mdx`-Datei ist ausschließlich für dokumentierte MDX-Layout-Komponenten zulässig.
 - `tone`: ausschließlich `default`, `muted`, `brand`; fehlender Wert bedeutet `default`.
 - Eine Datei wird als ein semantischer Inhaltsabschnitt dargestellt. Sie beginnt inhaltlich mit einer sinnvollen `h2`; weitere Ebenen müssen logisch folgen. Keine `h1` im Hero- oder Section-Markdown.
 - Keine eigene Section-Direktive, keine Steuerkommentare, keine CSS-Klassen oder Inline-Styles in Content-Dateien. MDX ist nur in `.mdx`-Sections erlaubt und darf ausschließlich dokumentierte AstroPilot-Komponenten importieren; keine Browser-Skripte oder beliebige JSX-Elemente.

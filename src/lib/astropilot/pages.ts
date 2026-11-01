@@ -12,15 +12,14 @@ export interface AssembledPage {
   sections: DocumentEntry[];
 }
 
-// Astro's glob loader normalizes `01-section.example.md` to `01-sectionexample` for entry IDs.
-const sectionName = /(?:^|\/)(\d{2,})-section[a-z0-9][a-z0-9-]*$/;
+const sectionName = /(?:^|\/)(\d{2,})-[a-z0-9][a-z0-9-]*$/;
 
 export function assemblePages(pageEntries: PageEntry[], documentEntries: DocumentEntry[]): AssembledPage[] {
   const pages = pageEntries.map((entry) => {
     const directory = entry.id.replace(/(?:^|\/)page(?:\.ya?ml)?$/, '');
     const prefix = directory === '' ? '' : `${directory}/`;
     const ownDocuments = documentEntries.filter((document) => document.id.startsWith(prefix) && !document.id.slice(prefix.length).includes('/'));
-    const hero = ownDocuments.find((document) => document.id === `${prefix}hero` || document.id === `${prefix}hero.md`);
+    const hero = ownDocuments.find((document) => document.id === `${prefix}hero`);
     const sections = ownDocuments.filter((document) => sectionName.test(document.id)).sort((left, right) => Number(sectionName.exec(left.id)?.[1]) - Number(sectionName.exec(right.id)?.[1]));
     return { entry, route: routeFromPageId(entry.id), hero, sections };
   });

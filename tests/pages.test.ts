@@ -15,16 +15,16 @@ test('applies a deployment base exactly once to root-relative URLs', () => {
   assert.equal(withBase('https://example.com', '/demo/'), 'https://example.com');
 });
 
-test('recognizes Astro-normalized section IDs and sorts them numerically', () => {
+test('recognizes generated section IDs and sorts them numerically', () => {
   const pages = [{ id: 'page', data: { title: 'Startseite', description: 'Eine Testseite.' } }] as CollectionEntry<'pages'>[];
   const documents = [
-    { id: '02-sectionvorteile', data: { tone: 'muted' } },
+    { id: '02-vorteile', data: { tone: 'muted' } },
     { id: 'hero', data: { title: 'Willkommen', tone: 'brand' } },
-    { id: '01-sectioneinleitung', data: { tone: 'default' } },
+    { id: '01-einleitung', data: { tone: 'default' } },
   ] as CollectionEntry<'documents'>[];
 
   const [page] = assemblePages(pages, documents);
 
   assert.equal(page.hero?.id, 'hero');
-  assert.deepEqual(page.sections.map((section) => section.id), ['01-sectioneinleitung', '02-sectionvorteile']);
+  assert.deepEqual(page.sections.map((section) => section.id), ['01-einleitung', '02-vorteile']);
 });

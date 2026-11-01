@@ -14,7 +14,7 @@ import { routeFromPageId } from './urls';
 const pageSchema = z.object({ title: z.string().trim().min(1), description: z.string().trim().min(1) });
 const markdownSchema = z.object({ tone: z.enum(tones).optional(), eyebrow: z.string().trim().min(1).optional() }).strict();
 const heroSchema = markdownSchema.extend({ title: z.string().trim().min(1) });
-const sectionPattern = /^\d{2,}-section\.[a-z0-9][a-z0-9-]*\.(?:md|mdx)$/;
+const sectionPattern = /^\d{2,}-[a-z0-9][a-z0-9-]*\.(?:md|mdx)$/;
 const mdxComponentImport = /^import\s*\{\s*Column\s*,\s*Columns\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
 
 interface MdxNode {
@@ -112,7 +112,7 @@ export function validateAstroPilotContent(contentRoot = resolve(process.cwd(), '
     if (filename === 'page.yaml') continue;
     const directory = contentDirectory(contentRoot, path);
     if (!pageDirectories.has(directory)) fail(contentRoot, path, 'hero or section file has no directly associated page.yaml');
-    if (filename !== 'hero.md' && !sectionPattern.test(filename)) fail(contentRoot, path, 'invalid content filename; expected hero.md or NN-section.name.md(x)');
+    if (filename !== 'hero.md' && !sectionPattern.test(filename)) fail(contentRoot, path, 'invalid content filename; expected hero.md or NN-name.md(x)');
     const { frontmatter, tree } = frontmatterAndTree(path);
     const metadata = (filename === 'hero.md' ? heroSchema : markdownSchema).safeParse(frontmatter);
     if (!metadata.success) fail(contentRoot, path, `invalid frontmatter: ${metadata.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join('; ')}`);
@@ -130,7 +130,7 @@ export function validateAstroPilotContent(contentRoot = resolve(process.cwd(), '
         previousHeading = node.depth;
         const text = node.children.map((child) => ('value' in child ? child.value : '')).join('').toLowerCase();
         const slug = text.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'abschnitt';
-        const id = `${filename.replace(/\.md$/, '')}-${slug}`;
+        const id = `${filename.replace(/\.(?:md|mdx)$/, '')}-${slug}`;
         if (seen.has(id)) fail(contentRoot, path, `duplicate generated heading id ${id}`);
         seen.add(id);
       }
