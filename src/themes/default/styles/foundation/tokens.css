@@ -1,6 +1,7 @@
 /* Shared typography, spacing, radius, and elevation tokens for the default theme. */
 @theme {
     --font-sans: ui-sans-serif, system-ui, sans-serif;
+    --font-heading: 'Space Grotesk', var(--font-sans);
     --text-display: clamp(2.25rem, 5vw, 4rem);
     --text-display--line-height: 1.08;
     --text-heading: clamp(1.75rem, 3vw, 2.5rem);

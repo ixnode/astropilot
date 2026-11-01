@@ -12,6 +12,7 @@
 @import 'tailwindcss';
 
 /* Foundation */
+@import './foundation/fonts.css';
 @import './foundation/tokens.css';
 @import './foundation/base.css';
 @import './foundation/prose.css';
