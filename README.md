@@ -60,7 +60,7 @@ Die resultierende `.tgz` ist in diesem Repository ignoriert. Ein frisches tempor
 
 ## Starten
 
-Voraussetzung ist Node.js 24 LTS oder neuer (getestet mit 24.20.0).
+Voraussetzung ist Node.js 24 LTS oder neuer. Die `.nvmrc` legt für die lokale Entwicklung Node.js 24.22.2 fest.
 
 ```sh
 npm install
