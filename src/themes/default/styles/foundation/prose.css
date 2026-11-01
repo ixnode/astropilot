@@ -4,7 +4,8 @@
         @apply prose max-w-none prose-headings:scroll-mt-8 prose-a:text-primary prose-a:font-medium prose-a:decoration-2 prose-a:underline;
     }
 
-    .ap-section > .site-shell > .content-prose {
+    .ap-section > .site-shell > .content-prose,
+    .ap-hero > .site-shell > .content-prose {
         > :first-child {
             @apply mt-0;
         }
