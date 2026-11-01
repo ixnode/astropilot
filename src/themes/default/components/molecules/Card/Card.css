@@ -1,6 +1,6 @@
 @layer components {
     .ap-card {
-        @apply overflow-hidden;
+        @apply my-5 overflow-hidden;
     }
 
     .ap-card__figure {
