@@ -4,11 +4,13 @@
         @apply prose max-w-none prose-headings:scroll-mt-8 prose-a:text-primary prose-a:font-medium prose-a:decoration-2 prose-a:underline;
     }
 
-    .ap-section > .site-shell > .content-prose > :first-child {
-        @apply mt-0;
-    }
+    .ap-section > .site-shell > .content-prose {
+        > :first-child {
+            @apply mt-0;
+        }
 
-    .ap-section > .site-shell > .content-prose > :last-child {
-        @apply mb-0;
+        > :last-child {
+            @apply mb-0;
+        }
     }
 }

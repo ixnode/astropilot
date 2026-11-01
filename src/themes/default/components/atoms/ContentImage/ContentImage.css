@@ -1,21 +1,21 @@
 @layer components {
     .ap-content-image {
         @apply block max-w-full object-cover;
-    }
 
-    .ap-content-image--full {
-        @apply w-full;
-    }
+        &.ap-content-image--full {
+            @apply w-full;
+        }
 
-    .ap-content-image--rounded {
-        @apply rounded-box;
-    }
+        &.ap-content-image--rounded {
+            @apply rounded-box;
+        }
 
-    .ap-content-image--square {
-        @apply rounded-none;
-    }
+        &.ap-content-image--square {
+            @apply rounded-none;
+        }
 
-    .ap-content-image--bordered {
-        @apply border border-base-300;
+        &.ap-content-image--bordered {
+            @apply border border-base-300;
+        }
     }
 }

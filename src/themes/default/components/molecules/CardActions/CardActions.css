@@ -1,9 +1,11 @@
 @layer components {
-    .ap-card-actions > p {
-        @apply m-0;
-    }
+    .ap-card-actions {
+        > p {
+            @apply m-0;
+        }
 
-    .ap-card-actions a {
-        @apply btn btn-primary;
+        a {
+            @apply btn btn-primary;
+        }
     }
 }
