@@ -70,6 +70,10 @@ src/content/
     │   ├── 04-navigation.md
     │   ├── 05-sections.md
     │   └── 06-alerts.mdx
+    │   ├── 07-images.mdx
+    │   └── images/
+    │       ├── layout-landscape.png
+    │       └── layout-portrait.png
     └── kontakt/
         ├── page.yaml
         └── 01-kontakt.md

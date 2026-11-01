@@ -1,0 +1,51 @@
+---
+tone: muted
+---
+
+import layoutLandscape from './images/layout-landscape.png';
+import layoutPortrait from './images/layout-portrait.png';
+import { ContentImage } from 'astropilot/components';
+
+## Bilder
+
+`ContentImage` nutzt Astros lokale Asset-Pipeline. Die PNG-Quellen werden beim Build als WebP mit Qualität 80 ausgegeben; Alternativtexte und Größen bleiben direkt am Inhalt sichtbar.
+
+### Feste Breite, runde Ecken und Rahmen
+
+<ContentImage
+    src={layoutLandscape}
+    alt="Abstrakte blaue Darstellung eines modularen Website-Layouts"
+    width={360}
+    shape="rounded"
+    border="default"
+/>
+
+### Feste Höhe, eckig und ohne Rahmen
+
+<ContentImage
+    src={layoutPortrait}
+    alt="Editorial-Darstellung von modularen Inhaltsblöcken"
+    height={360}
+    shape="square"
+    border="none"
+/>
+
+### Volle Breite
+
+<ContentImage
+    src={layoutLandscape}
+    alt="Breite abstrakte Darstellung eines responsiven Layouts"
+    fullWidth
+    shape="rounded"
+/>
+
+### Feste Breite und Höhe mit Cover-Ausschnitt
+
+<ContentImage
+    src={layoutLandscape}
+    alt="Auf einen breiten Ausschnitt zugeschnittene Layout-Illustration"
+    width={720}
+    height={260}
+    shape="rounded"
+    border="default"
+/>

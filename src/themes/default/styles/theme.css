@@ -22,6 +22,7 @@
 @import './themes/section-tones.css';
 
 /* Theme components: atoms, molecules, organisms, then layout primitives */
+@import '../components/atoms/ContentImage/ContentImage.css';
 @import '../components/molecules/Alert/Alert.css';
 @import '../components/organisms/Header/Header.css';
 @import '../components/organisms/Footer/Footer.css';

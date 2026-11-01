@@ -141,6 +141,23 @@ import { Alert } from 'astropilot/components';
 </Alert>
 ```
 
+Lokale Inhaltsbilder liegen direkt bei ihrer Section, beispielsweise unter `src/content/pages/showcase/images/`. `ContentImage` importiert diese PNG-, JPEG-, WebP- oder AVIF-Dateien aus MDX und gibt sie über Astros Asset-Pipeline als WebP mit Qualität 80 aus. Die Komponente akzeptiert `width`, `height`, `fullWidth`, `shape="rounded|square"` und `border="default|none"`; bei gesetzter Breite und Höhe verwendet sie `object-fit: cover`.
+
+```mdx
+import layoutImage from './images/layout.png';
+import { ContentImage } from 'astropilot/components';
+
+<ContentImage
+    src={layoutImage}
+    alt="Beschreibung des Bildinhalts"
+    width={720}
+    height={260}
+    fullWidth
+    shape="rounded"
+    border="default"
+/>
+```
+
 ## Struktur und Theme
 
 Die kleine, wiederverwendbare Inhalts- und URL-Logik liegt in `src/lib/astropilot/`. Sie kennt weder Demo-Texte noch Tailwind- oder DaisyUI-Klassen. Das Standard-Theme liegt in `src/themes/default/` und umfasst Layout, Header, Hero, Sections und Footer. DaisyUI wird dort tatsächlich für Navigation und Theme-Elemente genutzt.

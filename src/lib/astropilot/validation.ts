@@ -1,5 +1,5 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs';
-import { join, relative, resolve } from 'node:path';
+import { extname, join, relative, resolve } from 'node:path';
 import GithubSlugger from 'github-slugger';
 import type { Root } from 'mdast';
 import { z } from 'zod';
@@ -28,6 +28,11 @@ const mdxComponentImport =
     /^import\s*\{\s*Column\s*,\s*Columns\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
 const alertComponentImport =
     /^import\s*\{\s*Alert\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
+const contentImageComponentImport =
+    /^import\s*\{\s*ContentImage\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
+const localImageImport =
+    /^import\s+([A-Za-z_$][\w$]*)\s+from\s+['"]\.\/images\/[a-z0-9][a-z0-9._-]*\.(?:avif|jpe?g|png|webp)['"];?$/i;
+const imageExtensions = new Set(['.avif', '.jpeg', '.jpg', '.png', '.webp']);
 
 interface MdxNode {
     type: string;
@@ -82,21 +87,35 @@ function validateMdxLayout(
     let hasComponentImport = false;
     let columnsCount = 0;
     let alertCount = 0;
+    let contentImageCount = 0;
+    const localImageImports = new Set<string>();
     const validatedColumns = new Set<MdxNode>();
 
     visit(tree, (node) => {
         const mdxNode = node as MdxNode;
         if (mdxNode.type === 'mdxjsEsm') {
-            if (
-                !mdxComponentImport.test(mdxNode.value?.trim() ?? '') &&
-                !alertComponentImport.test(mdxNode.value?.trim() ?? '')
-            )
-                fail(
-                    contentRoot,
-                    path,
-                    'MDX may only import supported components from astropilot/components',
-                );
-            hasComponentImport = true;
+            const imports = (mdxNode.value?.trim() ?? '')
+                .split('\n')
+                .map((statement) => statement.trim())
+                .filter(Boolean);
+            for (const importValue of imports) {
+                const localImageMatch = importValue.match(localImageImport);
+                if (localImageMatch) {
+                    localImageImports.add(localImageMatch[1]);
+                    continue;
+                }
+                if (
+                    !mdxComponentImport.test(importValue) &&
+                    !alertComponentImport.test(importValue) &&
+                    !contentImageComponentImport.test(importValue)
+                )
+                    fail(
+                        contentRoot,
+                        path,
+                        'MDX may only import supported components from astropilot/components and local images from its images directory',
+                    );
+                hasComponentImport = true;
+            }
         }
         if (
             mdxNode.type === 'mdxFlowExpression' ||
@@ -202,6 +221,101 @@ function validateMdxLayout(
                         path,
                         'Alert accepts optional variant (info, success, warning, error) and style (normal, soft, outline, dash) props',
                     );
+            } else if (mdxNode.name === 'ContentImage') {
+                contentImageCount += 1;
+                const attributes = mdxNode.attributes ?? [];
+                const attributeNames = attributes.map(
+                    (attribute) => attribute.name,
+                );
+                const src = attributes.find(
+                    (attribute) =>
+                        attribute.type === 'mdxJsxAttribute' &&
+                        attribute.name === 'src',
+                );
+                const alt = attributes.find(
+                    (attribute) =>
+                        attribute.type === 'mdxJsxAttribute' &&
+                        attribute.name === 'alt',
+                );
+                const width = attributes.find(
+                    (attribute) =>
+                        attribute.type === 'mdxJsxAttribute' &&
+                        attribute.name === 'width',
+                );
+                const height = attributes.find(
+                    (attribute) =>
+                        attribute.type === 'mdxJsxAttribute' &&
+                        attribute.name === 'height',
+                );
+                const fullWidth = attributes.find(
+                    (attribute) =>
+                        attribute.type === 'mdxJsxAttribute' &&
+                        attribute.name === 'fullWidth',
+                );
+                const shape = attributes.find(
+                    (attribute) =>
+                        attribute.type === 'mdxJsxAttribute' &&
+                        attribute.name === 'shape',
+                );
+                const border = attributes.find(
+                    (attribute) =>
+                        attribute.type === 'mdxJsxAttribute' &&
+                        attribute.name === 'border',
+                );
+                const srcValue = src?.value;
+                const widthValue = width?.value;
+                const heightValue = height?.value;
+                const srcName =
+                    srcValue !== null && typeof srcValue === 'object'
+                        ? srcValue.value
+                        : undefined;
+                const widthNumber = Number(
+                    widthValue !== null && typeof widthValue === 'object'
+                        ? widthValue.value
+                        : undefined,
+                );
+                const heightNumber = Number(
+                    heightValue !== null && typeof heightValue === 'object'
+                        ? heightValue.value
+                        : undefined,
+                );
+                if (
+                    attributes.some(
+                        (attribute) =>
+                            attribute.type !== 'mdxJsxAttribute' ||
+                            ![
+                                'src',
+                                'alt',
+                                'width',
+                                'height',
+                                'fullWidth',
+                                'shape',
+                                'border',
+                            ].includes(attribute.name ?? ''),
+                    ) ||
+                    new Set(attributeNames).size !== attributeNames.length ||
+                    !src ||
+                    !localImageImports.has(srcName ?? '') ||
+                    typeof alt?.value !== 'string' ||
+                    alt.value.trim() === '' ||
+                    (width &&
+                        (!Number.isInteger(widthNumber) || widthNumber < 1)) ||
+                    (height &&
+                        (!Number.isInteger(heightNumber) ||
+                            heightNumber < 1)) ||
+                    (fullWidth && fullWidth.value !== null) ||
+                    (shape &&
+                        shape.value !== 'rounded' &&
+                        shape.value !== 'square') ||
+                    (border &&
+                        border.value !== 'default' &&
+                        border.value !== 'none')
+                )
+                    fail(
+                        contentRoot,
+                        path,
+                        'ContentImage requires a local image src expression and non-empty alt; optional width and height are positive integers, fullWidth is a boolean prop, shape is rounded or square, and border is default or none',
+                    );
             } else {
                 fail(
                     contentRoot,
@@ -212,7 +326,10 @@ function validateMdxLayout(
         }
     });
 
-    if (!hasComponentImport || (columnsCount === 0 && alertCount === 0))
+    if (
+        !hasComponentImport ||
+        (columnsCount === 0 && alertCount === 0 && contentImageCount === 0)
+    )
         fail(
             contentRoot,
             path,
@@ -254,6 +371,7 @@ export function validateAstroPilotContent(
     }
 
     for (const path of allFiles) {
+        if (imageExtensions.has(extname(path).toLowerCase())) continue;
         const filename = path.split('/').at(-1)!;
         if (filename === 'page.yaml') continue;
         const directory = contentDirectory(contentRoot, path);
