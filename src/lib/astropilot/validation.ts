@@ -36,7 +36,7 @@ const contentImageComponentImport =
 const cardComponentImport =
     /^import\s*\{\s*Card\s*,\s*CardActions\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
 const localImageImport =
-    /^import\s+([A-Za-z_$][\w$]*)\s+from\s+['"](?:\.\.\/|\.\/)[a-z0-9][a-z0-9._/-]*\.(?:avif|jpe?g|png|webp)['"];?$/i;
+    /^import\s+([A-Za-z_$][\w$]*)\s+from\s+['"](?:\.\.\/|\.\/)[a-z0-9_][a-z0-9._/-]*\.(?:avif|jpe?g|png|webp)['"];?$/i;
 const imageExtensions = new Set(['.avif', '.jpeg', '.jpg', '.png', '.webp']);
 
 interface MdxNode {
@@ -72,6 +72,10 @@ function contentDirectory(contentRoot: string, path: string): string {
         '/',
     );
     return directory === '.' ? '' : directory;
+}
+
+function isReservedContentDirectory(directory: string): boolean {
+    return directory.split('/').some((segment) => segment.startsWith('_'));
 }
 
 function frontmatterAndTree(path: string) {
@@ -416,6 +420,13 @@ export function validateAstroPilotContent(
     const headingsByRoute = new Map<string, Set<string>>();
 
     for (const pagePath of pageFiles) {
+        const directory = contentDirectory(contentRoot, pagePath);
+        if (isReservedContentDirectory(directory))
+            fail(
+                contentRoot,
+                pagePath,
+                'page.yaml is not allowed in a reserved directory beginning with _',
+            );
         const parsed = pageSchema.safeParse(
             parseYaml(readFileSync(pagePath, 'utf8')),
         );
@@ -425,7 +436,6 @@ export function validateAstroPilotContent(
                 pagePath,
                 `invalid page metadata: ${parsed.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join('; ')}`,
             );
-        const directory = contentDirectory(contentRoot, pagePath);
         const route = routeFromPageId(
             `${directory === '' ? '' : `${directory}/`}page.yaml`,
         );

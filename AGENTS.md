@@ -65,7 +65,7 @@ src/content/
     │   ├── page.yaml
     │   ├── hero.md
     │   ├── 01-bereiche.mdx
-    │   ├── assets/
+    │   ├── _assets/
     │       ├── layout-landscape.png
     │       └── layout-portrait.png
     │   ├── foundations/
@@ -125,7 +125,7 @@ description: Eine aussagekräftige Beschreibung dieser Beispielseite.
 ```
 
 - `title` und `description` sind nicht leere Pflichtfelder und werden für HTML-Metadaten verwendet: `title` für den `<title>`-Tag, `description` für die Meta-Description.
-- Jeder Ordner mit `page.yaml` definiert eine Seite; Ordner ohne diese Datei dürfen als reine Gruppierung für tiefere Seiten dienen.
+- Jeder Ordner mit `page.yaml` definiert eine Seite; Ordner ohne diese Datei dürfen als reine Gruppierung für tiefere Seiten dienen. Ordner, deren Name mit `_` beginnt, sind reservierte Unterstützungsordner (etwa `_assets/`), dürfen kein `page.yaml` enthalten und erzeugen niemals eine Seite.
 - Der relative Ordnerpfad bestimmt die URL: Wurzel → `/`, `faq/` → `/faq/`, `leistungen/monitoring/` → `/leistungen/monitoring/`.
 - Keine zusätzlichen Slug-Overrides oder Übersetzungssysteme in dieser Phase.
 - Bei Seiten ohne Hero ist `title` zugleich die sichtbare Hauptüberschrift.
