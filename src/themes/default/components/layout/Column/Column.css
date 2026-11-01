@@ -1,9 +1,49 @@
 @layer components {
-    .ap-column--span-8 {
-        @apply lg:col-span-8;
+    .ap-column--span-1 {
+        @apply lg:col-span-1;
+    }
+
+    .ap-column--span-2 {
+        @apply lg:col-span-2;
+    }
+
+    .ap-column--span-3 {
+        @apply lg:col-span-3;
     }
 
     .ap-column--span-4 {
         @apply lg:col-span-4;
+    }
+
+    .ap-column--span-5 {
+        @apply lg:col-span-5;
+    }
+
+    .ap-column--span-6 {
+        @apply lg:col-span-6;
+    }
+
+    .ap-column--span-7 {
+        @apply lg:col-span-7;
+    }
+
+    .ap-column--span-8 {
+        @apply lg:col-span-8;
+    }
+
+    .ap-column--span-9 {
+        @apply lg:col-span-9;
+    }
+
+    .ap-column--span-10 {
+        @apply lg:col-span-10;
+    }
+
+    .ap-column--span-11 {
+        @apply lg:col-span-11;
+    }
+
+    .ap-column--span-12 {
+        @apply lg:col-span-12;
     }
 }

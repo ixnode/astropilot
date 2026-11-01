@@ -104,29 +104,32 @@ Für geprüfte Layout-Bausteine unterstützt AstroPilot zusätzlich MDX-Sections
 npm install @astrojs/mdx
 ```
 
-Der erste Standardbaustein ist ein responsives 8/4-Layout:
+Der erste Standardbaustein ist ein responsives 12-Spalten-Layout:
 
 ```mdx
 import { Column, Columns } from 'astropilot/components';
 
 <Columns>
-  <Column span={8}>
+    <Column span={8}>
 
-## Hauptinhalt
+        ## Hauptinhalt
 
-Dieser Bereich nimmt acht von zwölf Spalten ein.
+        Dieser Bereich nimmt acht von zwölf Spalten ein.
 
-  </Column>
+    </Column>
 
-  <Column span={4}>
+    <Column span={4}>
 
-Dieser Bereich ergänzt den Hauptinhalt auf vier Spalten.
+        Dieser Bereich ergänzt den Hauptinhalt auf vier Spalten.
 
-  </Column>
+    </Column>
+
 </Columns>
 ```
 
-Die Datei heißt dann beispielsweise `01-einleitung.mdx`. Mobil stehen die Bereiche untereinander; ab Desktop werden sie nebeneinander gerendert. Neue Layout-Komponenten erfordern immer eine Astro-Komponente, einen dokumentierten Export und eine dokumentierte Verwendung.
+Die Datei heißt dann beispielsweise `01-einleitung.mdx`. Mobil stehen die Bereiche untereinander; ab Desktop liegt ein 12-Spalten-Raster zugrunde. `Column` akzeptiert `span={1}` bis `span={12}`; ohne Angabe belegt eine Spalte die volle Breite (`12`). Die Werte einer gemeinsamen Zeile sollten zusammen höchstens `12` ergeben. Kleinere Summen lassen bewusst leeren Raum.
+
+Übliche gleichmäßige Aufteilungen sind `12` (eine Spalte), `6 + 6` (zwei Spalten), `4 + 4 + 4` (drei Spalten) und `3 + 3 + 3 + 3` (vier Spalten). Asymmetrische Aufteilungen wie `8 + 4` oder `7 + 5` sind ebenso möglich. Neue Layout-Komponenten erfordern immer eine Astro-Komponente, einen dokumentierten Export und eine dokumentierte Verwendung.
 
 ## Struktur und Theme
 
