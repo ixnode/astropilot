@@ -1,5 +1,7 @@
 @layer components {
     .ap-column {
+        @apply flex;
+
         &.ap-column--span-1 {
             @apply lg:col-span-1;
         }
@@ -46,6 +48,10 @@
 
         &.ap-column--span-12 {
             @apply lg:col-span-12;
+        }
+
+        > .ap-card {
+            @apply w-full;
         }
     }
 }

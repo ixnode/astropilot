@@ -1,6 +1,6 @@
 @layer components {
     .ap-card {
-        @apply my-5 overflow-hidden;
+        @apply my-5 flex flex-1 flex-col overflow-hidden;
 
         .ap-card__figure {
             @apply overflow-hidden;
@@ -11,6 +11,8 @@
         }
 
         .ap-card__body {
+            @apply flex flex-1 flex-col;
+
             > h3:first-child {
                 @apply card-title;
             }

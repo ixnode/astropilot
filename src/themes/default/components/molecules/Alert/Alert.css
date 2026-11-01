@@ -1,9 +1,13 @@
 @layer components {
     .ap-alert {
-        @apply my-4;
+        @apply my-4 flex min-h-24 items-center;
 
         .ap-alert__content {
             @apply min-w-0;
+
+            strong {
+                color: inherit;
+            }
         }
     }
 }
