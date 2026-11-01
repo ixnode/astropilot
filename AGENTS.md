@@ -137,6 +137,8 @@ description: Eine aussagekräftige Beschreibung dieser Beispielseite.
 title: Energie verstehen und gezielt optimieren
 eyebrow: Willkommen bei AstroPilot
 tone: brand
+classes:
+    - ap-hero--visual
 ---
 
 Eine kurze Einführung in die Inhalte dieser Seite.
@@ -146,6 +148,7 @@ Eine kurze Einführung in die Inhalte dieser Seite.
 
 - Die Existenz der Datei aktiviert den Hero. Keine weitere Aktivierungsoption in `page.yaml`.
 - `title` ist ein nicht leerer Pflichtwert und wird als sichtbare `h1` gerendert; `eyebrow` ist optional; `tone` hat einen dokumentierten Standard.
+- `classes` ist optional und enthält höchstens acht zusätzliche Theme-Klassen für das äußere Hero-`section`-Element. Jede Klasse beginnt mit `ap-` und darf nur Kleinbuchstaben, Ziffern, `_` und `-` enthalten, etwa `ap-hero--visual`. Damit können Theme-Entwickler Hintergrundfarben, Bilder oder Strukturen ergänzen, ohne den Hero zu kopieren. Diese Klassen sind nur für `hero.md` vorgesehen, nicht für Sections.
 - Die gemeinsame Hero-Komponente rendert Titel und Markdown-Inhalt vollständig aus `hero.md`.
 - Ohne Hero rendert das Layout `page.yaml.title` als schlichte sichtbare `h1` vor den Sections. Dies ist der einzige vorgesehene sichtbare Fallback für Seiten ohne Hero.
 - Hauptseite, FAQ und Info nutzen dieselbe Hero-Komponente mit jeweils eigenen Inhalten. Keine drei kopierten Implementierungen.

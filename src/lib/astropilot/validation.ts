@@ -25,7 +25,14 @@ const markdownSchema = z
 const sectionSchema = markdownSchema.extend({
     fullWidth: z.boolean().optional(),
 });
-const heroSchema = markdownSchema.extend({ title: z.string().trim().min(1) });
+const heroClass = z.string().regex(/^ap-[a-z0-9][a-z0-9_-]*$/, {
+    message:
+        'must start with ap- and contain only lowercase letters, digits, underscores, or hyphens',
+});
+const heroSchema = markdownSchema.extend({
+    title: z.string().trim().min(1),
+    classes: z.array(heroClass).max(8).optional(),
+});
 const sectionPattern = /^\d{2,}-[a-z0-9][a-z0-9-]*\.(?:md|mdx)$/;
 const mdxComponentImport =
     /^import\s*\{\s*Column\s*,\s*Columns\s*\}\s*from\s*['"]astropilot\/components['"];?$/;

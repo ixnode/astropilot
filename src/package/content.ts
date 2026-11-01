@@ -8,6 +8,10 @@ export function createAstroPilotCollections(
     contentDirectory = './src/content/pages',
 ) {
     const tone = z.enum(tones).default('default');
+    const heroClass = z.string().regex(/^ap-[a-z0-9][a-z0-9_-]*$/, {
+        message:
+            'Hero classes must start with ap- and contain only lowercase letters, digits, underscores, or hyphens',
+    });
 
     const pages = defineCollection({
         loader: glob({
@@ -30,6 +34,7 @@ export function createAstroPilotCollections(
         schema: z.object({
             title: z.string().trim().min(1).optional(),
             eyebrow: z.string().trim().min(1).optional(),
+            classes: z.array(heroClass).max(8).default([]),
             tone,
             fullWidth: z.boolean().default(false),
         }),

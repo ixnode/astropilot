@@ -16,7 +16,10 @@ const toneClass = {
 }[toneOf(hero)];
 ---
 
-<section class:list={[toneClass, 'ap-hero']} aria-labelledby="page-title">
+<section
+    class:list={[toneClass, 'ap-hero', ...(hero.data.classes ?? [])]}
+    aria-labelledby="page-title"
+>
     <div class="ap-hero__inner site-shell">
         {hero.data.eyebrow && (
             <p class="ap-hero__eyebrow">{hero.data.eyebrow}</p>
