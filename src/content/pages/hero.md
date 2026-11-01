@@ -1,9 +1,9 @@
 ---
-title: Statische Websites mit Astro gestalten
+title: Statische Websites mit AstroPilot gestalten
 eyebrow: Willkommen bei AstroPilot
 tone: brand
 ---
 
-AstroPilot zeigt, wie sich Inhalte, Layouts und wiederverwendbare Komponenten in einem schlanken Astro-Projekt zusammenbringen lassen.
+AstroPilot verbindet nachvollziehbar gepflegte Inhalte, ein gemeinsames Theme und wiederverwendbare Komponenten in einem schlanken Astro-Projekt.
 
-[So funktioniert die Struktur](/info/)
+[Dokumentation lesen](/dokumentation/) · [Komponenten ansehen](/showcase/)

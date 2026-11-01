@@ -1,0 +1,18 @@
+---
+tone: default
+---
+
+## MDX für geprüfte Layouts
+
+Normale Inhalte bleiben Markdown. Eine `.mdx`-Section ist sinnvoll, wenn ein dokumentierter AstroPilot-Baustein ein Layout übernimmt, zum Beispiel das 12-Spalten-Raster.
+
+```mdx
+import { Column, Columns } from 'astropilot/components';
+
+<Columns>
+    <Column span={8}>Hauptinhalt</Column>
+    <Column span={4}>Ergänzung</Column>
+</Columns>
+```
+
+Auf mobilen Ansichten werden die Bereiche untereinander ausgegeben. Die Summe der Spalten einer gemeinsamen Reihe darf höchstens zwölf sein.

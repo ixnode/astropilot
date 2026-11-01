@@ -1,0 +1,9 @@
+---
+tone: default
+---
+
+## Semantische Farbvarianten
+
+Inhalte verwenden `tone: default`, `tone: muted` oder `tone: brand`. Diese Werte beschreiben eine Bedeutung, keine feste Farbe. Das Standard-Theme ordnet sie den DaisyUI-Farbtokens zu.
+
+Dadurch kann ein anderes Theme dieselben Inhalte darstellen, ohne Markdown oder YAML umzuschreiben.

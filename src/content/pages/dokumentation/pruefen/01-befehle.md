@@ -1,0 +1,15 @@
+---
+tone: default
+---
+
+## Die täglichen Befehle
+
+```sh
+npm run dev          # lokaler Entwicklungsserver
+npm run check        # Inhalt, Astro und TypeScript
+npm test             # Unit-Tests der Konventionen
+npm run build        # statischer Build und Ausgabeprüfung
+npm run preview      # lokalen Build ansehen
+```
+
+Für eine Deployment-Prüfung unter einem Unterpfad steht `npm run build:demo` bereit. Es baut die Website mit `/demo/` als Base, ohne `site.yaml` zu verändern.

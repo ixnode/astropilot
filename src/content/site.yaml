@@ -14,10 +14,14 @@ header:
           href: /info/
         - label: Showcase
           href: /showcase/
+        - label: Dokumentation
+          href: /dokumentation/
         - label: Kontakt
           href: /kontakt/
 footer:
     text: Eine Beispielwebsite mit AstroPilot.
     links:
+        - label: Dokumentation
+          href: /dokumentation/
         - label: Kontakt
           href: /kontakt/

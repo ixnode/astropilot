@@ -1,0 +1,23 @@
+---
+tone: default
+---
+
+## Seiteneinstieg mit hero.md
+
+Ein `hero.md` aktiviert den gemeinsamen Hero und liefert dessen sichtbare H1, Eyebrow, Tone und Markdown-Einführung.
+
+```yaml
+---
+title: Seitentitel im Hero
+eyebrow: Einordnung
+tone: brand
+---
+```
+
+### Klassen lokal überschreiben oder entfernen
+
+`classes` als Liste überschreibt `hero-classes` aus `site.yaml`. Mit `classes: null` entfernt eine Seite die globalen Klassen bewusst.
+
+```yaml
+classes: null
+```

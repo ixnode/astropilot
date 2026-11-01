@@ -1,9 +1,9 @@
 ---
-tone: brand
+tone: default
 ---
 
-## Bereit für Komponenten-Beispiele
+## Klar getrennt, gemeinsam nutzbar
 
-Die drei Bereiche zeigen die semantischen Hintergrundvarianten `default`, `muted` und `brand`. Als Nächstes kann diese Demo konkrete Tailwind- und DaisyUI-Komponenten in derselben Inhaltsstruktur vorstellen.
+Inhalte bleiben in Markdown und YAML. Das Standard-Theme liefert Struktur, Gestaltung und geprüfte Komponenten. Diese Trennung macht die Demo zugleich zu einer guten Grundlage für eigene Landingpages und statische Projektseiten.
 
-[Mehr über AstroPilot erfahren](/info/)
+[Dokumentation öffnen](/dokumentation/) · [Showcase öffnen](/showcase/)

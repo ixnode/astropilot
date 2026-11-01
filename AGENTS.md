@@ -81,6 +81,16 @@ src/content/
     │   ├── alerts/
     │   ├── images/
     │   └── cards/
+    ├── dokumentation/
+    │   ├── page.yaml
+    │   ├── hero.md
+    │   ├── 01-uebersicht.mdx
+    │   ├── einstieg/
+    │   ├── inhalte/
+    │   ├── layout/
+    │   ├── theme/
+    │   ├── pruefen/
+    │   └── paket/
     └── kontakt/
         ├── page.yaml
         └── 01-kontakt.md
@@ -107,6 +117,8 @@ header:
           href: /info/
         - label: Showcase
           href: /showcase/
+        - label: Dokumentation
+          href: /dokumentation/
         - label: Kontakt
           href: /kontakt/
 footer:
@@ -207,7 +219,7 @@ Hier steht normaler Markdown-Inhalt.
 - Stelle lesbare Markdown-Typografie einschließlich Listen, Links, Tabellen und Code sicher.
 - Ein späterer Austausch des Themes darf keine Content-Migration verlangen. Er darf Änderungen an Komponenten und CSS-/Build-Einbindung erfordern. Keine falsche Zusage, jede UI-Bibliothek ließe sich bereits per Konfigurationsschalter tauschen.
 - Baue jetzt nur ein Theme. Dokumentiere kurz dessen spätere Ersetzung. Kein generischer Theme-Loader erforderlich.
-- Gemeinsamer Header und Footer auf allen Seiten. Navigation mit aktivem Seitenzustand. Für fünf Links genügt eine responsive umbrochene Navigation ohne JavaScript-Menü.
+- Gemeinsamer Header und Footer auf allen Seiten. Navigation mit aktivem Seitenzustand. Für sechs Links genügt eine responsive umbrochene Navigation ohne JavaScript-Menü.
 - Konfigurierbar sind vereinbarte Inhalte, Navigation, Footer, Site-Metadaten und Farbvarianten. Beliebige Layout-Strukturen bleiben Entwickleraufgabe; kein visueller Baukasten.
 
 ## Barrierefreiheit und SEO
@@ -247,9 +259,9 @@ Stelle mindestens diese Befehle bereit:
 - `npm run preview`: Vorschau des Builds.
 - `npm run check`: Astro-/TypeScript-Prüfung plus erforderliche Inhaltsvalidierung.
 - `npm test`: wenige aussagekräftige Tests der eigenen Konventionen.
-- `npm run test:a11y`: reproduzierbare Browserprüfung der fünf Beispielseiten, etwa mit Playwright und axe-core.
+- `npm run test:a11y`: reproduzierbare Browserprüfung aller erzeugten Demo-, Showcase- und Dokumentationsseiten, etwa mit Playwright und axe-core.
 
-Nutze vorhandene Werkzeuge; keine eigene Testplattform. Prüfe vor allem Sortierung und doppelte Nummern, tiefe Ordnerzuordnung, fehlende Seitenmetadaten, ungültige Tones, Hero-Präsenz, H1-Fallback, eindeutige IDs und Base-URL-Verhalten. Temporäre Test-Fixtures für tiefere Seiten sind ausreichend; die sichtbare Demo umfasst fünf Seiten.
+Nutze vorhandene Werkzeuge; keine eigene Testplattform. Prüfe vor allem Sortierung und doppelte Nummern, tiefe Ordnerzuordnung, fehlende Seitenmetadaten, ungültige Tones, Hero-Präsenz, H1-Fallback, eindeutige IDs und Base-URL-Verhalten. Temporäre Test-Fixtures für tiefere Seiten sind ausreichend; die sichtbare Demo umfasst Startseite, Inhaltsseiten, Showcase und Dokumentation.
 
 Prüfe die gebaute Ausgabe auf interne Links und Metadaten. Einmal mit `/`, einmal mit einem Unterpfad wie `/demo/` testen. Kontrolliere Desktop und Mobile sowie Tastaturbedienung. Automatisierte Prüfungen ersetzen keine inhaltliche Bewertung von Überschriften oder Alternativtexten.
 

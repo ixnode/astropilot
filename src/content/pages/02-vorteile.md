@@ -2,10 +2,10 @@
 tone: muted
 ---
 
-## Auf Astro-Standards aufbauen
+## Von der Idee zur gepflegten Website
 
-- Seiten entstehen aus Ordnern und erhalten sprechende URLs.
-- Astro verarbeitet Markdown und Content Collections ohne einen eigenen Parser.
-- Navigation und Footer werden einmal in der Website-Konfiguration gepflegt.
+- Die [Dokumentation](/dokumentation/) erklärt Setup, Inhalte, Theme und Prüfungen Schritt für Schritt.
+- Der [Showcase](/showcase/) demonstriert die verfügbaren Layout- und UI-Bausteine direkt im Einsatz.
+- Seiten entstehen aus Ordnern; Navigation und Footer werden einmal in `site.yaml` gepflegt.
 
-[Häufige Fragen ansehen](/faq/)
+[Häufige Fragen ansehen](/faq/) · [Konzept kennenlernen](/info/)

@@ -1,0 +1,14 @@
+---
+tone: muted
+---
+
+## Seitenmetadaten und URLs
+
+Ein Ordner mit `page.yaml` definiert eine Seite. Der Ordnerpfad wird zur URL: `dokumentation/inhalte/page.yaml` erzeugt `/dokumentation/inhalte/`.
+
+```yaml
+title: Inhalte und Frontmatter
+description: Der Inhaltsvertrag von AstroPilot für globale Einstellungen, Seiten, Heroes und Sections.
+```
+
+`title` und `description` werden für den HTML-Titel und die Meta-Description verwendet. Ohne `hero.md` erscheint `title` zusätzlich als sichtbare H1.

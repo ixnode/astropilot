@@ -18,6 +18,9 @@ export function createAstroPilotConfig() {
         integrations: [mdx(), sitemap()],
         vite: { plugins: [tailwindcss()] },
         markdown: {
+            // A high-contrast Shiki theme keeps code comments readable in the
+            // documentation as well as in regular content.
+            shikiConfig: { theme: 'github-dark-high-contrast' },
             processor: unified({
                 remarkPlugins: [[remarkContentLinks, site]],
                 rehypePlugins: [rehypeHeadingIds, rehypeUniqueHeadingIds],

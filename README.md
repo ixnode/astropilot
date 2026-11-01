@@ -69,6 +69,8 @@ npm run dev
 
 Der Dev-Server startet bewusst mit `--force`, damit Änderungen an Content Collections, MDX-Komponenten und lokalen Package-Dateien ohne einen alten Astro-Content-Cache geprüft werden.
 
+Die laufende Demo dokumentiert sich zusätzlich selbst unter `/dokumentation/`: Dort stehen Setup, Inhaltsvertrag, Layout-Komponenten, Theme, Prüfungen und lokale Paketnutzung. Der sichtbare [Showcase](/showcase/) sammelt dagegen die Komponentenbeispiele.
+
 Weitere Befehle:
 
 ```sh
@@ -206,7 +208,7 @@ Ein anderes Theme kann diese Komponenten und die technische CSS-Einbindung erset
 
 ## Validierung und Grenzen
 
-Der Validator prüft die Ordnerzuordnung, YAML-Felder, Dateinamen, Tones, doppelte Abschnittsnummern, Markdown-Hierarchie, rohes HTML, unzulässige Link-Protokolle, interne Linkziele und generierte Überschrift-IDs. Der Build prüft fünf erzeugte Seiten, Metadaten, Canonicals, Sitemap und Base-Präfixe. Eigene Programmlogik liegt ausschließlich in TypeScript; `npm run test:source` prüft das zusätzlich.
+Der Validator prüft die Ordnerzuordnung, YAML-Felder, Dateinamen, Tones, doppelte Abschnittsnummern, Markdown-Hierarchie, rohes HTML, unzulässige Link-Protokolle, interne Linkziele und generierte Überschrift-IDs. Der Build prüft alle erzeugten Seiten, Metadaten, Canonicals, Sitemap und Base-Präfixe. Eigene Programmlogik liegt ausschließlich in TypeScript; `npm run test:source` prüft das zusätzlich.
 
 Die Barrierefreiheitsprüfung automatisiert axe, sichtbaren Tastaturfokus und mobile Overflow-Prüfungen. Sie ersetzt keine vollständige WCAG-2.2-AA-Konformitätsbewertung oder redaktionelle Bewertung von Überschriften und Linktexten.
 

@@ -1,0 +1,9 @@
+---
+tone: muted
+---
+
+## Hero-Varianten im Theme
+
+Hero-Klassen beginnen mit `ap-` und werden im Theme gestylt. `ap-hero--theme-1` ergänzt beispielsweise einen Verlauf und ein dezentes Muster, ohne den semantischen Tone zu überschreiben.
+
+Zusammengehörige Block-, Element- und Modifier-Regeln liegen in der CSS-Datei verschachtelt. So bleiben Varianten wie `ap-hero--theme-1` samt Pseudoelementen direkt zusammen editierbar.
