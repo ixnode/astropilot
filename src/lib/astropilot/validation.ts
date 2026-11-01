@@ -1,5 +1,6 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative, resolve } from 'node:path';
+import GithubSlugger from 'github-slugger';
 import type { Root } from 'mdast';
 import { z } from 'zod';
 import { parse as parseYaml } from 'yaml';
@@ -119,6 +120,7 @@ export function validateAstroPilotContent(contentRoot = resolve(process.cwd(), '
     if (path.endsWith('.mdx')) validateMdxLayout(contentRoot, path, tree);
     const route = directory === '' ? '/' : `/${directory}/`;
     const seen = headingsByRoute.get(route)!;
+    const headingSlugger = new GithubSlugger();
     let firstHeading: number | undefined;
     let previousHeading = 0;
     visit(tree, (node) => {
@@ -128,9 +130,8 @@ export function validateAstroPilotContent(contentRoot = resolve(process.cwd(), '
         if (node.depth === 1) fail(contentRoot, path, 'Markdown must not contain an h1');
         if (previousHeading > 0 && node.depth > previousHeading + 1) fail(contentRoot, path, `heading level jumps from h${previousHeading} to h${node.depth}`);
         previousHeading = node.depth;
-        const text = node.children.map((child) => ('value' in child ? child.value : '')).join('').toLowerCase();
-        const slug = text.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'abschnitt';
-        const id = `${filename.replace(/\.(?:md|mdx)$/, '')}-${slug}`;
+        const text = node.children.map((child) => ('value' in child ? child.value : '')).join('');
+        const id = `${filename.replace(/\.(?:md|mdx)$/, '')}-${headingSlugger.slug(text)}`;
         if (seen.has(id)) fail(contentRoot, path, `duplicate generated heading id ${id}`);
         seen.add(id);
       }
