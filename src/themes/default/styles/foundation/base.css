@@ -10,6 +10,6 @@
     }
 
     a {
-        @apply underline underline-offset-4;
+        @apply no-underline underline-offset-6 hover:underline;
     }
 }

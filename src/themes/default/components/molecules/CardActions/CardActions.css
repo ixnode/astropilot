@@ -1,5 +1,7 @@
 @layer components {
     .ap-card-actions {
+        @apply mt-6;
+
         > p {
             @apply m-0;
         }
