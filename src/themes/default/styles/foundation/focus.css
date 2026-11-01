@@ -1,4 +1,6 @@
 /* One visible keyboard-focus treatment across theme components and content. */
 @layer base {
-  :focus-visible { @apply outline-3 outline-offset-3 outline-primary; }
+    :focus-visible {
+        @apply outline-3 outline-offset-3 outline-primary;
+    }
 }

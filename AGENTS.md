@@ -31,6 +31,7 @@ Das Repository muss nach Installation seiner Entwicklungsabhängigkeiten unmitte
 - Sämtliche eigene Programmlogik wird in TypeScript geschrieben: Core, Hilfsfunktionen, Browser-Code, Tests, Prüfskripte und programmatische Werkzeugkonfigurationen.
 - Keine eigenen `.js`, `.mjs` oder `.cjs`-Quelldateien. Verwende `.ts`; keine zusätzliche Programmiersprache für Projekt-Hilfsskripte einführen.
 - Verwende `astro.config.ts`. Auch Test- und andere Werkzeugkonfigurationen werden in TypeScript angelegt, sofern sie programmatische Konfiguration benötigen. Wähle Werkzeuge mit TypeScript-Unterstützung; melde echte Einschränkungen statt still JavaScript anzulegen.
+- Formatiere formatierbare Projektquellen mit `npm run format`; verwende vier Leerzeichen statt Tabs. Prüfe den unveränderten Stil mit `npm run format:check`. Lockdateien und generierte Dateien werden nicht formatiert.
 - Nutze `astro/tsconfigs/strict` als TypeScript-Basis. Verwende präzise Typen und Typinferenz; kein pauschales `any`, `@ts-ignore` oder Abschalten der Typprüfung, um Fehler zu umgehen.
 - Astro-Komponenten bleiben `.astro`-Dateien; ihre Programmlogik wird in TypeScript geschrieben. Verwende typisierte Component-Props.
 - Browser-Scripts werden durch Astro verarbeitet: TypeScript in verarbeiteten `<script>`-Blöcken oder eingebundenen `.ts`-Modulen. Kein `is:inline`, keine HTML-Eventhandler und kein unverarbeiteter JavaScript-Programmcode in HTML-Strings.
@@ -74,20 +75,20 @@ url: https://example.com
 base: /
 language: de
 header:
-  links:
-    - label: Startseite
-      href: /
-    - label: FAQ
-      href: /faq/
-    - label: Info
-      href: /info/
-    - label: Kontakt
-      href: /kontakt/
+    links:
+        - label: Startseite
+          href: /
+        - label: FAQ
+          href: /faq/
+        - label: Info
+          href: /info/
+        - label: Kontakt
+          href: /kontakt/
 footer:
-  text: Eine Beispielwebsite mit AstroPilot.
-  links:
-    - label: Kontakt
-      href: /kontakt/
+    text: Eine Beispielwebsite mit AstroPilot.
+    links:
+        - label: Kontakt
+          href: /kontakt/
 ```
 
 Website-Name, Sprache, Produktions-URL, Basispfad, Navigation und Footer werden hier gepflegt. Verwende dieselben validierten Werte für Astro-Konfiguration, Links, Canonicals und Sitemap; keine doppelte Konfiguration. Astro-Konfiguration darf keine nur innerhalb der Astro-Laufzeit verfügbaren Content-APIs importieren. Verwende für die gemeinsam benötigte Singleton-Konfiguration eine kleine Node-kompatible Ladefunktion.

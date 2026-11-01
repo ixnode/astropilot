@@ -1,5 +1,5 @@
 @layer components {
-  .ap-skip-link {
-    @apply sr-only fixed left-4 top-4 z-50 rounded-box bg-base-100 px-4 py-3 text-base-content shadow-lg focus:not-sr-only;
-  }
+    .ap-skip-link {
+        @apply sr-only fixed left-4 top-4 z-50 rounded-box bg-base-100 px-4 py-3 text-base-content shadow-lg focus:not-sr-only;
+    }
 }

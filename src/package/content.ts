@@ -4,33 +4,35 @@ import { z } from 'astro/zod';
 import { tones } from '../lib/astropilot/types';
 
 /** Creates the two Astro collections required by the AstroPilot content contract. */
-export function createAstroPilotCollections(contentDirectory = './src/content/pages') {
-  const tone = z.enum(tones).default('default');
+export function createAstroPilotCollections(
+    contentDirectory = './src/content/pages',
+) {
+    const tone = z.enum(tones).default('default');
 
-  const pages = defineCollection({
-    loader: glob({
-      base: contentDirectory,
-      pattern: '**/page.yaml',
-      generateId: ({ entry }) => entry.replace(/\.yaml$/, ''),
-    }),
-    schema: z.object({
-      title: z.string().trim().min(1),
-      description: z.string().trim().min(1),
-    }),
-  });
+    const pages = defineCollection({
+        loader: glob({
+            base: contentDirectory,
+            pattern: '**/page.yaml',
+            generateId: ({ entry }) => entry.replace(/\.yaml$/, ''),
+        }),
+        schema: z.object({
+            title: z.string().trim().min(1),
+            description: z.string().trim().min(1),
+        }),
+    });
 
-  const documents = defineCollection({
-    loader: glob({
-      base: contentDirectory,
-      pattern: '**/*.{md,mdx}',
-      generateId: ({ entry }) => entry.replace(/\.(?:md|mdx)$/, ''),
-    }),
-    schema: z.object({
-      title: z.string().trim().min(1).optional(),
-      eyebrow: z.string().trim().min(1).optional(),
-      tone,
-    }),
-  });
+    const documents = defineCollection({
+        loader: glob({
+            base: contentDirectory,
+            pattern: '**/*.{md,mdx}',
+            generateId: ({ entry }) => entry.replace(/\.(?:md|mdx)$/, ''),
+        }),
+        schema: z.object({
+            title: z.string().trim().min(1).optional(),
+            eyebrow: z.string().trim().min(1).optional(),
+            tone,
+        }),
+    });
 
-  return { pages, documents };
+    return { pages, documents };
 }

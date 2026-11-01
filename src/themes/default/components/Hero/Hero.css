@@ -1,17 +1,17 @@
 @layer components {
-  .ap-hero {
-    @apply py-section-hero;
-  }
+    .ap-hero {
+        @apply py-section-hero;
+    }
 
-  .ap-hero__eyebrow {
-    @apply mb-3 text-sm font-bold tracking-widest uppercase;
-  }
+    .ap-hero__eyebrow {
+        @apply mb-3 text-sm font-bold tracking-widest uppercase;
+    }
 
-  .ap-hero__title {
-    @apply max-w-3xl text-display font-bold tracking-tight;
-  }
+    .ap-hero__title {
+        @apply max-w-3xl text-display font-bold tracking-tight;
+    }
 
-  .ap-hero__content {
-    @apply mt-6 max-w-3xl;
-  }
+    .ap-hero__content {
+        @apply mt-6 max-w-3xl;
+    }
 }

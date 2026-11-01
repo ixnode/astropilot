@@ -9,65 +9,65 @@
  */
 
 /* Framework */
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* Foundation */
-@import "./foundation/tokens.css";
-@import "./foundation/base.css";
-@import "./foundation/prose.css";
-@import "./foundation/focus.css";
-@import "./foundation/layout.css";
+@import './foundation/tokens.css';
+@import './foundation/base.css';
+@import './foundation/prose.css';
+@import './foundation/focus.css';
+@import './foundation/layout.css';
 
 /* Semantic content variants */
-@import "./themes/section-tones.css";
+@import './themes/section-tones.css';
 
 /* Theme components and layout */
-@import "../components/Header/Header.css";
-@import "../components/Footer/Footer.css";
-@import "../components/Hero/Hero.css";
-@import "../components/Section/Section.css";
-@import "../components/Columns/Columns.css";
-@import "../components/Column/Column.css";
-@import "../layouts/PageLayout/PageLayout.css";
+@import '../components/Header/Header.css';
+@import '../components/Footer/Footer.css';
+@import '../components/Hero/Hero.css';
+@import '../components/Section/Section.css';
+@import '../components/Columns/Columns.css';
+@import '../components/Column/Column.css';
+@import '../layouts/PageLayout/PageLayout.css';
 
 @plugin "daisyui" {
-  themes: false;
+    themes: false;
 }
 @plugin "daisyui/theme" {
-  name: "astropilot";
-  default: true;
-  prefersdark: false;
-  color-scheme: light;
+    name: 'astropilot';
+    default: true;
+    prefersdark: false;
+    color-scheme: light;
 
-  --color-base-100: #ffffff;
-  --color-base-200: #f5f7fa;
-  --color-base-300: #e2e8f0;
-  --color-base-content: #172033;
-  --color-primary: #1e5aa8;
-  --color-primary-content: #ffffff;
-  --color-secondary: #0f766e;
-  --color-secondary-content: #ffffff;
-  --color-accent: #b45309;
-  --color-accent-content: #ffffff;
-  --color-neutral: #26334a;
-  --color-neutral-content: #ffffff;
-  --color-info: #1769aa;
-  --color-info-content: #ffffff;
-  --color-success: #19764b;
-  --color-success-content: #ffffff;
-  --color-warning: #9a5b00;
-  --color-warning-content: #ffffff;
-  --color-error: #b42318;
-  --color-error-content: #ffffff;
+    --color-base-100: #ffffff;
+    --color-base-200: #f5f7fa;
+    --color-base-300: #e2e8f0;
+    --color-base-content: #172033;
+    --color-primary: #1e5aa8;
+    --color-primary-content: #ffffff;
+    --color-secondary: #0f766e;
+    --color-secondary-content: #ffffff;
+    --color-accent: #b45309;
+    --color-accent-content: #ffffff;
+    --color-neutral: #26334a;
+    --color-neutral-content: #ffffff;
+    --color-info: #1769aa;
+    --color-info-content: #ffffff;
+    --color-success: #19764b;
+    --color-success-content: #ffffff;
+    --color-warning: #9a5b00;
+    --color-warning-content: #ffffff;
+    --color-error: #b42318;
+    --color-error-content: #ffffff;
 
-  --radius-selector: 0.5rem;
-  --radius-field: 0.5rem;
-  --radius-box: 0.75rem;
-  --size-selector: 0.25rem;
-  --size-field: 0.25rem;
-  --border: 1px;
-  --depth: 0;
-  --noise: 0;
+    --radius-selector: 0.5rem;
+    --radius-field: 0.5rem;
+    --radius-box: 0.75rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 0;
+    --noise: 0;
 }
 
 @plugin "@tailwindcss/typography";

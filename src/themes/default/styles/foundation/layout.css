@@ -1,4 +1,6 @@
 /* Shared responsive content width and inline spacing. */
 @layer components {
-  .site-shell { @apply mx-auto w-full max-w-6xl px-gutter; }
+    .site-shell {
+        @apply mx-auto w-full max-w-6xl px-gutter;
+    }
 }

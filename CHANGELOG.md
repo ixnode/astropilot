@@ -46,4 +46,3 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 - Introduced the initial AstroPilot file-based content framework, default DaisyUI theme, validated content contract, static routing, SEO metadata, sitemap, tests, and accessibility checks.
 - Added the installable package surface for content collections, Astro configuration, and the shared page route, together with local tarball verification.
-

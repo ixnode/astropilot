@@ -2,10 +2,24 @@
 import type { CollectionEntry } from 'astro:content';
 import { toneOf } from '../../../../lib/astropilot/pages';
 
-interface Props { section: CollectionEntry<'documents'>; Content: Awaited<ReturnType<typeof import('astro:content').render>>['Content']; }
+interface Props {
+    section: CollectionEntry<'documents'>;
+    Content: Awaited<
+        ReturnType<typeof import('astro:content').render>
+    >['Content'];
+}
 const { section, Content } = Astro.props;
-const toneClass = { default: 'tone-default', muted: 'tone-muted', brand: 'tone-brand' }[toneOf(section)];
+const toneClass = {
+    default: 'tone-default',
+    muted: 'tone-muted',
+    brand: 'tone-brand',
+}[toneOf(section)];
 ---
+
 <section class:list={[toneClass, 'ap-section']}>
-  <div class="ap-section__inner site-shell"><div class="ap-section__content content-prose"><Content /></div></div>
+    <div class="ap-section__inner site-shell">
+        <div class="ap-section__content content-prose">
+            <Content />
+        </div>
+    </div>
 </section>

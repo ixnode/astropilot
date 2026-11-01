@@ -7,20 +7,51 @@ import Hero from '../themes/default/components/Hero/Hero.astro';
 import Section from '../themes/default/components/Section/Section.astro';
 
 export async function getAstroPilotStaticPaths() {
-  const pages = assemblePages(await getCollection('pages'), await getCollection('documents'));
-  return pages.map((page) => ({
-    params: { slug: page.route === '/' ? undefined : page.route.slice(1, -1) },
-    props: { page },
-  }));
+    const pages = assemblePages(
+        await getCollection('pages'),
+        await getCollection('documents'),
+    );
+    return pages.map((page) => ({
+        params: {
+            slug: page.route === '/' ? undefined : page.route.slice(1, -1),
+        },
+        props: { page },
+    }));
 }
 
-interface Props { page: AssembledPage; }
+interface Props {
+    page: AssembledPage;
+}
 const { page } = Astro.props;
 const site = loadSiteConfig();
 const hero = page.hero ? await render(page.hero) : undefined;
-const sections = await Promise.all(page.sections.map(async (section) => ({ section, rendered: await render(section) })));
+const sections = await Promise.all(
+    page.sections.map(async (section) => ({
+        section,
+        rendered: await render(section),
+    })),
+);
 ---
-<PageLayout site={site} title={page.entry.data.title} description={page.entry.data.description} route={page.route}>
-  {hero ? <Hero hero={page.hero!} Content={hero.Content} /> : <div class="site-shell py-section"><h1 id="page-title" class="max-w-3xl text-display font-bold tracking-tight">{page.entry.data.title}</h1></div>}
-  {sections.map(({ section, rendered }) => <Section section={section} Content={rendered.Content} />)}
+
+<PageLayout
+    site={site}
+    title={page.entry.data.title}
+    description={page.entry.data.description}
+    route={page.route}
+>
+    {hero ? (
+        <Hero hero={page.hero!} Content={hero.Content} />
+    ) : (
+        <div class="site-shell py-section">
+            <h1
+                id="page-title"
+                class="max-w-3xl text-display font-bold tracking-tight"
+            >
+                {page.entry.data.title}
+            </h1>
+        </div>
+    )}
+    {sections.map(({ section, rendered }) => (
+        <Section section={section} Content={rendered.Content} />
+    ))}
 </PageLayout>

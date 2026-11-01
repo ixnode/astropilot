@@ -23,11 +23,11 @@ Use this skill when the user:
 2. Summarize the commits since the current version tag or release point.
 3. Update `CHANGELOG.md` with today's date and a concise professional summary of those changes.
 4. Bump the version consistently, especially in:
-   - `VERSION`
-   - `package.json`
+    - `VERSION`
+    - `package.json`
 5. Preserve the release style already used by this repository.
 6. After the changes are complete, output a GitHub release title in this exact format:
-   - `<new version> - <single-line summary of the changes>`
+    - `<new version> - <single-line summary of the changes>`
 
 ## Output Rules
 

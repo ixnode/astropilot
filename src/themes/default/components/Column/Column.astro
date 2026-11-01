@@ -1,12 +1,16 @@
 ---
 interface Props {
-  span: number;
+    span: number;
 }
 
 const { span } = Astro.props;
-if (span !== 4 && span !== 8) throw new Error(`Unsupported AstroPilot column span: ${span}. Expected 4 or 8.`);
+if (span !== 4 && span !== 8)
+    throw new Error(
+        `Unsupported AstroPilot column span: ${span}. Expected 4 or 8.`,
+    );
 const columnClass = span === 8 ? 'ap-column--span-8' : 'ap-column--span-4';
 ---
+
 <div class:list={['ap-column', columnClass]}>
-  <slot />
+    <slot />
 </div>

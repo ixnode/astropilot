@@ -9,19 +9,19 @@ import { validateAstroPilotContent } from '../lib/astropilot/validation';
 
 /** Returns the Astro configuration required by the default AstroPilot theme. */
 export function createAstroPilotConfig() {
-  validateAstroPilotContent();
-  const site = loadSiteConfig();
+    validateAstroPilotContent();
+    const site = loadSiteConfig();
 
-  return {
-    site: site.url,
-    base: site.base,
-    integrations: [mdx(), sitemap()],
-    vite: { plugins: [tailwindcss()] },
-    markdown: {
-      processor: unified({
-        remarkPlugins: [[remarkContentLinks, site]],
-        rehypePlugins: [rehypeHeadingIds, rehypeUniqueHeadingIds],
-      }),
-    },
-  };
+    return {
+        site: site.url,
+        base: site.base,
+        integrations: [mdx(), sitemap()],
+        vite: { plugins: [tailwindcss()] },
+        markdown: {
+            processor: unified({
+                remarkPlugins: [[remarkContentLinks, site]],
+                rehypePlugins: [rehypeHeadingIds, rehypeUniqueHeadingIds],
+            }),
+        },
+    };
 }

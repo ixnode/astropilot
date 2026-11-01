@@ -1,4 +1,4 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "src", "scripts", "tests"]
+    "extends": "astro/tsconfigs/strict",
+    "include": [".astro/types.d.ts", "src", "scripts", "tests"]
 }
