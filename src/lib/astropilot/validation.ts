@@ -79,6 +79,7 @@ function validateMdxLayout(
 ): void {
     let hasComponentImport = false;
     let columnsCount = 0;
+    const validatedColumns = new Set<MdxNode>();
 
     visit(tree, (node) => {
         const mdxNode = node as MdxNode;
@@ -106,33 +107,55 @@ function validateMdxLayout(
                     (child) => child.type === 'mdxJsxFlowElement',
                 );
                 if (
-                    columns.length !== 2 ||
+                    mdxNode.attributes?.length !== 0 ||
+                    columns.length < 1 ||
+                    columns.length > 4 ||
                     columns.some((column) => column.name !== 'Column')
                 )
                     fail(
                         contentRoot,
                         path,
-                        'Columns must contain exactly two direct Column components',
+                        'Columns must contain one to four direct Column components and no props',
                     );
-            } else if (mdxNode.name === 'Column') {
-                const span = mdxNode.attributes?.find(
-                    (attribute) =>
-                        attribute.type === 'mdxJsxAttribute' &&
-                        attribute.name === 'span',
-                );
-                const spanValue = span?.value;
-                const value =
-                    spanValue !== null && typeof spanValue === 'object'
-                        ? spanValue.value
-                        : undefined;
-                if (
-                    mdxNode.attributes?.length !== 1 ||
-                    (value !== '8' && value !== '4')
-                )
+                const spans = columns.map((column) => {
+                    validatedColumns.add(column);
+                    if ((column.attributes?.length ?? 0) === 0) return 12;
+                    const span = column.attributes?.find(
+                        (attribute) =>
+                            attribute.type === 'mdxJsxAttribute' &&
+                            attribute.name === 'span',
+                    );
+                    const spanValue = span?.value;
+                    const value =
+                        spanValue !== null && typeof spanValue === 'object'
+                            ? spanValue.value
+                            : undefined;
+                    const numericValue = Number(value);
+                    if (
+                        column.attributes?.length !== 1 ||
+                        !Number.isInteger(numericValue) ||
+                        numericValue < 1 ||
+                        numericValue > 12
+                    )
+                        fail(
+                            contentRoot,
+                            path,
+                            'Column accepts no props for span 12 or exactly one numeric span prop from 1 to 12',
+                        );
+                    return numericValue;
+                });
+                if (spans.reduce((sum, span) => sum + span, 0) > 12)
                     fail(
                         contentRoot,
                         path,
-                        'Column requires exactly one span prop with the value 8 or 4',
+                        'the Column spans in one Columns layout must not exceed 12',
+                    );
+            } else if (mdxNode.name === 'Column') {
+                if (!validatedColumns.has(mdxNode))
+                    fail(
+                        contentRoot,
+                        path,
+                        'Column must be a direct child of Columns',
                     );
             } else {
                 fail(
@@ -144,11 +167,11 @@ function validateMdxLayout(
         }
     });
 
-    if (!hasComponentImport || columnsCount !== 1)
+    if (!hasComponentImport || columnsCount === 0)
         fail(
             contentRoot,
             path,
-            'MDX section requires one Columns layout and its AstroPilot component import',
+            'MDX section requires a Columns layout and its AstroPilot component import',
         );
 }
 

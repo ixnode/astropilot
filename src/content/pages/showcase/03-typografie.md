@@ -1,0 +1,27 @@
+---
+tone: default
+---
+
+## Inhaltstypografie
+
+Normales Markdown bleibt der Standard für Inhalte. Es erhält im Theme eine lesbare Typografie und muss keine Klassen oder HTML-Fragmente enthalten.
+
+### Listen und Links
+
+- Klare Absätze und sinnvolle Überschriften strukturieren den Inhalt.
+- [Interne Links](/info/) bleiben unter dem Deployment-Basispfad funktionsfähig.
+- `Inline-Code` eignet sich für Dateinamen und kurze technische Begriffe.
+
+### Zitat, Code und Tabelle
+
+> Inhalte und Darstellung bleiben getrennt. Autoren beschreiben den Inhalt, Entwickler pflegen die verfügbaren Bausteine.
+
+```text
+src/content/pages/showcase/
+```
+
+| Inhalt              | Pflegeort                       |
+| ------------------- | ------------------------------- |
+| Seitentitel und SEO | `page.yaml`                     |
+| Hero-Text           | `hero.md`                       |
+| Abschnitte          | `NN-name.md` oder `NN-name.mdx` |

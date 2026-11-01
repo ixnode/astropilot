@@ -4,7 +4,7 @@ import { loadSiteConfig } from '../src/lib/astropilot/site-config';
 import { canonicalUrl, withBase } from '../src/lib/astropilot/urls';
 
 const site = loadSiteConfig();
-const routes = ['/', '/faq/', '/info/', '/kontakt/'];
+const routes = ['/', '/faq/', '/info/', '/showcase/', '/kontakt/'];
 for (const route of routes) {
     const relativeFile =
         route === '/' ? 'index.html' : join(route, 'index.html');

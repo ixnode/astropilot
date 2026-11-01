@@ -127,7 +127,7 @@ import { Column, Columns } from 'astropilot/components';
 </Columns>
 ```
 
-Die Datei heißt dann beispielsweise `01-einleitung.mdx`. Mobil stehen die Bereiche untereinander; ab Desktop liegt ein 12-Spalten-Raster zugrunde. `Column` akzeptiert `span={1}` bis `span={12}`; ohne Angabe belegt eine Spalte die volle Breite (`12`). Die Werte einer gemeinsamen Zeile sollten zusammen höchstens `12` ergeben. Kleinere Summen lassen bewusst leeren Raum.
+Die Datei heißt dann beispielsweise `01-einleitung.mdx`. Mobil stehen die Bereiche untereinander; ab Desktop liegt ein 12-Spalten-Raster zugrunde. Ein `Columns`-Block enthält ein bis vier direkte `Column`-Elemente. `Column` akzeptiert `span={1}` bis `span={12}`; ohne Angabe belegt eine Spalte die volle Breite (`12`). Die Werte einer gemeinsamen Zeile dürfen zusammen höchstens `12` ergeben. Kleinere Summen lassen bewusst leeren Raum.
 
 Übliche gleichmäßige Aufteilungen sind `12` (eine Spalte), `6 + 6` (zwei Spalten), `4 + 4 + 4` (drei Spalten) und `3 + 3 + 3 + 3` (vier Spalten). Asymmetrische Aufteilungen wie `8 + 4` oder `7 + 5` sind ebenso möglich. Neue Layout-Komponenten erfordern immer eine Astro-Komponente, einen dokumentierten Export und eine dokumentierte Verwendung.
 
@@ -141,7 +141,7 @@ Ein anderes Theme kann diese Komponenten und die technische CSS-Einbindung erset
 
 ## Validierung und Grenzen
 
-Der Validator prüft die Ordnerzuordnung, YAML-Felder, Dateinamen, Tones, doppelte Abschnittsnummern, Markdown-Hierarchie, rohes HTML, unzulässige Link-Protokolle, interne Linkziele und generierte Überschrift-IDs. Der Build prüft vier erzeugte Seiten, Metadaten, Canonicals, Sitemap und Base-Präfixe. Eigene Programmlogik liegt ausschließlich in TypeScript; `npm run test:source` prüft das zusätzlich.
+Der Validator prüft die Ordnerzuordnung, YAML-Felder, Dateinamen, Tones, doppelte Abschnittsnummern, Markdown-Hierarchie, rohes HTML, unzulässige Link-Protokolle, interne Linkziele und generierte Überschrift-IDs. Der Build prüft fünf erzeugte Seiten, Metadaten, Canonicals, Sitemap und Base-Präfixe. Eigene Programmlogik liegt ausschließlich in TypeScript; `npm run test:source` prüft das zusätzlich.
 
 Die Barrierefreiheitsprüfung automatisiert axe, sichtbaren Tastaturfokus und mobile Overflow-Prüfungen. Sie ersetzt keine vollständige WCAG-2.2-AA-Konformitätsbewertung oder redaktionelle Bewertung von Überschriften und Linktexten.
 

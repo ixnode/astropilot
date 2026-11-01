@@ -1,0 +1,9 @@
+---
+tone: muted
+---
+
+## Sections und Farbvarianten
+
+Jede Content-Datei wird als eigener semantischer Bereich ausgegeben. Mit `tone: default`, `tone: muted` und `tone: brand` wählen Autoren eine Bedeutung, keine konkrete Farbe. Das Default-Theme ordnet diese Werte seinen geprüften Oberflächen zu.
+
+Diese Seite verwendet alle drei Varianten. So ist der Effekt direkt sichtbar, während die Inhaltsdateien unabhängig vom konkreten DaisyUI-Theme bleiben.

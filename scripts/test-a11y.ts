@@ -78,7 +78,13 @@ try {
         { width: 1440, height: 900, name: 'desktop' },
     ]) {
         const context = await browser.newContext({ viewport });
-        for (const route of ['/', '/faq/', '/info/', '/kontakt/']) {
+        for (const route of [
+            '/',
+            '/faq/',
+            '/info/',
+            '/showcase/',
+            '/kontakt/',
+        ]) {
             const page = await context.newPage();
             await page.goto(`${baseUrl}${route}`, { waitUntil: 'networkidle' });
             const results = await new AxeBuilder({ page }).analyze();
@@ -104,7 +110,7 @@ try {
     }
     await browser.close();
     console.log(
-        'Axe, keyboard-focus, and viewport-overflow checks passed for four routes on mobile and desktop.',
+        'Axe, keyboard-focus, and viewport-overflow checks passed for five routes on mobile and desktop.',
     );
 } finally {
     await new Promise<void>((resolveClose, reject) => {

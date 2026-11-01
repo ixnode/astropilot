@@ -1,0 +1,81 @@
+---
+tone: muted
+---
+
+import { Column, Columns } from 'astropilot/components';
+
+## Layout-Raster
+
+Das Layout verwendet ab großen Bildschirmen ein 12-Spalten-Raster. Auf kleineren Ansichten stehen alle Bereiche automatisch untereinander.
+
+<Columns>
+    <Column>
+        ### Eine Spalte: 12 von 12
+
+        Ein Bereich kann die vollständige verfügbare Breite nutzen.
+    </Column>
+
+</Columns>
+
+<Columns>
+    <Column span={6}>
+        ### Zwei Spalten: 6 von 12
+
+        Gleichmäßige Inhalte lassen sich paarweise anordnen.
+    </Column>
+
+    <Column span={6}>
+        ### Zwei Spalten: 6 von 12
+
+        Beide Bereiche teilen sich eine vollständige Reihe.
+    </Column>
+
+</Columns>
+
+<Columns>
+    <Column span={4}>
+        ### Drei Spalten: 4 von 12
+
+        Drei gleich große Spalten eignen sich für kompakte Vorteile.
+    </Column>
+
+    <Column span={4}>
+        ### Drei Spalten: 4 von 12
+
+        Die Breiten werden direkt am Inhalt dokumentiert.
+    </Column>
+
+    <Column span={4}>
+        ### Drei Spalten: 4 von 12
+
+        Die Summe bleibt innerhalb einer Reihe bei zwölf.
+    </Column>
+
+</Columns>
+
+<Columns>
+    <Column span={3}>
+        ### Vier Spalten
+
+        3 von 12
+    </Column>
+
+    <Column span={3}>
+        ### Vier Spalten
+
+        3 von 12
+    </Column>
+
+    <Column span={3}>
+        ### Vier Spalten
+
+        3 von 12
+    </Column>
+
+    <Column span={3}>
+        ### Vier Spalten
+
+        3 von 12
+    </Column>
+
+</Columns>

@@ -1,0 +1,9 @@
+---
+tone: default
+---
+
+## Design Foundations
+
+Das Standard-Theme bündelt Farben, Schriftgrößen, Abstände, Radien, Schatten und sichtbare Fokuszustände in nachvollziehbaren Foundation-Dateien. Die semantischen DaisyUI-Tokens wie `primary`, `base-200` und `base-300` sorgen dafür, dass Komponenten dieselbe visuelle Sprache sprechen.
+
+So bleiben Inhaltsdateien frei von CSS-Klassen und ein späteres Theme kann die Darstellung austauschen, ohne Markdown oder YAML umzuschreiben.
