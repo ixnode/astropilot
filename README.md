@@ -2,20 +2,20 @@
 
 [![GitHub Release](https://img.shields.io/github/v/release/ixnode/astropilot?display_name=tag&sort=semver)](https://github.com/ixnode/astropilot/releases)
 
-AstroPilot ist derzeit ein lokal entwickeltes, dateibasiertes Content-Framework auf Astro. Dieses Repository ist eine lauffähige Beispielwebsite, **kein veröffentlichtes npm-Paket** und keine Aussage über die Verfügbarkeit des Paketnamens.
+AstroPilot is currently a locally developed, file-based content framework built on Astro. This repository is a working demo website, **not a published npm package** and not a statement about package-name availability.
 
-## Lokale Paketnutzung vorbereiten
+## Preparing Local Package Use
 
-AstroPilot stellt eine kleine öffentliche Paketoberfläche bereit:
+AstroPilot provides a small public package surface:
 
-- `astropilot/content` mit `createAstroPilotCollections()`
-- `astropilot/config` mit `createAstroPilotConfig()`
-- `astropilot/page` mit der gemeinsamen Route und `getAstroPilotStaticPaths()`
-- `astropilot/components` mit den dokumentierten MDX-Layout-Komponenten
+- `astropilot/content` with `createAstroPilotCollections()`
+- `astropilot/config` with `createAstroPilotConfig()`
+- `astropilot/page` with the shared route and `getAstroPilotStaticPaths()`
+- `astropilot/components` with documented MDX layout components
 
-Die eigene Demo verwendet diese Imports bereits selbst. Für einen späteren lokalen Verbraucher wird ein Tarball mit `npm pack` erzeugt und dort installiert. Das Paket bleibt bis zu einem bewussten Veröffentlichungsauftrag `private` und wird nicht in die npm-Registry veröffentlicht.
+The demo itself already uses these imports. A future local consumer uses a tarball created with `npm pack` and installs it there. The package remains `private` and is not published to the npm registry until an explicit publishing request is made.
 
-Ein Verbraucherprojekt benötigt dann eigene Inhalte sowie diese drei kleinen Einbindungen:
+A consumer project needs its own content plus these three small integrations:
 
 ```ts
 // src/content.config.ts
@@ -44,63 +44,63 @@ const { page } = Astro.props;
 <AstroPilotPage page={page} />
 ```
 
-Die Content-Dateien gehören dabei ausschließlich dem Verbraucherprojekt. Den installierbaren Stand prüfst du ohne Registry-Veröffentlichung so:
+Content files belong exclusively to the consumer project. Test the installable state without publishing to a registry:
 
 ```sh
-# im AstroPilot-Repository
+# in the AstroPilot repository
 npm pack
 
-# im separaten Astro-Verbraucherprojekt
-npm install /absoluter/pfad/zu/astropilot-0.1.0.tgz
+# in the separate Astro consumer project
+npm install /absolute/path/to/astropilot-0.1.0.tgz
 npm run check
 npm run build
 ```
 
-Die resultierende `.tgz` ist in diesem Repository ignoriert. Ein frisches temporäres Verbraucherprojekt mit eigener `site.yaml` und Markdown-Section wurde auf diese Weise erfolgreich geprüft.
+The resulting `.tgz` is ignored by this repository. A fresh temporary consumer project with its own `site.yaml` and Markdown section has been tested successfully this way.
 
-## Starten
+## Getting Started
 
-Voraussetzung ist Node.js 24 LTS oder neuer. Die `.nvmrc` legt für die lokale Entwicklung Node.js 24.22.2 fest.
+Node.js 24 LTS or later is required. `.nvmrc` pins Node.js 24.22.2 for local development.
 
 ```sh
 npm install
 npm run dev
 ```
 
-Der Dev-Server startet bewusst mit `--force`, damit Änderungen an Content Collections, MDX-Komponenten und lokalen Package-Dateien ohne einen alten Astro-Content-Cache geprüft werden.
+The dev server deliberately starts with `--force`, so changes to Content Collections, MDX components, and local package files are checked without an outdated Astro content cache.
 
-Die laufende Demo dokumentiert sich zusätzlich selbst unter `/dokumentation/`: Dort stehen Setup, Inhaltsvertrag, Layout-Komponenten, Theme, Prüfungen und lokale Paketnutzung. Der sichtbare [Showcase](/showcase/) sammelt dagegen die Komponentenbeispiele.
+The running demo documents itself at `/dokumentation/`: it contains setup, the content contract, layout components, theme, checks, and local package use. The visible [showcase](/showcase/) instead collects component examples.
 
-Weitere Befehle:
+Additional commands:
 
 ```sh
-npm run check       # Inhaltsvertrag sowie Astro- und TypeScript-Prüfung
-npm test            # kleine Unit-Tests der URL-Konventionen
-npm run build       # validierter statischer Build nach dist/
-npm run preview     # Vorschau des Builds
-npm run test:a11y   # Playwright, axe, Tastaturfokus und mobile Breite
-npm run build:demo  # prüft den Build einmalig mit Base /demo/
+npm run check       # content contract plus Astro and TypeScript checks
+npm test            # small unit tests for URL conventions
+npm run build       # validated static build to dist/
+npm run preview     # preview the build
+npm run test:a11y   # Playwright, axe, keyboard focus, and mobile width
+npm run build:demo  # builds once with base /demo/
 ```
 
-`npm run build:demo` setzt nur für diesen Befehl die Umgebungsvariable `ASTROPILOT_BASE=/demo/`; `src/content/site.yaml` bleibt unverändert. Vor einer echten Veröffentlichung muss der Platzhalter `https://example.com` durch die Produktions-URL ersetzt und Indexierbarkeit sowie ein eventueller Staging-Schutz geprüft werden. `robots.txt` wäre kein Zugriffsschutz.
+`npm run build:demo` sets `ASTROPILOT_BASE=/demo/` only for that command; `src/content/site.yaml` remains unchanged. Before a real release, replace the `https://example.com` placeholder with the production URL and check indexability as well as any staging protection. `robots.txt` is not access control.
 
-## Inhalte pflegen
+## Maintaining Content
 
-`src/content/site.yaml` enthält Name, Produktions-URL, Basispfad, Sprache, Navigation und Footer. Jede Seite ist ein Ordner unter `src/content/pages/`:
+`src/content/site.yaml` contains the name, production URL, base path, language, navigation, and footer. Every page is a directory under `src/content/pages/`:
 
 ```text
 pages/
-├── page.yaml            # Startseite
+├── page.yaml            # homepage
 ├── hero.md              # optional
-├── 01-introduction.md  # Normale Markdown-Abschnitte, numerisch sortiert
+├── 01-introduction.md   # regular Markdown sections, sorted numerically
 └── faq/
     ├── page.yaml
     └── 01-questions.md
 ```
 
-`page.yaml` benötigt einen nicht leeren `title` und eine `description`. Beide Werte gehören zu den HTML-Metadaten: `title` wird im `<title>`-Tag, `description` als Meta-Description verwendet. Ohne `url` wird sein Ordner direkt zur URL: `faq/page.yaml` wird `/faq/`; eine tiefere `services/monitoring/page.yaml` wird `/services/monitoring/`. Mit dem optionalen einzelnen URL-Segment `url` kann ein englischer Quellpfad eine lokalisierte öffentliche URL behalten: `documentation/page.yaml` mit `url: dokumentation` erzeugt `/dokumentation/`. Für Unterseiten werden URL-Segmente ihrer Elternseiten ebenfalls berücksichtigt.
+`page.yaml` requires a non-empty `title` and `description`. Both values are used for HTML metadata: `title` becomes the `<title>` tag and `description` becomes the meta description. Without `url`, its directory becomes the URL directly: `faq/page.yaml` becomes `/faq/`; a deeper `services/monitoring/page.yaml` becomes `/services/monitoring/`. The optional single URL segment `url` lets an English source path retain a localized public URL: `documentation/page.yaml` with `url: dokumentation` produces `/dokumentation/`. URL segments of parent pages are also considered for child pages.
 
-Ein `hero.md` aktiviert den gemeinsamen Hero und benötigt einen `title` im Frontmatter; dieser wird als sichtbare `h1` verwendet. `hero-classes` in `site.yaml` kann optional höchstens acht Theme-Klassen für jeden Hero und die H1-Fallback-Ansicht ohne `hero.md` setzen. Mit `classes` als Liste in einer einzelnen `hero.md` wird diese globale Liste vollständig überschrieben; `classes: null` entfernt globale Klassen für genau diesen Hero. Die Klassen müssen mit `ap-` beginnen, zum Beispiel `ap-hero--visual`; damit kann ein Theme Hero-Hintergründe, Bilder oder Strukturen ergänzen. Fehlen beide Angaben, erhält der Hero keine zusätzliche Theme-Klasse. Löschen Sie die Datei, um stattdessen `page.yaml.title` als kompakte sichtbare H1-Fallback-Ansicht oberhalb der Sections zu verwenden; sie übernimmt weiterhin globale `hero-classes`. Sections heißen verbindlich `NN-name.md`, beginnen mit einer `h2` und können `tone: default`, `muted` oder `brand` im Frontmatter setzen. Standardmäßig begrenzt `ap-section__content` den Inhalt auf eine gut lesbare Breite. Mit `fullWidth: true` im Section-Frontmatter entfällt diese innere Begrenzung; die gemeinsame äußere `site-shell` und die Markdown-Typografie bleiben aktiv. Interne Links bleiben immer website-root-relativ, etwa `/faq/`; AstroPilot wendet `base` einmalig an. Überschrift-IDs werden aus Dateiname und Überschrift gebildet, etwa `01-introduction-inhalte-direkt-im-projekt-pflegen`, damit Sprunglinks über zusammengesetzte Markdown-Dateien eindeutig sind.
+A `hero.md` activates the shared hero and requires a frontmatter `title`, rendered as the visible `h1`. `hero-classes` in `site.yaml` may optionally set up to eight theme classes for each hero and for the H1 fallback view without `hero.md`. A `classes` list in an individual `hero.md` completely overrides that global list; `classes: null` removes global classes for that hero. Classes must begin with `ap-`, for example `ap-hero--visual`, so a theme can add hero backgrounds, images, or textures. If both settings are omitted, the hero receives no additional theme class. Delete the file to render `page.yaml.title` as a compact visible H1 fallback above the sections; it still receives global `hero-classes`. Sections must be named `NN-name.md`, begin with an `h2`, and may set `tone: default`, `muted`, or `brand` in frontmatter. By default, `ap-section__content` constrains content to a readable width. `fullWidth: true` in section frontmatter removes this inner constraint; the shared outer `site-shell` and Markdown typography remain active. Internal links always stay website-root-relative, for example `/faq/`; AstroPilot applies `base` exactly once. Heading IDs are derived from file names and headings, for example `01-introduction-inhalte-direkt-im-projekt-pflegen`, so anchor links remain unique across assembled Markdown files.
 
 ```md
 ---
@@ -111,7 +111,7 @@ classes:
 ---
 ```
 
-Zum bewussten Entfernen der globalen Hero-Klassen genügt:
+To deliberately remove global hero classes, use:
 
 ```md
 ---
@@ -120,13 +120,13 @@ classes: null
 ---
 ```
 
-Für geprüfte Layout-Bausteine unterstützt AstroPilot zusätzlich MDX-Sections mit der Endung `.mdx`. Installieren Sie dafür im Verbraucherprojekt die direkte Peer-Abhängigkeit:
+For tested layout building blocks, AstroPilot also supports MDX sections with the `.mdx` extension. Install this direct peer dependency in the consumer project:
 
 ```bash
 npm install @astrojs/mdx
 ```
 
-Der erste Standardbaustein ist ein responsives 12-Spalten-Layout:
+The first standard building block is a responsive 12-column layout:
 
 ```mdx
 import { Column, Columns } from 'astropilot/components';
@@ -149,11 +149,11 @@ import { Column, Columns } from 'astropilot/components';
 </Columns>
 ```
 
-Die Datei heißt dann beispielsweise `01-introduction.mdx`. Mobil stehen die Bereiche untereinander; ab Desktop liegt ein 12-Spalten-Raster zugrunde. Ein `Columns`-Block enthält ein bis vier direkte `Column`-Elemente. `Column` akzeptiert `span={1}` bis `span={12}`; ohne Angabe belegt eine Spalte die volle Breite (`12`). Die Werte einer gemeinsamen Zeile dürfen zusammen höchstens `12` ergeben. Kleinere Summen lassen bewusst leeren Raum.
+The file would be named `01-introduction.mdx`. Areas stack on mobile; from desktop widths onward, a 12-column grid applies. A `Columns` block contains one to four direct `Column` elements. `Column` accepts `span={1}` through `span={12}`; without a value, a column occupies the full width (`12`). Values in one row may total at most `12`. Smaller totals intentionally leave empty space.
 
-Übliche gleichmäßige Aufteilungen sind `12` (eine Spalte), `6 + 6` (zwei Spalten), `4 + 4 + 4` (drei Spalten) und `3 + 3 + 3 + 3` (vier Spalten). Asymmetrische Aufteilungen wie `8 + 4` oder `7 + 5` sind ebenso möglich. Neue Layout-Komponenten erfordern immer eine Astro-Komponente, einen dokumentierten Export und eine dokumentierte Verwendung.
+Common balanced distributions are `12` (one column), `6 + 6` (two columns), `4 + 4 + 4` (three columns), and `3 + 3 + 3 + 3` (four columns). Asymmetric distributions such as `8 + 4` or `7 + 5` are equally valid. New layout components always require an Astro component, a documented export, and documented usage.
 
-Die erste DaisyUI-Komponente ist `Alert`. Sie wird in einer MDX-Section importiert und akzeptiert optional `variant="info|success|warning|error"` sowie `style="normal|soft|outline|dash"`:
+The first DaisyUI component is `Alert`. Import it in an MDX section; it accepts optional `variant="info|success|warning|error"` and `style="normal|soft|outline|dash"` props:
 
 ```mdx
 import { Alert } from 'astropilot/components';
@@ -163,7 +163,7 @@ import { Alert } from 'astropilot/components';
 </Alert>
 ```
 
-Lokale Inhaltsbilder liegen bei der zugehörigen Seite oder in einem gemeinsamen lokalen `_assets/`-Ordner, beispielsweise unter `src/content/pages/showcase/_assets/`. Der `_`-Präfix markiert einen reinen Unterstützungsordner: Er darf kein `page.yaml` enthalten und kann deshalb keine Seite erzeugen. `ContentImage` importiert diese PNG-, JPEG-, WebP- oder AVIF-Dateien relativ aus MDX und gibt sie über Astros Asset-Pipeline als WebP mit Qualität 80 aus. Die Komponente akzeptiert `width`, `height`, `fullWidth`, `shape="rounded|square"` und `border="default|none"`; bei gesetzter Breite und Höhe verwendet sie `object-fit: cover`.
+Local content images belong beside their page or in a shared local `_assets/` directory, for example `src/content/pages/showcase/_assets/`. The `_` prefix marks a support-only directory: it must not contain `page.yaml` and therefore cannot generate a page. `ContentImage` imports these PNG, JPEG, WebP, or AVIF files relatively from MDX and sends them through Astro’s asset pipeline as WebP at quality 80. The component accepts `width`, `height`, `fullWidth`, `shape="rounded|square"`, and `border="default|none"`; when width and height are specified, it uses `object-fit: cover`.
 
 ```mdx
 import layoutImage from '../_assets/layout.png';
@@ -171,7 +171,7 @@ import { ContentImage } from 'astropilot/components';
 
 <ContentImage
     src={layoutImage}
-    alt="Beschreibung des Bildinhalts"
+    alt="Description of the image content"
     width={720}
     height={260}
     fullWidth
@@ -180,36 +180,36 @@ import { ContentImage } from 'astropilot/components';
 />
 ```
 
-`Card` bündelt optional ein lokales Bild, Markdown-Inhalt und Actions. Die erste direkte `###`-Überschrift erhält den DaisyUI-Card-Titel-Stil. `CardActions` ist optional; alle darin enthaltenen Markdown-Links werden als einheitliche primäre Buttons dargestellt.
+`Card` combines an optional local image, Markdown content, and actions. Its first direct `###` heading receives the DaisyUI card-title style. `CardActions` is optional; all Markdown links inside it render as consistent primary buttons.
 
 ```mdx
 import cardImage from './images/card.png';
 import { Card, CardActions } from 'astropilot/components';
 
-<Card image={cardImage} imageAlt="Beschreibung des Bildinhalts">
-    ### Card-Titel
+<Card image={cardImage} imageAlt="Description of the image content">
+    ### Card title
 
-    Mehrere Markdown-Absätze sind möglich.
+    Multiple Markdown paragraphs are supported.
 
     <CardActions>
-        [Mehr erfahren](/info/)
+        [Learn more](/info/)
     </CardActions>
 
 </Card>
 ```
 
-## Struktur und Theme
+## Structure and Theme
 
-Die kleine, wiederverwendbare Inhalts- und URL-Logik liegt in `src/lib/astropilot/`. Sie kennt weder Demo-Texte noch Tailwind- oder DaisyUI-Klassen. Das Standard-Theme liegt in `src/themes/default/` und umfasst Layout, Header, Hero, Sections und Footer. DaisyUI wird dort tatsächlich für Navigation und Theme-Elemente genutzt.
+The small reusable content and URL logic lives in `src/lib/astropilot/`. It knows neither demo text nor Tailwind or DaisyUI classes. The default theme lives in `src/themes/default/` and includes the layout, header, hero, sections, and footer. DaisyUI is actively used there for navigation and theme elements.
 
-Der Einstieg für das Default-Theme ist `src/themes/default/styles/theme.css`. Er dokumentiert die Importreihenfolge und bleibt der einzige zentrale Import. Globale Grundlagen liegen in `styles/foundation/`, semantische Inhaltsvarianten in `styles/themes/`. Komponenten folgen Atomic Design: `atoms/`, `molecules/`, `organisms/` und `layout/` für technische Layout-Primitives. Jeder sichtbare Baustein ist als Paar lokal organisiert, beispielsweise `components/organisms/Header/Header.astro` und `components/organisms/Header/Header.css`; das Layout folgt mit `layouts/PageLayout/` demselben Muster. Theme-eigene Klassen beginnen mit `ap-`, etwa `ap-header` und `ap-header__inner`. Das Standard-Theme heißt `astropilot`, ist bewusst hell und definiert seine semantischen DaisyUI-Tokens, Schriftgrößen, Abstände, Radien und Schatten zentral in den Theme- und Foundation-Dateien.
+The entry point for the default theme is `src/themes/default/styles/theme.css`. It documents the import order and remains the only central import. Global foundations live in `styles/foundation/`, semantic content variants in `styles/themes/`. Components follow Atomic Design: `atoms/`, `molecules/`, `organisms/`, and `layout/` for technical layout primitives. Every visible building block is organized locally as a pair, for example `components/organisms/Header/Header.astro` and `components/organisms/Header/Header.css`; `layouts/PageLayout/` follows the same pattern. Theme-owned classes begin with `ap-`, for example `ap-header` and `ap-header__inner`. The default theme is named `astropilot`, intentionally light, and centrally defines semantic DaisyUI tokens, font sizes, spacing, radii, and shadows in its theme and foundation files.
 
-Ein anderes Theme kann diese Komponenten und die technische CSS-Einbindung ersetzen, ohne Markdown oder YAML zu migrieren. Das ist noch kein konfigurierbarer Theme-Loader und bewusst keine Aussage, dass jede UI-Bibliothek per Schalter austauschbar wäre.
+Another theme can replace these components and the technical CSS integration without migrating Markdown or YAML. This is not yet a configurable theme loader and deliberately does not claim every UI library can be switched through a setting.
 
-## Validierung und Grenzen
+## Validation and Limitations
 
-Der Validator prüft die Ordnerzuordnung, YAML-Felder, Dateinamen, Tones, doppelte Abschnittsnummern, Markdown-Hierarchie, rohes HTML, unzulässige Link-Protokolle, interne Linkziele und generierte Überschrift-IDs. Der Build prüft alle erzeugten Seiten, Metadaten, Canonicals, Sitemap und Base-Präfixe. Eigene Programmlogik liegt ausschließlich in TypeScript; `npm run test:source` prüft das zusätzlich.
+The validator checks directory association, YAML fields, file names, tones, duplicate section numbers, Markdown hierarchy, raw HTML, disallowed link protocols, internal link targets, and generated heading IDs. The build checks all generated pages, metadata, canonicals, the sitemap, and base prefixes. Project-owned program logic is TypeScript only; `npm run test:source` checks this too.
 
-Die Barrierefreiheitsprüfung automatisiert axe, sichtbaren Tastaturfokus und mobile Overflow-Prüfungen. Sie ersetzt keine vollständige WCAG-2.2-AA-Konformitätsbewertung oder redaktionelle Bewertung von Überschriften und Linktexten.
+Accessibility testing automates axe, visible keyboard focus, and mobile overflow checks. It does not replace a complete WCAG 2.2 AA conformance assessment or editorial review of headings and link text.
 
-Für die spätere npm-Auslagerung fehlen weiterhin eine definierte öffentliche Paketoberfläche, ein Installationstest in einem Verbraucherprojekt, Paketmetadaten/Publikation, Projektgenerator und optionale Extensions. Diese Funktionen sind ausdrücklich nicht Teil dieses Meilensteins.
+Future npm extraction still needs a defined public package surface, an installation test in a consumer project, package metadata/publishing, a project generator, and optional extensions. These capabilities are explicitly outside the scope of this milestone.

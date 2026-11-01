@@ -1,47 +1,47 @@
-# AstroPilot – Regeln für Coding-Agenten
+# AstroPilot – Rules for Coding Agents
 
-## Ziel und aktueller Entwicklungsstand
+## Goal and Current Development Status
 
-AstroPilot ist ein schlankes, dateibasiertes Content-Framework auf Astro. Entwickler stellen Layout und geprüfte Bausteine bereit; Autoren und Agenten pflegen Inhalte in Markdown und YAML. Ausgabe sind statische Websites und Landingpages ohne CMS-Backend.
+AstroPilot is a lean, file-based content framework built on Astro. Developers provide layouts and tested building blocks; authors and agents maintain content in Markdown and YAML. Its output consists of static websites and landing pages without a CMS backend.
 
-Langfristiges Ziel: Installation als npm-Package `astropilot` mit nutzbarem Basislayout. Ein Projektgenerator und optionale Extensions können später folgen. Der Paketname ist ein Arbeitsname; Verfügbarkeit ist nicht geprüft. In dieser ersten Phase wird direkt in diesem Repository entwickelt. Installiere NICHT ein möglicherweise fremdes `astropilot`-Package aus der Registry.
+The long-term goal is installation as an npm package named `astropilot` with a usable base layout. A project generator and optional extensions may follow later. The package name is a working name; availability has not been verified. During this initial phase, development happens directly in this repository. Do NOT install a potentially unrelated `astropilot` package from the registry.
 
-Das Repository muss nach Installation seiner Entwicklungsabhängigkeiten unmittelbar mit `npm run dev` als Beispielwebsite laufen. Das ist ein funktionsfähiger Entwicklungsstand, noch kein fertiges veröffentlichtes npm-Produkt.
+After installing its development dependencies, this repository must run immediately as a demo website with `npm run dev`. This is a functional development state, not a finished published npm product.
 
-## Architekturprinzipien
+## Architecture Principles
 
-- Verwende Astro-Standards, stabile öffentliche APIs, Astro-Komponenten, Content Collections mit Schemas und die native Markdown-Verarbeitung.
-- Erweitere nur, wo die vereinbarte Inhaltsstruktur zusätzliche Logik erfordert. Kein eigener Markdown-Parser, Router, Build-Runner oder allgemeines Template-System.
-- Nutze ein normales Astro-Projekt mit TypeScript und npm. Beginne ohne Monorepo, Plugin-Registry, Dependency-Injection-Container oder eigene CLI.
-- Halte Funktionen und Module verständlich. Keine Abstraktionen für hypothetische Anwendungsfälle, keine unnötigen Wrapper oder Abhängigkeiten.
-- Begründe Abweichungen von Astro-Konventionen kurz in der Dokumentation. Wartbarkeit zählt mehr als eine minimale Zeilenzahl.
-- Trenne Inhaltsmodell und Seitenzusammenstellung von Darstellung. Der Kern darf keine DaisyUI-Klassen kennen und keine konkreten Demo-Seiten voraussetzen.
-- Lade Markdown über Astro. Verwende für YAML vorhandene Loader bzw. einen kleinen etablierten YAML-Parser, wenn die Singleton-Konfiguration das erfordert. Parse YAML nicht selbst.
-- Halte wiederverwendbare Logik in `src/lib/astropilot/` und das Standard-Theme in `src/themes/default/`. Kleine Standarddateien verbinden diese mit Astro. Das sind interne Grenzen, noch keine eigene Theme-Plattform.
-- Der einzige Style-Einstieg des Standard-Themes ist `src/themes/default/styles/theme.css`. Seine dokumentierte Importreihenfolge ist Teil der Cascade und wird nur mit anschließender Prüfung geändert.
-- Gliedere Theme-Styles nachvollziehbar: `styles/foundation/` enthält ausschließlich globale Grundlagen ohne konkrete Astro-Komponente (Tokens, Basis, Fokus, Layout-Hilfen und Prosa); `styles/themes/` enthält ausschließlich semantische Zuordnungen wie Inhalts-Tones.
-- Theme-Komponenten folgen Atomic Design: `components/atoms/` für kleine UI-Bausteine, `components/molecules/` für zusammengesetzte UI-Bausteine, `components/organisms/` für größere Website-Bereiche und `components/layout/` für technische Layout-Primitives. Lege keine leeren Kategorien an; bei neuen Komponenten wähle die kleinste fachlich passende Kategorie.
-- Jede Standard-Theme-Komponente liegt innerhalb ihrer Kategorie in einem eigenen PascalCase-Ordner mit der gleichnamigen `.astro`- und `.css`-Datei, etwa `components/organisms/Header/Header.astro` und `components/organisms/Header/Header.css`. Die CSS-Datei enthält ausschließlich die Darstellung dieses Bausteins; leere oder fachfremde CSS-Dateien sind nicht zulässig.
-- Theme-eigene CSS-Klassen erhalten den Präfix `ap-` und folgen innerhalb eines Bausteins einer klaren Block-Element-Benennung, etwa `ap-header` und `ap-header__inner`. DaisyUI-Klassen bleiben für ihre echten UI-Bausteine erlaubt.
-- Verwende für Theme-Komponenten konsequent natives CSS-Nesting: Der Block kapselt seine Elemente, etwa `.ap-hero { .ap-hero__inner { .ap-hero__title { … } } }`; ein Modifier kapselt seine Pseudoelemente und abweichenden Elemente, etwa `.ap-hero--theme-1 { &::before { … } .ap-hero__inner { … } }`. Zerlege zusammengehörige Selektoren nicht in getrennte Blöcke. Das Projekt verwendet CSS mit Tailwind, kein SCSS.
-- Verwende für Header, Footer, Hero, Section und die H1-Fallback-Ansicht dieselbe äußere Inhaltskante über `site-shell`. Begrenze die Lesebreite bei Bedarf innerhalb dieses Containers; unterschiedliche äußere Einrückungen für diese Standardbereiche sind nicht zulässig.
-- Demo-Inhalte bleiben in `src/content/`; sie gehören später nicht fest in den Framework-Kern.
-- Prüfe zu Beginn kompatible stabile Versionen in der offiziellen Dokumentation. Verwende eine unterstützte Node-LTS-Version, dokumentiere sie und lege eine Lockdatei an. Keine geratenen Versionsnummern.
+- Use Astro standards, stable public APIs, Astro components, Content Collections with schemas, and native Markdown processing.
+- Extend only where the agreed content structure requires additional logic. Do not implement a custom Markdown parser, router, build runner, or general template system.
+- Use a standard Astro project with TypeScript and npm. Start without a monorepo, plugin registry, dependency-injection container, or custom CLI.
+- Keep functions and modules understandable. Do not create abstractions for hypothetical use cases, unnecessary wrappers, or dependencies.
+- Briefly document deviations from Astro conventions. Maintainability matters more than a minimal line count.
+- Separate the content model and page assembly from presentation. The core must not know DaisyUI classes or assume concrete demo pages.
+- Load Markdown through Astro. For YAML, use existing loaders or a small established YAML parser where singleton configuration requires it. Do not parse YAML yourself.
+- Keep reusable logic in `src/lib/astropilot/` and the default theme in `src/themes/default/`. Small standard files connect them to Astro. These are internal boundaries, not a theme platform yet.
+- The only style entry point for the default theme is `src/themes/default/styles/theme.css`. Its documented import order is part of the cascade and may only change after subsequent verification.
+- Structure theme styles clearly: `styles/foundation/` contains only global foundations without concrete Astro components (tokens, base styles, focus, layout helpers, and prose); `styles/themes/` contains only semantic mappings such as content tones.
+- Theme components follow Atomic Design: use `components/atoms/` for small UI building blocks, `components/molecules/` for composed UI building blocks, `components/organisms/` for larger website areas, and `components/layout/` for technical layout primitives. Do not create empty categories; choose the smallest suitable category for each new component.
+- Each default-theme component lives in its category within its own PascalCase directory, containing an `.astro` and `.css` file with the same name, for example `components/organisms/Header/Header.astro` and `components/organisms/Header/Header.css`. The CSS file contains only the presentation of that building block; empty or unrelated CSS files are not allowed.
+- Theme-owned CSS classes use the `ap-` prefix and clear block-element naming within a building block, for example `ap-header` and `ap-header__inner`. DaisyUI classes remain allowed for their actual UI components.
+- Use native CSS nesting consistently for theme components: a block encapsulates its elements, for example `.ap-hero { .ap-hero__inner { .ap-hero__title { … } } }`; a modifier encapsulates its pseudo-elements and differing elements, for example `.ap-hero--theme-1 { &::before { … } .ap-hero__inner { … } }`. Do not split related selectors into separate blocks. This project uses CSS with Tailwind, not SCSS.
+- Use the same outer content edge via `site-shell` for the header, footer, hero, sections, and H1 fallback view. Constrain reading width inside this container where needed; differing outer indents for these standard areas are not allowed.
+- Demo content remains in `src/content/`; it must not become a fixed part of the framework core later.
+- At the beginning, verify compatible stable versions in the official documentation. Use a supported Node LTS version, document it, and commit a lockfile. Do not guess version numbers.
 
-## Verbindliche Sprache: ausschließlich TypeScript
+## Mandatory Language: TypeScript Only
 
-- Sämtliche eigene Programmlogik wird in TypeScript geschrieben: Core, Hilfsfunktionen, Browser-Code, Tests, Prüfskripte und programmatische Werkzeugkonfigurationen.
-- Keine eigenen `.js`, `.mjs` oder `.cjs`-Quelldateien. Verwende `.ts`; keine zusätzliche Programmiersprache für Projekt-Hilfsskripte einführen.
-- Verwende `astro.config.ts`. Auch Test- und andere Werkzeugkonfigurationen werden in TypeScript angelegt, sofern sie programmatische Konfiguration benötigen. Wähle Werkzeuge mit TypeScript-Unterstützung; melde echte Einschränkungen statt still JavaScript anzulegen.
-- Formatiere formatierbare Projektquellen mit `npm run format`; verwende vier Leerzeichen statt Tabs. Prüfe den unveränderten Stil mit `npm run format:check`. Lockdateien und generierte Dateien werden nicht formatiert.
-- Nutze `astro/tsconfigs/strict` als TypeScript-Basis. Verwende präzise Typen und Typinferenz; kein pauschales `any`, `@ts-ignore` oder Abschalten der Typprüfung, um Fehler zu umgehen.
-- Astro-Komponenten bleiben `.astro`-Dateien; ihre Programmlogik wird in TypeScript geschrieben. Verwende typisierte Component-Props.
-- Browser-Scripts werden durch Astro verarbeitet: TypeScript in verarbeiteten `<script>`-Blöcken oder eingebundenen `.ts`-Modulen. Kein `is:inline`, keine HTML-Eventhandler und kein unverarbeiteter JavaScript-Programmcode in HTML-Strings.
-- Generiertes JavaScript in Build-Ausgaben und JavaScript in Abhängigkeiten sind erlaubt. TypeScript wird für die Ausführung zu JavaScript verarbeitet; das Quellcode-Verbot gilt nicht für diesen notwendigen Output.
-- Markdown, YAML, CSS, JSON und HTML-Templates innerhalb von `.astro` bleiben für Inhalte, Styles, Daten und Markup erlaubt. npm-Scripts dürfen vorhandene CLI-Werkzeuge aufrufen; eigene Prüfprogrammlogik gehört in TypeScript-Dateien.
-- Prüfe bei der Abnahme, dass keine eigenen JavaScript-Quelldateien vorhanden sind. Generierte Verzeichnisse und Abhängigkeiten dabei ausschließen.
+- Write all project-owned program logic in TypeScript: core code, helpers, browser code, tests, validation scripts, and programmatic tool configuration.
+- Do not create `.js`, `.mjs`, or `.cjs` source files. Use `.ts`; do not introduce another programming language for project helper scripts.
+- Use `astro.config.ts`. Test and other tool configurations must also be TypeScript where they require programmatic configuration. Choose tools that support TypeScript; report genuine limitations instead of silently adding JavaScript.
+- Format formatable project sources with `npm run format`; use four spaces rather than tabs. Check unchanged formatting with `npm run format:check`. Do not format lockfiles or generated files.
+- Use `astro/tsconfigs/strict` as the TypeScript base. Use precise types and inference; do not use blanket `any`, `@ts-ignore`, or disabled type checking to avoid errors.
+- Astro components remain `.astro` files; write their program logic in TypeScript. Use typed component props.
+- Browser scripts are processed by Astro: use TypeScript in processed `<script>` blocks or imported `.ts` modules. Do not use `is:inline`, HTML event handlers, or unprocessed JavaScript code in HTML strings.
+- Generated JavaScript in build output and JavaScript in dependencies are allowed. TypeScript is transformed to JavaScript for execution; the source-code restriction does not apply to this required output.
+- Markdown, YAML, CSS, JSON, and HTML templates inside `.astro` remain allowed for content, styles, data, and markup. npm scripts may invoke existing CLI tools; project-owned validation logic belongs in TypeScript files.
+- During acceptance, check that no project-owned JavaScript source files exist. Exclude generated directories and dependencies from this check.
 
-## Verbindlicher Inhaltsvertrag
+## Binding Content Contract
 
 ```text
 src/content/
@@ -49,7 +49,7 @@ src/content/
 └── pages/
     ├── page.yaml
     ├── hero.md
-    ├── 01-introduction.mdx # MDX-Layout-Section
+    ├── 01-introduction.mdx # MDX layout section
     ├── 02-benefits.md
     ├── 03-further-reading.md
     ├── faq/
@@ -67,8 +67,8 @@ src/content/
     │   ├── hero.md
     │   ├── 01-areas.mdx
     │   ├── _assets/
-    │       ├── layout-landscape.png
-    │       └── layout-portrait.png
+    │   │   ├── layout-landscape.png
+    │   │   └── layout-portrait.png
     │   ├── foundations/
     │   │   ├── page.yaml
     │   │   └── 01-foundations.md
@@ -96,9 +96,9 @@ src/content/
         └── 01-contact.md
 ```
 
-### Globale Konfiguration: `site.yaml`
+### Global Configuration: `site.yaml`
 
-Mindestens:
+At a minimum:
 
 ```yaml
 name: AstroPilot
@@ -128,11 +128,11 @@ footer:
           href: /kontakt/
 ```
 
-Website-Name, Sprache, Produktions-URL, Basispfad, globale `hero-classes`, Navigation und Footer werden hier gepflegt. `hero-classes` ist optional, enthält höchstens acht Theme-Klassen mit `ap-`-Präfix und gilt für jeden Hero sowie für die H1-Fallback-Ansicht ohne `hero.md`; `classes` in einer einzelnen `hero.md` überschreibt diesen Wert vollständig. Verwende dieselben validierten Werte für Astro-Konfiguration, Links, Canonicals und Sitemap; keine doppelte Konfiguration. Astro-Konfiguration darf keine nur innerhalb der Astro-Laufzeit verfügbaren Content-APIs importieren. Verwende für die gemeinsam benötigte Singleton-Konfiguration eine kleine Node-kompatible Ladefunktion.
+Website name, language, production URL, base path, global `hero-classes`, navigation, and footer are maintained here. `hero-classes` is optional, contains at most eight theme classes with the `ap-` prefix, and applies to every hero and H1 fallback view without `hero.md`; `classes` in an individual `hero.md` overrides this value completely. Use the same validated values for Astro configuration, links, canonicals, and the sitemap; do not duplicate configuration. Astro configuration must not import Content APIs that are only available within the Astro runtime. Use a small Node-compatible loader for singleton configuration needed in more than one place.
 
-`example.com` ist ein dokumentierter Platzhalter. Dokumentiere dessen Austausch vor einer echten Veröffentlichung. Externe Schriftarten, Tracking oder Dienste sind für die Demo nicht nötig.
+`example.com` is a documented placeholder. Document its replacement before a real release. The demo does not require external fonts, tracking, or services.
 
-### Seite: `page.yaml`
+### Page: `page.yaml`
 
 ```yaml
 title: Energie verstehen und gezielt optimieren
@@ -140,13 +140,13 @@ description: Eine aussagekräftige Beschreibung dieser Beispielseite.
 url: energie
 ```
 
-- `title` und `description` sind nicht leere Pflichtfelder und werden für HTML-Metadaten verwendet: `title` für den `<title>`-Tag, `description` für die Meta-Description. `url` ist optional und enthält genau ein URL-Segment mit Kleinbuchstaben, Ziffern und Bindestrichen.
-- Jeder Ordner mit `page.yaml` definiert eine Seite; Ordner ohne diese Datei dürfen als reine Gruppierung für tiefere Seiten dienen. Ordner, deren Name mit `_` beginnt, sind reservierte Unterstützungsordner (etwa `_assets/`), dürfen kein `page.yaml` enthalten und erzeugen niemals eine Seite.
-- Ohne `url` bestimmt der relative Ordnerpfad die URL: Wurzel → `/`, `faq/` → `/faq/`, `services/monitoring/` → `/services/monitoring/`. Ein `url`-Wert ersetzt ausschließlich das Segment seines Ordners; bei Unterseiten werden auch die `url`-Werte vorhandener Elternseiten verwendet. So erzeugen `documentation/page.yaml` mit `url: dokumentation` und `documentation/getting-started/page.yaml` mit `url: einstieg` weiterhin `/dokumentation/einstieg/`.
-- Keine zusätzlichen Slug-Overrides oder Übersetzungssysteme über diesen einzelnen, expliziten URL-Segmentwert hinaus in dieser Phase.
-- Bei Seiten ohne Hero ist `title` zugleich die sichtbare Hauptüberschrift.
+- `title` and `description` are non-empty required fields used for HTML metadata: `title` for the `<title>` tag and `description` for the meta description. `url` is optional and contains exactly one URL segment using lowercase letters, digits, and hyphens.
+- Every directory containing `page.yaml` defines a page; directories without this file may serve purely as grouping for deeper pages. Directories whose name begins with `_` are reserved support directories (such as `_assets/`), must not contain `page.yaml`, and never produce a page.
+- Without `url`, the relative directory path determines the URL: root → `/`, `faq/` → `/faq/`, `services/monitoring/` → `/services/monitoring/`. A `url` value replaces only the segment of its own directory; for child pages, the `url` values of existing parent pages are also used. Therefore, `documentation/page.yaml` with `url: dokumentation` and `documentation/getting-started/page.yaml` with `url: einstieg` continue to produce `/dokumentation/einstieg/`.
+- Do not implement additional slug overrides or translation systems beyond this single explicit URL-segment value during this phase.
+- For pages without a hero, `title` is also the visible main heading.
 
-### Optionaler Hero: `hero.md`
+### Optional Hero: `hero.md`
 
 ```md
 ---
@@ -162,14 +162,14 @@ Eine kurze Einführung in die Inhalte dieser Seite.
 [Mehr erfahren](/info/)
 ```
 
-- Die Existenz der Datei aktiviert den Hero. Keine weitere Aktivierungsoption in `page.yaml`.
-- `title` ist ein nicht leerer Pflichtwert und wird als sichtbare `h1` gerendert; `eyebrow` ist optional; `tone` hat einen dokumentierten Standard.
-- `classes` ist optional und enthält höchstens acht zusätzliche Theme-Klassen für das äußere Hero-`section`-Element. Jede Klasse beginnt mit `ap-` und darf nur Kleinbuchstaben, Ziffern, `_` und `-` enthalten, etwa `ap-hero--visual`. Wenn `classes` als Liste angegeben ist, überschreibt sie die globalen `hero-classes` aus `site.yaml` vollständig. Mit `classes: null` werden globale Klassen bewusst entfernt; fehlt das Feld, gelten die globalen Klassen. Damit können Theme-Entwickler Hintergrundfarben, Bilder oder Strukturen ergänzen, ohne den Hero zu kopieren. Diese Klassen sind nur für `hero.md` vorgesehen, nicht für Sections.
-- Die gemeinsame Hero-Komponente rendert Titel und Markdown-Inhalt vollständig aus `hero.md`.
-- Ohne Hero rendert das Layout `page.yaml.title` als kompakte sichtbare H1-Fallback-Ansicht vor den Sections. Sie erhält die globalen `hero-classes` aus `site.yaml`; ohne `hero.md` gibt es keine lokale Überschreibung. Dies ist der einzige vorgesehene sichtbare Fallback für Seiten ohne Hero.
-- Hauptseite, FAQ und Info nutzen dieselbe Hero-Komponente mit jeweils eigenen Inhalten. Keine drei kopierten Implementierungen.
+- The presence of the file activates the hero. Do not add another activation option to `page.yaml`.
+- `title` is a non-empty required field rendered as the visible `h1`; `eyebrow` is optional; `tone` has a documented default.
+- `classes` is optional and contains at most eight additional theme classes for the outer hero `section` element. Each class starts with `ap-` and may only contain lowercase letters, digits, `_`, and `-`, for example `ap-hero--visual`. When `classes` is supplied as a list, it completely overrides global `hero-classes` from `site.yaml`. `classes: null` deliberately removes global classes; when the field is absent, global classes apply. This lets theme developers add backgrounds, images, or textures without copying the hero. These classes are only intended for `hero.md`, not for sections.
+- The shared hero component renders the title and Markdown content entirely from `hero.md`.
+- Without a hero, the layout renders `page.yaml.title` as a compact visible H1 fallback before the sections. It receives global `hero-classes` from `site.yaml`; without `hero.md`, there is no local override. This is the only intended visible fallback for pages without a hero.
+- The homepage, FAQ, and Info use the same hero component with their own content. Do not create three copied implementations.
 
-### Sections: `NN-name.md` und `NN-name.mdx`
+### Sections: `NN-name.md` and `NN-name.mdx`
 
 ```md
 ---
@@ -184,94 +184,94 @@ Hier steht normaler Markdown-Inhalt.
 [Antworten auf häufige Fragen](/faq/)
 ```
 
-- Nur direkt im Seitenordner liegende Dateien gehören zur jeweiligen Seite; keine Vermischung mit Unterseiten.
-- Numerische Präfixe mit mindestens zwei Ziffern und einem sprechenden, kleingeschriebenen Namen mit Bindestrichen; numerisch sortieren. Doppelte Nummern sind Fehler. Lücken sind erlaubt. Normale Sections verwenden `.md`; eine `.mdx`-Datei ist ausschließlich für dokumentierte MDX-Layout-Komponenten zulässig.
-- `tone`: ausschließlich `default`, `muted`, `brand`; fehlender Wert bedeutet `default`.
-- `fullWidth`: optionaler Boolean für Sections; fehlender Wert bedeutet `false` und begrenzt den Inhalt auf die Lesespalte. Mit `true` entfällt nur `ap-section__content`; `content-prose` und die äußere `site-shell` bleiben aktiv. Damit nutzt der Bereich die volle Inhaltsbreite, aber nicht den Browserrand.
-- Eine Datei wird als ein semantischer Inhaltsabschnitt dargestellt. Sie beginnt inhaltlich mit einer sinnvollen `h2`; weitere Ebenen müssen logisch folgen. Keine `h1` im Hero- oder Section-Markdown.
-- Keine eigene Section-Direktive, keine Steuerkommentare, keine CSS-Klassen oder Inline-Styles in Content-Dateien. MDX ist nur in `.mdx`-Sections erlaubt und darf ausschließlich dokumentierte AstroPilot-Komponenten sowie relative lokale Bilddateien importieren; keine Browser-Skripte oder beliebige JSX-Elemente.
-- Für das MVP unterstützt der Content-Vertrag normales Markdown ohne rohes HTML oder ausführbaren Code. Unzulässige Konstrukte über den vorhandenen Markdown-AST prüfen, nicht per Regex-Parser nachbauen. Fenced Code-Blöcke bleiben normale Inhalte.
-- IDs für Überschriften müssen innerhalb der zusammengesetzten Seite eindeutig sein, auch bei gleichen Überschriften in verschiedenen Dateien. Nutze eine kleine deterministische Strategie und dokumentiere Sprunglinks.
+- Only files directly in a page directory belong to that page; do not mix them with child pages.
+- Use numeric prefixes of at least two digits and a descriptive lowercase hyphenated name; sort numerically. Duplicate numbers are errors. Gaps are allowed. Standard sections use `.md`; an `.mdx` file is allowed only for documented MDX layout components.
+- `tone`: only `default`, `muted`, or `brand`; an omitted value means `default`.
+- `fullWidth`: an optional Boolean for sections; an omitted value means `false` and constrains content to the reading column. With `true`, only `ap-section__content` is omitted; `content-prose` and the outer `site-shell` remain active. The area therefore uses the full content width but not the browser edge.
+- One file renders one semantic content section. It starts with a meaningful `h2`; further levels must follow logically. Do not use `h1` in hero or section Markdown.
+- Do not use custom section directives, control comments, CSS classes, or inline styles in content files. MDX is allowed only in `.mdx` sections and may import only documented AstroPilot components and relative local images; do not use browser scripts or arbitrary JSX elements.
+- For the MVP, the content contract supports normal Markdown without raw HTML or executable code. Check disallowed constructs using the existing Markdown AST; do not recreate a regex parser. Fenced code blocks remain normal content.
+- Heading IDs must be unique within the assembled page, including equal headings in different files. Use a small deterministic strategy and document anchor links.
 
-### MDX-Layout-Komponenten
+### MDX Layout Components
 
-- Installiere bei MDX-Nutzung im Verbraucherprojekt `@astrojs/mdx` als direkte Abhängigkeit. Die AstroPilot-Konfiguration bindet die offizielle MDX-Integration ein.
-- Der erste Standardbaustein ist ein 12-Spalten-Layout: `Columns` enthält genau die gewünschten `Column span={8}`- und `Column span={4}`-Bereiche. Es rendert mobil untereinander und ab Desktop nebeneinander.
-- Neue Komponenten sind Entwicklerarbeit: Sie benötigen eine geprüfte Astro-Komponente, einen dokumentierten Export und eine klare MDX-Nutzung. Entwickle keine unbeschränkte Layoutsprache.
+- When using MDX in a consumer project, install `@astrojs/mdx` as a direct dependency. AstroPilot configuration includes the official MDX integration.
+- The first standard building block is a 12-column layout: `Columns` contains exactly the requested `Column span={8}` and `Column span={4}` areas. It renders stacked on mobile and side by side from desktop widths upward.
+- New components are developer work: they require a tested Astro component, a documented export, and clear MDX usage. Do not develop an unrestricted layout language.
 
-## Validierung, Routing und Entwicklung
+## Validation, Routing, and Development
 
-- Verwende passende Content Collections und Astro-Schemas. Ordnerbeziehungen und numerische Sortierung ergänzt eine kleine gemeinsame Funktion.
-- Erzeuge Seiten über eine gemeinsame statische Astro-Route mit `getStaticPaths()`, einschließlich der Startseite. Keine handgeschriebenen Routen je Beispielseite.
-- Validiere YAML-Felder und Frontmatter strikt. Fehler nennen Datei, Feld bzw. Ursache und erwartete Werte. Keine stillen Fallbacks für ungültige Konfiguration.
-- Hero-/Section-Dateien ohne direkt zugehörige `page.yaml` sind Fehler. Falsch benannte Inhaltsdateien nicht still ignorieren; klar melden. README-Dateien gehören außerhalb des Inhaltsverzeichnisses.
-- Interne Content-Links sind website-root-relative, z. B. `/faq/`, ohne Deployment-Unterpfad. Wende `base` einmalig auf solche Links und lokale öffentliche Asset-URLs an.
-- Externe URLs, `mailto:`, `tel:`, Querystrings und Fragmentziele korrekt behandeln. Keine unzulässigen URL-Protokolle wie `javascript:` oder Protokoll-relative URLs im Content-Vertrag.
-- Prüfe interne Seitenziele und Fragmente gegen die fertige Ausgabe; gewöhnliche statische Dateien wie Bilder dürfen nicht als Seiten interpretiert werden.
-- Sichere Pfadnormalisierung: keine Pfad-Traversierung und keine stillen URL-Kollisionen.
-- Änderungen, Hinzufügen und Entfernen von Inhaltsdateien sollen im Dev-Server berücksichtigt werden. Prüfe auch YAML-Änderungen. Falls globale Build-Konfiguration einen Neustart erfordert, dokumentiere dies ehrlich; kein aufwendiges eigenes Watch-System.
+- Use suitable Content Collections and Astro schemas. A small shared function supplements directory relationships and numeric sorting.
+- Generate pages through one shared static Astro route with `getStaticPaths()`, including the homepage. Do not hand-write routes for individual demo pages.
+- Validate YAML fields and frontmatter strictly. Errors name the file, field or cause, and expected values. Do not silently fall back for invalid configuration.
+- Hero or section files without directly associated `page.yaml` are errors. Do not silently ignore incorrectly named content files; report them clearly. README files belong outside the content directory.
+- Internal content links are website-root-relative, for example `/faq/`, without the deployment subpath. Apply `base` exactly once to such links and local public asset URLs.
+- Handle external URLs, `mailto:`, `tel:`, query strings, and fragment targets correctly. Do not allow invalid URL protocols such as `javascript:` or protocol-relative URLs in the content contract.
+- Check internal page targets and fragments against the finished output; ordinary static files such as images must not be interpreted as pages.
+- Ensure safe path normalization: no path traversal and no silent URL collisions.
+- Changes, additions, and removals of content files must be reflected by the dev server. Check YAML changes too. If global build configuration requires a restart, document this honestly; do not build a complex custom watch system.
 
-## Austauschbare Darstellung mit DaisyUI
+## Replaceable Presentation with DaisyUI
 
-- Integriere Tailwind CSS und DaisyUI nach deren aktueller offizieller Astro-Anleitung.
-- Nutze DaisyUI tatsächlich in Navigation, Links/Buttons, Hero oder anderen passenden Theme-Elementen.
-- DaisyUI-/Tailwind-spezifische Klassen und Styles bleiben im Standard-Theme und dessen technischer Einbindung. Keine solchen Details in Inhaltsschemas oder Core-Modulen.
-- Ordne semantische `tone`-Werte statischen, geprüften Farbvarianten zu. Kein dynamisches Zusammensetzen von Tailwind-Klassennamen, das die CSS-Erkennung unterläuft.
-- Stelle lesbare Markdown-Typografie einschließlich Listen, Links, Tabellen und Code sicher.
-- Ein späterer Austausch des Themes darf keine Content-Migration verlangen. Er darf Änderungen an Komponenten und CSS-/Build-Einbindung erfordern. Keine falsche Zusage, jede UI-Bibliothek ließe sich bereits per Konfigurationsschalter tauschen.
-- Baue jetzt nur ein Theme. Dokumentiere kurz dessen spätere Ersetzung. Kein generischer Theme-Loader erforderlich.
-- Gemeinsamer Header und Footer auf allen Seiten. Navigation mit aktivem Seitenzustand. Für sechs Links genügt eine responsive umbrochene Navigation ohne JavaScript-Menü.
-- Konfigurierbar sind vereinbarte Inhalte, Navigation, Footer, Site-Metadaten und Farbvarianten. Beliebige Layout-Strukturen bleiben Entwickleraufgabe; kein visueller Baukasten.
+- Integrate Tailwind CSS and DaisyUI according to their current official Astro instructions.
+- Actually use DaisyUI in navigation, links/buttons, the hero, or other suitable theme elements.
+- Keep DaisyUI- and Tailwind-specific classes and styles in the default theme and its technical integration. Do not put such details into content schemas or core modules.
+- Map semantic `tone` values to static, tested color variants. Do not dynamically compose Tailwind class names in a way that bypasses CSS detection.
+- Ensure readable Markdown typography including lists, links, tables, and code.
+- A later theme replacement must not require content migration. It may require changes to components and CSS/build integration. Do not falsely promise that every UI library is already interchangeable through a configuration switch.
+- Build only one theme now. Briefly document how it can later be replaced. No generic theme loader is required.
+- Use a shared header and footer on all pages. Navigation has an active page state. For six links, a responsive wrapping navigation without a JavaScript menu is sufficient.
+- The agreed content, navigation, footer, site metadata, and color variants are configurable. Arbitrary layout structures remain developer work; do not build a visual page builder.
 
-## Barrierefreiheit und SEO
+## Accessibility and SEO
 
-Diese Anforderungen gelten für Implementierungs- und Content-Aufgaben, nicht erst am Projektende.
+These requirements apply to implementation and content tasks, not only at the end of the project.
 
-- Ziel: WCAG 2.2 AA. Keine vollständige Konformität allein aufgrund automatisierter Tests behaupten.
-- Semantisches HTML, korrektes `lang`, Skip-Link, genau ein `main`, eine sichtbare `h1` als Projektkonvention, logische Überschriftenstruktur.
-- Tastaturbedienbarkeit, sichtbare und nicht verdeckte Fokusmarkierungen, sinnvolle Lesereihenfolge, ausreichend große Interaktionsziele und responsive Darstellung ohne vermeidbaren horizontalen Seiten-Overflow.
-- Kontraste für jede unterstützte Farbvariante prüfen; Links im Fließtext erkennbar machen. Information nicht nur über Farbe vermitteln.
-- Aussagekräftige Linktexte; Link für Navigation, Button für Aktionen. Aktive Navigation mit `aria-current="page"`.
-- Bilder brauchen sinnvolle Alternativtexte oder bewusst leere Alternativtexte bei Dekoration. Falls Bilder eingesetzt werden: Maße, responsive Auslieferung und passendes Ladeverhalten berücksichtigen. Keine Bilder nur zum Erfüllen einer Checkliste ergänzen.
-- Keine unnötigen Animationen; wenn verwendet, `prefers-reduced-motion` beachten. Native HTML-Semantik statt unnötigem ARIA.
-- Individueller HTML-Titel und Meta-Description aus validierten Daten; absolute Canonical-URL aus derselben Produktions-URL, Base und Route. Keine doppelten Base-Präfixe.
-- Offizielle Astro-Sitemap-Integration bevorzugen. Statische, crawlbare Links und saubere Status-/404-Behandlung; kein Catch-all, der unbekannte URLs als Startseite ausgibt.
-- Keine Meta-Keywords, kein fingiertes JSON-LD, keine Ranking-Versprechen. FAQ kann zunächst normaler Markdown-Text sein; kein Accordion oder FAQ-Schema erforderlich.
-- Dokumentiere vor Veröffentlichung zu prüfende Produktions-URL, Indexierbarkeit und gegebenenfalls Schutz einer Staging-Umgebung. `robots.txt` ist kein Zugriffsschutz.
+- Target WCAG 2.2 AA. Do not claim full conformance based on automated tests alone.
+- Use semantic HTML, correct `lang`, a skip link, exactly one `main`, one visible `h1` as a project convention, and a logical heading structure.
+- Provide keyboard operation, visible and unobscured focus indicators, meaningful reading order, sufficiently large interactive targets, and responsive presentation without avoidable horizontal page overflow.
+- Check contrast for every supported color variant; make links in running text recognizable. Do not convey information through color alone.
+- Use meaningful link text; use links for navigation and buttons for actions. Mark active navigation with `aria-current="page"`.
+- Images need meaningful alternative text or deliberately empty alternative text when decorative. If images are used, consider dimensions, responsive delivery, and suitable loading behavior. Do not add images merely to satisfy a checklist.
+- Do not use unnecessary animation; if used, respect `prefers-reduced-motion`. Prefer native HTML semantics over unnecessary ARIA.
+- Use individual HTML titles and meta descriptions from validated data; derive absolute canonical URLs from the same production URL, base, and route. Do not create duplicate base prefixes.
+- Prefer the official Astro sitemap integration. Use static crawlable links and correct status/404 handling; do not use a catch-all that renders unknown URLs as the homepage.
+- Do not add meta keywords, fabricated JSON-LD, or ranking promises. The FAQ may initially remain regular Markdown text; no accordion or FAQ schema is required.
+- Before publishing, document the production URL, indexability, and any staging protection that must be checked. `robots.txt` is not access control.
 
-## Agenten-Arbeitsmodi
+## Agent Work Modes
 
-Bei Framework-Entwicklung dürfen Core, Theme und Astro-Konfiguration im vereinbarten Umfang geändert werden.
-Bei reinen Inhaltsaufträgen bearbeite nur Inhalte, freigegebene Website-Einstellungen und Assets. Erweitere nicht ungefragt das Inhaltsmodell oder Styles, um einen Inhalt passend zu machen.
-Diese Regeln sind Verhaltensanweisungen, keine technische Sandbox. Behaupte nicht, ein Agent mit vollständigem Dateizugriff könne das Layout unmöglich verändern.
+During framework development, core, theme, and Astro configuration may be changed within the agreed scope.
+For content-only tasks, edit only content, approved website settings, and assets. Do not expand the content model or styles without being asked in order to force content to fit.
+These rules are behavior instructions, not a technical sandbox. Do not claim that an agent with full file access cannot change the layout.
 
-## Repository-lokale Codex-Skills und Versionen
+## Repository-Local Codex Skills and Versions
 
-- Die projektbezogenen Workflows liegen unter `.codex/skills/`. Nutze sie, wenn der Nutzer sie ausdrücklich mit ihrem Namen oder Kürzel aufruft.
-- Release-Workflows bereiten einen Release vor; `npm publish`, einen GitHub-Release, Tags oder einen Push nur auf ausdrücklichen Auftrag ausführen.
-- Die veröffentlichbare Version muss in `package.json`, `VERSION` und `CHANGELOG.md` übereinstimmen. Der Changelog folgt Keep a Changelog und SemVer.
+- Repository-specific workflows are located in `.codex/skills/`. Use them when the user explicitly invokes their name or shortcut.
+- Release workflows prepare a release; run `npm publish`, create a GitHub release, tag, or push only with an explicit request.
+- The publishable version must match in `package.json`, `VERSION`, and `CHANGELOG.md`. The changelog follows Keep a Changelog and SemVer.
 
-## Prüfungen und Dokumentation
+## Verification and Documentation
 
-Stelle mindestens diese Befehle bereit:
+Provide at least these commands:
 
-- `npm run dev`: lokale Astro-Vorschau aus diesem Repository.
-- `npm run build`: validierte statische Ausgabe nach `dist/`.
-- `npm run preview`: Vorschau des Builds.
-- `npm run check`: Astro-/TypeScript-Prüfung plus erforderliche Inhaltsvalidierung.
-- `npm test`: wenige aussagekräftige Tests der eigenen Konventionen.
-- `npm run test:a11y`: reproduzierbare Browserprüfung aller erzeugten Demo-, Showcase- und Dokumentationsseiten, etwa mit Playwright und axe-core.
+- `npm run dev`: local Astro preview from this repository.
+- `npm run build`: validated static output to `dist/`.
+- `npm run preview`: preview the build.
+- `npm run check`: Astro/TypeScript checking plus required content validation.
+- `npm test`: a few meaningful tests of project-owned conventions.
+- `npm run test:a11y`: reproducible browser verification of all generated demo, showcase, and documentation pages, for example with Playwright and axe-core.
 
-Nutze vorhandene Werkzeuge; keine eigene Testplattform. Prüfe vor allem Sortierung und doppelte Nummern, tiefe Ordnerzuordnung, fehlende Seitenmetadaten, ungültige Tones, Hero-Präsenz, H1-Fallback, eindeutige IDs und Base-URL-Verhalten. Temporäre Test-Fixtures für tiefere Seiten sind ausreichend; die sichtbare Demo umfasst Startseite, Inhaltsseiten, Showcase und Dokumentation.
+Use existing tools; do not build a custom test platform. Check especially sorting and duplicate numbers, deep directory association, missing page metadata, invalid tones, hero presence, H1 fallback, unique IDs, and base URL behavior. Temporary fixtures for deeper pages are sufficient; the visible demo includes the homepage, content pages, showcase, and documentation.
 
-Prüfe die gebaute Ausgabe auf interne Links und Metadaten. Einmal mit `/`, einmal mit einem Unterpfad wie `/demo/` testen. Kontrolliere Desktop und Mobile sowie Tastaturbedienung. Automatisierte Prüfungen ersetzen keine inhaltliche Bewertung von Überschriften oder Alternativtexten.
+Check built output for internal links and metadata. Test once with `/` and once with a subpath such as `/demo/`. Check desktop and mobile presentation as well as keyboard operation. Automated checks do not replace editorial judgment of headings or alternative text.
 
-README auf Deutsch: Setup, Node-Version, Befehle, Projektstruktur, Seite/Section hinzufügen, Hero entfernen, Navigation/Footer ändern, Farbvarianten, Links/Base, Theme ersetzen und geplante npm-Auslagerung. Code-Identifier auf Englisch. Dokumentiere tatsächlich ausgeführte Prüfungen und offene Grenzen; niemals nicht ausgeführte Tests als bestanden melden.
+README in English: setup, Node version, commands, project structure, adding pages/sections, removing the hero, changing navigation/footer, color variants, links/base, replacing the theme, and planned npm extraction. Keep code identifiers in English. Document checks that were actually run and open limitations; never report unrun tests as passed.
 
-## Spätere npm-Verteilung und bewusst ausgeschlossener Umfang
+## Future npm Distribution and Deliberately Excluded Scope
 
-Halte Core und Basislayout so getrennt, dass sie später in ein npm-Package ausgelagert werden können. Keine absoluten Entwicklerpfade oder Core-Importe aus Demo-Inhalten. Dokumentiere die geplante öffentliche Oberfläche knapp, ohne jetzt ungenutzte APIs zu implementieren.
+Keep core and base layout separated so they can later be extracted into an npm package. Do not use absolute developer paths or core imports from demo content. Briefly document the planned public surface without implementing unused APIs now.
 
-Noch nicht Teil dieses Meilensteins: npm-Veröffentlichung, Installationstest eines fertigen AstroPilot-Packages, Projektgenerator, eigener MCP-Server, Extensions/Marktplatz, Multisite, Mehrsprachigkeit, CMS, Authentifizierung, Form-Backend, Deployment und komplexe Layoutsprache.
+This milestone does not yet include: npm publishing, installation testing of a finished AstroPilot package, a project generator, a custom MCP server, extensions/marketplace, multisite, multilingual support, CMS, authentication, form backend, deployment, or a complex layout language.
 
-Veröffentliche oder deploye nichts ohne entsprechenden Auftrag. Eine frei erfundene Lizenz oder Paketnamensverfügbarkeit darf nicht als geklärt gelten.
+Do not publish or deploy anything without the corresponding request. Do not treat an invented license or package-name availability as resolved.
