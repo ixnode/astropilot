@@ -4,6 +4,6 @@ eyebrow: Bausteine im Einsatz
 tone: brand
 ---
 
-Diese Seite zeigt die aktuell verfügbaren Grundlagen von AstroPilot: Theme-Tokens, das Layout-Raster, Markdown-Typografie und die gemeinsamen Navigations- und Section-Bausteine.
+Entdecke die verfügbaren Bausteine des Standard-Themes. Jede Unterseite zeigt einen Bereich mit konkreten, direkt wiederverwendbaren Beispielen.
 
 [Mehr über die Arbeitsweise erfahren](/info/)

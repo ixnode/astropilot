@@ -36,7 +36,7 @@ const contentImageComponentImport =
 const cardComponentImport =
     /^import\s*\{\s*Card\s*,\s*CardActions\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
 const localImageImport =
-    /^import\s+([A-Za-z_$][\w$]*)\s+from\s+['"]\.\/images\/[a-z0-9][a-z0-9._-]*\.(?:avif|jpe?g|png|webp)['"];?$/i;
+    /^import\s+([A-Za-z_$][\w$]*)\s+from\s+['"](?:\.\.\/|\.\/)[a-z0-9][a-z0-9._/-]*\.(?:avif|jpe?g|png|webp)['"];?$/i;
 const imageExtensions = new Set(['.avif', '.jpeg', '.jpg', '.png', '.webp']);
 
 interface MdxNode {
@@ -120,7 +120,7 @@ function validateMdxLayout(
                     fail(
                         contentRoot,
                         path,
-                        'MDX may only import supported components from astropilot/components and local images from its images directory',
+                        'MDX may only import supported components from astropilot/components and local relative images',
                     );
                 hasComponentImport = true;
             }

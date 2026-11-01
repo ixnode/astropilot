@@ -143,10 +143,10 @@ import { Alert } from 'astropilot/components';
 </Alert>
 ```
 
-Lokale Inhaltsbilder liegen direkt bei ihrer Section, beispielsweise unter `src/content/pages/showcase/images/`. `ContentImage` importiert diese PNG-, JPEG-, WebP- oder AVIF-Dateien aus MDX und gibt sie über Astros Asset-Pipeline als WebP mit Qualität 80 aus. Die Komponente akzeptiert `width`, `height`, `fullWidth`, `shape="rounded|square"` und `border="default|none"`; bei gesetzter Breite und Höhe verwendet sie `object-fit: cover`.
+Lokale Inhaltsbilder liegen bei der zugehörigen Seite oder in einem gemeinsamen lokalen `assets/`-Ordner, beispielsweise unter `src/content/pages/showcase/assets/`. `ContentImage` importiert diese PNG-, JPEG-, WebP- oder AVIF-Dateien relativ aus MDX und gibt sie über Astros Asset-Pipeline als WebP mit Qualität 80 aus. Die Komponente akzeptiert `width`, `height`, `fullWidth`, `shape="rounded|square"` und `border="default|none"`; bei gesetzter Breite und Höhe verwendet sie `object-fit: cover`.
 
 ```mdx
-import layoutImage from './images/layout.png';
+import layoutImage from '../assets/layout.png';
 import { ContentImage } from 'astropilot/components';
 
 <ContentImage

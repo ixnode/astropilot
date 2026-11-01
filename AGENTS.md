@@ -64,17 +64,22 @@ src/content/
     ├── showcase/
     │   ├── page.yaml
     │   ├── hero.md
-    │   ├── 01-foundations.md
-    │   ├── 02-layout.mdx
-    │   ├── 03-typografie.md
-    │   ├── 04-navigation.md
-    │   ├── 05-sections.md
-    │   ├── 06-alerts.mdx
-    │   ├── 07-images.mdx
-    │   ├── 08-cards.mdx
-    │   └── images/
+    │   ├── 01-bereiche.mdx
+    │   ├── assets/
     │       ├── layout-landscape.png
     │       └── layout-portrait.png
+    │   ├── foundations/
+    │   │   ├── page.yaml
+    │   │   └── 01-foundations.md
+    │   ├── layout/
+    │   │   ├── page.yaml
+    │   │   └── 01-layout.mdx
+    │   ├── typografie/
+    │   ├── navigation/
+    │   ├── sections/
+    │   ├── alerts/
+    │   ├── images/
+    │   └── cards/
     └── kontakt/
         ├── page.yaml
         └── 01-kontakt.md
@@ -165,7 +170,7 @@ Hier steht normaler Markdown-Inhalt.
 - `tone`: ausschließlich `default`, `muted`, `brand`; fehlender Wert bedeutet `default`.
 - `fullWidth`: optionaler Boolean für Sections; fehlender Wert bedeutet `false` und begrenzt den Inhalt auf die Lesespalte. Mit `true` entfällt nur `ap-section__content`; `content-prose` und die äußere `site-shell` bleiben aktiv. Damit nutzt der Bereich die volle Inhaltsbreite, aber nicht den Browserrand.
 - Eine Datei wird als ein semantischer Inhaltsabschnitt dargestellt. Sie beginnt inhaltlich mit einer sinnvollen `h2`; weitere Ebenen müssen logisch folgen. Keine `h1` im Hero- oder Section-Markdown.
-- Keine eigene Section-Direktive, keine Steuerkommentare, keine CSS-Klassen oder Inline-Styles in Content-Dateien. MDX ist nur in `.mdx`-Sections erlaubt und darf ausschließlich dokumentierte AstroPilot-Komponenten importieren; keine Browser-Skripte oder beliebige JSX-Elemente.
+- Keine eigene Section-Direktive, keine Steuerkommentare, keine CSS-Klassen oder Inline-Styles in Content-Dateien. MDX ist nur in `.mdx`-Sections erlaubt und darf ausschließlich dokumentierte AstroPilot-Komponenten sowie relative lokale Bilddateien importieren; keine Browser-Skripte oder beliebige JSX-Elemente.
 - Für das MVP unterstützt der Content-Vertrag normales Markdown ohne rohes HTML oder ausführbaren Code. Unzulässige Konstrukte über den vorhandenen Markdown-AST prüfen, nicht per Regex-Parser nachbauen. Fenced Code-Blöcke bleiben normale Inhalte.
 - IDs für Überschriften müssen innerhalb der zusammengesetzten Seite eindeutig sein, auch bei gleichen Überschriften in verschiedenen Dateien. Nutze eine kleine deterministische Strategie und dokumentiere Sprunglinks.
 
