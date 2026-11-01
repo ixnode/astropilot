@@ -3,8 +3,8 @@ import { getCollection, render } from 'astro:content';
 import { assemblePages, type AssembledPage } from '../lib/astropilot/pages';
 import { loadSiteConfig } from '../lib/astropilot/site-config';
 import PageLayout from '../themes/default/layouts/PageLayout/PageLayout.astro';
-import Hero from '../themes/default/components/Hero/Hero.astro';
-import Section from '../themes/default/components/Section/Section.astro';
+import Hero from '../themes/default/components/organisms/Hero/Hero.astro';
+import Section from '../themes/default/components/organisms/Section/Section.astro';
 
 export async function getAstroPilotStaticPaths() {
     const pages = assemblePages(

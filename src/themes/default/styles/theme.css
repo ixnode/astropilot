@@ -21,13 +21,13 @@
 /* Semantic content variants */
 @import './themes/section-tones.css';
 
-/* Theme components and layout */
-@import '../components/Header/Header.css';
-@import '../components/Footer/Footer.css';
-@import '../components/Hero/Hero.css';
-@import '../components/Section/Section.css';
-@import '../components/Columns/Columns.css';
-@import '../components/Column/Column.css';
+/* Theme components: atoms, molecules, organisms, then layout primitives */
+@import '../components/organisms/Header/Header.css';
+@import '../components/organisms/Footer/Footer.css';
+@import '../components/organisms/Hero/Hero.css';
+@import '../components/organisms/Section/Section.css';
+@import '../components/layout/Columns/Columns.css';
+@import '../components/layout/Column/Column.css';
 @import '../layouts/PageLayout/PageLayout.css';
 
 @plugin "daisyui" {
