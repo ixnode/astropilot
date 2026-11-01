@@ -2,6 +2,31 @@
 @layer components {
     .content-prose {
         @apply prose max-w-none prose-headings:scroll-mt-8 prose-a:text-primary prose-a:font-medium prose-a:decoration-2 prose-a:underline;
+
+        h1 {
+            font-size: var(--text-heading-1);
+            @apply font-bold;
+        }
+        h2 {
+            font-size: var(--text-heading-2);
+            @apply font-bold;
+        }
+        h3 {
+            font-size: var(--text-heading-3);
+            @apply font-medium;
+        }
+        h4 {
+            font-size: var(--text-heading-4);
+            @apply font-medium;
+        }
+        h5 {
+            font-size: var(--text-heading-5);
+            @apply font-medium;
+        }
+        h6 {
+            font-size: var(--text-heading-6);
+            @apply font-medium;
+        }
     }
 
     .ap-section > .site-shell > .content-prose,

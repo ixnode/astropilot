@@ -1,0 +1,26 @@
+---
+tone: default
+---
+
+## H2 – Abschnittsüberschrift
+
+Die sichtbare Seitenüberschrift „Theme und Gestaltung“ oberhalb dieser Section
+ist die H1. Sie wird automatisch aus `page.yaml` gerendert, weil diese Seite
+kein `hero.md` besitzt.
+
+### H3 – Unterabschnitt
+
+Diese Ebene strukturiert einen Abschnitt weiter, wenn der Inhalt es erfordert.
+
+#### H4 – Detailüberschrift
+
+H4 eignet sich für klar abgegrenzte Details innerhalb eines Unterabschnitts.
+
+##### H5 – Feingliederung
+
+Diese Ebene sollte nur bei tatsächlich verschachtelten Inhalten verwendet
+werden.
+
+###### H6 – tiefste Überschriftenebene
+
+H6 ist verfügbar, wird für gut lesbare Inhaltsseiten aber selten benötigt.

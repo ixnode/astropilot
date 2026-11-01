@@ -4,9 +4,11 @@
         color-scheme: light;
         scroll-behavior: smooth;
     }
+
     body {
         @apply min-h-screen bg-base-100 text-base-content;
     }
+
     a {
         @apply underline underline-offset-4;
     }
