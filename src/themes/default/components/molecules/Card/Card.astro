@@ -1,0 +1,34 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+interface Props {
+    image?: ImageMetadata;
+    imageAlt?: string;
+}
+
+const { image, imageAlt } = Astro.props;
+if (Boolean(image) !== Boolean(imageAlt))
+    throw new Error(
+        'AstroPilot Card requires image and imageAlt together, or neither prop.',
+    );
+---
+
+<article class="ap-card card bg-base-100 shadow-sm not-prose">
+    {image && (
+        <figure class="ap-card__figure">
+            <Image
+                src={image}
+                alt={imageAlt!}
+                format="webp"
+                quality={80}
+                loading="lazy"
+                decoding="async"
+                class="ap-card__image"
+            />
+        </figure>
+    )}
+    <div class="ap-card__body card-body">
+        <slot />
+    </div>
+</article>

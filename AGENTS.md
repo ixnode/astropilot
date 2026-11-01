@@ -69,8 +69,9 @@ src/content/
     │   ├── 03-typografie.md
     │   ├── 04-navigation.md
     │   ├── 05-sections.md
-    │   └── 06-alerts.mdx
+    │   ├── 06-alerts.mdx
     │   ├── 07-images.mdx
+    │   ├── 08-cards.mdx
     │   └── images/
     │       ├── layout-landscape.png
     │       └── layout-portrait.png

@@ -160,6 +160,24 @@ import { ContentImage } from 'astropilot/components';
 />
 ```
 
+`Card` bündelt optional ein lokales Bild, Markdown-Inhalt und Actions. Die erste direkte `###`-Überschrift erhält den DaisyUI-Card-Titel-Stil. `CardActions` ist optional; alle darin enthaltenen Markdown-Links werden als einheitliche primäre Buttons dargestellt.
+
+```mdx
+import cardImage from './images/card.png';
+import { Card, CardActions } from 'astropilot/components';
+
+<Card image={cardImage} imageAlt="Beschreibung des Bildinhalts">
+    ### Card-Titel
+
+    Mehrere Markdown-Absätze sind möglich.
+
+    <CardActions>
+        [Mehr erfahren](/info/)
+    </CardActions>
+
+</Card>
+```
+
 ## Struktur und Theme
 
 Die kleine, wiederverwendbare Inhalts- und URL-Logik liegt in `src/lib/astropilot/`. Sie kennt weder Demo-Texte noch Tailwind- oder DaisyUI-Klassen. Das Standard-Theme liegt in `src/themes/default/` und umfasst Layout, Header, Hero, Sections und Footer. DaisyUI wird dort tatsächlich für Navigation und Theme-Elemente genutzt.

@@ -1,0 +1,21 @@
+@layer components {
+    .ap-card {
+        @apply overflow-hidden;
+    }
+
+    .ap-card__figure {
+        @apply overflow-hidden;
+    }
+
+    .ap-card__image {
+        @apply h-56 w-full object-cover;
+    }
+
+    .ap-card__body > h3:first-child {
+        @apply card-title;
+    }
+
+    .ap-card__body > p {
+        @apply leading-relaxed;
+    }
+}

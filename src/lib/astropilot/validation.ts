@@ -33,6 +33,8 @@ const alertComponentImport =
     /^import\s*\{\s*Alert\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
 const contentImageComponentImport =
     /^import\s*\{\s*ContentImage\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
+const cardComponentImport =
+    /^import\s*\{\s*Card\s*,\s*CardActions\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
 const localImageImport =
     /^import\s+([A-Za-z_$][\w$]*)\s+from\s+['"]\.\/images\/[a-z0-9][a-z0-9._-]*\.(?:avif|jpe?g|png|webp)['"];?$/i;
 const imageExtensions = new Set(['.avif', '.jpeg', '.jpg', '.png', '.webp']);
@@ -91,8 +93,10 @@ function validateMdxLayout(
     let columnsCount = 0;
     let alertCount = 0;
     let contentImageCount = 0;
+    let cardCount = 0;
     const localImageImports = new Set<string>();
     const validatedColumns = new Set<MdxNode>();
+    const validatedCardActions = new Set<MdxNode>();
 
     visit(tree, (node) => {
         const mdxNode = node as MdxNode;
@@ -110,7 +114,8 @@ function validateMdxLayout(
                 if (
                     !mdxComponentImport.test(importValue) &&
                     !alertComponentImport.test(importValue) &&
-                    !contentImageComponentImport.test(importValue)
+                    !contentImageComponentImport.test(importValue) &&
+                    !cardComponentImport.test(importValue)
                 )
                     fail(
                         contentRoot,
@@ -319,6 +324,60 @@ function validateMdxLayout(
                         path,
                         'ContentImage requires a local image src expression and non-empty alt; optional width and height are positive integers, fullWidth is a boolean prop, shape is rounded or square, and border is default or none',
                     );
+            } else if (mdxNode.name === 'Card') {
+                cardCount += 1;
+                const attributes = mdxNode.attributes ?? [];
+                const image = attributes.find(
+                    (attribute) =>
+                        attribute.type === 'mdxJsxAttribute' &&
+                        attribute.name === 'image',
+                );
+                const imageAlt = attributes.find(
+                    (attribute) =>
+                        attribute.type === 'mdxJsxAttribute' &&
+                        attribute.name === 'imageAlt',
+                );
+                const imageValue = image?.value;
+                const imageImport =
+                    imageValue !== null && typeof imageValue === 'object'
+                        ? imageValue.value
+                        : undefined;
+                const actions = (mdxNode.children ?? []).filter(
+                    (child) =>
+                        child.type === 'mdxJsxFlowElement' &&
+                        child.name === 'CardActions',
+                );
+                actions.forEach((action) => validatedCardActions.add(action));
+                if (
+                    attributes.length > 2 ||
+                    attributes.some(
+                        (attribute) =>
+                            attribute.type !== 'mdxJsxAttribute' ||
+                            (attribute.name !== 'image' &&
+                                attribute.name !== 'imageAlt'),
+                    ) ||
+                    Boolean(image) !== Boolean(imageAlt) ||
+                    (image && !localImageImports.has(imageImport ?? '')) ||
+                    (imageAlt &&
+                        (typeof imageAlt.value !== 'string' ||
+                            imageAlt.value.trim() === '')) ||
+                    actions.length > 1
+                )
+                    fail(
+                        contentRoot,
+                        path,
+                        'Card accepts image and imageAlt together, or neither; it may contain one direct CardActions component',
+                    );
+            } else if (mdxNode.name === 'CardActions') {
+                if (
+                    mdxNode.attributes?.length !== 0 ||
+                    !validatedCardActions.has(mdxNode)
+                )
+                    fail(
+                        contentRoot,
+                        path,
+                        'CardActions must be a direct child of Card and does not accept props',
+                    );
             } else {
                 fail(
                     contentRoot,
@@ -331,7 +390,10 @@ function validateMdxLayout(
 
     if (
         !hasComponentImport ||
-        (columnsCount === 0 && alertCount === 0 && contentImageCount === 0)
+        (columnsCount === 0 &&
+            alertCount === 0 &&
+            contentImageCount === 0 &&
+            cardCount === 0)
     )
         fail(
             contentRoot,

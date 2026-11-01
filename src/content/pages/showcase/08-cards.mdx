@@ -1,0 +1,48 @@
+---
+tone: default
+---
+
+import layoutLandscape from './images/layout-landscape.png';
+import layoutPortrait from './images/layout-portrait.png';
+import { Card, CardActions } from 'astropilot/components';
+
+## Cards
+
+Cards fassen Bild, Markdown-Inhalt und einen optionalen nächsten Schritt in einem wiederverwendbaren Baustein zusammen.
+
+<Card
+    image={layoutLandscape}
+    imageAlt="Abstrakte blaue Darstellung eines modularen Website-Layouts"
+>
+    ### Mit Bild, Titel und Action
+
+    Die erste Überschrift der Card wird als Titel gestaltet. Das Bild wird innerhalb eines `figure`-Elements als optimiertes WebP ausgegeben.
+
+    <CardActions>
+        [Mehr zum Konzept](/info/)
+    </CardActions>
+
+</Card>
+
+<Card>
+    ### Ohne Bild mit mehreren Actions
+
+    Der Body unterstützt gewöhnliches Markdown mit mehreren Absätzen.
+
+    Inhalt und Darstellung bleiben dabei voneinander getrennt.
+
+    <CardActions>
+        [FAQ](/faq/) [Kontakt](/kontakt/)
+    </CardActions>
+
+</Card>
+
+<Card
+    image={layoutPortrait}
+    imageAlt="Editorial-Darstellung von modularen Inhaltsblöcken"
+>
+    Diese Card beginnt ohne Überschrift und hat keinen Actions-Bereich.
+
+    So bleibt sie für rein visuelle oder ergänzende Inhalte bewusst schlicht.
+
+</Card>
