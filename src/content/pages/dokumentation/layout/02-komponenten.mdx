@@ -1,0 +1,25 @@
+---
+tone: muted
+---
+
+import { Eyebrow } from 'astropilot/components';
+
+<Eyebrow>Öffentliche Bausteine</Eyebrow>
+
+## Verfügbare Komponenten
+
+AstroPilot exportiert geprüfte Komponenten aus `astropilot/components`. Aktuell gehören dazu `Columns`, `Column`, `Eyebrow`, `Alert`, `ContentImage`, `Card` und `CardActions`.
+
+### Eyebrow vor einer Überschrift
+
+`Eyebrow` ergänzt eine Überschrift um eine kurze Einordnung. Die Komponente nimmt keine Props entgegen und ihr Text sollte die Überschrift präzisieren, statt sie zu wiederholen.
+
+```mdx
+import { Eyebrow } from 'astropilot/components';
+
+<Eyebrow>Einordnung</Eyebrow>
+
+## Die eigentliche Überschrift
+```
+
+Der [Showcase](/showcase/) zeigt alle verfügbaren Varianten als sichtbare Beispiele. Neue Komponenten werden dort ergänzt, bevor sie als dokumentierter MDX-Baustein verwendet werden.

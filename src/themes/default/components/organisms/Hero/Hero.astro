@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import { toneOf } from '../../../../../lib/astropilot/pages';
 import type { SiteConfig } from '../../../../../lib/astropilot/types';
+import Eyebrow from '../../atoms/Eyebrow/Eyebrow.astro';
 
 interface Props {
     hero: CollectionEntry<'documents'>;
@@ -27,9 +28,7 @@ const heroClasses =
     aria-labelledby="page-title"
 >
     <div class="ap-hero__inner site-shell">
-        {hero.data.eyebrow && (
-            <p class="ap-hero__eyebrow">{hero.data.eyebrow}</p>
-        )}
+        {hero.data.eyebrow && <Eyebrow>{hero.data.eyebrow}</Eyebrow>}
         <h1 id="page-title" class="ap-hero__title">
             {hero.data.title}
         </h1>

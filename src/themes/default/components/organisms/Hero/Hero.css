@@ -3,10 +3,6 @@
         @apply py-section-hero;
 
         .ap-hero__inner {
-            .ap-hero__eyebrow {
-                @apply mb-3 text-sm font-bold tracking-widest uppercase;
-            }
-
             .ap-hero__title {
                 @apply max-w-3xl text-display font-bold tracking-tight;
             }

@@ -1,0 +1,5 @@
+@layer components {
+    .ap-eyebrow {
+        @apply mb-3 text-sm font-bold tracking-widest uppercase;
+    }
+}

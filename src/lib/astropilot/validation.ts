@@ -35,7 +35,9 @@ const heroSchema = markdownSchema.extend({
 });
 const sectionPattern = /^\d{2,}-[a-z0-9][a-z0-9-]*\.(?:md|mdx)$/;
 const mdxComponentImport =
-    /^import\s*\{\s*Column\s*,\s*Columns\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
+    /^import\s*\{\s*Column\s*,\s*Columns(?:\s*,\s*Eyebrow)?\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
+const eyebrowComponentImport =
+    /^import\s*\{\s*Eyebrow\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
 const alertComponentImport =
     /^import\s*\{\s*Alert\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
 const contentImageComponentImport =
@@ -105,6 +107,7 @@ function validateMdxLayout(
     let alertCount = 0;
     let contentImageCount = 0;
     let cardCount = 0;
+    let eyebrowCount = 0;
     const localImageImports = new Set<string>();
     const validatedColumns = new Set<MdxNode>();
     const validatedCardActions = new Set<MdxNode>();
@@ -124,6 +127,7 @@ function validateMdxLayout(
                 }
                 if (
                     !mdxComponentImport.test(importValue) &&
+                    !eyebrowComponentImport.test(importValue) &&
                     !alertComponentImport.test(importValue) &&
                     !contentImageComponentImport.test(importValue) &&
                     !cardComponentImport.test(importValue)
@@ -240,6 +244,10 @@ function validateMdxLayout(
                         path,
                         'Alert accepts optional variant (info, success, warning, error) and style (normal, soft, outline, dash) props',
                     );
+            } else if (mdxNode.name === 'Eyebrow') {
+                eyebrowCount += 1;
+                if (mdxNode.attributes?.length !== 0)
+                    fail(contentRoot, path, 'Eyebrow does not accept props');
             } else if (mdxNode.name === 'ContentImage') {
                 contentImageCount += 1;
                 const attributes = mdxNode.attributes ?? [];
@@ -404,7 +412,8 @@ function validateMdxLayout(
         (columnsCount === 0 &&
             alertCount === 0 &&
             contentImageCount === 0 &&
-            cardCount === 0)
+            cardCount === 0 &&
+            eyebrowCount === 0)
     )
         fail(
             contentRoot,
