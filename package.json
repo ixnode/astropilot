@@ -22,7 +22,7 @@
         "node": ">=24.0.0"
     },
     "scripts": {
-        "dev": "astro dev",
+        "dev": "astro dev --force",
         "build": "npm run validate && astro build && node --import tsx scripts/verify-build.ts",
         "build:demo": "ASTROPILOT_BASE=/demo/ npm run build",
         "preview": "astro preview",

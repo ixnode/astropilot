@@ -22,6 +22,9 @@ const markdownSchema = z
         eyebrow: z.string().trim().min(1).optional(),
     })
     .strict();
+const sectionSchema = markdownSchema.extend({
+    fullWidth: z.boolean().optional(),
+});
 const heroSchema = markdownSchema.extend({ title: z.string().trim().min(1) });
 const sectionPattern = /^\d{2,}-[a-z0-9][a-z0-9-]*\.(?:md|mdx)$/;
 const mdxComponentImport =
@@ -389,7 +392,7 @@ export function validateAstroPilotContent(
             );
         const { frontmatter, tree } = frontmatterAndTree(path);
         const metadata = (
-            filename === 'hero.md' ? heroSchema : markdownSchema
+            filename === 'hero.md' ? heroSchema : sectionSchema
         ).safeParse(frontmatter);
         if (!metadata.success)
             fail(

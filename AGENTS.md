@@ -149,6 +149,7 @@ Eine kurze Einführung in die Inhalte dieser Seite.
 ```md
 ---
 tone: muted
+fullWidth: true
 ---
 
 ## Ein eigener Inhaltsbereich
@@ -161,6 +162,7 @@ Hier steht normaler Markdown-Inhalt.
 - Nur direkt im Seitenordner liegende Dateien gehören zur jeweiligen Seite; keine Vermischung mit Unterseiten.
 - Numerische Präfixe mit mindestens zwei Ziffern und einem sprechenden, kleingeschriebenen Namen mit Bindestrichen; numerisch sortieren. Doppelte Nummern sind Fehler. Lücken sind erlaubt. Normale Sections verwenden `.md`; eine `.mdx`-Datei ist ausschließlich für dokumentierte MDX-Layout-Komponenten zulässig.
 - `tone`: ausschließlich `default`, `muted`, `brand`; fehlender Wert bedeutet `default`.
+- `fullWidth`: optionaler Boolean für Sections; fehlender Wert bedeutet `false` und begrenzt den Inhalt auf die Lesespalte. Mit `true` entfällt nur `ap-section__content`; `content-prose` und die äußere `site-shell` bleiben aktiv. Damit nutzt der Bereich die volle Inhaltsbreite, aber nicht den Browserrand.
 - Eine Datei wird als ein semantischer Inhaltsabschnitt dargestellt. Sie beginnt inhaltlich mit einer sinnvollen `h2`; weitere Ebenen müssen logisch folgen. Keine `h1` im Hero- oder Section-Markdown.
 - Keine eigene Section-Direktive, keine Steuerkommentare, keine CSS-Klassen oder Inline-Styles in Content-Dateien. MDX ist nur in `.mdx`-Sections erlaubt und darf ausschließlich dokumentierte AstroPilot-Komponenten importieren; keine Browser-Skripte oder beliebige JSX-Elemente.
 - Für das MVP unterstützt der Content-Vertrag normales Markdown ohne rohes HTML oder ausführbaren Code. Unzulässige Konstrukte über den vorhandenen Markdown-AST prüfen, nicht per Regex-Parser nachbauen. Fenced Code-Blöcke bleiben normale Inhalte.

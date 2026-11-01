@@ -67,6 +67,8 @@ npm install
 npm run dev
 ```
 
+Der Dev-Server startet bewusst mit `--force`, damit Änderungen an Content Collections, MDX-Komponenten und lokalen Package-Dateien ohne einen alten Astro-Content-Cache geprüft werden.
+
 Weitere Befehle:
 
 ```sh
@@ -96,7 +98,7 @@ pages/
 
 `page.yaml` benötigt einen nicht leeren `title` und eine `description`. Beide Werte gehören zu den HTML-Metadaten: `title` wird im `<title>`-Tag, `description` als Meta-Description verwendet. Sein Ordner wird direkt zur URL: `faq/page.yaml` wird `/faq/`; eine tiefere `leistungen/monitoring/page.yaml` wird `/leistungen/monitoring/`.
 
-Ein `hero.md` aktiviert den gemeinsamen Hero und benötigt einen `title` im Frontmatter; dieser wird als sichtbare `h1` verwendet. Löschen Sie die Datei, um stattdessen `page.yaml.title` als schlichte sichtbare `h1` oberhalb der Sections zu verwenden. Sections heißen verbindlich `NN-name.md`, beginnen mit einer `h2` und können `tone: default`, `muted` oder `brand` im Frontmatter setzen. Interne Links bleiben immer website-root-relativ, etwa `/faq/`; AstroPilot wendet `base` einmalig an. Überschrift-IDs werden aus Dateiname und Überschrift gebildet, etwa `01-einleitung-inhalte-direkt-im-projekt-pflegen`, damit Sprunglinks über zusammengesetzte Markdown-Dateien eindeutig sind.
+Ein `hero.md` aktiviert den gemeinsamen Hero und benötigt einen `title` im Frontmatter; dieser wird als sichtbare `h1` verwendet. Löschen Sie die Datei, um stattdessen `page.yaml.title` als schlichte sichtbare `h1` oberhalb der Sections zu verwenden. Sections heißen verbindlich `NN-name.md`, beginnen mit einer `h2` und können `tone: default`, `muted` oder `brand` im Frontmatter setzen. Standardmäßig begrenzt `ap-section__content` den Inhalt auf eine gut lesbare Breite. Mit `fullWidth: true` im Section-Frontmatter entfällt diese innere Begrenzung; die gemeinsame äußere `site-shell` und die Markdown-Typografie bleiben aktiv. Interne Links bleiben immer website-root-relativ, etwa `/faq/`; AstroPilot wendet `base` einmalig an. Überschrift-IDs werden aus Dateiname und Überschrift gebildet, etwa `01-einleitung-inhalte-direkt-im-projekt-pflegen`, damit Sprunglinks über zusammengesetzte Markdown-Dateien eindeutig sind.
 
 Für geprüfte Layout-Bausteine unterstützt AstroPilot zusätzlich MDX-Sections mit der Endung `.mdx`. Installieren Sie dafür im Verbraucherprojekt die direkte Peer-Abhängigkeit:
 

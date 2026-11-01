@@ -31,6 +31,7 @@ export function createAstroPilotCollections(
             title: z.string().trim().min(1).optional(),
             eyebrow: z.string().trim().min(1).optional(),
             tone,
+            fullWidth: z.boolean().default(false),
         }),
     });
 

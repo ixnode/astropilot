@@ -18,7 +18,12 @@ const toneClass = {
 
 <section class:list={[toneClass, 'ap-section']}>
     <div class="ap-section__inner site-shell">
-        <div class="ap-section__content content-prose">
+        <div
+            class:list={[
+                'content-prose',
+                !section.data.fullWidth && 'ap-section__content',
+            ]}
+        >
             <Content />
         </div>
     </div>
