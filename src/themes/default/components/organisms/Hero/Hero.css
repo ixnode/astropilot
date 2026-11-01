@@ -1,17 +1,53 @@
 @layer components {
     .ap-hero {
         @apply py-section-hero;
+
+        .ap-hero__inner {
+            .ap-hero__eyebrow {
+                @apply mb-3 text-sm font-bold tracking-widest uppercase;
+            }
+
+            .ap-hero__title {
+                @apply max-w-3xl text-display font-bold tracking-tight;
+            }
+
+            .ap-hero__content {
+                @apply mt-6 max-w-3xl;
+            }
+        }
     }
 
-    .ap-hero__eyebrow {
-        @apply mb-3 text-sm font-bold tracking-widest uppercase;
-    }
+    .ap-hero--theme-1 {
+        @apply relative isolate overflow-hidden bg-primary;
 
-    .ap-hero__title {
-        @apply max-w-3xl text-display font-bold tracking-tight;
-    }
+        background-image:
+            radial-gradient(
+                circle at 14% 18%,
+                rgb(255 255 255 / 18%),
+                transparent 30rem
+            ),
+            linear-gradient(
+                125deg,
+                rgb(255 255 255 / 10%),
+                transparent 48%,
+                rgb(15 118 110 / 28%)
+            );
 
-    .ap-hero__content {
-        @apply mt-6 max-w-3xl;
+        &::before {
+            content: '';
+            @apply pointer-events-none absolute inset-0;
+            background-image:
+                linear-gradient(rgb(255 255 255 / 10%) 1px, transparent 1px),
+                linear-gradient(
+                    90deg,
+                    rgb(255 255 255 / 10%) 1px,
+                    transparent 1px
+                );
+            background-size: 0.5rem 0.5rem;
+        }
+
+        .ap-hero__inner {
+            @apply relative z-10;
+        }
     }
 }
