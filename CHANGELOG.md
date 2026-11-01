@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2026-11-01
+
+### Added
+
+- Added validated MDX layout components for columns, alerts, cards, images, and contextual eyebrows.
+- Added a self-documenting website with a component showcase, documentation pages, optimized local images, and reusable hero theme classes.
+- Added responsive transparent and glass header states, a compact fallback page title, and a sticky footer layout.
+
+### Changed
+
+- Reorganized default-theme components by Atomic Design and consolidated their nested CSS structure.
+- Refined semantic typography, spacing, prose handling, navigation states, cards, and section layout options.
+- Simplified section filenames, reserved underscored support directories, and improved heading anchors and content validation.
+
 ## [0.2.3] - 2026-10-30
 
 ### Added
