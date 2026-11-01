@@ -1,12 +1,12 @@
 @layer components {
     .ap-header {
-        @apply border-b border-base-300 bg-base-100;
+        @apply absolute inset-x-0 top-0 z-40 border-b border-transparent bg-transparent text-primary-content transition-[background-color,border-color,box-shadow,backdrop-filter] duration-200;
 
         .ap-header__inner {
-            @apply flex flex-wrap items-center justify-between gap-x-8 gap-y-3 py-5;
+            @apply flex flex-wrap items-center justify-between gap-x-8 gap-y-3 py-7 transition-[padding] duration-200;
 
             .ap-header__brand {
-                @apply text-lg font-bold no-underline hover:no-underline;
+                @apply text-lg font-bold text-primary-content no-underline hover:no-underline;
             }
 
             .ap-header__links {
@@ -14,8 +14,58 @@
             }
 
             .ap-header__link {
-                @apply !text-lg no-underline hover:no-underline;
+                @apply !text-lg !text-primary-content no-underline hover:no-underline;
+
+                &:hover {
+                    --btn-bg: color-mix(
+                        in oklab,
+                        var(--color-primary-content) 30%,
+                        transparent
+                    ) !important;
+                }
+
+                &[aria-current='page'] {
+                    --btn-bg: transparent !important;
+                    --btn-border: var(--color-primary-content) !important;
+                    @apply font-bold;
+                }
             }
+        }
+
+        &.ap-header--scrolled {
+            @apply fixed border-base-300 bg-base-100/85 text-base-content shadow-sm backdrop-blur-md;
+
+            .ap-header__inner {
+                @apply py-5;
+
+                .ap-header__brand,
+                .ap-header__link {
+                    @apply !text-base-content;
+                }
+
+                .ap-header__link {
+                    &[aria-current='page'] {
+                        --btn-bg: transparent !important;
+                        --btn-border: var(--color-base-content) !important;
+                        @apply font-bold;
+                    }
+
+                    &:not([aria-current='page']):hover {
+                        --btn-bg: color-mix(
+                            in oklab,
+                            var(--color-base-content) 10%,
+                            transparent
+                        ) !important;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .ap-header,
+        .ap-header .ap-header__inner {
+            @apply transition-none;
         }
     }
 }

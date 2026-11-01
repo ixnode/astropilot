@@ -103,6 +103,14 @@ try {
         for (const route of routes) {
             const page = await context.newPage();
             await page.goto(`${baseUrl}${route}`, { waitUntil: 'networkidle' });
+            const header = page.locator('.ap-header');
+            const initialHeaderPosition = await header.evaluate(
+                (element) => getComputedStyle(element).position,
+            );
+            if (initialHeaderPosition !== 'absolute')
+                throw new Error(
+                    `${viewport.name} ${route}: header is not transparent before scrolling`,
+                );
             const results = await new AxeBuilder({ page }).analyze();
             if (results.violations.length > 0)
                 throw new Error(
@@ -119,6 +127,26 @@ try {
             if (overflow)
                 throw new Error(
                     `${viewport.name} ${route}: viewport overflows horizontally`,
+                );
+            await page.evaluate(() => window.scrollTo(0, 10));
+            await page.waitForFunction(() =>
+                document
+                    .querySelector('.ap-header')
+                    ?.classList.contains('ap-header--scrolled'),
+            );
+            const scrolledHeader = await header.evaluate((element) => {
+                const styles = getComputedStyle(element);
+                return {
+                    backdropFilter: styles.backdropFilter,
+                    position: styles.position,
+                };
+            });
+            if (
+                scrolledHeader.position !== 'fixed' ||
+                scrolledHeader.backdropFilter === 'none'
+            )
+                throw new Error(
+                    `${viewport.name} ${route}: header does not use the fixed glass state after scrolling`,
                 );
             await page.close();
         }

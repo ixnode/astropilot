@@ -32,3 +32,22 @@ const isActive = (link: Link) => link.href === route;
         </nav>
     </div>
 </header>
+
+<script>
+    const scrollThreshold = 6;
+    const header = document.querySelector<HTMLElement>('.ap-header');
+
+    if (header) {
+        const updateHeaderState = () => {
+            header.classList.toggle(
+                'ap-header--scrolled',
+                window.scrollY >= scrollThreshold,
+            );
+        };
+
+        updateHeaderState();
+        window.addEventListener('scroll', updateHeaderState, {
+            passive: true,
+        });
+    }
+</script>

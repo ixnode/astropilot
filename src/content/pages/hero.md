@@ -5,5 +5,3 @@ tone: brand
 ---
 
 AstroPilot verbindet nachvollziehbar gepflegte Inhalte, ein gemeinsames Theme und wiederverwendbare Komponenten in einem schlanken Astro-Projekt.
-
-[Dokumentation lesen](/dokumentation/) · [Komponenten ansehen](/showcase/)

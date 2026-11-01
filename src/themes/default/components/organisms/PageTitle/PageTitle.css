@@ -1,6 +1,7 @@
 @layer components {
     .ap-page-title {
         @apply py-8;
+        padding-top: calc(var(--spacing-header-overlay) + 2rem);
 
         .ap-page-title__title {
             @apply max-w-3xl text-display font-bold tracking-tight;

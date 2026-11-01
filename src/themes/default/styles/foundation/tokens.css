@@ -8,6 +8,7 @@
     --spacing-gutter: clamp(1rem, 4vw, 2rem);
     --spacing-section: clamp(3.5rem, 7vw, 6rem);
     --spacing-section-hero: clamp(4.5rem, 9vw, 7.5rem);
+    --spacing-header-overlay: 10rem;
     --shadow-soft: 0 1px 2px rgb(23 32 51 / 8%), 0 8px 24px rgb(23 32 51 / 6%);
     --shadow-raised:
         0 8px 24px rgb(23 32 51 / 12%), 0 2px 6px rgb(23 32 51 / 8%);
@@ -18,4 +19,10 @@
     --text-heading-4: 1.25rem;
     --text-heading-5: 1.125rem;
     --text-heading-6: 1rem;
+}
+
+@media (min-width: 48rem) {
+    :root {
+        --spacing-header-overlay: 5.5rem;
+    }
 }

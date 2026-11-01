@@ -1,6 +1,10 @@
 @layer components {
     .ap-hero {
         @apply py-section-hero;
+        padding-top: max(
+            var(--spacing-section-hero),
+            calc(var(--spacing-header-overlay) + 2rem)
+        );
 
         .ap-hero__inner {
             .ap-hero__title {
