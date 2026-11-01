@@ -1,0 +1,38 @@
+---
+type AlertVariant = 'default' | 'info' | 'success' | 'warning' | 'error';
+type AlertStyle = 'normal' | 'soft' | 'outline' | 'dash';
+
+interface Props {
+    variant?: AlertVariant;
+    style?: AlertStyle;
+}
+
+const { variant = 'default', style = 'normal' } = Astro.props;
+const variantClasses: Record<AlertVariant, string> = {
+    default: '',
+    info: 'alert-info',
+    success: 'alert-success',
+    warning: 'alert-warning',
+    error: 'alert-error',
+};
+const styleClasses: Record<AlertStyle, string> = {
+    normal: '',
+    soft: 'alert-soft',
+    outline: 'alert-outline',
+    dash: 'alert-dash',
+};
+---
+
+<div
+    role="alert"
+    class:list={[
+        'ap-alert',
+        'alert',
+        variantClasses[variant],
+        styleClasses[style],
+    ]}
+>
+    <div class="ap-alert__content">
+        <slot />
+    </div>
+</div>

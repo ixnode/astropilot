@@ -26,6 +26,8 @@ const heroSchema = markdownSchema.extend({ title: z.string().trim().min(1) });
 const sectionPattern = /^\d{2,}-[a-z0-9][a-z0-9-]*\.(?:md|mdx)$/;
 const mdxComponentImport =
     /^import\s*\{\s*Column\s*,\s*Columns\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
+const alertComponentImport =
+    /^import\s*\{\s*Alert\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
 
 interface MdxNode {
     type: string;
@@ -79,16 +81,20 @@ function validateMdxLayout(
 ): void {
     let hasComponentImport = false;
     let columnsCount = 0;
+    let alertCount = 0;
     const validatedColumns = new Set<MdxNode>();
 
     visit(tree, (node) => {
         const mdxNode = node as MdxNode;
         if (mdxNode.type === 'mdxjsEsm') {
-            if (!mdxComponentImport.test(mdxNode.value?.trim() ?? ''))
+            if (
+                !mdxComponentImport.test(mdxNode.value?.trim() ?? '') &&
+                !alertComponentImport.test(mdxNode.value?.trim() ?? '')
+            )
                 fail(
                     contentRoot,
                     path,
-                    'MDX may only import Column and Columns from astropilot/components',
+                    'MDX may only import supported components from astropilot/components',
                 );
             hasComponentImport = true;
         }
@@ -157,6 +163,45 @@ function validateMdxLayout(
                         path,
                         'Column must be a direct child of Columns',
                     );
+            } else if (mdxNode.name === 'Alert') {
+                alertCount += 1;
+                const attributes = mdxNode.attributes ?? [];
+                const variant = attributes.find(
+                    (attribute) =>
+                        attribute.type === 'mdxJsxAttribute' &&
+                        attribute.name === 'variant',
+                );
+                const style = attributes.find(
+                    (attribute) =>
+                        attribute.type === 'mdxJsxAttribute' &&
+                        attribute.name === 'style',
+                );
+                const variantValue = variant?.value;
+                const styleValue = style?.value;
+                if (
+                    attributes.length > 2 ||
+                    attributes.some(
+                        (attribute) =>
+                            attribute.type !== 'mdxJsxAttribute' ||
+                            (attribute.name !== 'variant' &&
+                                attribute.name !== 'style'),
+                    ) ||
+                    (variantValue !== undefined &&
+                        variantValue !== 'info' &&
+                        variantValue !== 'success' &&
+                        variantValue !== 'warning' &&
+                        variantValue !== 'error') ||
+                    (styleValue !== undefined &&
+                        styleValue !== 'normal' &&
+                        styleValue !== 'soft' &&
+                        styleValue !== 'outline' &&
+                        styleValue !== 'dash')
+                )
+                    fail(
+                        contentRoot,
+                        path,
+                        'Alert accepts optional variant (info, success, warning, error) and style (normal, soft, outline, dash) props',
+                    );
             } else {
                 fail(
                     contentRoot,
@@ -167,11 +212,11 @@ function validateMdxLayout(
         }
     });
 
-    if (!hasComponentImport || columnsCount === 0)
+    if (!hasComponentImport || (columnsCount === 0 && alertCount === 0))
         fail(
             contentRoot,
             path,
-            'MDX section requires a Columns layout and its AstroPilot component import',
+            'MDX section requires a supported AstroPilot component and its import',
         );
 }
 

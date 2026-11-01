@@ -131,6 +131,16 @@ Die Datei heißt dann beispielsweise `01-einleitung.mdx`. Mobil stehen die Berei
 
 Übliche gleichmäßige Aufteilungen sind `12` (eine Spalte), `6 + 6` (zwei Spalten), `4 + 4 + 4` (drei Spalten) und `3 + 3 + 3 + 3` (vier Spalten). Asymmetrische Aufteilungen wie `8 + 4` oder `7 + 5` sind ebenso möglich. Neue Layout-Komponenten erfordern immer eine Astro-Komponente, einen dokumentierten Export und eine dokumentierte Verwendung.
 
+Die erste DaisyUI-Komponente ist `Alert`. Sie wird in einer MDX-Section importiert und akzeptiert optional `variant="info|success|warning|error"` sowie `style="normal|soft|outline|dash"`:
+
+```mdx
+import { Alert } from 'astropilot/components';
+
+<Alert variant="success" style="soft">
+    **Gespeichert:** Die Änderungen wurden übernommen.
+</Alert>
+```
+
 ## Struktur und Theme
 
 Die kleine, wiederverwendbare Inhalts- und URL-Logik liegt in `src/lib/astropilot/`. Sie kennt weder Demo-Texte noch Tailwind- oder DaisyUI-Klassen. Das Standard-Theme liegt in `src/themes/default/` und umfasst Layout, Header, Hero, Sections und Footer. DaisyUI wird dort tatsächlich für Navigation und Theme-Elemente genutzt.

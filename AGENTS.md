@@ -68,7 +68,8 @@ src/content/
     │   ├── 02-layout.mdx
     │   ├── 03-typografie.md
     │   ├── 04-navigation.md
-    │   └── 05-sections.md
+    │   ├── 05-sections.md
+    │   └── 06-alerts.mdx
     └── kontakt/
         ├── page.yaml
         └── 01-kontakt.md

@@ -1,0 +1,9 @@
+@layer components {
+    .ap-alert {
+        @apply my-4;
+    }
+
+    .ap-alert__content {
+        @apply min-w-0;
+    }
+}
