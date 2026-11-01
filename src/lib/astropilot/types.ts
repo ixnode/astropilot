@@ -11,6 +11,7 @@ export interface SiteConfig {
     url: string;
     base: string;
     language: string;
+    heroClasses: string[];
     header: { links: Link[] };
     footer: { text: string; links: Link[] };
 }

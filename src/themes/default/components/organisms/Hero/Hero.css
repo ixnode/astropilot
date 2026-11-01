@@ -18,7 +18,7 @@
     }
 
     .ap-hero--theme-1 {
-        @apply relative isolate overflow-hidden bg-primary;
+        @apply relative isolate overflow-hidden;
 
         background-image:
             radial-gradient(

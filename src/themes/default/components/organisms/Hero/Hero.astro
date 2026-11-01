@@ -1,23 +1,29 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { toneOf } from '../../../../../lib/astropilot/pages';
+import type { SiteConfig } from '../../../../../lib/astropilot/types';
 
 interface Props {
     hero: CollectionEntry<'documents'>;
+    site: SiteConfig;
     Content: Awaited<
         ReturnType<typeof import('astro:content').render>
     >['Content'];
 }
-const { hero, Content } = Astro.props;
+const { hero, site, Content } = Astro.props;
 const toneClass = {
     default: 'tone-default',
     muted: 'tone-muted',
     brand: 'tone-brand',
 }[toneOf(hero)];
+const heroClasses =
+    hero.data.classes === undefined
+        ? site.heroClasses
+        : (hero.data.classes ?? []);
 ---
 
 <section
-    class:list={[toneClass, 'ap-hero', ...(hero.data.classes ?? [])]}
+    class:list={[toneClass, 'ap-hero', ...heroClasses]}
     aria-labelledby="page-title"
 >
     <div class="ap-hero__inner site-shell">

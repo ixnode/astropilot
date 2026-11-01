@@ -8,6 +8,10 @@ const linkSchema = z.object({
     label: z.string().trim().min(1),
     href: z.string().trim().min(1),
 });
+const heroClass = z.string().regex(/^ap-[a-z0-9][a-z0-9_-]*$/, {
+    message:
+        'must start with ap- and contain only lowercase letters, digits, underscores, or hyphens',
+});
 
 const siteSchema = z.object({
     name: z.string().trim().min(1),
@@ -18,6 +22,7 @@ const siteSchema = z.object({
     language: z
         .string()
         .regex(/^[a-z]{2}(?:-[A-Z]{2})?$/, 'must be a BCP 47 language tag'),
+    'hero-classes': z.array(heroClass).max(8).default([]),
     header: z.object({ links: z.array(linkSchema).min(1) }),
     footer: z.object({
         text: z.string().trim().min(1),
@@ -34,12 +39,14 @@ export function loadSiteConfig(): SiteConfig {
             `Invalid src/content/site.yaml: ${parsed.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join('; ')}`,
         );
     }
+    const { 'hero-classes': heroClasses, ...site } = parsed.data;
+    const config: SiteConfig = { ...site, heroClasses };
     const environmentBase = process.env.ASTROPILOT_BASE;
-    if (environmentBase === undefined) return parsed.data;
+    if (environmentBase === undefined) return config;
     const base = siteSchema.shape.base.safeParse(environmentBase);
     if (!base.success)
         throw new Error(
             `Invalid ASTROPILOT_BASE: ${base.error.issues[0]?.message}`,
         );
-    return { ...parsed.data, base: base.data };
+    return { ...config, base: base.data };
 }

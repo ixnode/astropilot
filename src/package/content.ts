@@ -34,7 +34,7 @@ export function createAstroPilotCollections(
         schema: z.object({
             title: z.string().trim().min(1).optional(),
             eyebrow: z.string().trim().min(1).optional(),
-            classes: z.array(heroClass).max(8).default([]),
+            classes: z.array(heroClass).max(8).nullable().optional(),
             tone,
             fullWidth: z.boolean().default(false),
         }),

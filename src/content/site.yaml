@@ -2,6 +2,8 @@ name: AstroPilot
 url: https://example.com
 base: /
 language: de
+hero-classes:
+    - ap-hero--theme-1
 header:
     links:
         - label: Startseite

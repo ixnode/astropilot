@@ -40,7 +40,7 @@ const sections = await Promise.all(
     route={page.route}
 >
     {hero ? (
-        <Hero hero={page.hero!} Content={hero.Content} />
+        <Hero hero={page.hero!} site={site} Content={hero.Content} />
     ) : (
         <div class="site-shell py-section">
             <h1
