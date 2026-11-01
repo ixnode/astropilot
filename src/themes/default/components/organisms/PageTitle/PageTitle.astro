@@ -1,0 +1,15 @@
+---
+interface Props {
+    title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<section class="tone-brand ap-page-title" aria-labelledby="page-title">
+    <div class="ap-page-title__inner site-shell">
+        <h1 id="page-title" class="ap-page-title__title">
+            {title}
+        </h1>
+    </div>
+</section>

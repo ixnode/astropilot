@@ -1,0 +1,9 @@
+@layer components {
+    .ap-page-title {
+        @apply py-8;
+
+        .ap-page-title__title {
+            @apply max-w-3xl text-display font-bold tracking-tight;
+        }
+    }
+}

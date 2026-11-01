@@ -4,6 +4,7 @@ import { assemblePages, type AssembledPage } from '../lib/astropilot/pages';
 import { loadSiteConfig } from '../lib/astropilot/site-config';
 import PageLayout from '../themes/default/layouts/PageLayout/PageLayout.astro';
 import Hero from '../themes/default/components/organisms/Hero/Hero.astro';
+import PageTitle from '../themes/default/components/organisms/PageTitle/PageTitle.astro';
 import Section from '../themes/default/components/organisms/Section/Section.astro';
 
 export async function getAstroPilotStaticPaths() {
@@ -42,14 +43,7 @@ const sections = await Promise.all(
     {hero ? (
         <Hero hero={page.hero!} site={site} Content={hero.Content} />
     ) : (
-        <div class="site-shell py-section">
-            <h1
-                id="page-title"
-                class="max-w-3xl text-display font-bold tracking-tight"
-            >
-                {page.entry.data.title}
-            </h1>
-        </div>
+        <PageTitle title={page.entry.data.title} />
     )}
     {sections.map(({ section, rendered }) => (
         <Section section={section} Content={rendered.Content} />
