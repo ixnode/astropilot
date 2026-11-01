@@ -46,7 +46,7 @@ src/content/
 └── pages/
     ├── page.yaml
     ├── hero.md
-    ├── 01-section.einleitung.md
+    ├── 01-section.einleitung.mdoc # Markdoc-Layout-Section
     ├── 02-section.vorteile.md
     ├── 03-section.weiterlesen.md
     ├── faq/
@@ -105,7 +105,7 @@ description: Eine aussagekräftige Beschreibung dieser Beispielseite.
 - Jeder Ordner mit `page.yaml` definiert eine Seite; Ordner ohne diese Datei dürfen als reine Gruppierung für tiefere Seiten dienen.
 - Der relative Ordnerpfad bestimmt die URL: Wurzel → `/`, `faq/` → `/faq/`, `leistungen/monitoring/` → `/leistungen/monitoring/`.
 - Keine zusätzlichen Slug-Overrides oder Übersetzungssysteme in dieser Phase.
-- Gleiche sichtbare Hauptüberschrift auf Basis von `title`, unabhängig davon, ob ein Hero existiert.
+- Bei Seiten ohne Hero ist `title` zugleich die sichtbare Hauptüberschrift.
 
 ### Optionaler Hero: `hero.md`
 
@@ -127,7 +127,7 @@ Eine kurze Einführung in die Inhalte dieser Seite.
 - Ohne Hero rendert das Layout `page.yaml.title` als schlichte sichtbare `h1` vor den Sections. Dies ist der einzige vorgesehene sichtbare Fallback für Seiten ohne Hero.
 - Hauptseite, FAQ und Info nutzen dieselbe Hero-Komponente mit jeweils eigenen Inhalten. Keine drei kopierten Implementierungen.
 
-### Sections: `NN-section.name.md`
+### Sections: `NN-section.name.md` und `NN-section.name.mdoc`
 
 ```md
 ---
@@ -142,12 +142,18 @@ Hier steht normaler Markdown-Inhalt.
 ```
 
 - Nur direkt im Seitenordner liegende Dateien gehören zur jeweiligen Seite; keine Vermischung mit Unterseiten.
-- Numerische Präfixe mit mindestens zwei Ziffern sowie das verbindliche Literal `section.`; numerisch sortieren. Doppelte Nummern sind Fehler. Lücken sind erlaubt.
+- Numerische Präfixe mit mindestens zwei Ziffern sowie das verbindliche Literal `section.`; numerisch sortieren. Doppelte Nummern sind Fehler. Lücken sind erlaubt. Normale Sections verwenden `.md`; eine `.mdoc`-Datei ist ausschließlich für dokumentierte Markdoc-Layout-Tags zulässig.
 - `tone`: ausschließlich `default`, `muted`, `brand`; fehlender Wert bedeutet `default`.
 - Eine Datei wird als ein semantischer Inhaltsabschnitt dargestellt. Sie beginnt inhaltlich mit einer sinnvollen `h2`; weitere Ebenen müssen logisch folgen. Keine `h1` im Hero- oder Section-Markdown.
-- Keine eigene Section-Direktive, keine Steuerkommentare, kein MDX, keine CSS-Klassen oder Inline-Styles in Content-Dateien.
+- Keine eigene Section-Direktive, keine Steuerkommentare, kein MDX, keine CSS-Klassen oder Inline-Styles in Content-Dateien. Markdoc-Tags sind nur in `.mdoc`-Sections erlaubt und müssen aus dem dokumentierten, validierten AstroPilot-Tag-Katalog stammen.
 - Für das MVP unterstützt der Content-Vertrag normales Markdown ohne rohes HTML oder ausführbaren Code. Unzulässige Konstrukte über den vorhandenen Markdown-AST prüfen, nicht per Regex-Parser nachbauen. Fenced Code-Blöcke bleiben normale Inhalte.
 - IDs für Überschriften müssen innerhalb der zusammengesetzten Seite eindeutig sein, auch bei gleichen Überschriften in verschiedenen Dateien. Nutze eine kleine deterministische Strategie und dokumentiere Sprunglinks.
+
+### Markdoc-Layout-Tags
+
+- Installiere bei Markdoc-Nutzung im Verbraucherprojekt `@astrojs/markdoc` als direkte Abhängigkeit. Aktiviere Markdoc über `markdoc.config.ts` mit `createAstroPilotMarkdocConfig()` aus `astropilot/markdoc`; die AstroPilot-Konfiguration bindet die offizielle Markdoc-Integration ein.
+- Der erste Standardbaustein ist ein 12-Spalten-Layout: `{% columns %}` enthält genau die gewünschten `{% column span=8 %}`- und `{% column span=4 %}`-Bereiche. Es rendert mobil untereinander und ab Desktop nebeneinander.
+- Neue Tags sind Entwicklerarbeit: Sie benötigen eine geprüfte Astro-Komponente, eine typisierte Markdoc-Konfiguration und Dokumentation. Entwickle keine unbeschränkte Layoutsprache.
 
 ## Validierung, Routing und Entwicklung
 

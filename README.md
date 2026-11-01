@@ -87,7 +87,7 @@ npm run build:demo  # prüft den Build einmalig mit Base /demo/
 pages/
 ├── page.yaml            # Startseite
 ├── hero.md              # optional
-├── 01-section.einleitung.md  # Abschnitte, numerisch sortiert
+├── 01-section.einleitung.md  # Normale Markdown-Abschnitte, numerisch sortiert
 └── faq/
     ├── page.yaml
     └── 01-section.fragen.md
@@ -96,6 +96,42 @@ pages/
 `page.yaml` benötigt einen nicht leeren `title` und eine `description`. Beide Werte gehören zu den HTML-Metadaten: `title` wird im `<title>`-Tag, `description` als Meta-Description verwendet. Sein Ordner wird direkt zur URL: `faq/page.yaml` wird `/faq/`; eine tiefere `leistungen/monitoring/page.yaml` wird `/leistungen/monitoring/`.
 
 Ein `hero.md` aktiviert den gemeinsamen Hero und benötigt einen `title` im Frontmatter; dieser wird als sichtbare `h1` verwendet. Löschen Sie die Datei, um stattdessen `page.yaml.title` als schlichte sichtbare `h1` oberhalb der Sections zu verwenden. Sections heißen verbindlich `NN-section.name.md`, beginnen mit einer `h2` und können `tone: default`, `muted` oder `brand` im Frontmatter setzen. Interne Links bleiben immer website-root-relativ, etwa `/faq/`; AstroPilot wendet `base` einmalig an. Überschrift-IDs werden aus Dateiname und Überschrift gebildet, etwa `01-section.einleitung-inhalte-die-im-projekt-bleiben`, damit Sprunglinks über zusammengesetzte Markdown-Dateien eindeutig sind.
+
+Für geprüfte Layout-Bausteine unterstützt AstroPilot zusätzlich Markdoc-Sections mit der Endung `.mdoc`. Installieren Sie dafür im Verbraucherprojekt die direkte Peer-Abhängigkeit und legen Sie im Projektstamm eine `markdoc.config.ts` an:
+
+```bash
+npm install @astrojs/markdoc
+```
+
+```ts
+import { createAstroPilotMarkdocConfig } from 'astropilot/markdoc';
+
+export default createAstroPilotMarkdocConfig();
+```
+
+Der erste Standardtag ist ein responsives 8/4-Layout:
+
+```md
+{% columns %}
+
+{% column span=8 %}
+
+## Hauptinhalt
+
+Dieser Bereich nimmt acht von zwölf Spalten ein.
+
+{% /column %}
+
+{% column span=4 %}
+
+Dieser Bereich ergänzt den Hauptinhalt auf vier Spalten.
+
+{% /column %}
+
+{% /columns %}
+```
+
+Die Datei heißt dann beispielsweise `01-section.einleitung.mdoc`. Mobil stehen die Bereiche untereinander; ab Desktop werden sie nebeneinander gerendert. Neue Markdoc-Tags erfordern immer eine Astro-Komponente, eine validierte Konfiguration und eine Dokumentation.
 
 ## Struktur und Theme
 

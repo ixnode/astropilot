@@ -1,0 +1,5 @@
+@layer components {
+  .ap-columns {
+    @apply grid grid-cols-1 gap-8 lg:grid-cols-12;
+  }
+}

@@ -26,6 +26,8 @@
 @import "../components/Footer/Footer.css";
 @import "../components/Hero/Hero.css";
 @import "../components/Section/Section.css";
+@import "../components/Columns/Columns.css";
+@import "../components/Column/Column.css";
 @import "../layouts/PageLayout/PageLayout.css";
 
 @plugin "daisyui" {

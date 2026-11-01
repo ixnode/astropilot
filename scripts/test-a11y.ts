@@ -1,31 +1,53 @@
-import { spawn } from 'node:child_process';
-import { createServer } from 'node:net';
+import { readFile } from 'node:fs/promises';
+import { createServer } from 'node:http';
+import { extname, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
 import AxeBuilder from '@axe-core/playwright';
 
-async function findFreePort(): Promise<number> {
-  const probe = createServer();
-  let port: number | undefined;
-  await new Promise<void>((resolve, reject) => {
-    probe.once('error', reject);
-    probe.listen(0, '127.0.0.1', () => {
-      const address = probe.address();
-      if (!address || typeof address === 'string') {
-        reject(new Error('Could not determine a free local port'));
-        return;
-      }
-      port = address.port;
-      probe.close((error) => error ? reject(error) : resolve());
-    });
-  });
-  if (port === undefined) throw new Error('Could not determine a free local port');
-  return port;
+const distDirectory = fileURLToPath(new URL('../dist/', import.meta.url));
+const contentTypes: Record<string, string> = {
+  '.css': 'text/css; charset=utf-8',
+  '.html': 'text/html; charset=utf-8',
+  '.js': 'text/javascript; charset=utf-8',
+  '.json': 'application/json; charset=utf-8',
+  '.svg': 'image/svg+xml',
+  '.xml': 'application/xml; charset=utf-8',
+};
+
+function outputPath(pathname: string): string | undefined {
+  const file = pathname.endsWith('/') ? `${pathname}index.html` : pathname;
+  const resolved = resolve(distDirectory, `.${decodeURIComponent(file)}`);
+  const pathFromDist = relative(distDirectory, resolved);
+  return pathFromDist.startsWith('..') || pathFromDist === '' ? undefined : resolved;
 }
 
-const port = await findFreePort();
-const astroCli = fileURLToPath(new URL('../node_modules/astro/bin/astro.mjs', import.meta.url));
-const astroServer = spawn(process.execPath, [astroCli, 'preview', '--host', '127.0.0.1', '--port', String(port)], { stdio: 'ignore' });
+const previewServer = createServer(async (request, response) => {
+  try {
+    const pathname = new URL(request.url ?? '/', 'http://127.0.0.1').pathname;
+    const file = outputPath(pathname);
+    if (!file) {
+      response.writeHead(404).end();
+      return;
+    }
+    const body = await readFile(file);
+    response.writeHead(200, { 'content-type': contentTypes[extname(file)] ?? 'application/octet-stream' }).end(body);
+  } catch {
+    response.writeHead(404).end();
+  }
+});
+
+const port = await new Promise<number>((resolvePort, reject) => {
+  previewServer.once('error', reject);
+  previewServer.listen(0, '127.0.0.1', () => {
+    const address = previewServer.address();
+    if (!address || typeof address === 'string') {
+      reject(new Error('Could not determine the local preview port'));
+      return;
+    }
+    resolvePort(address.port);
+  });
+});
 const baseUrl = `http://127.0.0.1:${port}`;
 
 async function waitForServer(): Promise<void> {
@@ -33,7 +55,7 @@ async function waitForServer(): Promise<void> {
     try { if ((await fetch(baseUrl)).ok) return; } catch { /* server is starting */ }
     await new Promise((resolve) => setTimeout(resolve, 250));
   }
-  throw new Error('Astro preview server did not start');
+  throw new Error('Static preview server did not start');
 }
 
 try {
@@ -57,5 +79,7 @@ try {
   await browser.close();
   console.log('Axe, keyboard-focus, and viewport-overflow checks passed for four routes on mobile and desktop.');
 } finally {
-  astroServer.kill('SIGTERM');
+  await new Promise<void>((resolveClose, reject) => {
+    previewServer.close((error) => error ? reject(error) : resolveClose());
+  });
 }

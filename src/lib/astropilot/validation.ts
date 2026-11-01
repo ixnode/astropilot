@@ -12,7 +12,7 @@ import { routeFromPageId } from './urls';
 const pageSchema = z.object({ title: z.string().trim().min(1), description: z.string().trim().min(1) });
 const markdownSchema = z.object({ tone: z.enum(tones).optional(), eyebrow: z.string().trim().min(1).optional() }).strict();
 const heroSchema = markdownSchema.extend({ title: z.string().trim().min(1) });
-const sectionPattern = /^\d{2,}-section\.[a-z0-9][a-z0-9-]*\.md$/;
+const sectionPattern = /^\d{2,}-section\.[a-z0-9][a-z0-9-]*\.(?:md|mdoc)$/;
 
 function filesIn(directory: string): string[] {
   return readdirSync(directory).flatMap((name) => {
