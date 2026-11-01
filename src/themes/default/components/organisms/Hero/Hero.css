@@ -3,7 +3,7 @@
         @apply py-section-hero;
         padding-top: max(
             var(--spacing-section-hero),
-            calc(var(--spacing-header-overlay) + 2rem)
+            calc(var(--spacing-header-overlay) + 4rem)
         );
         padding-bottom: var(--spacing-section-hero-bottom);
 
