@@ -1,14 +1,18 @@
 ---
 interface Props {
     title: string;
+    classes: string[];
 }
 
-const { title } = Astro.props;
+const { title, classes } = Astro.props;
 ---
 
-<section class="tone-brand ap-page-title" aria-labelledby="page-title">
-    <div class="ap-page-title__inner site-shell">
-        <h1 id="page-title" class="ap-page-title__title">
+<section
+    class:list={['tone-brand', 'ap-hero', 'ap-page-title', ...classes]}
+    aria-labelledby="page-title"
+>
+    <div class="ap-hero__inner ap-page-title__inner site-shell">
+        <h1 id="page-title" class="ap-hero__title ap-page-title__title">
             {title}
         </h1>
     </div>

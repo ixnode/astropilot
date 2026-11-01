@@ -5,5 +5,3 @@ tone: brand
 ---
 
 Hier finden Sie die wichtigsten Hinweise zur Arbeit mit statischen Seiten, Markdown-Inhalten und wiederverwendbaren Komponenten.
-
-[Mehr über die Projektstruktur](/info/)

@@ -5,6 +5,7 @@
             var(--spacing-section-hero),
             calc(var(--spacing-header-overlay) + 2rem)
         );
+        padding-bottom: var(--spacing-section-hero-bottom);
 
         .ap-hero__inner {
             .ap-hero__title {

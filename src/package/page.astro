@@ -43,7 +43,7 @@ const sections = await Promise.all(
     {hero ? (
         <Hero hero={page.hero!} site={site} Content={hero.Content} />
     ) : (
-        <PageTitle title={page.entry.data.title} />
+        <PageTitle title={page.entry.data.title} classes={site.heroClasses} />
     )}
     {sections.map(({ section, rendered }) => (
         <Section section={section} Content={rendered.Content} />

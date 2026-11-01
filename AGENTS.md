@@ -128,7 +128,7 @@ footer:
           href: /kontakt/
 ```
 
-Website-Name, Sprache, Produktions-URL, Basispfad, globale `hero-classes`, Navigation und Footer werden hier gepflegt. `hero-classes` ist optional, enthält höchstens acht Theme-Klassen mit `ap-`-Präfix und gilt für jeden Hero; `classes` in einer einzelnen `hero.md` überschreibt diesen Wert vollständig. Verwende dieselben validierten Werte für Astro-Konfiguration, Links, Canonicals und Sitemap; keine doppelte Konfiguration. Astro-Konfiguration darf keine nur innerhalb der Astro-Laufzeit verfügbaren Content-APIs importieren. Verwende für die gemeinsam benötigte Singleton-Konfiguration eine kleine Node-kompatible Ladefunktion.
+Website-Name, Sprache, Produktions-URL, Basispfad, globale `hero-classes`, Navigation und Footer werden hier gepflegt. `hero-classes` ist optional, enthält höchstens acht Theme-Klassen mit `ap-`-Präfix und gilt für jeden Hero sowie für die H1-Fallback-Ansicht ohne `hero.md`; `classes` in einer einzelnen `hero.md` überschreibt diesen Wert vollständig. Verwende dieselben validierten Werte für Astro-Konfiguration, Links, Canonicals und Sitemap; keine doppelte Konfiguration. Astro-Konfiguration darf keine nur innerhalb der Astro-Laufzeit verfügbaren Content-APIs importieren. Verwende für die gemeinsam benötigte Singleton-Konfiguration eine kleine Node-kompatible Ladefunktion.
 
 `example.com` ist ein dokumentierter Platzhalter. Dokumentiere dessen Austausch vor einer echten Veröffentlichung. Externe Schriftarten, Tracking oder Dienste sind für die Demo nicht nötig.
 
@@ -165,7 +165,7 @@ Eine kurze Einführung in die Inhalte dieser Seite.
 - `title` ist ein nicht leerer Pflichtwert und wird als sichtbare `h1` gerendert; `eyebrow` ist optional; `tone` hat einen dokumentierten Standard.
 - `classes` ist optional und enthält höchstens acht zusätzliche Theme-Klassen für das äußere Hero-`section`-Element. Jede Klasse beginnt mit `ap-` und darf nur Kleinbuchstaben, Ziffern, `_` und `-` enthalten, etwa `ap-hero--visual`. Wenn `classes` als Liste angegeben ist, überschreibt sie die globalen `hero-classes` aus `site.yaml` vollständig. Mit `classes: null` werden globale Klassen bewusst entfernt; fehlt das Feld, gelten die globalen Klassen. Damit können Theme-Entwickler Hintergrundfarben, Bilder oder Strukturen ergänzen, ohne den Hero zu kopieren. Diese Klassen sind nur für `hero.md` vorgesehen, nicht für Sections.
 - Die gemeinsame Hero-Komponente rendert Titel und Markdown-Inhalt vollständig aus `hero.md`.
-- Ohne Hero rendert das Layout `page.yaml.title` als schlichte sichtbare `h1` vor den Sections. Dies ist der einzige vorgesehene sichtbare Fallback für Seiten ohne Hero.
+- Ohne Hero rendert das Layout `page.yaml.title` als kompakte sichtbare H1-Fallback-Ansicht vor den Sections. Sie erhält die globalen `hero-classes` aus `site.yaml`; ohne `hero.md` gibt es keine lokale Überschreibung. Dies ist der einzige vorgesehene sichtbare Fallback für Seiten ohne Hero.
 - Hauptseite, FAQ und Info nutzen dieselbe Hero-Komponente mit jeweils eigenen Inhalten. Keine drei kopierten Implementierungen.
 
 ### Sections: `NN-name.md` und `NN-name.mdx`
