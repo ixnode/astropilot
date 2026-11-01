@@ -12,6 +12,49 @@ test('derives normalized routes from page metadata paths', () => {
         '/leistungen/monitoring/',
     );
 });
+
+test('uses optional page URL segments while preserving parent URL segments', () => {
+    const urlSegments = new Map([
+        ['documentation', 'dokumentation'],
+        ['documentation/getting-started', 'einstieg'],
+    ]);
+
+    assert.equal(
+        routeFromPageId(
+            'documentation/getting-started/page.yaml',
+            (directory) => urlSegments.get(directory),
+        ),
+        '/dokumentation/einstieg/',
+    );
+});
+
+test('assembles page routes from inherited URL segments', () => {
+    const pages = [
+        {
+            id: 'documentation/page',
+            data: {
+                title: 'Dokumentation',
+                description: 'Die Dokumentation.',
+                url: 'dokumentation',
+            },
+        },
+        {
+            id: 'documentation/getting-started/page',
+            data: {
+                title: 'Einstieg',
+                description: 'Der Einstieg.',
+                url: 'einstieg',
+            },
+        },
+    ] as CollectionEntry<'pages'>[];
+
+    const pagesWithRoutes = assemblePages(pages, []);
+
+    assert.deepEqual(
+        pagesWithRoutes.map((page) => page.route),
+        ['/dokumentation/', '/dokumentation/einstieg/'],
+    );
+});
 test('applies a deployment base exactly once to root-relative URLs', () => {
     assert.equal(withBase('/faq/', '/demo/'), '/demo/faq/');
     assert.equal(withBase('/', '/demo/'), '/demo/');
@@ -29,9 +72,9 @@ test('recognizes generated section IDs and sorts them numerically', () => {
         },
     ] as CollectionEntry<'pages'>[];
     const documents = [
-        { id: '02-vorteile', data: { tone: 'muted' } },
+        { id: '02-benefits', data: { tone: 'muted' } },
         { id: 'hero', data: { title: 'Willkommen', tone: 'brand' } },
-        { id: '01-einleitung', data: { tone: 'default' } },
+        { id: '01-introduction', data: { tone: 'default' } },
     ] as CollectionEntry<'documents'>[];
 
     const [page] = assemblePages(pages, documents);
@@ -39,6 +82,6 @@ test('recognizes generated section IDs and sorts them numerically', () => {
     assert.equal(page.hero?.id, 'hero');
     assert.deepEqual(
         page.sections.map((section) => section.id),
-        ['01-einleitung', '02-vorteile'],
+        ['01-introduction', '02-benefits'],
     );
 });

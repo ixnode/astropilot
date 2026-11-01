@@ -1,18 +1,35 @@
 import type { SiteConfig } from './types';
 
-export function routeFromPageId(id: string): string {
+export function pageDirectoryFromId(id: string): string {
     const directory = id
         .replace(/(?:^|\/)page(?:\.ya?ml)?$/, '')
         .replace(/^\/+|\/+$/g, '');
-    if (directory === '') return '/';
     if (
+        directory !== '' &&
         directory
             .split('/')
             .some((part) => part === '.' || part === '..' || part === '')
     ) {
         throw new Error(`Unsafe page identifier: ${id}`);
     }
-    return `/${directory}/`;
+    return directory;
+}
+
+export function routeFromPageId(
+    id: string,
+    urlSegmentForDirectory?: (directory: string) => string | undefined,
+): string {
+    const directory = pageDirectoryFromId(id);
+    if (directory === '') return '/';
+    const segments = directory
+        .split('/')
+        .map(
+            (segment, index, allSegments) =>
+                urlSegmentForDirectory?.(
+                    allSegments.slice(0, index + 1).join('/'),
+                ) ?? segment,
+        );
+    return `/${segments.join('/')}/`;
 }
 
 export function withBase(pathname: string, base: string): string {

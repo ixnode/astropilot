@@ -49,23 +49,23 @@ src/content/
 └── pages/
     ├── page.yaml
     ├── hero.md
-    ├── 01-einleitung.mdx # MDX-Layout-Section
-    ├── 02-vorteile.md
-    ├── 03-weiterlesen.md
+    ├── 01-introduction.mdx # MDX-Layout-Section
+    ├── 02-benefits.md
+    ├── 03-further-reading.md
     ├── faq/
     │   ├── page.yaml
     │   ├── hero.md
-    │   ├── 01-allgemeine-fragen.md
-    │   └── 02-inhalte-pflegen.md
+    │   ├── 01-general-questions.md
+    │   └── 02-content-management.md
     ├── info/
     │   ├── page.yaml
     │   ├── hero.md
-    │   ├── 01-ueber-astropilot.md
-    │   └── 02-arbeitsweise.md
+    │   ├── 01-about-astropilot.md
+    │   └── 02-workflow.md
     ├── showcase/
     │   ├── page.yaml
     │   ├── hero.md
-    │   ├── 01-bereiche.mdx
+    │   ├── 01-areas.mdx
     │   ├── _assets/
     │       ├── layout-landscape.png
     │       └── layout-portrait.png
@@ -75,25 +75,25 @@ src/content/
     │   ├── layout/
     │   │   ├── page.yaml
     │   │   └── 01-layout.mdx
-    │   ├── typografie/
+    │   ├── typography/
     │   ├── navigation/
     │   ├── sections/
     │   ├── alerts/
     │   ├── images/
     │   └── cards/
-    ├── dokumentation/
+    ├── documentation/
     │   ├── page.yaml
     │   ├── hero.md
-    │   ├── 01-uebersicht.mdx
-    │   ├── einstieg/
-    │   ├── inhalte/
+    │   ├── 01-overview.mdx
+    │   ├── getting-started/
+    │   ├── content/
     │   ├── layout/
     │   ├── theme/
-    │   ├── pruefen/
-    │   └── paket/
-    └── kontakt/
+    │   ├── checks/
+    │   └── package/
+    └── contact/
         ├── page.yaml
-        └── 01-kontakt.md
+        └── 01-contact.md
 ```
 
 ### Globale Konfiguration: `site.yaml`
@@ -137,12 +137,13 @@ Website-Name, Sprache, Produktions-URL, Basispfad, globale `hero-classes`, Navig
 ```yaml
 title: Energie verstehen und gezielt optimieren
 description: Eine aussagekräftige Beschreibung dieser Beispielseite.
+url: energie
 ```
 
-- `title` und `description` sind nicht leere Pflichtfelder und werden für HTML-Metadaten verwendet: `title` für den `<title>`-Tag, `description` für die Meta-Description.
+- `title` und `description` sind nicht leere Pflichtfelder und werden für HTML-Metadaten verwendet: `title` für den `<title>`-Tag, `description` für die Meta-Description. `url` ist optional und enthält genau ein URL-Segment mit Kleinbuchstaben, Ziffern und Bindestrichen.
 - Jeder Ordner mit `page.yaml` definiert eine Seite; Ordner ohne diese Datei dürfen als reine Gruppierung für tiefere Seiten dienen. Ordner, deren Name mit `_` beginnt, sind reservierte Unterstützungsordner (etwa `_assets/`), dürfen kein `page.yaml` enthalten und erzeugen niemals eine Seite.
-- Der relative Ordnerpfad bestimmt die URL: Wurzel → `/`, `faq/` → `/faq/`, `leistungen/monitoring/` → `/leistungen/monitoring/`.
-- Keine zusätzlichen Slug-Overrides oder Übersetzungssysteme in dieser Phase.
+- Ohne `url` bestimmt der relative Ordnerpfad die URL: Wurzel → `/`, `faq/` → `/faq/`, `services/monitoring/` → `/services/monitoring/`. Ein `url`-Wert ersetzt ausschließlich das Segment seines Ordners; bei Unterseiten werden auch die `url`-Werte vorhandener Elternseiten verwendet. So erzeugen `documentation/page.yaml` mit `url: dokumentation` und `documentation/getting-started/page.yaml` mit `url: einstieg` weiterhin `/dokumentation/einstieg/`.
+- Keine zusätzlichen Slug-Overrides oder Übersetzungssysteme über diesen einzelnen, expliziten URL-Segmentwert hinaus in dieser Phase.
 - Bei Seiten ohne Hero ist `title` zugleich die sichtbare Hauptüberschrift.
 
 ### Optionaler Hero: `hero.md`

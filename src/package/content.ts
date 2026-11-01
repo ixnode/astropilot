@@ -22,6 +22,14 @@ export function createAstroPilotCollections(
         schema: z.object({
             title: z.string().trim().min(1),
             description: z.string().trim().min(1),
+            url: z
+                .string()
+                .trim()
+                .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, {
+                    message:
+                        'URL segments must use lowercase letters, digits, and hyphens',
+                })
+                .optional(),
         }),
     });
 

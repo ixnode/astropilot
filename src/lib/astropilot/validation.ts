@@ -15,6 +15,13 @@ import { routeFromPageId } from './urls';
 const pageSchema = z.object({
     title: z.string().trim().min(1),
     description: z.string().trim().min(1),
+    url: z
+        .string()
+        .trim()
+        .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, {
+            message: 'must use lowercase letters, digits, and hyphens',
+        })
+        .optional(),
 });
 const markdownSchema = z
     .object({
@@ -432,6 +439,7 @@ export function validateAstroPilotContent(
     const pageDirectories = new Set(
         pageFiles.map((path) => contentDirectory(contentRoot, path)),
     );
+    const pageDataByDirectory = new Map<string, z.infer<typeof pageSchema>>();
     const routes = new Set<string>();
     const headingsByRoute = new Map<string, Set<string>>();
 
@@ -452,9 +460,18 @@ export function validateAstroPilotContent(
                 pagePath,
                 `invalid page metadata: ${parsed.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join('; ')}`,
             );
-        const route = routeFromPageId(
+        pageDataByDirectory.set(directory, parsed.data);
+    }
+
+    const routeForDirectory = (directory: string): string =>
+        routeFromPageId(
             `${directory === '' ? '' : `${directory}/`}page.yaml`,
+            (path) => pageDataByDirectory.get(path)?.url,
         );
+
+    for (const pagePath of pageFiles) {
+        const directory = contentDirectory(contentRoot, pagePath);
+        const route = routeForDirectory(directory);
         if (routes.has(route))
             fail(contentRoot, pagePath, `URL collision at ${route}`);
         routes.add(route);
@@ -489,7 +506,7 @@ export function validateAstroPilotContent(
                 `invalid frontmatter: ${metadata.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join('; ')}`,
             );
         if (path.endsWith('.mdx')) validateMdxLayout(contentRoot, path, tree);
-        const route = directory === '' ? '/' : `/${directory}/`;
+        const route = routeForDirectory(directory);
         const seen = headingsByRoute.get(route)!;
         const headingSlugger = new GithubSlugger();
         let firstHeading: number | undefined;

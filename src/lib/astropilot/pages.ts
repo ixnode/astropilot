@@ -1,5 +1,5 @@
 import type { CollectionEntry } from 'astro:content';
-import { routeFromPageId } from './urls';
+import { pageDirectoryFromId, routeFromPageId } from './urls';
 import type { Tone } from './types';
 
 type PageEntry = CollectionEntry<'pages'>;
@@ -18,8 +18,14 @@ export function assemblePages(
     pageEntries: PageEntry[],
     documentEntries: DocumentEntry[],
 ): AssembledPage[] {
+    const pageUrlByDirectory = new Map(
+        pageEntries.map((entry) => [
+            pageDirectoryFromId(entry.id),
+            entry.data.url,
+        ]),
+    );
     const pages = pageEntries.map((entry) => {
-        const directory = entry.id.replace(/(?:^|\/)page(?:\.ya?ml)?$/, '');
+        const directory = pageDirectoryFromId(entry.id);
         const prefix = directory === '' ? '' : `${directory}/`;
         const ownDocuments = documentEntries.filter(
             (document) =>
@@ -36,7 +42,14 @@ export function assemblePages(
                     Number(sectionName.exec(left.id)?.[1]) -
                     Number(sectionName.exec(right.id)?.[1]),
             );
-        return { entry, route: routeFromPageId(entry.id), hero, sections };
+        return {
+            entry,
+            route: routeFromPageId(entry.id, (path) =>
+                pageUrlByDirectory.get(path),
+            ),
+            hero,
+            sections,
+        };
     });
     return pages.sort((left, right) => left.route.localeCompare(right.route));
 }

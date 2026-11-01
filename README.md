@@ -92,15 +92,15 @@ npm run build:demo  # prüft den Build einmalig mit Base /demo/
 pages/
 ├── page.yaml            # Startseite
 ├── hero.md              # optional
-├── 01-einleitung.md  # Normale Markdown-Abschnitte, numerisch sortiert
+├── 01-introduction.md  # Normale Markdown-Abschnitte, numerisch sortiert
 └── faq/
     ├── page.yaml
-    └── 01-fragen.md
+    └── 01-questions.md
 ```
 
-`page.yaml` benötigt einen nicht leeren `title` und eine `description`. Beide Werte gehören zu den HTML-Metadaten: `title` wird im `<title>`-Tag, `description` als Meta-Description verwendet. Sein Ordner wird direkt zur URL: `faq/page.yaml` wird `/faq/`; eine tiefere `leistungen/monitoring/page.yaml` wird `/leistungen/monitoring/`.
+`page.yaml` benötigt einen nicht leeren `title` und eine `description`. Beide Werte gehören zu den HTML-Metadaten: `title` wird im `<title>`-Tag, `description` als Meta-Description verwendet. Ohne `url` wird sein Ordner direkt zur URL: `faq/page.yaml` wird `/faq/`; eine tiefere `services/monitoring/page.yaml` wird `/services/monitoring/`. Mit dem optionalen einzelnen URL-Segment `url` kann ein englischer Quellpfad eine lokalisierte öffentliche URL behalten: `documentation/page.yaml` mit `url: dokumentation` erzeugt `/dokumentation/`. Für Unterseiten werden URL-Segmente ihrer Elternseiten ebenfalls berücksichtigt.
 
-Ein `hero.md` aktiviert den gemeinsamen Hero und benötigt einen `title` im Frontmatter; dieser wird als sichtbare `h1` verwendet. `hero-classes` in `site.yaml` kann optional höchstens acht Theme-Klassen für jeden Hero und die H1-Fallback-Ansicht ohne `hero.md` setzen. Mit `classes` als Liste in einer einzelnen `hero.md` wird diese globale Liste vollständig überschrieben; `classes: null` entfernt globale Klassen für genau diesen Hero. Die Klassen müssen mit `ap-` beginnen, zum Beispiel `ap-hero--visual`; damit kann ein Theme Hero-Hintergründe, Bilder oder Strukturen ergänzen. Fehlen beide Angaben, erhält der Hero keine zusätzliche Theme-Klasse. Löschen Sie die Datei, um stattdessen `page.yaml.title` als kompakte sichtbare H1-Fallback-Ansicht oberhalb der Sections zu verwenden; sie übernimmt weiterhin globale `hero-classes`. Sections heißen verbindlich `NN-name.md`, beginnen mit einer `h2` und können `tone: default`, `muted` oder `brand` im Frontmatter setzen. Standardmäßig begrenzt `ap-section__content` den Inhalt auf eine gut lesbare Breite. Mit `fullWidth: true` im Section-Frontmatter entfällt diese innere Begrenzung; die gemeinsame äußere `site-shell` und die Markdown-Typografie bleiben aktiv. Interne Links bleiben immer website-root-relativ, etwa `/faq/`; AstroPilot wendet `base` einmalig an. Überschrift-IDs werden aus Dateiname und Überschrift gebildet, etwa `01-einleitung-inhalte-direkt-im-projekt-pflegen`, damit Sprunglinks über zusammengesetzte Markdown-Dateien eindeutig sind.
+Ein `hero.md` aktiviert den gemeinsamen Hero und benötigt einen `title` im Frontmatter; dieser wird als sichtbare `h1` verwendet. `hero-classes` in `site.yaml` kann optional höchstens acht Theme-Klassen für jeden Hero und die H1-Fallback-Ansicht ohne `hero.md` setzen. Mit `classes` als Liste in einer einzelnen `hero.md` wird diese globale Liste vollständig überschrieben; `classes: null` entfernt globale Klassen für genau diesen Hero. Die Klassen müssen mit `ap-` beginnen, zum Beispiel `ap-hero--visual`; damit kann ein Theme Hero-Hintergründe, Bilder oder Strukturen ergänzen. Fehlen beide Angaben, erhält der Hero keine zusätzliche Theme-Klasse. Löschen Sie die Datei, um stattdessen `page.yaml.title` als kompakte sichtbare H1-Fallback-Ansicht oberhalb der Sections zu verwenden; sie übernimmt weiterhin globale `hero-classes`. Sections heißen verbindlich `NN-name.md`, beginnen mit einer `h2` und können `tone: default`, `muted` oder `brand` im Frontmatter setzen. Standardmäßig begrenzt `ap-section__content` den Inhalt auf eine gut lesbare Breite. Mit `fullWidth: true` im Section-Frontmatter entfällt diese innere Begrenzung; die gemeinsame äußere `site-shell` und die Markdown-Typografie bleiben aktiv. Interne Links bleiben immer website-root-relativ, etwa `/faq/`; AstroPilot wendet `base` einmalig an. Überschrift-IDs werden aus Dateiname und Überschrift gebildet, etwa `01-introduction-inhalte-direkt-im-projekt-pflegen`, damit Sprunglinks über zusammengesetzte Markdown-Dateien eindeutig sind.
 
 ```md
 ---
@@ -149,7 +149,7 @@ import { Column, Columns } from 'astropilot/components';
 </Columns>
 ```
 
-Die Datei heißt dann beispielsweise `01-einleitung.mdx`. Mobil stehen die Bereiche untereinander; ab Desktop liegt ein 12-Spalten-Raster zugrunde. Ein `Columns`-Block enthält ein bis vier direkte `Column`-Elemente. `Column` akzeptiert `span={1}` bis `span={12}`; ohne Angabe belegt eine Spalte die volle Breite (`12`). Die Werte einer gemeinsamen Zeile dürfen zusammen höchstens `12` ergeben. Kleinere Summen lassen bewusst leeren Raum.
+Die Datei heißt dann beispielsweise `01-introduction.mdx`. Mobil stehen die Bereiche untereinander; ab Desktop liegt ein 12-Spalten-Raster zugrunde. Ein `Columns`-Block enthält ein bis vier direkte `Column`-Elemente. `Column` akzeptiert `span={1}` bis `span={12}`; ohne Angabe belegt eine Spalte die volle Breite (`12`). Die Werte einer gemeinsamen Zeile dürfen zusammen höchstens `12` ergeben. Kleinere Summen lassen bewusst leeren Raum.
 
 Übliche gleichmäßige Aufteilungen sind `12` (eine Spalte), `6 + 6` (zwei Spalten), `4 + 4 + 4` (drei Spalten) und `3 + 3 + 3 + 3` (vier Spalten). Asymmetrische Aufteilungen wie `8 + 4` oder `7 + 5` sind ebenso möglich. Neue Layout-Komponenten erfordern immer eine Astro-Komponente, einen dokumentierten Export und eine dokumentierte Verwendung.
 
