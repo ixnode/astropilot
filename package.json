@@ -14,8 +14,7 @@
     ".": "./src/package/index.ts",
     "./content": "./src/package/content.ts",
     "./config": "./src/package/config.ts",
-    "./markdoc": "./src/package/markdoc.ts",
-    "./markdoc/components": "./src/package/markdoc-components.ts",
+    "./components": "./src/package/components.ts",
     "./page": "./src/package/page.astro",
     "./package.json": "./package.json"
   },
@@ -35,7 +34,7 @@
     "pack:check": "npm pack --dry-run"
   },
   "peerDependencies": {
-    "@astrojs/markdoc": "^2.1.2",
+    "@astrojs/mdx": "^8.1.2",
     "astro": "^7.4.4"
   },
   "dependencies": {
@@ -44,6 +43,7 @@
     "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.3",
     "daisyui": "^5.7.42",
+    "remark-mdx": "^3.1.1",
     "remark-parse": "^11.0.0",
     "tailwindcss": "^4.3.3",
     "unified": "^11.0.5",
@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
-    "@astrojs/markdoc": "^2.1.2",
+    "@astrojs/mdx": "^8.1.2",
     "@axe-core/playwright": "^4.13.0",
     "@playwright/test": "^1.63.0",
     "astro": "^7.4.4",

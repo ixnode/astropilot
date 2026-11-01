@@ -11,6 +11,7 @@ AstroPilot stellt eine kleine öffentliche Paketoberfläche bereit:
 - `astropilot/content` mit `createAstroPilotCollections()`
 - `astropilot/config` mit `createAstroPilotConfig()`
 - `astropilot/page` mit der gemeinsamen Route und `getAstroPilotStaticPaths()`
+- `astropilot/components` mit den dokumentierten MDX-Layout-Komponenten
 
 Die eigene Demo verwendet diese Imports bereits selbst. Für einen späteren lokalen Verbraucher wird ein Tarball mit `npm pack` erzeugt und dort installiert. Das Paket bleibt bis zu einem bewussten Veröffentlichungsauftrag `private` und wird nicht in die npm-Registry veröffentlicht.
 
@@ -97,41 +98,35 @@ pages/
 
 Ein `hero.md` aktiviert den gemeinsamen Hero und benötigt einen `title` im Frontmatter; dieser wird als sichtbare `h1` verwendet. Löschen Sie die Datei, um stattdessen `page.yaml.title` als schlichte sichtbare `h1` oberhalb der Sections zu verwenden. Sections heißen verbindlich `NN-section.name.md`, beginnen mit einer `h2` und können `tone: default`, `muted` oder `brand` im Frontmatter setzen. Interne Links bleiben immer website-root-relativ, etwa `/faq/`; AstroPilot wendet `base` einmalig an. Überschrift-IDs werden aus Dateiname und Überschrift gebildet, etwa `01-section.einleitung-inhalte-die-im-projekt-bleiben`, damit Sprunglinks über zusammengesetzte Markdown-Dateien eindeutig sind.
 
-Für geprüfte Layout-Bausteine unterstützt AstroPilot zusätzlich Markdoc-Sections mit der Endung `.mdoc`. Installieren Sie dafür im Verbraucherprojekt die direkte Peer-Abhängigkeit und legen Sie im Projektstamm eine `markdoc.config.ts` an:
+Für geprüfte Layout-Bausteine unterstützt AstroPilot zusätzlich MDX-Sections mit der Endung `.mdx`. Installieren Sie dafür im Verbraucherprojekt die direkte Peer-Abhängigkeit:
 
 ```bash
-npm install @astrojs/markdoc
+npm install @astrojs/mdx
 ```
 
-```ts
-import { createAstroPilotMarkdocConfig } from 'astropilot/markdoc';
+Der erste Standardbaustein ist ein responsives 8/4-Layout:
 
-export default createAstroPilotMarkdocConfig();
-```
+```mdx
+import { Column, Columns } from 'astropilot/components';
 
-Der erste Standardtag ist ein responsives 8/4-Layout:
-
-```md
-{% columns %}
-
-{% column span=8 %}
+<Columns>
+  <Column span={8}>
 
 ## Hauptinhalt
 
 Dieser Bereich nimmt acht von zwölf Spalten ein.
 
-{% /column %}
+  </Column>
 
-{% column span=4 %}
+  <Column span={4}>
 
 Dieser Bereich ergänzt den Hauptinhalt auf vier Spalten.
 
-{% /column %}
-
-{% /columns %}
+  </Column>
+</Columns>
 ```
 
-Die Datei heißt dann beispielsweise `01-section.einleitung.mdoc`. Mobil stehen die Bereiche untereinander; ab Desktop werden sie nebeneinander gerendert. Neue Markdoc-Tags erfordern immer eine Astro-Komponente, eine validierte Konfiguration und eine Dokumentation.
+Die Datei heißt dann beispielsweise `01-section.einleitung.mdx`. Mobil stehen die Bereiche untereinander; ab Desktop werden sie nebeneinander gerendert. Neue Layout-Komponenten erfordern immer eine Astro-Komponente, einen dokumentierten Export und eine dokumentierte Verwendung.
 
 ## Struktur und Theme
 

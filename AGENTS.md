@@ -46,7 +46,7 @@ src/content/
 └── pages/
     ├── page.yaml
     ├── hero.md
-    ├── 01-section.einleitung.mdoc # Markdoc-Layout-Section
+    ├── 01-section.einleitung.mdx # MDX-Layout-Section
     ├── 02-section.vorteile.md
     ├── 03-section.weiterlesen.md
     ├── faq/
@@ -127,7 +127,7 @@ Eine kurze Einführung in die Inhalte dieser Seite.
 - Ohne Hero rendert das Layout `page.yaml.title` als schlichte sichtbare `h1` vor den Sections. Dies ist der einzige vorgesehene sichtbare Fallback für Seiten ohne Hero.
 - Hauptseite, FAQ und Info nutzen dieselbe Hero-Komponente mit jeweils eigenen Inhalten. Keine drei kopierten Implementierungen.
 
-### Sections: `NN-section.name.md` und `NN-section.name.mdoc`
+### Sections: `NN-section.name.md` und `NN-section.name.mdx`
 
 ```md
 ---
@@ -142,18 +142,18 @@ Hier steht normaler Markdown-Inhalt.
 ```
 
 - Nur direkt im Seitenordner liegende Dateien gehören zur jeweiligen Seite; keine Vermischung mit Unterseiten.
-- Numerische Präfixe mit mindestens zwei Ziffern sowie das verbindliche Literal `section.`; numerisch sortieren. Doppelte Nummern sind Fehler. Lücken sind erlaubt. Normale Sections verwenden `.md`; eine `.mdoc`-Datei ist ausschließlich für dokumentierte Markdoc-Layout-Tags zulässig.
+- Numerische Präfixe mit mindestens zwei Ziffern sowie das verbindliche Literal `section.`; numerisch sortieren. Doppelte Nummern sind Fehler. Lücken sind erlaubt. Normale Sections verwenden `.md`; eine `.mdx`-Datei ist ausschließlich für dokumentierte MDX-Layout-Komponenten zulässig.
 - `tone`: ausschließlich `default`, `muted`, `brand`; fehlender Wert bedeutet `default`.
 - Eine Datei wird als ein semantischer Inhaltsabschnitt dargestellt. Sie beginnt inhaltlich mit einer sinnvollen `h2`; weitere Ebenen müssen logisch folgen. Keine `h1` im Hero- oder Section-Markdown.
-- Keine eigene Section-Direktive, keine Steuerkommentare, kein MDX, keine CSS-Klassen oder Inline-Styles in Content-Dateien. Markdoc-Tags sind nur in `.mdoc`-Sections erlaubt und müssen aus dem dokumentierten, validierten AstroPilot-Tag-Katalog stammen.
+- Keine eigene Section-Direktive, keine Steuerkommentare, keine CSS-Klassen oder Inline-Styles in Content-Dateien. MDX ist nur in `.mdx`-Sections erlaubt und darf ausschließlich dokumentierte AstroPilot-Komponenten importieren; keine Browser-Skripte oder beliebige JSX-Elemente.
 - Für das MVP unterstützt der Content-Vertrag normales Markdown ohne rohes HTML oder ausführbaren Code. Unzulässige Konstrukte über den vorhandenen Markdown-AST prüfen, nicht per Regex-Parser nachbauen. Fenced Code-Blöcke bleiben normale Inhalte.
 - IDs für Überschriften müssen innerhalb der zusammengesetzten Seite eindeutig sein, auch bei gleichen Überschriften in verschiedenen Dateien. Nutze eine kleine deterministische Strategie und dokumentiere Sprunglinks.
 
-### Markdoc-Layout-Tags
+### MDX-Layout-Komponenten
 
-- Installiere bei Markdoc-Nutzung im Verbraucherprojekt `@astrojs/markdoc` als direkte Abhängigkeit. Aktiviere Markdoc über `markdoc.config.ts` mit `createAstroPilotMarkdocConfig()` aus `astropilot/markdoc`; die AstroPilot-Konfiguration bindet die offizielle Markdoc-Integration ein.
-- Der erste Standardbaustein ist ein 12-Spalten-Layout: `{% columns %}` enthält genau die gewünschten `{% column span=8 %}`- und `{% column span=4 %}`-Bereiche. Es rendert mobil untereinander und ab Desktop nebeneinander.
-- Neue Tags sind Entwicklerarbeit: Sie benötigen eine geprüfte Astro-Komponente, eine typisierte Markdoc-Konfiguration und Dokumentation. Entwickle keine unbeschränkte Layoutsprache.
+- Installiere bei MDX-Nutzung im Verbraucherprojekt `@astrojs/mdx` als direkte Abhängigkeit. Die AstroPilot-Konfiguration bindet die offizielle MDX-Integration ein.
+- Der erste Standardbaustein ist ein 12-Spalten-Layout: `Columns` enthält genau die gewünschten `Column span={8}`- und `Column span={4}`-Bereiche. Es rendert mobil untereinander und ab Desktop nebeneinander.
+- Neue Komponenten sind Entwicklerarbeit: Sie benötigen eine geprüfte Astro-Komponente, einen dokumentierten Export und eine klare MDX-Nutzung. Entwickle keine unbeschränkte Layoutsprache.
 
 ## Validierung, Routing und Entwicklung
 

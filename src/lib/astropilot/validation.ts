@@ -1,9 +1,11 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative, resolve } from 'node:path';
+import type { Root } from 'mdast';
 import { z } from 'zod';
 import { parse as parseYaml } from 'yaml';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
+import remarkMdx from 'remark-mdx';
 import { visit } from 'unist-util-visit';
 import { loadSiteConfig } from './site-config';
 import { tones } from './types';
@@ -12,7 +14,22 @@ import { routeFromPageId } from './urls';
 const pageSchema = z.object({ title: z.string().trim().min(1), description: z.string().trim().min(1) });
 const markdownSchema = z.object({ tone: z.enum(tones).optional(), eyebrow: z.string().trim().min(1).optional() }).strict();
 const heroSchema = markdownSchema.extend({ title: z.string().trim().min(1) });
-const sectionPattern = /^\d{2,}-section\.[a-z0-9][a-z0-9-]*\.(?:md|mdoc)$/;
+const sectionPattern = /^\d{2,}-section\.[a-z0-9][a-z0-9-]*\.(?:md|mdx)$/;
+const mdxComponentImport = /^import\s*\{\s*Column\s*,\s*Columns\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
+
+interface MdxNode {
+  type: string;
+  name?: string | null;
+  value?: string;
+  attributes?: MdxAttribute[];
+  children?: MdxNode[];
+}
+
+interface MdxAttribute {
+  type: string;
+  name?: string;
+  value?: string | { type: string; value?: string } | null;
+}
 
 function filesIn(directory: string): string[] {
   return readdirSync(directory).flatMap((name) => {
@@ -36,7 +53,39 @@ function frontmatterAndTree(path: string) {
   const match = source.match(/^---\s*\n([\s\S]*?)\n---\s*\n?/);
   const frontmatter = match ? parseYaml(match[1]) : {};
   const body = match ? source.slice(match[0].length) : source;
-  return { frontmatter, tree: unified().use(remarkParse).parse(body) };
+  const processor = unified().use(remarkParse);
+  if (path.endsWith('.mdx')) processor.use(remarkMdx);
+  return { frontmatter, tree: processor.parse(body) };
+}
+
+function validateMdxLayout(contentRoot: string, path: string, tree: Root): void {
+  let hasComponentImport = false;
+  let columnsCount = 0;
+
+  visit(tree, (node) => {
+    const mdxNode = node as MdxNode;
+    if (mdxNode.type === 'mdxjsEsm') {
+      if (!mdxComponentImport.test(mdxNode.value?.trim() ?? '')) fail(contentRoot, path, 'MDX may only import Column and Columns from astropilot/components');
+      hasComponentImport = true;
+    }
+    if (mdxNode.type === 'mdxFlowExpression' || mdxNode.type === 'mdxTextExpression') fail(contentRoot, path, 'MDX expressions are not allowed');
+    if (mdxNode.type === 'mdxJsxFlowElement' || mdxNode.type === 'mdxJsxTextElement') {
+      if (mdxNode.name === 'Columns') {
+        columnsCount += 1;
+        const columns = (mdxNode.children ?? []).filter((child) => child.type === 'mdxJsxFlowElement');
+        if (columns.length !== 2 || columns.some((column) => column.name !== 'Column')) fail(contentRoot, path, 'Columns must contain exactly two direct Column components');
+      } else if (mdxNode.name === 'Column') {
+        const span = mdxNode.attributes?.find((attribute) => attribute.type === 'mdxJsxAttribute' && attribute.name === 'span');
+        const spanValue = span?.value;
+        const value = spanValue !== null && typeof spanValue === 'object' ? spanValue.value : undefined;
+        if (mdxNode.attributes?.length !== 1 || (value !== '8' && value !== '4')) fail(contentRoot, path, 'Column requires exactly one span prop with the value 8 or 4');
+      } else {
+        fail(contentRoot, path, `unsupported MDX component: ${mdxNode.name ?? 'anonymous'}`);
+      }
+    }
+  });
+
+  if (!hasComponentImport || columnsCount !== 1) fail(contentRoot, path, 'MDX section requires one Columns layout and its AstroPilot component import');
 }
 
 /** Validates AstroPilot's file-based content contract in the current Astro project. */
@@ -63,10 +112,11 @@ export function validateAstroPilotContent(contentRoot = resolve(process.cwd(), '
     if (filename === 'page.yaml') continue;
     const directory = contentDirectory(contentRoot, path);
     if (!pageDirectories.has(directory)) fail(contentRoot, path, 'hero or section file has no directly associated page.yaml');
-    if (filename !== 'hero.md' && !sectionPattern.test(filename)) fail(contentRoot, path, 'invalid content filename; expected hero.md or NN-section.name.md');
+    if (filename !== 'hero.md' && !sectionPattern.test(filename)) fail(contentRoot, path, 'invalid content filename; expected hero.md or NN-section.name.md(x)');
     const { frontmatter, tree } = frontmatterAndTree(path);
     const metadata = (filename === 'hero.md' ? heroSchema : markdownSchema).safeParse(frontmatter);
     if (!metadata.success) fail(contentRoot, path, `invalid frontmatter: ${metadata.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join('; ')}`);
+    if (path.endsWith('.mdx')) validateMdxLayout(contentRoot, path, tree);
     const route = directory === '' ? '/' : `/${directory}/`;
     const seen = headingsByRoute.get(route)!;
     let firstHeading: number | undefined;

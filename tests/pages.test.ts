@@ -2,7 +2,6 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { CollectionEntry } from 'astro:content';
 import { assemblePages } from '../src/lib/astropilot/pages';
-import { validateColumnSpan } from '../src/package/markdoc';
 import { routeFromPageId, withBase } from '../src/lib/astropilot/urls';
 
 test('derives normalized routes from page metadata paths', () => {
@@ -10,7 +9,6 @@ test('derives normalized routes from page metadata paths', () => {
   assert.equal(routeFromPageId('faq/page.yaml'), '/faq/');
   assert.equal(routeFromPageId('leistungen/monitoring/page.yaml'), '/leistungen/monitoring/');
 });
-
 test('applies a deployment base exactly once to root-relative URLs', () => {
   assert.equal(withBase('/faq/', '/demo/'), '/demo/faq/');
   assert.equal(withBase('/', '/demo/'), '/demo/');
@@ -29,10 +27,4 @@ test('recognizes Astro-normalized section IDs and sorts them numerically', () =>
 
   assert.equal(page.hero?.id, 'hero');
   assert.deepEqual(page.sections.map((section) => section.id), ['01-sectioneinleitung', '02-sectionvorteile']);
-});
-
-test('validates the fixed 8/4 Markdoc column spans', () => {
-  assert.deepEqual(validateColumnSpan(8), []);
-  assert.deepEqual(validateColumnSpan(4), []);
-  assert.equal(validateColumnSpan(6)[0]?.id, 'astropilot-column-span-invalid');
 });

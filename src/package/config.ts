@@ -1,4 +1,4 @@
-import markdoc from '@astrojs/markdoc';
+import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { unified } from '@astrojs/markdown-remark';
 import tailwindcss from '@tailwindcss/vite';
@@ -15,7 +15,7 @@ export function createAstroPilotConfig() {
   return {
     site: site.url,
     base: site.base,
-    integrations: [markdoc(), sitemap()],
+    integrations: [mdx(), sitemap()],
     vite: { plugins: [tailwindcss()] },
     markdown: { processor: unified({ remarkPlugins: [remarkUniqueHeadingIds, [remarkContentLinks, site]] }) },
   };
