@@ -1,0 +1,33 @@
+---
+type TabsVariant = 'border' | 'box' | 'lift';
+
+interface Props {
+    label: string;
+    variant?: TabsVariant;
+    initial?: number;
+}
+
+const { label, variant = 'border', initial = 1 } = Astro.props;
+const variants: Record<TabsVariant, string> = {
+    border: 'tabs-border',
+    box: 'tabs-box',
+    lift: 'tabs-lift',
+};
+if (!label?.trim() || !Object.hasOwn(variants, variant))
+    throw new Error('Tabs requires a label and variant border, box, or lift.');
+if (!Number.isInteger(initial) || initial < 1)
+    throw new Error('Tabs initial must be a positive, one-based integer.');
+---
+
+<div class="ap-tabs" data-initial={initial}>
+    <div
+        class:list={['ap-tabs__list', 'tabs', variants[variant]]}
+        data-label={label}
+        hidden
+    ></div>
+    <slot />
+</div>
+
+<script>
+    import './tabs';
+</script>

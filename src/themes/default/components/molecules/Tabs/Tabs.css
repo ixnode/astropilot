@@ -1,0 +1,22 @@
+@layer components {
+    .ap-tabs {
+        @apply my-6 min-w-0;
+
+        .ap-tabs__list {
+            @apply mb-2 flex max-w-full flex-nowrap overflow-x-auto;
+
+            &[hidden] {
+                display: none;
+            }
+
+            .ap-tabs__button {
+                @apply min-h-11 shrink-0 whitespace-nowrap font-semibold !text-base-content;
+
+                &:focus-visible {
+                    outline: 3px solid var(--color-primary) !important;
+                    outline-offset: -3px !important;
+                }
+            }
+        }
+    }
+}

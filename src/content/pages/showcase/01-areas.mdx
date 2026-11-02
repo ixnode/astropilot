@@ -11,6 +11,7 @@ import sectionsImage from './_assets/sections.png';
 import alertsImage from './_assets/alerts.png';
 import imagesImage from './_assets/images.png';
 import cardsImage from './_assets/layout-portrait.png';
+import tabsImage from './_assets/tabs.png';
 import { Card, CardActions } from 'astropilot/components';
 import { Column, Columns } from 'astropilot/components';
 import { Eyebrow } from 'astropilot/components';
@@ -114,6 +115,18 @@ Jeder Bereich hat eine eigene Seite mit fokussierten Beispielen. Die Übersicht 
 
             <CardActions>
                 [Cards ansehen](/showcase/cards/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={tabsImage} imageAlt="Dreidimensionale Darstellung einer Oberfläche mit drei Reitern und hervorgehobenem Inhaltsbereich">
+            ### Tabs
+
+            Inhalte in Reitern gliedern: Linie, Box und angehobene Registerkarten mit Tastaturbedienung und Markdown-Panels.
+
+            <CardActions>
+                [Tabs ansehen](/showcase/tabs/)
             </CardActions>
         </Card>
     </Column>

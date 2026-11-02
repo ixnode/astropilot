@@ -1,4 +1,6 @@
 export { default as Alert } from '../themes/default/components/molecules/Alert/Alert.astro';
+export { default as Tabs } from '../themes/default/components/molecules/Tabs/Tabs.astro';
+export { default as Tab } from '../themes/default/components/atoms/Tab/Tab.astro';
 export { default as Card } from '../themes/default/components/molecules/Card/Card.astro';
 export { default as CardActions } from '../themes/default/components/molecules/CardActions/CardActions.astro';
 export { default as ContentImage } from '../themes/default/components/atoms/ContentImage/ContentImage.astro';

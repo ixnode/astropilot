@@ -51,6 +51,8 @@ const contentImageComponentImport =
     /^import\s*\{\s*ContentImage\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
 const cardComponentImport =
     /^import\s*\{\s*Card(?:\s*,\s*CardActions)?\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
+const tabsComponentImport =
+    /^import\s*\{\s*Tabs\s*,\s*Tab\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
 const localImageImport =
     /^import\s+([A-Za-z_$][\w$]*)\s+from\s+['"](?:\.\.\/|\.\/)[a-z0-9_][a-z0-9._/-]*\.(?:avif|jpe?g|png|webp)['"];?$/i;
 const imageExtensions = new Set(['.avif', '.jpeg', '.jpg', '.png', '.webp']);
@@ -111,12 +113,14 @@ function validateMdxLayout(
 ): void {
     let hasComponentImport = false;
     let columnsCount = 0;
+    let tabsCount = 0;
     let alertCount = 0;
     let contentImageCount = 0;
     let cardCount = 0;
     let eyebrowCount = 0;
     const localImageImports = new Set<string>();
     const validatedColumns = new Set<MdxNode>();
+    const validatedTabs = new Set<MdxNode>();
     const validatedCardActions = new Set<MdxNode>();
 
     visit(tree, (node) => {
@@ -137,7 +141,8 @@ function validateMdxLayout(
                     !eyebrowComponentImport.test(importValue) &&
                     !alertComponentImport.test(importValue) &&
                     !contentImageComponentImport.test(importValue) &&
-                    !cardComponentImport.test(importValue)
+                    !cardComponentImport.test(importValue) &&
+                    !tabsComponentImport.test(importValue)
                 )
                     fail(
                         contentRoot,
@@ -156,7 +161,84 @@ function validateMdxLayout(
             mdxNode.type === 'mdxJsxFlowElement' ||
             mdxNode.type === 'mdxJsxTextElement'
         ) {
-            if (mdxNode.name === 'Columns') {
+            if (mdxNode.name === 'Tabs') {
+                tabsCount += 1;
+                const attributes = mdxNode.attributes ?? [];
+                const label = attributes.find(
+                    (attribute) => attribute.name === 'label',
+                );
+                const variant = attributes.find(
+                    (attribute) => attribute.name === 'variant',
+                );
+                const initial = attributes.find(
+                    (attribute) => attribute.name === 'initial',
+                );
+                const initialValue = initial?.value;
+                const initialNumber = initial
+                    ? Number(
+                          initialValue && typeof initialValue === 'object'
+                              ? initialValue.value
+                              : undefined,
+                      )
+                    : 1;
+                const children = mdxNode.children ?? [];
+                const tabs = children.filter(
+                    (child) =>
+                        child.type === 'mdxJsxFlowElement' &&
+                        child.name === 'Tab',
+                );
+                if (
+                    attributes.some(
+                        (attribute) =>
+                            attribute.type !== 'mdxJsxAttribute' ||
+                            !['label', 'variant', 'initial'].includes(
+                                attribute.name ?? '',
+                            ),
+                    ) ||
+                    new Set(attributes.map((attribute) => attribute.name))
+                        .size !== attributes.length ||
+                    typeof label?.value !== 'string' ||
+                    !label.value.trim() ||
+                    (variant &&
+                        !['border', 'box', 'lift'].includes(
+                            String(variant.value),
+                        )) ||
+                    tabs.length < 1 ||
+                    children.some(
+                        (child) =>
+                            !(
+                                child.type === 'mdxJsxFlowElement' &&
+                                child.name === 'Tab'
+                            ) &&
+                            !(child.type === 'text' && !child.value?.trim()),
+                    ) ||
+                    !Number.isInteger(initialNumber) ||
+                    initialNumber < 1 ||
+                    initialNumber > tabs.length
+                )
+                    fail(
+                        contentRoot,
+                        path,
+                        'Tabs requires a non-empty label, direct Tab children, optional variant border, box, or lift, and an initial index from 1 to the number of tabs',
+                    );
+                tabs.forEach((tab) => validatedTabs.add(tab));
+            } else if (mdxNode.name === 'Tab') {
+                const attributes = mdxNode.attributes ?? [];
+                const title = attributes[0];
+                if (
+                    !validatedTabs.has(mdxNode) ||
+                    attributes.length !== 1 ||
+                    title?.type !== 'mdxJsxAttribute' ||
+                    title.name !== 'title' ||
+                    typeof title.value !== 'string' ||
+                    !title.value.trim()
+                )
+                    fail(
+                        contentRoot,
+                        path,
+                        'Tab must be a direct child of Tabs and accepts exactly one non-empty title',
+                    );
+            } else if (mdxNode.name === 'Columns') {
                 columnsCount += 1;
                 const columns = (mdxNode.children ?? []).filter(
                     (child) => child.type === 'mdxJsxFlowElement',
@@ -409,6 +491,7 @@ function validateMdxLayout(
     if (
         !hasComponentImport ||
         (columnsCount === 0 &&
+            tabsCount === 0 &&
             alertCount === 0 &&
             contentImageCount === 0 &&
             cardCount === 0 &&

@@ -198,6 +198,28 @@ import { Card, CardActions } from 'astropilot/components';
 </Card>
 ```
 
+`Tabs` and `Tab` display Markdown panels with DaisyUI styling. `Tabs` requires a non-empty accessible `label` and one or more direct `Tab` children, each with a non-empty `title`. Optional `variant` supports `border` (default), `box`, and `lift`; `initial` is a one-based index (default `1`) and must refer to an existing panel.
+
+```mdx
+import { Tabs, Tab } from 'astropilot/components';
+
+<Tabs label="Product information" variant="border" initial={1}>
+    <Tab title="Overview">
+
+        An overview with **Markdown**.
+
+    </Tab>
+    <Tab title="Details">
+
+        Additional information.
+
+    </Tab>
+
+</Tabs>
+```
+
+Tabs progressively enhance static panels: all content remains readable without JavaScript. With JavaScript, each group has its own selection and linked tab/panel semantics. Arrow keys wrap between tabs, Home/End select the first/last tab, and Tab moves into the active panel. Long tab lists scroll horizontally. See `/showcase/tabs/` for examples. The implementation uses [DaisyUI tabs](https://daisyui.com/components/tab/) and the [WAI-ARIA tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/).
+
 ## Structure and Theme
 
 The small reusable content and URL logic lives in `src/lib/astropilot/`. It knows neither demo text nor Tailwind or DaisyUI classes. The default theme lives in `src/themes/default/` and includes the layout, header, hero, sections, and footer. DaisyUI is actively used there for navigation and theme elements.

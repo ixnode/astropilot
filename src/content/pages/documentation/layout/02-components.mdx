@@ -8,7 +8,7 @@ import { Eyebrow } from 'astropilot/components';
 
 ## Verfügbare Komponenten
 
-AstroPilot exportiert geprüfte Komponenten aus `astropilot/components`. Aktuell gehören dazu `Columns`, `Column`, `Eyebrow`, `Alert`, `ContentImage`, `Card` und `CardActions`.
+AstroPilot exportiert geprüfte Komponenten aus `astropilot/components`. Aktuell gehören dazu `Columns`, `Column`, `Eyebrow`, `Alert`, `ContentImage`, `Card`, `CardActions`, `Tabs` und `Tab`.
 
 ### Eyebrow vor einer Überschrift
 
@@ -21,5 +21,29 @@ import { Eyebrow } from 'astropilot/components';
 
 ## Die eigentliche Überschrift
 ```
+
+### Inhalte mit Tabs gliedern
+
+`Tabs` enthält direkt einen oder mehrere `Tab`-Bausteine mit Markdown-Inhalten. Die Gruppe benötigt ein beschreibendes `label`, jeder Reiter einen `title`. Optional wählt `variant` zwischen `border` (Standard), `box` und `lift`; `initial` bestimmt den anfangs geöffneten Reiter, ab eins gezählt.
+
+```mdx
+import { Tabs, Tab } from 'astropilot/components';
+
+<Tabs label="Informationen" variant="box" initial={1}>
+    <Tab title="Überblick">
+
+        Ein kurzer **Überblick**.
+
+    </Tab>
+    <Tab title="Details">
+
+        Die ausführliche Erklärung.
+
+    </Tab>
+
+</Tabs>
+```
+
+Die Reiter sind mit Pfeiltasten sowie Pos1 und Ende bedienbar. Ohne JavaScript bleiben die Inhalte untereinander sichtbar. Die [Tabs-Beispiele](/showcase/tabs/) zeigen alle drei Darstellungen.
 
 Der [Showcase](/showcase/) zeigt alle verfügbaren Varianten als sichtbare Beispiele. Neue Komponenten werden dort ergänzt, bevor sie als dokumentierter MDX-Baustein verwendet werden.

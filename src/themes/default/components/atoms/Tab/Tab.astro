@@ -1,0 +1,15 @@
+---
+interface Props {
+    title: string;
+}
+
+const { title } = Astro.props;
+if (!title?.trim()) throw new Error('Tab requires a non-empty title.');
+---
+
+<div class="ap-tab" data-title={title}>
+    <p class="ap-tab__label">{title}</p>
+    <div class="ap-tab__content">
+        <slot />
+    </div>
+</div>

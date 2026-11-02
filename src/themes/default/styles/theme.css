@@ -25,6 +25,8 @@
 /* Theme components: atoms, molecules, organisms, then layout primitives */
 @import '../components/atoms/ContentImage/ContentImage.css';
 @import '../components/atoms/Eyebrow/Eyebrow.css';
+@import '../components/atoms/Tab/Tab.css';
+@import '../components/molecules/Tabs/Tabs.css';
 @import '../components/molecules/Alert/Alert.css';
 @import '../components/molecules/Card/Card.css';
 @import '../components/molecules/CardActions/CardActions.css';
