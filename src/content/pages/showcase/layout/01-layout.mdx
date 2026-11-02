@@ -4,82 +4,189 @@ fullWidth: true
 ---
 
 import { Column, Columns } from 'astropilot/components';
+import { Card } from 'astropilot/components';
 import { Eyebrow } from 'astropilot/components';
 
 <Eyebrow>Responsive Struktur</Eyebrow>
 
-## Layout-Raster
+## Ein Raster, unterschiedliche Aufteilungen
 
-Das Layout verwendet ab großen Bildschirmen ein 12-Spalten-Raster. Auf kleineren Ansichten stehen alle Bereiche automatisch untereinander.
+Jede Karte macht einen Spaltenbereich sichtbar. Ab 64rem Bildschirmbreite stehen zwölf Rasterspalten zur Verfügung. Darunter werden alle Bereiche in ihrer Lesereihenfolge untereinander angezeigt. Verkleinere das Browserfenster, um den Wechsel zu sehen.
+
+### Volle Breite: 12
+
+Ohne `span` nutzt eine Spalte die gesamte Inhaltsbreite.
 
 <Columns>
     <Column>
-        ### Eine Spalte: 12 von 12
+        <Card>
+            #### 12 von 12
 
-        Ein Bereich kann die vollständige verfügbare Breite nutzen.
+            Platz für einen Überblick oder einen längeren Inhalt. Die Breite endet am gemeinsamen Inhaltsrand der Seite.
+        </Card>
     </Column>
-
 </Columns>
+
+### Zwei gleiche Bereiche: 6 + 6
+
+Beide Karten teilen sich eine Reihe. Überschrift und Text bleiben innerhalb jeder Spalte untereinander.
 
 <Columns>
     <Column span={6}>
-        ### Zwei Spalten: 6 von 12
+        <Card>
+            #### Linke Hälfte
 
-        Gleichmäßige Inhalte lassen sich paarweise anordnen.
+            `span={6}` belegt die ersten sechs Rasterspalten.
+        </Card>
     </Column>
-
     <Column span={6}>
-        ### Zwei Spalten: 6 von 12
+        <Card>
+            #### Rechte Hälfte
 
-        Beide Bereiche teilen sich eine vollständige Reihe.
+            `span={6}` belegt die übrigen sechs Rasterspalten.
+        </Card>
     </Column>
-
 </Columns>
+
+### Drei gleiche Bereiche: 4 + 4 + 4
+
+Drei Karten stehen nebeneinander. Die Abstände zwischen ihnen bleiben genauso groß wie bei zwei Spalten.
 
 <Columns>
     <Column span={4}>
-        ### Drei Spalten: 4 von 12
+        <Card>
+            #### Erstes Drittel
 
-        Drei gleich große Spalten eignen sich für kompakte Vorteile.
+            `span={4}` eignet sich beispielsweise für einen Vorteil.
+        </Card>
     </Column>
-
     <Column span={4}>
-        ### Drei Spalten: 4 von 12
+        <Card>
+            #### Zweites Drittel
 
-        Die Breiten werden direkt am Inhalt dokumentiert.
+            Auch mit etwas mehr Text bleibt die Karte innerhalb ihrer Spalte. Die Karten einer Reihe werden auf dieselbe Höhe gestreckt.
+        </Card>
     </Column>
-
     <Column span={4}>
-        ### Drei Spalten: 4 von 12
+        <Card>
+            #### Drittes Drittel
 
-        Die Summe bleibt innerhalb einer Reihe bei zwölf.
+            Die Reihe ist mit zwölf Rasterspalten vollständig gefüllt.
+        </Card>
     </Column>
 
 </Columns>
+
+### Vier gleiche Bereiche: 3 + 3 + 3 + 3
+
+Viertel eignen sich für kurze Inhalte. Auf kleinen Bildschirmen erhalten auch diese Karten die volle Inhaltsbreite.
 
 <Columns>
     <Column span={3}>
-        ### Vier Spalten
+        <Card>
+            #### Viertel 1
 
-        3 von 12
+            `span={3}`
+        </Card>
     </Column>
-
     <Column span={3}>
-        ### Vier Spalten
+        <Card>
+            #### Viertel 2
 
-        3 von 12
+            `span={3}`
+        </Card>
     </Column>
-
     <Column span={3}>
-        ### Vier Spalten
+        <Card>
+            #### Viertel 3
 
-        3 von 12
+            `span={3}`
+        </Card>
     </Column>
-
     <Column span={3}>
-        ### Vier Spalten
+        <Card>
+            #### Viertel 4
 
-        3 von 12
+            `span={3}`
+        </Card>
     </Column>
 
 </Columns>
+
+### Unterschiedliche Breiten: 8 + 4
+
+Ein Hauptbereich erhält zwei Drittel der Breite, ein ergänzender Bereich ein Drittel. Auf mobilen Ansichten steht der Hauptbereich zuerst.
+
+<Columns>
+    <Column span={8}>
+        <Card>
+            #### Hauptinhalt: 8 von 12
+
+            Der breitere Bereich bietet Platz für ausführliche Erklärungen. Die Aufteilung entsteht allein durch `span={8}`.
+        </Card>
+    </Column>
+    <Column span={4}>
+        <Card>
+            #### Ergänzung: 4 von 12
+
+            `span={4}` schafft Platz für einen begleitenden Hinweis.
+        </Card>
+    </Column>
+
+</Columns>
+
+### Automatischer Umbruch: fünf Karten in einem Block
+
+Alle fünf Karten gehören zum selben `Columns`-Block und verwenden `span={4}`. Nach der dritten Karte beginnt automatisch eine neue Reihe. Die letzten beiden Karten bleiben linksbündig und behalten ihre Breite; der letzte Platz bleibt frei.
+
+<Columns>
+    <Column span={4}>
+        <Card>
+            #### Karte 1
+
+            Erste Reihe, erster Platz.
+        </Card>
+    </Column>
+    <Column span={4}>
+        <Card>
+            #### Karte 2
+
+            Erste Reihe, zweiter Platz.
+        </Card>
+    </Column>
+    <Column span={4}>
+        <Card>
+            #### Karte 3
+
+            Erste Reihe, dritter Platz. Die zwölf Rasterspalten sind belegt.
+        </Card>
+    </Column>
+    <Column span={4}>
+        <Card>
+            #### Karte 4
+
+            Zweite Reihe, erster Platz. Der Umbruch benötigt keinen weiteren Layout-Block.
+        </Card>
+    </Column>
+    <Column span={4}>
+        <Card>
+            #### Karte 5
+
+            Zweite Reihe, zweiter Platz. Der Abstand zur oberen Reihe entspricht dem Abstand zwischen den Spalten.
+        </Card>
+    </Column>
+
+</Columns>
+
+Ein einzelner Bereich wird beispielsweise so geschrieben. Für weitere Karten wird `Column` innerhalb desselben Blocks wiederholt:
+
+```mdx
+import { Column, Columns } from 'astropilot/components';
+import { Card } from 'astropilot/components';
+
+<Columns>
+    <Column span={4}>
+        <Card>Ein Bereich mit vier von zwölf Rasterspalten.</Card>
+    </Column>
+</Columns>
+```

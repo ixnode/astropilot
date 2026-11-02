@@ -1,6 +1,6 @@
 @layer components {
     .ap-column {
-        @apply flex;
+        @apply flex min-w-0 flex-col;
 
         > :first-child {
             @apply mt-0;

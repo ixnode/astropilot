@@ -50,7 +50,7 @@ const alertComponentImport =
 const contentImageComponentImport =
     /^import\s*\{\s*ContentImage\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
 const cardComponentImport =
-    /^import\s*\{\s*Card\s*,\s*CardActions\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
+    /^import\s*\{\s*Card(?:\s*,\s*CardActions)?\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
 const localImageImport =
     /^import\s+([A-Za-z_$][\w$]*)\s+from\s+['"](?:\.\.\/|\.\/)[a-z0-9_][a-z0-9._/-]*\.(?:avif|jpe?g|png|webp)['"];?$/i;
 const imageExtensions = new Set(['.avif', '.jpeg', '.jpg', '.png', '.webp']);
