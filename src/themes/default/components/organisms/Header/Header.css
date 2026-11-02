@@ -43,7 +43,7 @@
         }
 
         &.ap-header--scrolled {
-            @apply fixed border-base-300 bg-base-100/85 text-base-content shadow-sm backdrop-blur-md;
+            @apply fixed border-base-300 bg-base-100/40 text-base-content shadow-sm backdrop-blur-md;
 
             .ap-header__inner {
                 @apply py-5;
