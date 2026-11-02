@@ -19,4 +19,4 @@ import { Column, Columns } from 'astropilot/components';
 </Columns>
 ```
 
-Auf mobilen Ansichten werden die Bereiche untereinander ausgegeben. Die Summe der Spalten einer gemeinsamen Reihe darf höchstens zwölf sein.
+Auf mobilen Ansichten werden die Bereiche untereinander ausgegeben. Ab Desktopbreite stehen zwölf Rasterspalten pro Reihe zur Verfügung. Sobald ein weiterer Bereich nicht mehr in die Reihe passt, beginnt er automatisch in der nächsten Reihe. Ein gemeinsamer `Columns`-Block kann dadurch beliebig viele Bereiche enthalten: Acht Bereiche mit `span={4}` ergeben beispielsweise Reihen mit drei, drei und zwei Elementen. Die Abstände zwischen Spalten und Reihen sind einheitlich.

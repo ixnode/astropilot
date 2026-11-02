@@ -164,17 +164,16 @@ function validateMdxLayout(
                 if (
                     mdxNode.attributes?.length !== 0 ||
                     columns.length < 1 ||
-                    columns.length > 4 ||
                     columns.some((column) => column.name !== 'Column')
                 )
                     fail(
                         contentRoot,
                         path,
-                        'Columns must contain one to four direct Column components and no props',
+                        'Columns must contain at least one direct Column component and no props',
                     );
-                const spans = columns.map((column) => {
+                columns.forEach((column) => {
                     validatedColumns.add(column);
-                    if ((column.attributes?.length ?? 0) === 0) return 12;
+                    if ((column.attributes?.length ?? 0) === 0) return;
                     const span = column.attributes?.find(
                         (attribute) =>
                             attribute.type === 'mdxJsxAttribute' &&
@@ -197,14 +196,7 @@ function validateMdxLayout(
                             path,
                             'Column accepts no props for span 12 or exactly one numeric span prop from 1 to 12',
                         );
-                    return numericValue;
                 });
-                if (spans.reduce((sum, span) => sum + span, 0) > 12)
-                    fail(
-                        contentRoot,
-                        path,
-                        'the Column spans in one Columns layout must not exceed 12',
-                    );
             } else if (mdxNode.name === 'Column') {
                 if (!validatedColumns.has(mdxNode))
                     fail(
