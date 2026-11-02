@@ -137,6 +137,14 @@ try {
                     const group = groups.nth(index);
                     const tabs = group.getByRole('tab');
                     assert.equal(await tabs.count(), 3);
+                    assert.equal(
+                        await group
+                            .locator('.ap-tabs__list')
+                            .evaluate(
+                                (element) => getComputedStyle(element).flexWrap,
+                            ),
+                        'nowrap',
+                    );
                     const initial = index === 1 ? 1 : 0;
                     assert.equal(
                         await tabs.nth(initial).getAttribute('aria-selected'),
@@ -158,6 +166,33 @@ try {
                             'true',
                         );
                         assert.equal(await panel.isVisible(), true);
+                        if (index === 2) {
+                            const listBounds = await group
+                                .locator('.ap-tabs__list')
+                                .boundingBox();
+                            const panelBounds = await panel.boundingBox();
+                            const tabBounds = await button.boundingBox();
+                            assert(listBounds && panelBounds);
+                            assert(tabBounds);
+                            assert(
+                                Math.abs(
+                                    listBounds.y +
+                                        listBounds.height -
+                                        panelBounds.y -
+                                        1,
+                                ) < 1,
+                                'Lifted tabs must join the panel without a gap',
+                            );
+                            assert(
+                                Math.abs(
+                                    tabBounds.y +
+                                        tabBounds.height -
+                                        panelBounds.y -
+                                        1,
+                                ) < 1,
+                                'The active lifted tab must touch its panel',
+                            );
+                        }
                     }
                     await tabs.nth(2).press('ArrowRight');
                     assert.equal(

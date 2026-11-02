@@ -3,7 +3,8 @@
         @apply my-6 min-w-0;
 
         .ap-tabs__list {
-            @apply mb-2 flex max-w-full flex-nowrap overflow-x-auto;
+            @apply mb-2 flex max-w-full !flex-nowrap overflow-x-auto;
+            scrollbar-width: none;
 
             &[hidden] {
                 display: none;
@@ -16,6 +17,17 @@
                     outline: 3px solid var(--color-primary) !important;
                     outline-offset: -3px !important;
                 }
+            }
+        }
+
+        &[data-variant='lift'][data-enhanced='true'] {
+            .ap-tabs__list {
+                @apply relative z-10;
+                margin-bottom: -1px;
+            }
+
+            > .ap-tab {
+                @apply mt-0 rounded-tl-none;
             }
         }
     }

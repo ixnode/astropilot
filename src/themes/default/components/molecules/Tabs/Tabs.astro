@@ -19,7 +19,7 @@ if (!Number.isInteger(initial) || initial < 1)
     throw new Error('Tabs initial must be a positive, one-based integer.');
 ---
 
-<div class="ap-tabs" data-initial={initial}>
+<div class="ap-tabs" data-initial={initial} data-variant={variant}>
     <div
         class:list={['ap-tabs__list', 'tabs', variants[variant]]}
         data-label={label}
