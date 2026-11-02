@@ -1,4 +1,5 @@
 ---
+import logoUrl from '../../../assets/favicon.svg?url';
 import type { SiteConfig } from '../../../../../lib/astropilot/types';
 import { contentHref } from '../../../../../lib/astropilot/urls';
 interface Props {
@@ -9,7 +10,16 @@ const { site } = Astro.props;
 
 <footer class="ap-footer">
     <div class="ap-footer__inner site-shell">
-        <p class="ap-footer__text">{site.footer.text}</p>
+        <p class="ap-footer__text">
+            <img
+                class="ap-footer__logo"
+                src={logoUrl}
+                alt=""
+                width="24"
+                height="24"
+            />
+            <span>{site.footer.text}</span>
+        </p>
         <nav aria-label="Fußnavigation">
             <ul class="ap-footer__links">
                 {site.footer.links.map((link) => (

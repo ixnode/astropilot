@@ -5,6 +5,14 @@
         .ap-footer__inner {
             @apply flex flex-wrap items-center justify-between gap-4 py-10 text-sm;
 
+            .ap-footer__text {
+                @apply flex items-center gap-3;
+
+                .ap-footer__logo {
+                    @apply size-6 shrink-0;
+                }
+            }
+
             .ap-footer__links {
                 @apply flex flex-wrap gap-4;
             }

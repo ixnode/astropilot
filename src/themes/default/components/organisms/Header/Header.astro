@@ -1,4 +1,5 @@
 ---
+import logoUrl from '../../../assets/favicon.svg?url';
 import type { Link, SiteConfig } from '../../../../../lib/astropilot/types';
 import { contentHref } from '../../../../../lib/astropilot/urls';
 
@@ -13,6 +14,13 @@ const isActive = (link: Link) => link.href === route;
 <header class="ap-header">
     <div class="ap-header__inner site-shell">
         <a class="ap-header__brand" href={contentHref('/', site)}>
+            <img
+                class="ap-header__logo"
+                src={logoUrl}
+                alt=""
+                width="32"
+                height="32"
+            />
             {site.name}
         </a>
         <nav class="ap-header__nav" aria-label="Hauptnavigation">

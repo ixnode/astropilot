@@ -6,7 +6,11 @@
             @apply flex flex-wrap items-center justify-between gap-x-8 gap-y-3 py-7 transition-[padding] duration-200;
 
             .ap-header__brand {
-                @apply text-lg font-bold text-primary-content no-underline hover:no-underline;
+                @apply inline-flex items-center gap-3 text-lg font-bold text-primary-content no-underline hover:no-underline;
+
+                .ap-header__logo {
+                    @apply size-8 shrink-0;
+                }
             }
 
             .ap-header__links {
