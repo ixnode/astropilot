@@ -13,8 +13,10 @@ import { Eyebrow } from 'astropilot/components';
 
 Cards fassen Bild, Markdown-Inhalt und einen optionalen nächsten Schritt in einem wiederverwendbaren Baustein zusammen.
 
+### Bildkarte mit weiterführendem Link
+
 <Card image={layoutLandscape} imageAlt="Abstrakte blaue Darstellung eines modularen Website-Layouts">
-    ### Mit Bild, Titel und Action
+    #### Mit Bild, Titel und Action
 
     Die erste Überschrift der Card wird als Titel gestaltet. Das Bild wird innerhalb eines `figure`-Elements als optimiertes WebP ausgegeben.
 
@@ -24,8 +26,10 @@ Cards fassen Bild, Markdown-Inhalt und einen optionalen nächsten Schritt in ein
 
 </Card>
 
+### Textkarte mit mehreren Links
+
 <Card>
-    ### Ohne Bild mit mehreren Actions
+    #### Ohne Bild mit mehreren Actions
 
     Der Body unterstützt gewöhnliches Markdown mit mehreren Absätzen.
 
@@ -36,6 +40,8 @@ Cards fassen Bild, Markdown-Inhalt und einen optionalen nächsten Schritt in ein
     </CardActions>
 
 </Card>
+
+### Bildkarte ohne Titel und Links
 
 <Card image={layoutPortrait} imageAlt="Editorial-Darstellung von modularen Inhaltsblöcken">
     Diese Card beginnt ohne Überschrift und hat keinen Actions-Bereich.
