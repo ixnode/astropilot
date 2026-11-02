@@ -3,7 +3,7 @@
         @apply absolute inset-x-0 top-0 z-40 border-b border-transparent bg-transparent text-primary-content transition-[background-color,border-color,box-shadow,backdrop-filter] duration-200;
 
         .ap-header__inner {
-            @apply flex flex-wrap items-center justify-between gap-x-8 gap-y-3 py-7 transition-[padding] duration-200;
+            @apply flex flex-wrap items-center justify-between gap-x-8 gap-y-3 py-[2.1875rem] transition-[padding] duration-200;
 
             .ap-header__brand {
                 @apply inline-flex items-center gap-3 text-lg font-bold text-primary-content no-underline hover:no-underline;
