@@ -1,13 +1,13 @@
 /*
- * Space Grotesk is stored locally so production pages do not request fonts
+ * Nunito is stored locally so production pages do not request fonts
  * from a third party. Its SIL Open Font License is in ./fonts/OFL.txt.
  */
 @font-face {
-    font-family: 'Space Grotesk';
+    font-family: 'Nunito';
     font-style: normal;
-    font-weight: 300 700;
+    font-weight: 200 1000;
     font-display: swap;
-    src: url('./fonts/space-grotesk-latin-variable.woff2') format('woff2');
+    src: url('./fonts/nunito-latin-variable.woff2') format('woff2');
 }
 
 @layer base {
