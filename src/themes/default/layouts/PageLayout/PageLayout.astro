@@ -1,5 +1,6 @@
 ---
 import '../../styles/theme.css';
+import faviconUrl from '../../assets/favicon.svg?url';
 import Header from '../../components/organisms/Header/Header.astro';
 import Footer from '../../components/organisms/Footer/Footer.astro';
 import type { SiteConfig } from '../../../../lib/astropilot/types';
@@ -19,6 +20,7 @@ const documentTitle = `${title} | ${site.name}`;
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/svg+xml" sizes="any" href={faviconUrl} />
         <title>{documentTitle}</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={canonicalUrl(route, site)} />

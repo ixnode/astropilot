@@ -9,27 +9,31 @@
 
         h1 {
             font-size: var(--text-heading-1);
-            @apply font-bold;
+            @apply mb-5 font-bold;
         }
         h2 {
             font-size: var(--text-heading-2);
-            @apply font-bold;
+            @apply mb-4 font-bold;
         }
         h3 {
             font-size: var(--text-heading-3);
-            @apply font-medium;
+            @apply mb-3 font-medium;
         }
         h4 {
             font-size: var(--text-heading-4);
-            @apply font-medium;
+            @apply mb-2.5 font-medium;
         }
         h5 {
             font-size: var(--text-heading-5);
-            @apply font-medium;
+            @apply mb-2 font-medium;
         }
         h6 {
             font-size: var(--text-heading-6);
-            @apply font-medium;
+            @apply mb-2 font-medium;
+        }
+
+        :is(h1, h2, h3, h4, h5, h6) + * {
+            @apply mt-0;
         }
 
         > .ap-eyebrow + :is(h1, h2, h3, h4, h5, h6) {

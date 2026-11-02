@@ -2,6 +2,14 @@
     .ap-column {
         @apply flex;
 
+        > :first-child {
+            @apply mt-0;
+        }
+
+        > :last-child {
+            @apply mb-0;
+        }
+
         &.ap-column--span-1 {
             @apply lg:col-span-1;
         }
