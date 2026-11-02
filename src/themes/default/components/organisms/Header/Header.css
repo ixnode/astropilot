@@ -14,7 +14,7 @@
             }
 
             .ap-header__link {
-                @apply !text-lg !text-primary-content no-underline hover:no-underline;
+                @apply relative !text-lg !text-primary-content no-underline hover:no-underline;
 
                 &:hover {
                     --btn-bg: color-mix(
@@ -26,8 +26,18 @@
 
                 &[aria-current='page'] {
                     --btn-bg: transparent !important;
-                    --btn-border: var(--color-primary-content) !important;
+                    --btn-border: transparent !important;
                     @apply font-bold;
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        inset-inline: 0.75rem;
+                        bottom: 0;
+                        height: 2px;
+                        border-radius: 999px;
+                        background-color: currentColor;
+                    }
                 }
             }
         }
@@ -44,12 +54,6 @@
                 }
 
                 .ap-header__link {
-                    &[aria-current='page'] {
-                        --btn-bg: transparent !important;
-                        --btn-border: var(--color-base-content) !important;
-                        @apply font-bold;
-                    }
-
                     &:not([aria-current='page']):hover {
                         --btn-bg: color-mix(
                             in oklab,
