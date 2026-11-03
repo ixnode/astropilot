@@ -624,7 +624,8 @@ export function validateAstroPilotContent(
                         `disallowed link protocol: ${href}`,
                     );
                 if (href.startsWith('/')) {
-                    const [target, fragment] = href.split('#', 2);
+                    const [targetWithQuery, fragment] = href.split('#', 2);
+                    const [target] = targetWithQuery.split('?', 1);
                     const normalized =
                         target === ''
                             ? '/'

@@ -1,0 +1,50 @@
+import assert from 'node:assert/strict';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import test from 'node:test';
+import { validateAstroPilotContent } from '../src/lib/astropilot/validation';
+import { withBase } from '../src/lib/astropilot/urls';
+
+test('validates query links against their page path and preserves fragment checks', () => {
+    const directory = mkdtempSync(join(tmpdir(), 'astropilot-query-links-'));
+    try {
+        writeFileSync(
+            join(directory, 'page.yaml'),
+            'title: Start\ndescription: Link examples.\n',
+        );
+        mkdirSync(join(directory, 'faq'));
+        writeFileSync(
+            join(directory, 'faq/page.yaml'),
+            'title: FAQ\ndescription: Answers.\n',
+        );
+        const section = join(directory, '01-links.md');
+        writeFileSync(
+            section,
+            '## Links\n\n[FAQ](/faq/?ref=showcase)\n\n[FAQ title](/faq?ref=showcase#page-title)\n',
+        );
+        assert.doesNotThrow(() => validateAstroPilotContent(directory));
+        assert.equal(
+            withBase('/faq/?ref=showcase#page-title', '/demo/'),
+            '/demo/faq/?ref=showcase#page-title',
+        );
+        writeFileSync(
+            section,
+            '## Links\n\n[Missing page](/missing/?ref=showcase)\n',
+        );
+        assert.throws(
+            () => validateAstroPilotContent(directory),
+            /internal link target does not exist/,
+        );
+        writeFileSync(
+            section,
+            '## Links\n\n[Missing fragment](/faq/?ref=showcase#missing)\n',
+        );
+        assert.throws(
+            () => validateAstroPilotContent(directory),
+            /internal link fragment does not exist/,
+        );
+    } finally {
+        rmSync(directory, { recursive: true, force: true });
+    }
+});

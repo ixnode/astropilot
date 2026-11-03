@@ -1,13 +1,154 @@
 ---
-tone: brand
+tone: default
+fullWidth: true
 ---
 
 import { Eyebrow } from 'astropilot/components';
+import { Tabs, Tab } from 'astropilot/components';
+import { Card, CardActions } from 'astropilot/components';
 
 <Eyebrow>Verbindungen im Projekt</Eyebrow>
 
 ## Navigation und Links
 
-Der gemeinsame Header zeigt den aktuellen Navigationspunkt und ist auf jeder Seite verfügbar. Die globale Navigation und der Footer werden zentral in `site.yaml` gepflegt; dadurch brauchen Inhalte keine kopierten Linklisten.
+Header und Footer werden zentral in `site.yaml` gepflegt und auf allen Seiten ausgegeben. Im Header ist ein Link aktiv, wenn sein Ziel genau der aktuellen Seitenadresse entspricht; auf `/showcase/` wird beispielsweise „Showcase“ markiert. Unterseiten erhalten keine automatische Markierung ihres übergeordneten Navigationspunkts.
 
-[FAQ ansehen](/faq/) · [Konzept kennenlernen](/info/) · [Kontakt aufnehmen](/kontakt/)
+Die folgenden Beispiele zeigen Links innerhalb des Seiteninhalts. Die Vorschau ist jeweils anfangs geöffnet; unter „Code“ steht der passende Markdown- oder MDX-Ausschnitt für eine bestehende Inhaltsdatei. Das MDX-Beispiel enthält auch den benötigten Import.
+
+### Direkte Seitenlinks
+
+Eine kurze Liste bietet direkte Einstiege zu wichtigen Seiten. Interne Ziele werden ohne Deployment-Unterpfad geschrieben; AstroPilot ergänzt ihn automatisch.
+
+<Tabs label="Direkte Seitenlinks: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+        - [Antworten auf häufige Fragen](/faq/)
+        - [Das AstroPilot-Konzept kennenlernen](/info/)
+        - [Kontakt aufnehmen](/kontakt/)
+
+    </Tab>
+    <Tab title="Code">
+        ````markdown
+        - [Antworten auf häufige Fragen](/faq/)
+        - [Das AstroPilot-Konzept kennenlernen](/info/)
+        - [Kontakt aufnehmen](/kontakt/)
+        ````
+    </Tab>
+
+</Tabs>
+
+### Verlinktes Inhaltsverzeichnis
+
+Fragmentlinks führen zu einer Überschrift auf derselben Seite. AstroPilot setzt den Dateinamen vor die Überschriften-ID. Der Code bezieht sich auf diese Datei, 01-navigation.mdx; bei einem anderen Dateinamen muss der Präfix angepasst werden.
+
+<Tabs label="Verlinktes Inhaltsverzeichnis: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+        #### Einstieg in das Beispiel
+
+        [Zu den weiteren Informationen](#01-navigation-weitere-informationen)
+
+        #### Weitere Informationen
+
+        Überschriften erhalten eindeutige IDs. Das Sprungziel liegt hier im selben Vorschau-Panel.
+
+        [Zurück zum Einstieg](#01-navigation-einstieg-in-das-beispiel)
+
+    </Tab>
+    <Tab title="Code">
+        ````markdown
+        #### Einstieg in das Beispiel
+
+        [Zu den weiteren Informationen](#01-navigation-weitere-informationen)
+
+        #### Weitere Informationen
+
+        Überschriften erhalten eindeutige IDs. Das Sprungziel liegt hier im selben Vorschau-Panel.
+
+        [Zurück zum Einstieg](#01-navigation-einstieg-in-das-beispiel)
+        ````
+    </Tab>
+
+</Tabs>
+
+### Links mit Zusatzparametern
+
+Links können zusätzliche Parameter enthalten. Das Seitenziel bleibt gleich; Query-Parameter bleiben beim Ergänzen des Basispfads erhalten.
+
+<Tabs label="Links mit Zusatzparametern: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+        [FAQ aus dem Showcase öffnen](/faq/?ref=showcase)
+
+        [Info mit Herkunftsparameter öffnen](/info/?ref=navigation)
+
+    </Tab>
+    <Tab title="Code">
+        ````markdown
+        [FAQ aus dem Showcase öffnen](/faq/?ref=showcase)
+
+        [Info mit Herkunftsparameter öffnen](/info/?ref=navigation)
+        ````
+    </Tab>
+
+</Tabs>
+
+### Externe Links und E-Mail
+
+Externe URLs behalten ihre vollständige Adresse. Ein E-Mail-Link öffnet das Mailprogramm; kontakt@example.com ist hier eine Beispieladresse. Der Weblink wird im selben Browser-Tab geöffnet.
+
+<Tabs label="Externe Links und E-Mail: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+        Die [offizielle Astro-Dokumentation](https://docs.astro.build/) ergänzt die projektspezifischen Informationen.
+
+        [An die Beispieladresse schreiben](mailto:kontakt@example.com)
+
+    </Tab>
+    <Tab title="Code">
+        ````markdown
+        Die [offizielle Astro-Dokumentation](https://docs.astro.build/) ergänzt die projektspezifischen Informationen.
+
+        [An die Beispieladresse schreiben](mailto:kontakt@example.com)
+        ````
+    </Tab>
+
+</Tabs>
+
+### Weiterführende Aktionen
+
+CardActions stellt Navigationslinks innerhalb einer Card als Schaltflächen dar. Da sie zu anderen Seiten führen, bleiben es semantisch Links.
+
+<Tabs label="Weiterführende Aktionen: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+        <Card>
+            #### Das Layout kennenlernen
+
+            Entdecke die Spaltenaufteilungen im Showcase oder lies die Dokumentation zu den Bausteinen.
+
+            <CardActions>
+                [Layout ansehen](/showcase/layout/)
+                [Komponenten verstehen](/dokumentation/layout/)
+            </CardActions>
+        </Card>
+
+    </Tab>
+    <Tab title="Code">
+        ````mdx
+        import { Card, CardActions } from 'astropilot/components';
+
+        <Card>
+            #### Das Layout kennenlernen
+
+            Entdecke die Spaltenaufteilungen im Showcase oder lies die Dokumentation zu den Bausteinen.
+
+            <CardActions>
+                [Layout ansehen](/showcase/layout/)
+                [Komponenten verstehen](/dokumentation/layout/)
+            </CardActions>
+        </Card>
+        ````
+    </Tab>
+
+</Tabs>
