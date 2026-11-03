@@ -224,6 +224,23 @@ Fenced code blocks use Astro's built-in Shiki highlighter. Specify the language 
 
 ## Structure and Theme
 
+`ContentTable` wraps exactly one Markdown table in an MDX section. Its required `caption` becomes a native table caption. Optional props are `variant="plain|striped"`, `density="comfortable|compact"`, a boolean `wide` flag, and a one-based `highlight={2}` body-row index. Keep blank lines between the component tags and Markdown table. Column alignment uses standard Markdown colons. `wide` preserves a minimum table width of 60rem inside a keyboard-focusable horizontal scroll region.
+
+```mdx
+import { ContentTable } from 'astropilot/components';
+
+<ContentTable caption="Example projects" variant="striped">
+
+    | Project | Status | Pages |
+    | :--- | :---: | ---: |
+    | North | Draft | 12 |
+    | South | Reviewed | 8 |
+
+</ContentTable>
+```
+
+This MDX component requires the AstroPilot configuration: a small rehype transform adds the caption, column-header scopes, and optional row marker to Astro's existing table AST. Validation uses `remark-gfm` to inspect the same Markdown table structure. No custom table parser or browser JavaScript is needed. Plain Markdown tables remain supported; `/showcase/tabellen/` demonstrates the enhanced component.
+
 `FoundationSample` is a fixed visual theme specimen exported from `astropilot/components`. Its required `kind` prop accepts `colors`, `type`, `spacing`, `radius`, `shadow`, or `focus`; it accepts no other props or children. For example, `<FoundationSample kind="colors" />` displays labeled swatches using the actual theme variables. It illustrates the theme rather than providing a general layout language. `/showcase/foundations/` contains live specimens and usage/CSS examples; the detailed token reference lives on `/dokumentation/theme/`.
 
 The small reusable content and URL logic lives in `src/lib/astropilot/`. It knows neither demo text nor Tailwind or DaisyUI classes. The default theme lives in `src/themes/default/` and includes the layout, header, hero, sections, and footer. DaisyUI is actively used there for navigation and theme elements.

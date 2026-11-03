@@ -1,0 +1,59 @@
+@layer components {
+    .ap-content-table {
+        @apply my-5 max-w-full overflow-x-auto rounded-box border border-base-300 bg-base-100 text-base-content;
+        overscroll-behavior-inline: contain;
+
+        table {
+            @apply table;
+            overflow-wrap: normal;
+
+            caption {
+                @apply px-4 py-4 text-left text-base font-semibold text-base-content;
+                caption-side: top;
+            }
+
+            th {
+                @apply text-base-content;
+            }
+
+            th,
+            td {
+                vertical-align: top;
+
+                &[align='left'] {
+                    text-align: left;
+                }
+                &[align='center'] {
+                    text-align: center;
+                }
+                &[align='right'] {
+                    text-align: right;
+                }
+            }
+
+            tr[data-highlighted] {
+                background-color: var(--color-base-200);
+                font-weight: 600;
+                box-shadow: inset 3px 0 var(--color-primary);
+            }
+        }
+
+        &.ap-content-table--striped {
+            table {
+                @apply table-zebra;
+            }
+        }
+
+        &.ap-content-table--compact {
+            table {
+                @apply table-sm;
+            }
+        }
+
+        &.ap-content-table--wide {
+            table {
+                min-width: 60rem;
+            }
+        }
+    }
+}

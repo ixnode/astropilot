@@ -1,0 +1,274 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Eyebrow } from 'astropilot/components';
+import { Tabs, Tab } from 'astropilot/components';
+import { ContentTable } from 'astropilot/components';
+
+<Eyebrow>Daten verständlich darstellen</Eyebrow>
+
+## Tabellen vergleichen und einbinden
+
+Tabellen machen vergleichbare Informationen übersichtlich. `ContentTable` ergänzt eine normale Markdown-Tabelle um Beschriftung und Darstellungsvarianten. Breite Tabellen lassen sich im eigenen Bereich horizontal scrollen. Die Vorschau ist jeweils anfangs geöffnet; unter „Code“ steht der passende Markdown- oder MDX-Ausschnitt. Die Komponentenbeispiele enthalten auch den benötigten Import.
+
+Das erste Beispiel zeigt eine einfache Tabelle mit [normalem Markdown](/showcase/typografie/). Danach folgen die erweiterten Möglichkeiten mit `ContentTable`. Alle Beispiele enthalten bewusst Beispieldaten.
+
+### Einfache Markdown-Tabelle
+
+Für diese Tabelle brauchst du weder eine Komponente noch einen Import. Sie verwendet die allgemeine Markdown-Typografie und lässt sich in `.md`- und `.mdx`-Inhalte einfügen. Die Daten sind identisch mit der anschließenden beschrifteten Basistabelle.
+
+<Tabs label="Einfache Markdown-Tabelle: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+        | Inhalt | Datei |
+        | --- | --- |
+        | Seiteneinstellungen | `page.yaml` |
+        | Hero | `hero.md` |
+        | Abschnitt | `01-einleitung.md` |
+
+    </Tab>
+    <Tab title="Code">
+
+        ````markdown
+        | Inhalt | Datei |
+        | --- | --- |
+        | Seiteneinstellungen | `page.yaml` |
+        | Hero | `hero.md` |
+        | Abschnitt | `01-einleitung.md` |
+        ````
+
+    </Tab>
+
+</Tabs>
+
+### Beschriftete Basistabelle
+
+Eine sichtbare Tabellenbeschriftung benennt den Inhalt. Die erste Zeile enthält die Spaltenüberschriften; diese werden auch für assistive Technologien als Spaltenköpfe ausgezeichnet.
+
+<Tabs label="Beschriftete Basistabelle: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+        <ContentTable caption="Dateien im Seitenverzeichnis">
+
+        | Inhalt | Datei |
+        | --- | --- |
+        | Seiteneinstellungen | `page.yaml` |
+        | Hero | `hero.md` |
+        | Abschnitt | `01-einleitung.md` |
+
+        </ContentTable>
+
+    </Tab>
+    <Tab title="Code">
+
+        ````mdx
+        import { ContentTable } from 'astropilot/components';
+
+        <ContentTable caption="Dateien im Seitenverzeichnis">
+
+        | Inhalt | Datei |
+        | --- | --- |
+        | Seiteneinstellungen | `page.yaml` |
+        | Hero | `hero.md` |
+        | Abschnitt | `01-einleitung.md` |
+
+        </ContentTable>
+        ````
+
+    </Tab>
+
+</Tabs>
+
+### Spalten passend ausrichten
+
+Die Doppelpunkte in der Markdown-Trennzeile bestimmen die Ausrichtung: links für Namen, mittig für kurze Statusangaben und rechts für Zahlen.
+
+<Tabs label="Spalten passend ausrichten: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+        <ContentTable caption="Beispielprojekte und Seitenumfang">
+
+        | Projekt | Status | Seiten |
+        | :--- | :---: | ---: |
+        | Nord | In Arbeit | 12 |
+        | Süd | Geprüft | 8 |
+        | West | Geplant | 3 |
+
+        </ContentTable>
+
+    </Tab>
+    <Tab title="Code">
+
+        ````mdx
+        import { ContentTable } from 'astropilot/components';
+
+        <ContentTable caption="Beispielprojekte und Seitenumfang">
+
+        | Projekt | Status | Seiten |
+        | :--- | :---: | ---: |
+        | Nord | In Arbeit | 12 |
+        | Süd | Geprüft | 8 |
+        | West | Geplant | 3 |
+
+        </ContentTable>
+        ````
+
+    </Tab>
+
+</Tabs>
+
+### Abwechselnde Zeilenflächen
+
+Dezente Streifen erleichtern es, einer Zeile über mehrere Spalten zu folgen. Die Daten und ihre Reihenfolge bleiben unverändert.
+
+<Tabs label="Abwechselnde Zeilenflächen: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+        <ContentTable caption="Arbeitsschritte im Überblick" variant="striped">
+
+        | Schritt | Aufgabe |
+        | --- | --- |
+        | Planen | Themen und Zuständigkeiten festlegen |
+        | Schreiben | Inhalte in Markdown pflegen |
+        | Prüfen | Links und Ausgabe kontrollieren |
+        | Freigeben | Ergebnis gemeinsam bewerten |
+
+        </ContentTable>
+
+    </Tab>
+    <Tab title="Code">
+
+        ````mdx
+        import { ContentTable } from 'astropilot/components';
+
+        <ContentTable caption="Arbeitsschritte im Überblick" variant="striped">
+
+        | Schritt | Aufgabe |
+        | --- | --- |
+        | Planen | Themen und Zuständigkeiten festlegen |
+        | Schreiben | Inhalte in Markdown pflegen |
+        | Prüfen | Links und Ausgabe kontrollieren |
+        | Freigeben | Ergebnis gemeinsam bewerten |
+
+        </ContentTable>
+        ````
+
+    </Tab>
+
+</Tabs>
+
+### Eine Datenzeile hervorheben
+
+highlight zählt Datenzeilen ab eins, ohne die Kopfzeile. Die zweite Zeile erhält hier eine betonte Fläche und eine seitliche Markierung. Der ausgeschriebene Status macht die Bedeutung zusätzlich verständlich.
+
+<Tabs label="Eine Datenzeile hervorheben: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+        <ContentTable caption="Bearbeitungsstand – Beispieldaten" highlight={2}>
+
+        | Bereich | Status | Nächster Schritt |
+        | --- | --- | --- |
+        | Startseite | Erledigt | Ergebnis prüfen |
+        | Info | **Aktuell** | Details überarbeiten |
+        | FAQ | Offen | Fragen sammeln |
+
+        </ContentTable>
+
+    </Tab>
+    <Tab title="Code">
+
+        ````mdx
+        import { ContentTable } from 'astropilot/components';
+
+        <ContentTable caption="Bearbeitungsstand – Beispieldaten" highlight={2}>
+
+        | Bereich | Status | Nächster Schritt |
+        | --- | --- | --- |
+        | Startseite | Erledigt | Ergebnis prüfen |
+        | Info | **Aktuell** | Details überarbeiten |
+        | FAQ | Offen | Fragen sammeln |
+
+        </ContentTable>
+        ````
+
+    </Tab>
+
+</Tabs>
+
+### Kompakte Darstellung
+
+Weniger Zellabstand schafft Platz für größere Datenmengen. Inhalt und Beschriftung folgen denselben Regeln wie in der Basistabelle.
+
+<Tabs label="Kompakte Darstellung: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+        <ContentTable caption="Dateien im Seitenverzeichnis – kompakt" density="compact">
+
+        | Inhalt | Datei |
+        | --- | --- |
+        | Seiteneinstellungen | `page.yaml` |
+        | Hero | `hero.md` |
+        | Abschnitt | `01-einleitung.md` |
+
+        </ContentTable>
+
+    </Tab>
+    <Tab title="Code">
+
+        ````mdx
+        import { ContentTable } from 'astropilot/components';
+
+        <ContentTable caption="Dateien im Seitenverzeichnis – kompakt" density="compact">
+
+        | Inhalt | Datei |
+        | --- | --- |
+        | Seiteneinstellungen | `page.yaml` |
+        | Hero | `hero.md` |
+        | Abschnitt | `01-einleitung.md` |
+
+        </ContentTable>
+        ````
+
+    </Tab>
+
+</Tabs>
+
+### Breite Tabellen auf kleinen Bildschirmen
+
+Die Tabelle behält ihre Spaltenbreite und scrollt innerhalb ihres eigenen Bereichs. Auf Mobilgeräten kannst du horizontal wischen. Mit der Tabulatortaste erreichst du den Tabellenbereich und kannst ihn mit den Pfeiltasten horizontal bewegen.
+
+<Tabs label="Breite Tabellen auf kleinen Bildschirmen: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+        <ContentTable caption="Redaktionsplan – Beispieldaten" variant="striped" density="compact" wide>
+
+        | Seite | Zuständigkeit | Status | Sprache | Planung | Prüfung | Freigabe | Hinweis |
+        | --- | --- | --- | --- | --- | --- | --- | --- |
+        | Startseite | Redaktion | Entwurf | Deutsch | Woche 1 | Redaktion | Team | Einstieg überarbeiten |
+        | Info | Entwicklung | In Arbeit | Deutsch | Woche 2 | Entwicklung | Team | Beispiele ergänzen |
+        | FAQ | Redaktion | Geplant | Deutsch | Woche 3 | Redaktion | Team | Häufige Fragen sammeln |
+
+        </ContentTable>
+
+    </Tab>
+    <Tab title="Code">
+
+        ````mdx
+        import { ContentTable } from 'astropilot/components';
+
+        <ContentTable caption="Redaktionsplan – Beispieldaten" variant="striped" density="compact" wide>
+
+        | Seite | Zuständigkeit | Status | Sprache | Planung | Prüfung | Freigabe | Hinweis |
+        | --- | --- | --- | --- | --- | --- | --- | --- |
+        | Startseite | Redaktion | Entwurf | Deutsch | Woche 1 | Redaktion | Team | Einstieg überarbeiten |
+        | Info | Entwicklung | In Arbeit | Deutsch | Woche 2 | Entwicklung | Team | Beispiele ergänzen |
+        | FAQ | Redaktion | Geplant | Deutsch | Woche 3 | Redaktion | Team | Häufige Fragen sammeln |
+
+        </ContentTable>
+        ````
+
+    </Tab>
+
+</Tabs>

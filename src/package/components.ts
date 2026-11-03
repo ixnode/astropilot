@@ -1,4 +1,5 @@
 export { default as Alert } from '../themes/default/components/molecules/Alert/Alert.astro';
+export { default as ContentTable } from '../themes/default/components/molecules/ContentTable/ContentTable.astro';
 export { default as FoundationSample } from '../themes/default/components/molecules/FoundationSample/FoundationSample.astro';
 export { default as Tabs } from '../themes/default/components/molecules/Tabs/Tabs.astro';
 export { default as Tab } from '../themes/default/components/atoms/Tab/Tab.astro';

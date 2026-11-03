@@ -7,6 +7,7 @@ import { parse as parseYaml } from 'yaml';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkMdx from 'remark-mdx';
+import remarkGfm from 'remark-gfm';
 import { visit } from 'unist-util-visit';
 import { loadSiteConfig } from './site-config';
 import { tones } from './types';
@@ -53,6 +54,8 @@ const cardComponentImport =
     /^import\s*\{\s*Card(?:\s*,\s*CardActions)?\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
 const tabsComponentImport =
     /^import\s*\{\s*Tabs\s*,\s*Tab\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
+const contentTableImport =
+    /^import\s*\{\s*ContentTable\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
 const foundationSampleImport =
     /^import\s*\{\s*FoundationSample\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
 const localImageImport =
@@ -103,7 +106,7 @@ function frontmatterAndTree(path: string) {
     const match = source.match(/^---\s*\n([\s\S]*?)\n---\s*\n?/);
     const frontmatter = match ? parseYaml(match[1]) : {};
     const body = match ? source.slice(match[0].length) : source;
-    const processor = unified().use(remarkParse);
+    const processor = unified().use(remarkParse).use(remarkGfm);
     if (path.endsWith('.mdx')) processor.use(remarkMdx);
     return { frontmatter, tree: processor.parse(body) };
 }
@@ -116,6 +119,7 @@ function validateMdxLayout(
     let hasComponentImport = false;
     let columnsCount = 0;
     let tabsCount = 0;
+    let contentTableCount = 0;
     let foundationSampleCount = 0;
     let alertCount = 0;
     let contentImageCount = 0;
@@ -146,7 +150,8 @@ function validateMdxLayout(
                     !contentImageComponentImport.test(importValue) &&
                     !cardComponentImport.test(importValue) &&
                     !tabsComponentImport.test(importValue) &&
-                    !foundationSampleImport.test(importValue)
+                    !foundationSampleImport.test(importValue) &&
+                    !contentTableImport.test(importValue)
                 )
                     fail(
                         contentRoot,
@@ -165,7 +170,73 @@ function validateMdxLayout(
             mdxNode.type === 'mdxJsxFlowElement' ||
             mdxNode.type === 'mdxJsxTextElement'
         ) {
-            if (mdxNode.name === 'FoundationSample') {
+            if (mdxNode.name === 'ContentTable') {
+                contentTableCount += 1;
+                const attributes = mdxNode.attributes ?? [];
+                const caption = attributes.find(
+                    (attribute) => attribute.name === 'caption',
+                );
+                const variant = attributes.find(
+                    (attribute) => attribute.name === 'variant',
+                );
+                const density = attributes.find(
+                    (attribute) => attribute.name === 'density',
+                );
+                const wide = attributes.find(
+                    (attribute) => attribute.name === 'wide',
+                );
+                const highlight = attributes.find(
+                    (attribute) => attribute.name === 'highlight',
+                );
+                const highlightValue = highlight?.value;
+                const rowNumber = Number(
+                    highlightValue && typeof highlightValue === 'object'
+                        ? highlightValue.value
+                        : undefined,
+                );
+                const children = (mdxNode.children ?? []).filter(
+                    (child) => !(child.type === 'text' && !child.value?.trim()),
+                );
+                const table = children[0];
+                const rowCount = (table?.children?.length ?? 1) - 1;
+                if (
+                    attributes.some(
+                        (attribute) =>
+                            attribute.type !== 'mdxJsxAttribute' ||
+                            ![
+                                'caption',
+                                'variant',
+                                'density',
+                                'wide',
+                                'highlight',
+                            ].includes(attribute.name ?? ''),
+                    ) ||
+                    new Set(attributes.map((attribute) => attribute.name))
+                        .size !== attributes.length ||
+                    typeof caption?.value !== 'string' ||
+                    !caption.value.trim() ||
+                    (variant &&
+                        !['plain', 'striped'].includes(
+                            String(variant.value),
+                        )) ||
+                    (density &&
+                        !['comfortable', 'compact'].includes(
+                            String(density.value),
+                        )) ||
+                    (wide && wide.value !== null) ||
+                    children.length !== 1 ||
+                    table?.type !== 'table' ||
+                    (highlight &&
+                        (!Number.isInteger(rowNumber) ||
+                            rowNumber < 1 ||
+                            rowNumber > rowCount))
+                )
+                    fail(
+                        contentRoot,
+                        path,
+                        'ContentTable requires a caption and exactly one Markdown table; variant is plain or striped, density is comfortable or compact, wide is a boolean flag, and highlight must be an existing body row number',
+                    );
+            } else if (mdxNode.name === 'FoundationSample') {
                 foundationSampleCount += 1;
                 const attributes = mdxNode.attributes ?? [];
                 const kind = attributes[0];
@@ -520,6 +591,7 @@ function validateMdxLayout(
         !hasComponentImport ||
         (columnsCount === 0 &&
             tabsCount === 0 &&
+            contentTableCount === 0 &&
             foundationSampleCount === 0 &&
             alertCount === 0 &&
             contentImageCount === 0 &&

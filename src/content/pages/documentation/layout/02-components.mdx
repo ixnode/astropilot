@@ -8,7 +8,7 @@ import { Eyebrow } from 'astropilot/components';
 
 ## Verfügbare Komponenten
 
-AstroPilot exportiert geprüfte Komponenten aus `astropilot/components`. Aktuell gehören dazu `Columns`, `Column`, `Eyebrow`, `Alert`, `ContentImage`, `Card`, `CardActions`, `Tabs`, `Tab` und `FoundationSample`.
+AstroPilot exportiert geprüfte Komponenten aus `astropilot/components`. Aktuell gehören dazu `Columns`, `Column`, `Eyebrow`, `Alert`, `ContentImage`, `ContentTable`, `Card`, `CardActions`, `Tabs`, `Tab` und `FoundationSample`.
 
 ### Eyebrow vor einer Überschrift
 
@@ -59,3 +59,24 @@ import { FoundationSample } from 'astropilot/components';
 ```
 
 Die [Foundations-Seite](/showcase/foundations/) zeigt alle sechs Proben mit Einbindungscode und den zugehörigen CSS-Ausschnitten.
+
+### Tabellen mit Beschriftung und Varianten
+
+`ContentTable` enthält genau eine normale Markdown-Tabelle. `caption` ist eine erforderliche, sichtbare Tabellenbeschriftung. Optional sind `variant="plain|striped"`, `density="comfortable|compact"`, die boolesche Prop `wide` und `highlight={2}` zum Hervorheben einer vorhandenen Datenzeile. Datenzeilen zählen ab eins; die Kopfzeile zählt nicht mit.
+
+```mdx
+import { ContentTable } from 'astropilot/components';
+
+<ContentTable caption="Beispielprojekte" variant="striped">
+
+    | Projekt | Status | Seiten |
+    | :--- | :---: | ---: |
+    | Nord | In Arbeit | 12 |
+    | Süd | Geprüft | 8 |
+
+</ContentTable>
+```
+
+Leerzeilen vor und nach der Tabelle trennen das Markdown vom MDX-Baustein. Die Markdown-Trennzeile steuert die Spaltenausrichtung. Eine kleine Transformation im bestehenden Markdown-AST ergänzt die native Beschriftung, `scope="col"` für die Kopfzellen und gegebenenfalls die Zeilenmarkierung. Der Baustein setzt AstroPilots MDX-Konfiguration voraus; ein eigener Tabellenparser wird nicht verwendet.
+
+Mit `wide` bleibt die Tabelle mindestens 60rem breit und lässt sich innerhalb ihres fokussierbaren Bereichs horizontal scrollen. Der Seiteninhalt selbst wird nicht verbreitert. Die [Tabellen-Beispiele](/showcase/tabellen/) zeigen alle Varianten mit Vorschau und vollständigem Code.

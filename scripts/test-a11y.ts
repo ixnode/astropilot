@@ -60,6 +60,7 @@ const port = await new Promise<number>((resolvePort, reject) => {
 });
 const baseUrl = `http://127.0.0.1:${port}`;
 const routes = [
+    '/showcase/tabellen/',
     '/showcase/tabs/',
     '/',
     '/faq/',
@@ -131,6 +132,238 @@ try {
                 throw new Error(
                     `${viewport.name} ${route}: viewport overflows horizontally`,
                 );
+            if (route === '/showcase/tabellen/') {
+                const examples = page.locator('.content-prose > .ap-tabs');
+                assert.equal(await examples.count(), 7);
+                const basic = examples.first();
+                const basicPreview = basic.getByRole('tab', {
+                    name: 'Vorschau',
+                    exact: true,
+                });
+                const basicCode = basic.getByRole('tab', {
+                    name: 'Code',
+                    exact: true,
+                });
+                assert.equal(
+                    await basicPreview.getAttribute('aria-selected'),
+                    'true',
+                );
+                const basicTable = basic
+                    .getByRole('tabpanel')
+                    .getByRole('table');
+                assert.equal(await basicTable.count(), 1);
+                assert.equal(await basicTable.locator('caption').count(), 0);
+                assert.equal(
+                    await basic.locator('.ap-content-table').count(),
+                    0,
+                );
+                const basicRows = await basicTable
+                    .locator('tbody tr')
+                    .allTextContents();
+                await basicCode.click();
+                const markdown = await basic
+                    .getByRole('tabpanel')
+                    .locator('pre[data-language="markdown"]')
+                    .innerText();
+                assert(markdown.includes('| Inhalt'));
+                assert(
+                    !markdown.includes('ContentTable') &&
+                        !markdown.includes('import '),
+                );
+                await basicCode.press('ArrowLeft');
+                assert.equal(
+                    await basicPreview.getAttribute('aria-selected'),
+                    'true',
+                );
+                const groups = examples.filter({
+                    has: page.locator('.ap-content-table'),
+                });
+                assert.equal(await groups.count(), 6);
+                assert.deepEqual(
+                    await groups
+                        .first()
+                        .getByRole('tabpanel')
+                        .locator('tbody tr')
+                        .allTextContents(),
+                    basicRows,
+                );
+                let comfortablePadding = 0;
+                for (let index = 0; index < 6; index += 1) {
+                    const group = groups.nth(index);
+                    const preview = group.getByRole('tab', {
+                        name: 'Vorschau',
+                        exact: true,
+                    });
+                    const code = group.getByRole('tab', {
+                        name: 'Code',
+                        exact: true,
+                    });
+                    assert.equal(
+                        await preview.getAttribute('aria-selected'),
+                        'true',
+                    );
+                    const panel = group.getByRole('tabpanel');
+                    const region = panel.getByRole('region');
+                    const table = region.getByRole('table');
+                    assert.equal(await table.count(), 1);
+                    const caption = await table.locator('caption').innerText();
+                    assert(caption.trim());
+                    assert.equal(
+                        await region
+                            .getByRole('table', { name: caption, exact: true })
+                            .count(),
+                        1,
+                    );
+                    assert(
+                        await table
+                            .locator('th')
+                            .evaluateAll((elements) =>
+                                elements.every(
+                                    (element) =>
+                                        element.getAttribute('scope') === 'col',
+                                ),
+                            ),
+                    );
+                    if (index === 0)
+                        comfortablePadding = await table
+                            .locator('tbody td')
+                            .first()
+                            .evaluate((element) =>
+                                parseFloat(
+                                    getComputedStyle(element).paddingTop,
+                                ),
+                            );
+                    if (index === 1) {
+                        const alignments = await table
+                            .locator('thead th')
+                            .evaluateAll((elements) =>
+                                elements.map(
+                                    (element) =>
+                                        getComputedStyle(element).textAlign,
+                                ),
+                            );
+                        assert.deepEqual(alignments, [
+                            'left',
+                            'center',
+                            'right',
+                        ]);
+                    }
+                    if (index === 2) {
+                        const backgrounds = await table
+                            .locator('tbody tr')
+                            .evaluateAll((elements) =>
+                                elements.map(
+                                    (element) =>
+                                        getComputedStyle(element)
+                                            .backgroundColor,
+                                ),
+                            );
+                        assert.notEqual(backgrounds[0], backgrounds[1]);
+                    }
+                    if (index === 3) {
+                        const marked = table.locator(
+                            'tbody tr[data-highlighted]',
+                        );
+                        assert.equal(await marked.count(), 1);
+                        assert((await marked.innerText()).includes('Aktuell'));
+                        assert.equal(
+                            await table
+                                .locator('tbody tr')
+                                .nth(1)
+                                .getAttribute('data-highlighted'),
+                            'true',
+                        );
+                    }
+                    if (index === 4) {
+                        const compactPadding = await table
+                            .locator('tbody td')
+                            .first()
+                            .evaluate((element) =>
+                                parseFloat(
+                                    getComputedStyle(element).paddingTop,
+                                ),
+                            );
+                        assert(
+                            compactPadding < comfortablePadding,
+                            'Compact tables must reduce cell padding',
+                        );
+                    }
+                    if (index === 5) {
+                        const bounds = await table.boundingBox();
+                        assert(bounds && bounds.width >= 960);
+                        if (viewport.name === 'mobile') {
+                            assert(
+                                await region.evaluate(
+                                    (element) =>
+                                        element.scrollWidth >
+                                        element.clientWidth,
+                                ),
+                            );
+                            await preview.focus();
+                            await page.keyboard.press('Tab');
+                            assert(
+                                await panel.evaluate(
+                                    (element) =>
+                                        element === document.activeElement,
+                                ),
+                            );
+                            await page.keyboard.press('Tab');
+                            assert(
+                                await region.evaluate(
+                                    (element) =>
+                                        element === document.activeElement &&
+                                        element.matches(':focus-visible'),
+                                ),
+                            );
+                            await page.keyboard.press('ArrowRight');
+                            await page.waitForFunction(() => {
+                                const element = document.querySelector(
+                                    '.ap-content-table--wide',
+                                );
+                                return (
+                                    element !== null && element.scrollLeft > 0
+                                );
+                            });
+                            await region.evaluate((element) => {
+                                element.scrollLeft = 0;
+                            });
+                        }
+                    }
+                    await code.click();
+                    const source = await group
+                        .getByRole('tabpanel')
+                        .locator('pre[data-language="mdx"]')
+                        .innerText();
+                    assert(
+                        source.includes(
+                            "import { ContentTable } from 'astropilot/components';",
+                        ),
+                    );
+                    assert(source.includes(caption));
+                    assert(
+                        await page.evaluate(
+                            () =>
+                                document.documentElement.scrollWidth <=
+                                innerWidth,
+                        ),
+                    );
+                    await code.press('ArrowLeft');
+                    assert.equal(
+                        await preview.getAttribute('aria-selected'),
+                        'true',
+                    );
+                }
+                await page.evaluate(() => window.scrollTo(0, 0));
+                await page.waitForFunction(() => window.scrollY === 0);
+                await page.waitForTimeout(250);
+                await page.screenshot({
+                    path: join(
+                        tmpdir(),
+                        `astropilot-tables-${viewport.name}.png`,
+                    ),
+                    fullPage: true,
+                });
+            }
             if (route === '/showcase/tabs/') {
                 const examples = page.locator('.content-prose > .ap-tabs');
                 assert.equal(await examples.count(), 3);
@@ -645,6 +878,12 @@ try {
         await staticPage.locator('.ap-foundation-sample:visible').count(),
         6,
     );
+    await staticPage.goto(`${baseUrl}/showcase/tabellen/`);
+    assert.equal(
+        await staticPage.locator('.ap-content-table:visible').count(),
+        6,
+    );
+    assert.equal(await staticPage.locator('caption:visible').count(), 6);
     await staticContext.close();
     await browser.close();
     console.log(

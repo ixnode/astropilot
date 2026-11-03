@@ -1,0 +1,42 @@
+---
+interface Props {
+    caption: string;
+    variant?: 'plain' | 'striped';
+    density?: 'comfortable' | 'compact';
+    wide?: boolean;
+    highlight?: number;
+}
+
+const {
+    caption,
+    variant = 'plain',
+    density = 'comfortable',
+    wide = false,
+    highlight,
+} = Astro.props;
+if (
+    !caption?.trim() ||
+    !['plain', 'striped'].includes(variant) ||
+    !['comfortable', 'compact'].includes(density) ||
+    typeof wide !== 'boolean' ||
+    (highlight !== undefined && (!Number.isInteger(highlight) || highlight < 1))
+)
+    throw new Error(
+        'ContentTable requires a caption; variant is plain or striped, density is comfortable or compact, wide is boolean, and highlight is a positive row number.',
+    );
+---
+
+<div
+    class:list={[
+        'ap-content-table',
+        'not-prose',
+        variant === 'striped' && 'ap-content-table--striped',
+        density === 'compact' && 'ap-content-table--compact',
+        wide && 'ap-content-table--wide',
+    ]}
+    role="region"
+    aria-label={`Tabellenbereich: ${caption}`}
+    tabindex="0"
+>
+    <slot />
+</div>
