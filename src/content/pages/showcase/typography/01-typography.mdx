@@ -1,31 +1,209 @@
 ---
 tone: default
+fullWidth: true
 ---
 
 import { Eyebrow } from 'astropilot/components';
+import { Tabs, Tab } from 'astropilot/components';
 
 <Eyebrow>Lesbare Inhalte</Eyebrow>
 
 ## Inhaltstypografie
 
-Normales Markdown bleibt der Standard für Inhalte. Es erhält im Theme eine lesbare Typografie und muss keine Klassen oder HTML-Fragmente enthalten.
+Normales Markdown bleibt der Standard für Inhalte. Es erhält im Theme eine lesbare Typografie und benötigt weder Klassen noch HTML-Fragmente. Jedes Beispiel zeigt zunächst die Vorschau; unter „Code“ findest du den passenden Markdown-Ausschnitt zum Einfügen in eine bestehende Inhaltsdatei. Die Vorschau/Code-Tabs selbst gehören nur zur Darstellung der Beispiele.
 
-### Listen und Links
+### Absätze und Hervorhebungen
 
-- Klare Absätze und sinnvolle Überschriften strukturieren den Inhalt.
-- [Interne Links](/info/) bleiben unter dem Deployment-Basispfad funktionsfähig.
-- `Inline-Code` eignet sich für Dateinamen und kurze technische Begriffe.
+Absätze gliedern längere Texte. Fett und kursiv gesetzte Wörter heben einzelne Aussagen gezielt hervor.
 
-### Zitat, Code und Tabelle
+<Tabs label="Absätze und Hervorhebungen: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        Ein klarer Absatz behandelt einen zusammengehörigen Gedanken. Ein neuer Absatz schafft Raum für den nächsten Aspekt.
 
-> Inhalte und Darstellung bleiben getrennt. Autoren beschreiben den Inhalt, Entwickler pflegen die verfügbaren Bausteine.
+        **Wichtige Aussagen** lassen sich hervorheben. *Kursive Begriffe* setzen eine feinere Betonung. Die Bedeutung bleibt auch ohne besondere Gestaltung verständlich.
+    </Tab>
+    <Tab title="Code">
+        ````markdown
+        Ein klarer Absatz behandelt einen zusammengehörigen Gedanken. Ein neuer Absatz schafft Raum für den nächsten Aspekt.
 
-```text
-src/content/pages/showcase/
-```
+        **Wichtige Aussagen** lassen sich hervorheben. *Kursive Begriffe* setzen eine feinere Betonung. Die Bedeutung bleibt auch ohne besondere Gestaltung verständlich.
+        ````
+    </Tab>
 
-| Inhalt              | Pflegeort                       |
-| ------------------- | ------------------------------- |
-| Seitentitel und SEO | `page.yaml`                     |
-| Hero-Text           | `hero.md`                       |
-| Abschnitte          | `NN-name.md` oder `NN-name.mdx` |
+</Tabs>
+
+### Überschriften und Hierarchie
+
+Die sichtbare Hauptüberschrift kommt aus dem Seitenlayout; Inhaltsabschnitte beginnen mit h2. Die Beispiele dieser Seite stehen unter h3. Hier zeigen h4 bis h6 die weitere Gliederung, ohne eine Ebene zu überspringen.
+
+<Tabs label="Überschriften und Hierarchie: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        #### Ein Thema vertiefen
+
+        Eine Überschrift benennt den folgenden Inhalt präzise.
+
+        ##### Einen Einzelaspekt erläutern
+
+        Unterüberschriften gliedern umfangreichere Themen.
+
+        ###### Ein Detail beschreiben
+
+        Weitere Ebenen sind möglich, sollten aber nur bei entsprechend tief gegliederten Inhalten verwendet werden.
+    </Tab>
+    <Tab title="Code">
+        ````markdown
+        #### Ein Thema vertiefen
+
+        Eine Überschrift benennt den folgenden Inhalt präzise.
+
+        ##### Einen Einzelaspekt erläutern
+
+        Unterüberschriften gliedern umfangreichere Themen.
+
+        ###### Ein Detail beschreiben
+
+        Weitere Ebenen sind möglich, sollten aber nur bei entsprechend tief gegliederten Inhalten verwendet werden.
+        ````
+    </Tab>
+
+</Tabs>
+
+### Aufzählungen und nummerierte Listen
+
+Aufzählungen gruppieren gleichrangige Punkte. Nummerierte Listen machen eine Reihenfolge deutlich; Unterpunkte ergänzen einen einzelnen Schritt.
+
+<Tabs label="Aufzählungen und nummerierte Listen: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        #### Auf einen Blick
+
+        - Texte bleiben in Markdown gepflegt.
+        - Einstellungen stehen in YAML-Dateien.
+        - Geprüfte Komponenten übernehmen die Darstellung.
+
+        #### Schritt für Schritt
+
+        1. Eine Inhaltsdatei öffnen.
+        2. Den Inhalt bearbeiten.
+            - Aussagekräftige Überschriften verwenden.
+            - Links und Alternativtexte prüfen.
+        3. Das Ergebnis in der Vorschau kontrollieren.
+    </Tab>
+    <Tab title="Code">
+        ````markdown
+        #### Auf einen Blick
+
+        - Texte bleiben in Markdown gepflegt.
+        - Einstellungen stehen in YAML-Dateien.
+        - Geprüfte Komponenten übernehmen die Darstellung.
+
+        #### Schritt für Schritt
+
+        1. Eine Inhaltsdatei öffnen.
+        2. Den Inhalt bearbeiten.
+            - Aussagekräftige Überschriften verwenden.
+            - Links und Alternativtexte prüfen.
+        3. Das Ergebnis in der Vorschau kontrollieren.
+        ````
+    </Tab>
+
+</Tabs>
+
+### Links im Fließtext
+
+Beschreibende Linktexte machen das Ziel verständlich. Interne Links beginnen am Website-Stamm; ein Deployment-Basispfad wird automatisch ergänzt.
+
+<Tabs label="Links im Fließtext: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        Die [Info-Seite](/info/) erklärt das Konzept von AstroPilot. Die [Dokumentation zum Einstieg](/dokumentation/einstieg/) führt durch die ersten Schritte.
+
+        Für konkrete Bausteine lohnt sich ein Blick auf die [Layout-Beispiele](/showcase/layout/) und die [Bilddarstellung](/showcase/images/).
+    </Tab>
+    <Tab title="Code">
+        ````markdown
+        Die [Info-Seite](/info/) erklärt das Konzept von AstroPilot. Die [Dokumentation zum Einstieg](/dokumentation/einstieg/) führt durch die ersten Schritte.
+
+        Für konkrete Bausteine lohnt sich ein Blick auf die [Layout-Beispiele](/showcase/layout/) und die [Bilddarstellung](/showcase/images/).
+        ````
+    </Tab>
+
+</Tabs>
+
+### Zitate und hervorgehobene Aussagen
+
+Ein Blockzitat setzt eine Aussage vom übrigen Text ab. Es eignet sich für zitierte Passagen oder ausdrücklich abgesetzte Leitgedanken.
+
+<Tabs label="Zitate und hervorgehobene Aussagen: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        > Inhalte und Darstellung bleiben getrennt. Autoren beschreiben den Inhalt, Entwickler pflegen die verfügbaren Bausteine.
+    </Tab>
+    <Tab title="Code">
+        ````markdown
+        > Inhalte und Darstellung bleiben getrennt. Autoren beschreiben den Inhalt, Entwickler pflegen die verfügbaren Bausteine.
+        ````
+    </Tab>
+</Tabs>
+
+### Inline-Code und sprachabhängige Codeblöcke
+
+Inline-Code kennzeichnet Dateinamen oder kurze technische Begriffe. Mehrzeiliger Code erhält eine Sprachangabe für das Syntaxhighlighting. Der Code-Tab zeigt auch die dafür benötigten Markdown-Zeichen.
+
+<Tabs label="Inline-Code und sprachabhängige Codeblöcke: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        Die Datei `page.yaml` enthält die Seitenmetadaten. Mit `npm run build` wird die statische Ausgabe erstellt.
+
+        ```typescript
+        const page = {
+            title: 'AstroPilot',
+            published: true,
+        };
+
+        const description: string = page.title;
+        ```
+    </Tab>
+    <Tab title="Code">
+        ````markdown
+        Die Datei `page.yaml` enthält die Seitenmetadaten. Mit `npm run build` wird die statische Ausgabe erstellt.
+
+        ```typescript
+        const page = {
+            title: 'AstroPilot',
+            published: true,
+        };
+
+        const description: string = page.title;
+        ```
+        ````
+    </Tab>
+
+</Tabs>
+
+### Tabellen für strukturierte Informationen
+
+Tabellen stellen vergleichbare Angaben zeilenweise gegenüber. Die Kopfzeile benennt die Spalten; Inline-Code hebt Dateinamen innerhalb der Tabelle hervor.
+
+<Tabs
+    label="Tabellen für strukturierte Informationen: Vorschau und Code"
+    variant="border"
+>
+    <Tab title="Vorschau">
+
+        | Inhalt              | Pflegeort                       |
+        | ------------------- | ------------------------------- |
+        | Seitentitel und SEO | `page.yaml`                     |
+        | Hero-Text           | `hero.md`                       |
+        | Abschnitte          | `NN-name.md` oder `NN-name.mdx` |
+
+    </Tab>
+    <Tab title="Code">
+
+        ````markdown
+        | Inhalt              | Pflegeort                       |
+        | ------------------- | ------------------------------- |
+        | Seitentitel und SEO | `page.yaml`                     |
+        | Hero-Text           | `hero.md`                       |
+        | Abschnitte          | `NN-name.md` oder `NN-name.mdx` |
+        ````
+
+    </Tab>
+
+</Tabs>
