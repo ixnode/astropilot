@@ -312,6 +312,76 @@ try {
                 assert.equal(new Set(ids).size, ids.length);
                 await page.evaluate(() => window.scrollTo(0, 0));
             }
+            if (route === '/showcase/sections/') {
+                const groups = page.locator('.ap-tabs');
+                const tones = ['default', 'muted', 'brand', 'muted', 'default'];
+                const fullWidths = [true, true, true, false, true];
+                const widths: number[] = [];
+                assert.equal(await groups.count(), 5);
+                for (let index = 0; index < tones.length; index += 1) {
+                    const group = groups.nth(index);
+                    const preview = group.getByRole('tab', {
+                        name: 'Vorschau',
+                        exact: true,
+                    });
+                    const code = group.getByRole('tab', {
+                        name: 'Code',
+                        exact: true,
+                    });
+                    assert.equal(
+                        await preview.getAttribute('aria-selected'),
+                        'true',
+                    );
+                    const sectionState = await group.evaluate((element) => {
+                        const section = element.closest('.ap-section');
+                        const content =
+                            section?.querySelector('.content-prose');
+                        if (!section || !content)
+                            throw new Error('Missing Section container');
+                        return {
+                            classes: Array.from(section.classList),
+                            constrained: content.classList.contains(
+                                'ap-section__content',
+                            ),
+                            width: content.getBoundingClientRect().width,
+                        };
+                    });
+                    assert(
+                        sectionState.classes.includes(`tone-${tones[index]}`),
+                    );
+                    assert.equal(sectionState.constrained, !fullWidths[index]);
+                    widths.push(sectionState.width);
+                    const heading = await group
+                        .getByRole('tabpanel')
+                        .getByRole('heading')
+                        .innerText();
+                    await code.click();
+                    const sample = group
+                        .getByRole('tabpanel')
+                        .locator('pre[data-language="markdown"]');
+                    const source = await sample.innerText();
+                    assert(source.startsWith('---\n'));
+                    assert(source.includes(`tone: ${tones[index]}`));
+                    assert(source.includes(`fullWidth: ${fullWidths[index]}`));
+                    assert(source.includes(`## ${heading}`));
+                    assert.equal(await sample.isVisible(), true);
+                    assert(
+                        await page.evaluate(
+                            () =>
+                                document.documentElement.scrollWidth <=
+                                innerWidth,
+                        ),
+                    );
+                    await code.press('ArrowLeft');
+                    assert.equal(
+                        await preview.getAttribute('aria-selected'),
+                        'true',
+                    );
+                }
+                if (viewport.name === 'desktop') assert(widths[3] < widths[4]);
+                else assert.equal(widths[3], widths[4]);
+                await page.evaluate(() => window.scrollTo(0, 0));
+            }
             const canScroll = await page.evaluate(
                 () =>
                     document.documentElement.scrollHeight -

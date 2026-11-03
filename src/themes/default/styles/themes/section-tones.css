@@ -11,15 +11,15 @@
 
         .content-prose {
             &,
-            :where(h2, h3, h4, p, li, strong, code) {
+            :where(h2, h3, h4, p, li, strong, code):not(:where(.ap-tabs *)) {
                 @apply text-primary-content;
             }
 
-            a {
+            a:not(:where(.ap-tabs *)) {
                 @apply text-primary-content decoration-current;
             }
 
-            :not(pre) > code {
+            :not(pre) > code:not(:where(.ap-tabs *)) {
                 @apply bg-base-100 text-base-content;
             }
         }

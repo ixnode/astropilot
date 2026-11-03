@@ -1,6 +1,10 @@
 @layer components {
     .ap-tabs {
-        @apply my-6 min-w-0;
+        @apply my-6 min-w-0 text-base-content;
+
+        :where(.tone-brand) & {
+            @apply rounded-box bg-base-100 p-4;
+        }
 
         .ap-tabs__list {
             @apply mb-2 flex max-w-full !flex-nowrap overflow-x-auto;

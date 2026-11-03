@@ -1,0 +1,35 @@
+---
+tone: muted
+fullWidth: false
+---
+
+import { Tabs, Tab } from 'astropilot/components';
+
+## Begrenzte Lesebreite
+
+Ohne fullWidth oder mit fullWidth: false wird der Inhalt auf die Lesespalte begrenzt. Der Hintergrund reicht weiterhin über die gesamte Seitenbreite.
+
+<Tabs label="Begrenzte Lesebreite: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        ## Raum für längere Texte
+
+        Die begrenzte Zeilenlänge eignet sich für erklärende Texte. Auch auf großen Bildschirmen bleibt der Inhalt in einer überschaubaren Spalte.
+
+        Der äußere Inhaltsrand bleibt mit Header und Footer ausgerichtet.
+    </Tab>
+    <Tab title="Code">
+        ```markdown
+        ---
+        tone: muted
+        fullWidth: false
+        ---
+
+        ## Raum für längere Texte
+
+        Die begrenzte Zeilenlänge eignet sich für erklärende Texte. Auch auf großen Bildschirmen bleibt der Inhalt in einer überschaubaren Spalte.
+
+        Der äußere Inhaltsrand bleibt mit Header und Footer ausgerichtet.
+        ```
+    </Tab>
+
+</Tabs>
