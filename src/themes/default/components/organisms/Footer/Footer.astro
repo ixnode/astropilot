@@ -1,7 +1,10 @@
 ---
 import logoUrl from '../../../assets/favicon.svg?url';
 import type { SiteConfig } from '../../../../../lib/astropilot/types';
-import { contentHref } from '../../../../../lib/astropilot/urls';
+import {
+    contentHref,
+    isExternalWebLink,
+} from '../../../../../lib/astropilot/urls';
 interface Props {
     site: SiteConfig;
 }
@@ -22,11 +25,22 @@ const { site } = Astro.props;
         </p>
         <nav aria-label="Fußnavigation">
             <ul class="ap-footer__links">
-                {site.footer.links.map((link) => (
-                    <li>
-                        <a href={contentHref(link.href, site)}>{link.label}</a>
-                    </li>
-                ))}
+                {site.footer.links.map((link) => {
+                    const external = isExternalWebLink(link.href, site.url);
+                    return (
+                        <li>
+                            <a
+                                href={contentHref(link.href, site)}
+                                target={external ? '_blank' : undefined}
+                                rel={
+                                    external ? 'noopener noreferrer' : undefined
+                                }
+                            >
+                                {link.label}
+                            </a>
+                        </li>
+                    );
+                })}
             </ul>
         </nav>
     </div>

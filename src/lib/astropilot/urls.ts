@@ -43,6 +43,16 @@ export function contentHref(href: string, site: SiteConfig): string {
     return withBase(href, site.base);
 }
 
+/** Compare web links with the validated production origin, including in preview builds. */
+export function isExternalWebLink(href: string, siteUrl: string): boolean {
+    const site = new URL(siteUrl);
+    const target = new URL(href, site);
+    return (
+        (target.protocol === 'http:' || target.protocol === 'https:') &&
+        target.origin !== site.origin
+    );
+}
+
 export function canonicalUrl(route: string, site: SiteConfig): string {
     return new URL(withBase(route, site.base), site.url).toString();
 }

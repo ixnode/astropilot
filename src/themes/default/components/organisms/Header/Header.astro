@@ -1,7 +1,10 @@
 ---
 import logoUrl from '../../../assets/favicon.svg?url';
 import type { Link, SiteConfig } from '../../../../../lib/astropilot/types';
-import { contentHref } from '../../../../../lib/astropilot/urls';
+import {
+    contentHref,
+    isExternalWebLink,
+} from '../../../../../lib/astropilot/urls';
 
 interface Props {
     site: SiteConfig;
@@ -25,17 +28,26 @@ const isActive = (link: Link) => link.href === route;
         </a>
         <nav class="ap-header__nav" aria-label="Hauptnavigation">
             <ul class="ap-header__links">
-                {site.header.links.map((link) => (
-                    <li>
-                        <a
-                            class="ap-header__link btn btn-ghost btn-sm"
-                            href={contentHref(link.href, site)}
-                            aria-current={isActive(link) ? 'page' : undefined}
-                        >
-                            {link.label}
-                        </a>
-                    </li>
-                ))}
+                {site.header.links.map((link) => {
+                    const external = isExternalWebLink(link.href, site.url);
+                    return (
+                        <li>
+                            <a
+                                class="ap-header__link btn btn-ghost btn-sm"
+                                href={contentHref(link.href, site)}
+                                target={external ? '_blank' : undefined}
+                                rel={
+                                    external ? 'noopener noreferrer' : undefined
+                                }
+                                aria-current={
+                                    isActive(link) ? 'page' : undefined
+                                }
+                            >
+                                {link.label}
+                            </a>
+                        </li>
+                    );
+                })}
             </ul>
         </nav>
     </div>

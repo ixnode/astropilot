@@ -9,6 +9,7 @@ import tailwindcss from '@tailwindcss/vite';
 import tsx from '@shikijs/langs/tsx';
 import { rehypeUniqueHeadingIds } from '../lib/astropilot/rehype-ids';
 import { rehypeContentTables } from '../lib/astropilot/rehype-tables';
+import { rehypeExternalLinks } from '../lib/astropilot/rehype-links';
 import { remarkContentLinks } from '../lib/astropilot/remark-links';
 import { loadSiteConfig } from '../lib/astropilot/site-config';
 import { validateAstroPilotContent } from '../lib/astropilot/validation';
@@ -37,6 +38,7 @@ export function createAstroPilotConfig() {
                     rehypeHeadingIds,
                     rehypeUniqueHeadingIds,
                     rehypeContentTables,
+                    [rehypeExternalLinks, site.url],
                 ],
             }),
         },
