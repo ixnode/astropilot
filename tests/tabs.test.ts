@@ -68,3 +68,12 @@ test('rejects invalid Tabs props and child relationships', () => {
         /Tabs requires/,
     );
 });
+
+test('accepts nested Tabs with independent initial selections and nested code fences', () => {
+    const fence = String.fromCharCode(96);
+    assert.doesNotThrow(() =>
+        validate(
+            `<Tabs label="Example">\n<Tab title="Preview">\n<Tabs label="Inner" variant="box" initial={2}>\n${panels}\n</Tabs>\n</Tab>\n<Tab title="Code">\n\n${fence.repeat(4)}mdx\n<Tabs label="Sample">\n<Tab title="Commands">\n\n${fence.repeat(3)}sh\nnpm run build\n${fence.repeat(3)}\n\n</Tab>\n</Tabs>\n${fence.repeat(4)}\n\n</Tab>\n</Tabs>`,
+        ),
+    );
+});

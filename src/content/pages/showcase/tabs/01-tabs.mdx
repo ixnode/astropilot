@@ -1,5 +1,6 @@
 ---
 tone: muted
+fullWidth: true
 ---
 
 import { Tabs, Tab } from 'astropilot/components';
@@ -9,36 +10,74 @@ import { Eyebrow } from 'astropilot/components';
 
 ## Tabs
 
-Reiter zeigen zusammengehörige Inhalte abwechselnd an. Probiere die drei Darstellungen aus: Jeder Block arbeitet unabhängig, der Inhalt bleibt normales Markdown. Mit der Tabulatortaste erreichst du den ausgewählten Reiter, mit den Pfeiltasten links und rechts wechselst du ihn. Pos1 und Ende springen zum ersten und letzten Reiter.
+Reiter zeigen zusammengehörige Inhalte abwechselnd an. Jedes Beispiel ist in eine eigene Vorschau/Code-Gruppe eingebettet: Die Vorschau ist anfangs geöffnet, unter „Code“ findest du das vollständige MDX-Beispiel mit Import. Probiere die drei Darstellungen aus: Jeder Block arbeitet unabhängig, der Inhalt bleibt normales Markdown. Mit der Tabulatortaste erreichst du den ausgewählten Reiter, mit den Pfeiltasten links und rechts wechselst du ihn. Pos1 und Ende springen zum ersten und letzten Reiter.
 
 ### Linie
 
 Eine dezente Linie markiert den ausgewählten Reiter. Dies ist die Standarddarstellung.
 
-<Tabs label="Arbeitsablauf">
-    <Tab title="Inhalte">
-        #### Inhalte pflegen
+<Tabs label="Linie: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Tabs label="Arbeitsablauf">
+            <Tab title="Inhalte">
+                #### Inhalte pflegen
 
-        Seiten entstehen aus `page.yaml` und nummerierten Markdown-Dateien.
+                Seiten entstehen aus `page.yaml` und nummerierten Markdown-Dateien.
 
-        - Texte lokal bearbeiten
-        - Änderungen in der Vorschau prüfen
-        - Inhalte gemeinsam versionieren
+                - Texte lokal bearbeiten
+                - Änderungen in der Vorschau prüfen
+                - Inhalte gemeinsam versionieren
+            </Tab>
+            <Tab title="Prüfen">
+                #### Qualität prüfen
+
+                Vor der Veröffentlichung prüfen die vorhandenen Befehle Inhalte und Ausgabe:
+
+                ```sh
+                npm run check
+                npm run build
+                ```
+            </Tab>
+            <Tab title="Weiterlesen">
+                #### Mehr erfahren
+
+                Die [Dokumentation](/dokumentation/) erklärt den Aufbau. Für einen schnellen Start führt der [Einstieg](/dokumentation/einstieg/) durch die Einrichtung.
+            </Tab>
+
+        </Tabs>
     </Tab>
-    <Tab title="Prüfen">
-        #### Qualität prüfen
+    <Tab title="Code">
+        ````mdx
+        import { Tabs, Tab } from 'astropilot/components';
 
-        Vor der Veröffentlichung prüfen die vorhandenen Befehle Inhalte und Ausgabe:
+        <Tabs label="Arbeitsablauf">
+            <Tab title="Inhalte">
+                #### Inhalte pflegen
 
-        ```sh
-        npm run check
-        npm run build
-        ```
-    </Tab>
-    <Tab title="Weiterlesen">
-        #### Mehr erfahren
+                Seiten entstehen aus `page.yaml` und nummerierten Markdown-Dateien.
 
-        Die [Dokumentation](/dokumentation/) erklärt den Aufbau. Für einen schnellen Start führt der [Einstieg](/dokumentation/einstieg/) durch die Einrichtung.
+                - Texte lokal bearbeiten
+                - Änderungen in der Vorschau prüfen
+                - Inhalte gemeinsam versionieren
+            </Tab>
+            <Tab title="Prüfen">
+                #### Qualität prüfen
+
+                Vor der Veröffentlichung prüfen die vorhandenen Befehle Inhalte und Ausgabe:
+
+                ```sh
+                npm run check
+                npm run build
+                ```
+            </Tab>
+            <Tab title="Weiterlesen">
+                #### Mehr erfahren
+
+                Die [Dokumentation](/dokumentation/) erklärt den Aufbau. Für einen schnellen Start führt der [Einstieg](/dokumentation/einstieg/) durch die Einrichtung.
+            </Tab>
+
+        </Tabs>
+        ````
     </Tab>
 
 </Tabs>
@@ -47,21 +86,50 @@ Eine dezente Linie markiert den ausgewählten Reiter. Dies ist die Standarddarst
 
 Die Reiter stehen auf einer gemeinsamen Fläche. Hier ist anfangs der zweite Reiter ausgewählt.
 
-<Tabs label="Vorteile des Frameworks" variant="box" initial={2}>
-    <Tab title="Für Autoren">
-        #### Vertraute Dateien
+<Tabs label="Box: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Tabs label="Vorteile des Frameworks" variant="box" initial={2}>
+            <Tab title="Für Autoren">
+                #### Vertraute Dateien
 
-        Markdown für Texte, YAML für Einstellungen. Ein CMS-Backend ist nicht erforderlich.
+                Markdown für Texte, YAML für Einstellungen. Ein CMS-Backend ist nicht erforderlich.
+            </Tab>
+            <Tab title="Für Entwickler">
+                #### Geprüfte Bausteine
+
+                Astro-Komponenten bilden das Layout. Autoren setzen die dokumentierten Bausteine in MDX ein.
+            </Tab>
+            <Tab title="Für Besucher">
+                #### Statische Seiten
+
+                Links und Inhalte werden als HTML ausgeliefert. Ohne JavaScript bleiben alle Tab-Inhalte untereinander lesbar.
+            </Tab>
+
+        </Tabs>
     </Tab>
-    <Tab title="Für Entwickler">
-        #### Geprüfte Bausteine
+    <Tab title="Code">
+        ````mdx
+        import { Tabs, Tab } from 'astropilot/components';
 
-        Astro-Komponenten bilden das Layout. Autoren setzen die dokumentierten Bausteine in MDX ein.
-    </Tab>
-    <Tab title="Für Besucher">
-        #### Statische Seiten
+        <Tabs label="Vorteile des Frameworks" variant="box" initial={2}>
+            <Tab title="Für Autoren">
+                #### Vertraute Dateien
 
-        Links und Inhalte werden als HTML ausgeliefert. Ohne JavaScript bleiben alle Tab-Inhalte untereinander lesbar.
+                Markdown für Texte, YAML für Einstellungen. Ein CMS-Backend ist nicht erforderlich.
+            </Tab>
+            <Tab title="Für Entwickler">
+                #### Geprüfte Bausteine
+
+                Astro-Komponenten bilden das Layout. Autoren setzen die dokumentierten Bausteine in MDX ein.
+            </Tab>
+            <Tab title="Für Besucher">
+                #### Statische Seiten
+
+                Links und Inhalte werden als HTML ausgeliefert. Ohne JavaScript bleiben alle Tab-Inhalte untereinander lesbar.
+            </Tab>
+
+        </Tabs>
+        ````
     </Tab>
 
 </Tabs>
@@ -70,43 +138,50 @@ Die Reiter stehen auf einer gemeinsamen Fläche. Hier ist anfangs der zweite Rei
 
 Die aktive Registerkarte hebt sich optisch von den anderen Reitern ab. Bei wenig Platz lässt sich die Reiterleiste horizontal scrollen.
 
-<Tabs label="Darstellung und Bedienung" variant="lift">
-    <Tab title="Desktop und Mobil">
-        #### Platz für den Inhalt
+<Tabs label="Angehoben: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Tabs label="Darstellung und Bedienung" variant="lift">
+            <Tab title="Desktop und Mobil">
+                #### Platz für den Inhalt
 
-        Die Panels nutzen die verfügbare Breite. Lange Reiterleisten scrollen innerhalb des Bausteins, ohne die gesamte Seite zu verbreitern.
+                Die Panels nutzen die verfügbare Breite. Lange Reiterleisten scrollen innerhalb des Bausteins, ohne die gesamte Seite zu verbreitern.
+            </Tab>
+            <Tab title="Tastaturbedienung">
+                #### Ohne Maus wechseln
+
+                Pfeiltasten wählen den benachbarten Reiter. Nach dem letzten folgt wieder der erste. Die Tabulatortaste führt anschließend in das aktive Panel und zu seinen Links.
+            </Tab>
+            <Tab title="Markdown und Links">
+                #### Inhalt wie gewohnt
+
+                **Hervorhebungen**, Listen, Code und [interne Links](/showcase/layout/) können in jedem Panel verwendet werden.
+            </Tab>
+
+        </Tabs>
     </Tab>
-    <Tab title="Tastaturbedienung">
-        #### Ohne Maus wechseln
+    <Tab title="Code">
+        ````mdx
+        import { Tabs, Tab } from 'astropilot/components';
 
-        Pfeiltasten wählen den benachbarten Reiter. Nach dem letzten folgt wieder der erste. Die Tabulatortaste führt anschließend in das aktive Panel und zu seinen Links.
-    </Tab>
-    <Tab title="Markdown und Links">
-        #### Inhalt wie gewohnt
+        <Tabs label="Darstellung und Bedienung" variant="lift">
+            <Tab title="Desktop und Mobil">
+                #### Platz für den Inhalt
 
-        **Hervorhebungen**, Listen, Code und [interne Links](/showcase/layout/) können in jedem Panel verwendet werden.
+                Die Panels nutzen die verfügbare Breite. Lange Reiterleisten scrollen innerhalb des Bausteins, ohne die gesamte Seite zu verbreitern.
+            </Tab>
+            <Tab title="Tastaturbedienung">
+                #### Ohne Maus wechseln
+
+                Pfeiltasten wählen den benachbarten Reiter. Nach dem letzten folgt wieder der erste. Die Tabulatortaste führt anschließend in das aktive Panel und zu seinen Links.
+            </Tab>
+            <Tab title="Markdown und Links">
+                #### Inhalt wie gewohnt
+
+                **Hervorhebungen**, Listen, Code und [interne Links](/showcase/layout/) können in jedem Panel verwendet werden.
+            </Tab>
+
+        </Tabs>
+        ````
     </Tab>
 
 </Tabs>
-
-### Verwendung in MDX
-
-`label` benennt die Reitergruppe für assistive Technologien, `title` den einzelnen Reiter. `variant` ist optional und erlaubt `border`, `box` oder `lift`. `initial` zählt ab eins und muss auf ein vorhandenes Panel zeigen. Ein `Tab` gehört direkt in einen `Tabs`-Block.
-
-```mdx
-import { Tabs, Tab } from 'astropilot/components';
-
-<Tabs label="Produktinformationen" variant="border" initial={1}>
-    <Tab title="Überblick">
-
-        Der erste Inhalt mit **Markdown**.
-
-    </Tab>
-    <Tab title="Details">
-
-        Weitere Informationen zum Thema.
-
-    </Tab>
-
-</Tabs>
-```

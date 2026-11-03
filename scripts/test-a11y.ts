@@ -131,11 +131,27 @@ try {
                     `${viewport.name} ${route}: viewport overflows horizontally`,
                 );
             if (route === '/showcase/tabs/') {
-                const groups = page.locator('.ap-tabs');
+                const examples = page.locator('.content-prose > .ap-tabs');
+                assert.equal(await examples.count(), 3);
+                assert.equal(await page.locator('.ap-tabs').count(), 6);
+                const groups = examples.locator(
+                    ':scope > .ap-tab > .ap-tab__content > .ap-tabs',
+                );
                 assert.equal(await groups.count(), 3);
                 for (let index = 0; index < 3; index += 1) {
+                    const example = examples.nth(index);
+                    const outerTabs = example
+                        .locator(':scope > .ap-tabs__list')
+                        .getByRole('tab');
+                    assert.equal(await outerTabs.count(), 2);
+                    assert.equal(
+                        await outerTabs.nth(0).getAttribute('aria-selected'),
+                        'true',
+                    );
                     const group = groups.nth(index);
-                    const tabs = group.getByRole('tab');
+                    const tabs = group.locator(
+                        ':scope > .ap-tabs__list > [role="tab"]',
+                    );
                     assert.equal(await tabs.count(), 3);
                     assert.equal(
                         await group
@@ -232,6 +248,53 @@ try {
                         ),
                         [],
                     );
+                    assert.equal(
+                        await outerTabs.nth(0).getAttribute('aria-selected'),
+                        'true',
+                        'Inner keyboard navigation must leave the outer selection unchanged',
+                    );
+                    await outerTabs.nth(1).click();
+                    assert.equal(await group.isVisible(), false);
+                    const code = example
+                        .locator(':scope > .ap-tab')
+                        .nth(1)
+                        .locator('pre[data-language="mdx"]');
+                    assert.equal(await code.isVisible(), true);
+                    const source = await code.innerText();
+                    assert(
+                        source.includes(
+                            "import { Tabs, Tab } from 'astropilot/components';",
+                        ),
+                    );
+                    assert(!source.includes('Vorschau und Code'));
+                    if (index === 0)
+                        assert(
+                            source.includes('```sh'),
+                            'The inner shell fence must remain part of the MDX sample',
+                        );
+                    assert.equal(
+                        await tabs.nth(2).getAttribute('aria-selected'),
+                        'true',
+                        'Hiding the preview must preserve the inner selection',
+                    );
+                    assert(
+                        await page.evaluate(
+                            () =>
+                                document.documentElement.scrollWidth <=
+                                innerWidth,
+                        ),
+                    );
+                    await outerTabs.nth(1).press('ArrowLeft');
+                    assert.equal(
+                        await outerTabs.nth(0).getAttribute('aria-selected'),
+                        'true',
+                    );
+                    assert.equal(await tabs.nth(2).isVisible(), true);
+                    assert.equal(
+                        await tabs.nth(2).getAttribute('aria-selected'),
+                        'true',
+                        'Returning to the preview must preserve the inner selection',
+                    );
                 }
                 assert.equal(
                     await groups
@@ -289,8 +352,11 @@ try {
     });
     const staticPage = await staticContext.newPage();
     await staticPage.goto(`${baseUrl}/showcase/tabs/`);
-    assert.equal(await staticPage.locator('.ap-tab:visible').count(), 9);
-    assert.equal(await staticPage.locator('.ap-tab__label:visible').count(), 9);
+    assert.equal(await staticPage.locator('.ap-tab:visible').count(), 15);
+    assert.equal(
+        await staticPage.locator('.ap-tab__label:visible').count(),
+        15,
+    );
     assert.equal(await staticPage.locator('.ap-tabs__list:visible').count(), 0);
     await staticContext.close();
     await browser.close();
