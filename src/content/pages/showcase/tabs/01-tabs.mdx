@@ -12,6 +12,10 @@ import { Eyebrow } from 'astropilot/components';
 
 Reiter zeigen zusammengehörige Inhalte abwechselnd an. Jedes Beispiel ist in eine eigene Vorschau/Code-Gruppe eingebettet: Die Vorschau ist anfangs geöffnet, unter „Code“ findest du das vollständige MDX-Beispiel mit Import. Probiere die drei Darstellungen aus: Jeder Block arbeitet unabhängig, der Inhalt bleibt normales Markdown. Mit der Tabulatortaste erreichst du den ausgewählten Reiter, mit den Pfeiltasten links und rechts wechselst du ihn. Pos1 und Ende springen zum ersten und letzten Reiter.
 
+**Atomic Design:** Molecule `Tabs` mit dem Atom `Tab` für die einzelnen Inhaltsbereiche.
+
+Komponentenpfade unter `src/themes/default/components/`: `molecules/Tabs/` und `atoms/Tab/`.
+
 ### Linie
 
 Eine dezente Linie markiert den ausgewählten Reiter. Dies ist die Standarddarstellung.

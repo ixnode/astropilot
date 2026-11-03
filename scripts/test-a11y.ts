@@ -691,6 +691,9 @@ try {
                             offset: '3px',
                         });
                         await page.keyboard.press('Enter');
+                        await page.waitForURL(
+                            (url) => url.hash === '#main-content',
+                        );
                         assert.equal(new URL(page.url()).hash, '#main-content');
                     }
                     await code.click();

@@ -1,0 +1,82 @@
+---
+tone: default
+fullWidth: true
+---
+
+import imagesImage from './_assets/images.png';
+import tablesImage from './_assets/tables.png';
+import alertsImage from './_assets/alerts.png';
+import cardsImage from './_assets/layout-portrait.png';
+import tabsImage from './_assets/tabs.png';
+import { Card, CardActions } from 'astropilot/components';
+import { Column, Columns } from 'astropilot/components';
+import { Eyebrow } from 'astropilot/components';
+
+<Eyebrow>In MDX verwenden</Eyebrow>
+
+## Inhaltsbausteine
+
+Bilder, Tabellen und weitere Bausteine für den Seiteninhalt auswählen, ausprobieren und mit Code übernehmen.
+
+<Columns>
+    <Column span={4}>
+        <Card image={imagesImage} imageAlt="Abstrakte Darstellung von Bildern in unterschiedlichen Zuschnitten">
+            ### Bilder
+
+            Optimierte lokale Assets mit festen Größen, Rahmen, Formen und Cover-Ausschnitten.
+
+            <CardActions>
+                [Bilder ansehen](/showcase/images/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={tablesImage} imageAlt="Dreidimensionale Darstellung einer Tabelle mit blauem Spaltenkopf und hervorgehobener Datenzeile">
+            ### Tabellen
+
+            Beschriftete Tabellen mit Ausrichtung, Zeilenhervorhebung, kompakter Darstellung und mobilem Scrollen.
+
+            <CardActions>
+                [Tabellen ansehen](/showcase/tabellen/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={alertsImage} imageAlt="Abstrakte Darstellung von vier unterschiedlichen Benachrichtigungen">
+            ### Alerts
+
+            DaisyUI-Alerts mit Varianten für Hinweise, Erfolg, Warnungen und Fehler.
+
+            <CardActions>
+                [Alerts ansehen](/showcase/alerts/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={cardsImage} imageAlt="Editorial-Darstellung von modularen Inhaltsblöcken">
+            ### Cards
+
+            Wiederverwendbare Inhaltskarten mit optionalem Bild, Markdown-Body und Actions.
+
+            <CardActions>
+                [Cards ansehen](/showcase/cards/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={tabsImage} imageAlt="Dreidimensionale Darstellung einer Oberfläche mit drei Reitern und hervorgehobenem Inhaltsbereich">
+            ### Tabs
+
+            Inhalte in Reitern gliedern: Linie, Box und angehobene Registerkarten mit Tastaturbedienung und Markdown-Panels.
+
+            <CardActions>
+                [Tabs ansehen](/showcase/tabs/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>

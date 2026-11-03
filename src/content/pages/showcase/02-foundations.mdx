@@ -1,0 +1,43 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import foundationsImage from './_assets/foundations.png';
+import typographyImage from './_assets/typography.png';
+import { Card, CardActions } from 'astropilot/components';
+import { Column, Columns } from 'astropilot/components';
+import { Eyebrow } from 'astropilot/components';
+
+<Eyebrow>Farben, Schrift und Abstände</Eyebrow>
+
+## Grundlagen
+
+Farben, Schrift und weitere Gestaltungsgrundlagen kennenlernen, bevor du einzelne Bausteine einsetzt.
+
+<Columns>
+    <Column span={4}>
+        <Card image={foundationsImage} imageAlt="Abstrakte Darstellung von Farbwerten, Abständen und Design-Tokens">
+            ### Foundations
+
+            Farben, Typografie, Abstände, Radien, Schatten und Fokuszustände des Standard-Themes.
+
+            <CardActions>
+                [Foundations ansehen](/showcase/foundations/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={typographyImage} imageAlt="Abstrakte Darstellung von Inhaltsblöcken und Typografie">
+            ### Typografie
+
+            Lesbare Markdown-Typografie für Überschriften, Listen, Zitate, Tabellen und Code.
+
+            <CardActions>
+                [Typografie ansehen](/showcase/typografie/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>

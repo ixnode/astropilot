@@ -1,0 +1,56 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import layoutImage from './_assets/layout-landscape.png';
+import sectionsImage from './_assets/sections.png';
+import navigationImage from './_assets/navigation.png';
+import { Card, CardActions } from 'astropilot/components';
+import { Column, Columns } from 'astropilot/components';
+import { Eyebrow } from 'astropilot/components';
+
+<Eyebrow>Raster, Abschnitte und Navigation</Eyebrow>
+
+## Layout und Seitenaufbau
+
+Inhalte in Spalten und Abschnitte gliedern und die gemeinsame Navigation verstehen.
+
+<Columns>
+    <Column span={4}>
+        <Card image={layoutImage} imageAlt="Abstrakte blaue Darstellung eines modularen Website-Layouts">
+            ### Layout
+
+            Das responsive 12-Spalten-Raster für ein-, zwei-, drei- und vierspaltige Inhalte.
+
+            <CardActions>
+                [Layout ansehen](/showcase/layout/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={sectionsImage} imageAlt="Abstrakte Darstellung von drei gestapelten Inhaltsabschnitten">
+            ### Sections
+
+            Semantische Content-Bereiche und ihre unabhängigen Farbvarianten.
+
+            <CardActions>
+                [Sections ansehen](/showcase/sections/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={navigationImage} imageAlt="Abstrakte Darstellung einer verbundenen Website-Navigation">
+            ### Navigation
+
+            Gemeinsamer Header, aktive Zustände und robuste interne Links unter einem Base-Pfad.
+
+            <CardActions>
+                [Navigation ansehen](/showcase/navigation/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>
