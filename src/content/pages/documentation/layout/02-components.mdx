@@ -8,7 +8,7 @@ import { Eyebrow } from 'astropilot/components';
 
 ## Verfügbare Komponenten
 
-AstroPilot exportiert geprüfte Komponenten aus `astropilot/components`. Aktuell gehören dazu `Columns`, `Column`, `Eyebrow`, `Alert`, `ContentImage`, `Card`, `CardActions`, `Tabs` und `Tab`.
+AstroPilot exportiert geprüfte Komponenten aus `astropilot/components`. Aktuell gehören dazu `Columns`, `Column`, `Eyebrow`, `Alert`, `ContentImage`, `Card`, `CardActions`, `Tabs`, `Tab` und `FoundationSample`.
 
 ### Eyebrow vor einer Überschrift
 
@@ -47,3 +47,15 @@ import { Tabs, Tab } from 'astropilot/components';
 Die Reiter sind mit Pfeiltasten sowie Pos1 und Ende bedienbar. Ohne JavaScript bleiben die Inhalte untereinander sichtbar. Die [Tabs-Beispiele](/showcase/tabs/) zeigen alle drei Darstellungen.
 
 Der [Showcase](/showcase/) zeigt alle verfügbaren Varianten als sichtbare Beispiele. Neue Komponenten werden dort ergänzt, bevor sie als dokumentierter MDX-Baustein verwendet werden.
+
+### Gestaltungsproben für Foundations
+
+`FoundationSample` zeigt die Gestaltung des aktiven Default-Themes. Die erforderliche Prop `kind` wählt eine fest definierte Probe: `colors`, `type`, `spacing`, `radius`, `shadow` oder `focus`. Der Baustein nimmt keine weiteren Props und keine Kinder entgegen. Er dient der visuellen Theme-Vorschau und ist kein allgemeiner Layout-Baustein.
+
+```mdx
+import { FoundationSample } from 'astropilot/components';
+
+<FoundationSample kind="colors" />
+```
+
+Die [Foundations-Seite](/showcase/foundations/) zeigt alle sechs Proben mit Einbindungscode und den zugehörigen CSS-Ausschnitten.

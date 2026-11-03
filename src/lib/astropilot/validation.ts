@@ -53,6 +53,8 @@ const cardComponentImport =
     /^import\s*\{\s*Card(?:\s*,\s*CardActions)?\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
 const tabsComponentImport =
     /^import\s*\{\s*Tabs\s*,\s*Tab\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
+const foundationSampleImport =
+    /^import\s*\{\s*FoundationSample\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
 const localImageImport =
     /^import\s+([A-Za-z_$][\w$]*)\s+from\s+['"](?:\.\.\/|\.\/)[a-z0-9_][a-z0-9._/-]*\.(?:avif|jpe?g|png|webp)['"];?$/i;
 const imageExtensions = new Set(['.avif', '.jpeg', '.jpg', '.png', '.webp']);
@@ -114,6 +116,7 @@ function validateMdxLayout(
     let hasComponentImport = false;
     let columnsCount = 0;
     let tabsCount = 0;
+    let foundationSampleCount = 0;
     let alertCount = 0;
     let contentImageCount = 0;
     let cardCount = 0;
@@ -142,7 +145,8 @@ function validateMdxLayout(
                     !alertComponentImport.test(importValue) &&
                     !contentImageComponentImport.test(importValue) &&
                     !cardComponentImport.test(importValue) &&
-                    !tabsComponentImport.test(importValue)
+                    !tabsComponentImport.test(importValue) &&
+                    !foundationSampleImport.test(importValue)
                 )
                     fail(
                         contentRoot,
@@ -161,7 +165,31 @@ function validateMdxLayout(
             mdxNode.type === 'mdxJsxFlowElement' ||
             mdxNode.type === 'mdxJsxTextElement'
         ) {
-            if (mdxNode.name === 'Tabs') {
+            if (mdxNode.name === 'FoundationSample') {
+                foundationSampleCount += 1;
+                const attributes = mdxNode.attributes ?? [];
+                const kind = attributes[0];
+                if (
+                    attributes.length !== 1 ||
+                    kind?.type !== 'mdxJsxAttribute' ||
+                    kind.name !== 'kind' ||
+                    typeof kind.value !== 'string' ||
+                    ![
+                        'colors',
+                        'type',
+                        'spacing',
+                        'radius',
+                        'shadow',
+                        'focus',
+                    ].includes(kind.value) ||
+                    mdxNode.children?.length
+                )
+                    fail(
+                        contentRoot,
+                        path,
+                        'FoundationSample accepts exactly one kind: colors, type, spacing, radius, shadow, or focus, and no children',
+                    );
+            } else if (mdxNode.name === 'Tabs') {
                 tabsCount += 1;
                 const attributes = mdxNode.attributes ?? [];
                 const label = attributes.find(
@@ -492,6 +520,7 @@ function validateMdxLayout(
         !hasComponentImport ||
         (columnsCount === 0 &&
             tabsCount === 0 &&
+            foundationSampleCount === 0 &&
             alertCount === 0 &&
             contentImageCount === 0 &&
             cardCount === 0 &&

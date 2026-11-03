@@ -1,0 +1,158 @@
+---
+const kinds = [
+    'colors',
+    'type',
+    'spacing',
+    'radius',
+    'shadow',
+    'focus',
+] as const;
+type SampleKind = (typeof kinds)[number];
+
+interface Props {
+    kind: SampleKind;
+}
+
+const { kind } = Astro.props;
+if (!kinds.includes(kind))
+    throw new Error(
+        `FoundationSample kind must be one of: ${kinds.join(', ')}.`,
+    );
+
+const colors = [
+    ['base-100', 'Standardfläche'],
+    ['base-200', 'Gedämpfte Fläche'],
+    ['base-300', 'Rahmenfarbe'],
+    ['base-content', 'Textfarbe'],
+    ['primary', 'Primärfarbe'],
+    ['secondary', 'Sekundärfarbe'],
+    ['accent', 'Akzentfarbe'],
+    ['neutral', 'Neutral'],
+    ['info', 'Information'],
+    ['success', 'Erfolg'],
+    ['warning', 'Warnung'],
+    ['error', 'Fehler'],
+] as const;
+const spaces = [
+    ['1', '0,25rem'],
+    ['2', '0,5rem'],
+    ['4', '1rem'],
+    ['6', '1,5rem'],
+    ['8', '2rem'],
+] as const;
+const radii = [
+    ['none', 'Eckig', '0'],
+    ['field', 'Felder', '--radius-field'],
+    ['box', 'Boxen', '--radius-box'],
+] as const;
+const shadows = [
+    ['none', 'Ohne Schatten', 'none'],
+    ['sm', 'Klein', '--shadow-sm'],
+    ['soft', 'Weich', '--shadow-soft'],
+    ['raised', 'Angehoben', '--shadow-raised'],
+] as const;
+---
+
+<div
+    class:list={[
+        'ap-foundation-sample',
+        `ap-foundation-sample--${kind}`,
+        'not-prose',
+    ]}
+>
+    {kind === 'colors' && (
+        <ul class="ap-foundation-sample__palette">
+            {colors.map(([name, label]) => (
+                <li class="ap-foundation-sample__color">
+                    <div
+                        class:list={[
+                            'ap-foundation-sample__swatch',
+                            `ap-foundation-sample__swatch--${name}`,
+                        ]}
+                        aria-hidden="true"
+                    />
+                    <span>{label}</span>
+                    <code>--color-{name}</code>
+                </li>
+            ))}
+        </ul>
+    )}
+    {kind === 'type' && (
+        <div class="ap-foundation-sample__type">
+            <p class="ap-foundation-sample__label">Nunito · große Schrift</p>
+            <p class="ap-foundation-sample__display">Klare Gedanken.</p>
+            <p class="ap-foundation-sample__label">Nunito · mittlere Schrift</p>
+            <p class="ap-foundation-sample__heading">
+                Eine gemeinsame Formensprache.
+            </p>
+            <p class="ap-foundation-sample__label">Systemschrift · Fließtext</p>
+            <p class="ap-foundation-sample__body">
+                Gut lesbare Texte geben Inhalten Raum. Die Systemschrift ergänzt
+                die weicheren Formen der Überschrift.
+            </p>
+        </div>
+    )}
+    {kind === 'spacing' && (
+        <ul class="ap-foundation-sample__spaces">
+            {spaces.map(([step, size]) => (
+                <li class="ap-foundation-sample__space-row">
+                    <span>{size}</span>
+                    <div class="ap-foundation-sample__track" aria-hidden="true">
+                        <span
+                            class:list={[
+                                'ap-foundation-sample__space',
+                                `ap-foundation-sample__space--${step}`,
+                            ]}
+                        />
+                    </div>
+                </li>
+            ))}
+        </ul>
+    )}
+    {kind === 'radius' && (
+        <ul class="ap-foundation-sample__tiles">
+            {radii.map(([name, label, token]) => (
+                <li class="ap-foundation-sample__tile">
+                    <div
+                        class:list={[
+                            'ap-foundation-sample__shape',
+                            `ap-foundation-sample__shape--${name}`,
+                        ]}
+                        aria-hidden="true"
+                    />
+                    <span>{label}</span>
+                    <code>{token}</code>
+                </li>
+            ))}
+        </ul>
+    )}
+    {kind === 'shadow' && (
+        <ul class="ap-foundation-sample__tiles">
+            {shadows.map(([name, label, token]) => (
+                <li class="ap-foundation-sample__tile">
+                    <div
+                        class:list={[
+                            'ap-foundation-sample__elevation',
+                            `ap-foundation-sample__elevation--${name}`,
+                        ]}
+                        aria-hidden="true"
+                    />
+                    <span>{label}</span>
+                    <code>{token}</code>
+                </li>
+            ))}
+        </ul>
+    )}
+    {kind === 'focus' && (
+        <div class="ap-foundation-sample__focus-area">
+            <p>
+                Wechsle mit der Tabulatortaste zum Link. Die Kontur zeigt das
+                aktive Tastaturziel; der Link führt zum Hauptinhalt dieser
+                Seite.
+            </p>
+            <a class="ap-foundation-sample__focus" href="#main-content">
+                Zum Hauptinhalt
+            </a>
+        </div>
+    )}
+</div>

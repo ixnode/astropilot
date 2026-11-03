@@ -1,7 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import { createServer } from 'node:http';
-import { extname, relative, resolve } from 'node:path';
+import { extname, join, relative, resolve } from 'node:path';
+import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
 import AxeBuilder from '@axe-core/playwright';
@@ -312,6 +313,217 @@ try {
                 assert.equal(new Set(ids).size, ids.length);
                 await page.evaluate(() => window.scrollTo(0, 0));
             }
+            if (route === '/showcase/foundations/') {
+                const kinds = [
+                    'colors',
+                    'type',
+                    'spacing',
+                    'radius',
+                    'shadow',
+                    'focus',
+                ];
+                const groups = page.locator('.content-prose > .ap-tabs');
+                assert.equal(await groups.count(), kinds.length);
+                assert.equal(
+                    await page.locator('.ap-foundation-sample').count(),
+                    kinds.length,
+                );
+                assert.equal(
+                    await page
+                        .locator('main table, main .ap-card, main .ap-alert')
+                        .count(),
+                    0,
+                );
+                for (let index = 0; index < kinds.length; index += 1) {
+                    const group = groups.nth(index);
+                    const preview = group.getByRole('tab', {
+                        name: 'Vorschau',
+                        exact: true,
+                    });
+                    const code = group.getByRole('tab', {
+                        name: 'Code',
+                        exact: true,
+                    });
+                    assert.equal(
+                        await preview.getAttribute('aria-selected'),
+                        'true',
+                    );
+                    const panel = group.getByRole('tabpanel');
+                    const sample = panel.locator(
+                        `.ap-foundation-sample--${kinds[index]}`,
+                    );
+                    assert.equal(await sample.isVisible(), true);
+                    if (index === 0) {
+                        const swatches = sample.locator(
+                            '.ap-foundation-sample__swatch',
+                        );
+                        assert.equal(await swatches.count(), 12);
+                        assert.equal(
+                            await sample
+                                .locator(
+                                    '.ap-foundation-sample__swatch--primary',
+                                )
+                                .evaluate(
+                                    (element) =>
+                                        getComputedStyle(element)
+                                            .backgroundColor,
+                                ),
+                            'rgb(30, 90, 168)',
+                        );
+                    }
+                    if (index === 1) {
+                        assert(
+                            (
+                                await sample
+                                    .locator('.ap-foundation-sample__display')
+                                    .evaluate(
+                                        (element) =>
+                                            getComputedStyle(element)
+                                                .fontFamily,
+                                    )
+                            ).includes('Nunito'),
+                        );
+                        assert(
+                            !(
+                                await sample
+                                    .locator('.ap-foundation-sample__body')
+                                    .evaluate(
+                                        (element) =>
+                                            getComputedStyle(element)
+                                                .fontFamily,
+                                    )
+                            ).includes('Nunito'),
+                        );
+                    }
+                    if (index === 2) {
+                        const widths = await sample
+                            .locator('.ap-foundation-sample__space')
+                            .evaluateAll((elements) =>
+                                elements.map(
+                                    (element) =>
+                                        element.getBoundingClientRect().width,
+                                ),
+                            );
+                        assert.deepEqual(widths, [4, 8, 16, 24, 32]);
+                    }
+                    if (index === 3) {
+                        const radii = await sample
+                            .locator('.ap-foundation-sample__shape')
+                            .evaluateAll((elements) =>
+                                elements.map(
+                                    (element) =>
+                                        getComputedStyle(element)
+                                            .borderTopLeftRadius,
+                                ),
+                            );
+                        assert.deepEqual(radii, ['0px', '8px', '12px']);
+                    }
+                    if (index === 4) {
+                        const shadows = await sample
+                            .locator('.ap-foundation-sample__elevation')
+                            .evaluateAll((elements) =>
+                                elements.map(
+                                    (element) =>
+                                        getComputedStyle(element).boxShadow,
+                                ),
+                            );
+                        assert.equal(shadows[0], 'none');
+                        assert.equal(new Set(shadows).size, 4);
+                    }
+                    if (index === 5) {
+                        await preview.focus();
+                        await page.keyboard.press('Tab');
+                        assert(
+                            await panel.evaluate(
+                                (element) => element === document.activeElement,
+                            ),
+                        );
+                        await page.keyboard.press('Tab');
+                        const link = sample.getByRole('link', {
+                            name: 'Zum Hauptinhalt',
+                        });
+                        assert(
+                            await link.evaluate(
+                                (element) =>
+                                    element === document.activeElement &&
+                                    element.matches(':focus-visible'),
+                            ),
+                        );
+                        const focus = await link.evaluate((element) => ({
+                            width: getComputedStyle(element).outlineWidth,
+                            offset: getComputedStyle(element).outlineOffset,
+                        }));
+                        assert.deepEqual(focus, {
+                            width: '3px',
+                            offset: '3px',
+                        });
+                        await page.keyboard.press('Enter');
+                        assert.equal(new URL(page.url()).hash, '#main-content');
+                    }
+                    await code.click();
+                    const codePanel = group.getByRole('tabpanel');
+                    assert(
+                        (
+                            await codePanel
+                                .locator('pre[data-language="mdx"]')
+                                .innerText()
+                        ).includes(
+                            `<FoundationSample kind="${kinds[index]}" />`,
+                        ),
+                    );
+                    const css = codePanel.locator('pre[data-language="css"]');
+                    assert.equal(await css.isVisible(), true);
+                    const colors = await css
+                        .locator('span[style]')
+                        .evaluateAll((elements) =>
+                            Array.from(
+                                new Set(
+                                    elements.map(
+                                        (element) =>
+                                            getComputedStyle(element).color,
+                                    ),
+                                ),
+                            ),
+                        );
+                    assert(colors.length >= 2);
+                    assert(
+                        await page.evaluate(
+                            () =>
+                                document.documentElement.scrollWidth <=
+                                innerWidth,
+                        ),
+                    );
+                    await code.press('ArrowLeft');
+                    assert.equal(
+                        await preview.getAttribute('aria-selected'),
+                        'true',
+                    );
+                }
+                await page.evaluate(() => window.scrollTo(0, 0));
+                await page.screenshot({
+                    path: join(
+                        tmpdir(),
+                        `astropilot-foundations-${viewport.name}.png`,
+                    ),
+                    fullPage: true,
+                });
+            }
+            if (route === '/dokumentation/theme/') {
+                assert.equal(
+                    await page
+                        .getByRole('heading', {
+                            name: 'Token-Referenz des Default-Themes',
+                            exact: true,
+                        })
+                        .count(),
+                    1,
+                );
+                assert.equal(await page.locator('main table').count(), 6);
+                assert.equal(
+                    await page.locator('.ap-foundation-sample').count(),
+                    0,
+                );
+            }
             if (route === '/showcase/sections/') {
                 const groups = page.locator('.ap-tabs');
                 const tones = ['default', 'muted', 'brand', 'muted', 'default'];
@@ -428,6 +640,11 @@ try {
         15,
     );
     assert.equal(await staticPage.locator('.ap-tabs__list:visible').count(), 0);
+    await staticPage.goto(`${baseUrl}/showcase/foundations/`);
+    assert.equal(
+        await staticPage.locator('.ap-foundation-sample:visible').count(),
+        6,
+    );
     await staticContext.close();
     await browser.close();
     console.log(

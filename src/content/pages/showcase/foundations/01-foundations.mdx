@@ -1,13 +1,234 @@
 ---
 tone: default
+fullWidth: true
 ---
 
 import { Eyebrow } from 'astropilot/components';
+import { Tabs, Tab } from 'astropilot/components';
+import { FoundationSample } from 'astropilot/components';
 
-<Eyebrow>Grundlagen des Themes</Eyebrow>
+<Eyebrow>Gestaltung sehen und ausprobieren</Eyebrow>
 
 ## Design Foundations
 
-Das Standard-Theme bündelt Farben, Schriftgrößen, Abstände, Radien, Schatten und sichtbare Fokuszustände in nachvollziehbaren Foundation-Dateien. Die semantischen DaisyUI-Tokens wie `primary`, `base-200` und `base-300` sorgen dafür, dass Komponenten dieselbe visuelle Sprache sprechen.
+Wie wirken die Farben, Schriften, Abstände, Ecken und Schatten des Themes? Die folgenden Proben machen die gemeinsamen Gestaltungsgrundlagen sichtbar. Unter „Code“ findest du die MDX-Einbindung und einen passenden CSS-Ausschnitt aus dem Baustein. Die CSS-Ausschnitte erklären die Darstellung; die fertige Komponente bringt ihre Styles bereits mit.
 
-So bleiben Inhaltsdateien frei von CSS-Klassen und ein späteres Theme kann die Darstellung austauschen, ohne Markdown oder YAML umzuschreiben.
+Die vollständigen Tokenwerte, Quelldateien und Verwendungsdetails stehen in der [Theme-Dokumentation](/dokumentation/theme/). Die Detailseiten für [Cards](/showcase/cards/), [Alerts](/showcase/alerts/) und [Layout](/showcase/layout/) zeigen die Anwendung der fertigen Bausteine.
+
+### Farben sehen und vergleichen
+
+Die Palette zeigt neutrale Flächen, Markenfarben und Statusfarben direkt nebeneinander. Jede Farbfläche ist beschriftet; ihre Farbe kommt aus dem Theme.
+
+<Tabs label="Farben sehen und vergleichen: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <FoundationSample kind="colors" />
+    </Tab>
+    <Tab title="Code">
+        ````mdx
+        import { FoundationSample } from 'astropilot/components';
+
+        <FoundationSample kind="colors" />
+        ````
+
+        Die Darstellung verwendet unter anderem diesen CSS-Ausschnitt:
+
+        ````css
+        .ap-foundation-sample__swatch--primary {
+            background-color: var(--color-primary);
+        }
+
+        .ap-foundation-sample__swatch--secondary {
+            background-color: var(--color-secondary);
+        }
+
+        .ap-foundation-sample__swatch--accent {
+            background-color: var(--color-accent);
+        }
+        ````
+    </Tab>
+
+</Tabs>
+
+### Schrift und Größen erleben
+
+Die weicheren Formen von Nunito und die Systemschrift lassen sich direkt vergleichen. Die große Schrift passt sich an die Bildschirmbreite an. Die Proben sind Textabsätze, damit die Überschriftenhierarchie der Seite erhalten bleibt.
+
+<Tabs label="Schrift und Größen erleben: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <FoundationSample kind="type" />
+    </Tab>
+    <Tab title="Code">
+        ````mdx
+        import { FoundationSample } from 'astropilot/components';
+
+        <FoundationSample kind="type" />
+        ````
+
+        Die Darstellung verwendet unter anderem diesen CSS-Ausschnitt:
+
+        ````css
+        .ap-foundation-sample__display {
+            font-family: var(--font-heading);
+            font-size: var(--text-display);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .ap-foundation-sample__heading {
+            font-family: var(--font-heading);
+            font-size: var(--text-heading-2);
+            font-weight: 500;
+            line-height: 1.2;
+        }
+
+        .ap-foundation-sample__body {
+            font-family: var(--font-sans);
+            line-height: 1.75;
+        }
+        ````
+    </Tab>
+
+</Tabs>
+
+### Abstände in Originalgröße
+
+Die blauen Balken zeigen fünf Größen der gemeinsamen Abstandsskala. Ihre Breite entspricht dem angegebenen Wert; sie werden nicht zur Veranschaulichung vergrößert.
+
+<Tabs label="Abstände in Originalgröße: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <FoundationSample kind="spacing" />
+    </Tab>
+    <Tab title="Code">
+        ````mdx
+        import { FoundationSample } from 'astropilot/components';
+
+        <FoundationSample kind="spacing" />
+        ````
+
+        Die Darstellung verwendet unter anderem diesen CSS-Ausschnitt:
+
+        ````css
+        .ap-foundation-sample__space--1 {
+            width: calc(var(--spacing) * 1);
+        }
+
+        .ap-foundation-sample__space--2 {
+            width: calc(var(--spacing) * 2);
+        }
+
+        .ap-foundation-sample__space--4 {
+            width: calc(var(--spacing) * 4);
+        }
+
+        .ap-foundation-sample__space--6 {
+            width: calc(var(--spacing) * 6);
+        }
+
+        .ap-foundation-sample__space--8 {
+            width: calc(var(--spacing) * 8);
+        }
+        ````
+    </Tab>
+
+</Tabs>
+
+### Ecken und Radien vergleichen
+
+Drei gleich große Flächen zeigen den Unterschied zwischen eckigen Kanten und den Rundungen für Felder und Boxen.
+
+<Tabs label="Ecken und Radien vergleichen: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <FoundationSample kind="radius" />
+    </Tab>
+    <Tab title="Code">
+        ````mdx
+        import { FoundationSample } from 'astropilot/components';
+
+        <FoundationSample kind="radius" />
+        ````
+
+        Die Darstellung verwendet unter anderem diesen CSS-Ausschnitt:
+
+        ````css
+        .ap-foundation-sample__shape--none {
+            border-radius: 0;
+        }
+
+        .ap-foundation-sample__shape--field {
+            border-radius: var(--radius-field);
+        }
+
+        .ap-foundation-sample__shape--box {
+            border-radius: var(--radius-box);
+        }
+        ````
+    </Tab>
+
+</Tabs>
+
+### Schatten und Tiefe
+
+Gleich große Flächen machen die Wirkung unterschiedlicher Schatten sichtbar. Neben dem kleinen Schatten lassen sich die weichere und die stärker angehobene Variante des Themes vergleichen.
+
+<Tabs label="Schatten und Tiefe: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <FoundationSample kind="shadow" />
+    </Tab>
+    <Tab title="Code">
+        ````mdx
+        import { FoundationSample } from 'astropilot/components';
+
+        <FoundationSample kind="shadow" />
+        ````
+
+        Die Darstellung verwendet unter anderem diesen CSS-Ausschnitt:
+
+        ````css
+        .ap-foundation-sample__elevation--none {
+            box-shadow: none;
+        }
+
+        .ap-foundation-sample__elevation--sm {
+            box-shadow: var(--shadow-sm);
+        }
+
+        .ap-foundation-sample__elevation--soft {
+            box-shadow: var(--shadow-soft);
+        }
+
+        .ap-foundation-sample__elevation--raised {
+            box-shadow: var(--shadow-raised);
+        }
+        ````
+    </Tab>
+
+</Tabs>
+
+### Tastaturfokus ausprobieren
+
+Wähle den Vorschau-Reiter und drücke zweimal die Tabulatortaste: zuerst zum Panel, dann zum Link. Die sichtbare Kontur zeigt das aktive Tastaturziel. Mit Enter lässt sich der Link bedienen.
+
+<Tabs label="Tastaturfokus ausprobieren: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <FoundationSample kind="focus" />
+    </Tab>
+    <Tab title="Code">
+        ````mdx
+        import { FoundationSample } from 'astropilot/components';
+
+        <FoundationSample kind="focus" />
+        ````
+
+        Die Darstellung verwendet unter anderem diesen CSS-Ausschnitt:
+
+        ````css
+        .ap-foundation-sample__focus {
+            &:focus-visible {
+                outline: 3px solid var(--color-primary);
+                outline-offset: 3px;
+            }
+        }
+        ````
+    </Tab>
+
+</Tabs>
