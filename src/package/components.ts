@@ -7,5 +7,7 @@ export { default as Card } from '../themes/default/components/molecules/Card/Car
 export { default as CardActions } from '../themes/default/components/molecules/CardActions/CardActions.astro';
 export { default as ContentImage } from '../themes/default/components/atoms/ContentImage/ContentImage.astro';
 export { default as Eyebrow } from '../themes/default/components/atoms/Eyebrow/Eyebrow.astro';
+export { default as Badge } from '../themes/default/components/atoms/Badge/Badge.astro';
+export { default as Button } from '../themes/default/components/atoms/Button/Button.astro';
 export { default as Column } from '../themes/default/components/layout/Column/Column.astro';
 export { default as Columns } from '../themes/default/components/layout/Columns/Columns.astro';

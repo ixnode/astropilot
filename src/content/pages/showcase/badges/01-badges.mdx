@@ -1,0 +1,111 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Badge } from 'astropilot/components';
+import { Card } from 'astropilot/components';
+import { Eyebrow } from 'astropilot/components';
+import { Tabs, Tab } from 'astropilot/components';
+
+<Eyebrow>Status und Kategorien</Eyebrow>
+
+## Badges
+
+Badges markieren kurze Statuswerte, Kategorien oder Mengen. Sie ergänzen den Inhalt, ersetzen aber keine Erklärung: Für wichtige Informationen bleibt eine verständliche Beschriftung im Fließtext erforderlich.
+
+**Atomic Design:** Atom `Badge`.
+
+Komponentenpfad unter `src/themes/default/components/`: `atoms/Badge/`.
+
+### Farbvarianten
+
+Die Varianten verwenden die gleichen semantischen Theme-Farben wie andere DaisyUI-Bausteine.
+
+<Tabs label="Farbvarianten: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Badge>Default</Badge>
+        <Badge variant="primary">Primary</Badge>
+        <Badge variant="secondary">Secondary</Badge>
+        <Badge variant="accent">Accent</Badge>
+        <Badge variant="neutral">Neutral</Badge>
+        <Badge variant="info">Info</Badge>
+        <Badge variant="success">Success</Badge>
+        <Badge variant="warning">Warning</Badge>
+        <Badge variant="error">Error</Badge>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Badge } from 'astropilot/components';
+
+        <Badge>Default</Badge>
+        <Badge variant="primary">Primary</Badge>
+        <Badge variant="success">Success</Badge>
+        <Badge variant="warning">Warning</Badge>
+        <Badge variant="error">Error</Badge>
+        ```
+    </Tab>
+
+</Tabs>
+
+### Größen und Stile
+
+Größe und Stil können unabhängig von der Farbvariante gewählt werden.
+
+<Tabs label="Größen und Stile: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Badge size="xs">XS</Badge>
+        <Badge size="sm">SM</Badge>
+        <Badge size="md">MD</Badge>
+        <Badge size="lg">LG</Badge>
+        <Badge size="xl">XL</Badge>
+        <Badge variant="primary" style="outline">Outline</Badge>
+        <Badge variant="success" style="soft">Soft</Badge>
+        <Badge variant="warning" style="dash">Dash</Badge>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Badge } from 'astropilot/components';
+
+        <Badge size="xs">XS</Badge>
+        <Badge size="xl">XL</Badge>
+        <Badge variant="primary" style="outline">Outline</Badge>
+        <Badge variant="success" style="soft">Soft</Badge>
+        <Badge variant="warning" style="dash">Dash</Badge>
+        ```
+    </Tab>
+
+</Tabs>
+
+### In Listen und Cards
+
+Badges lassen sich innerhalb normaler Markdown-Inhalte verwenden. Der umgebende Text erklärt jeweils, was der Status bedeutet.
+
+<Tabs label="Badges in Listen und Cards: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        - Statischer Build <Badge variant="success">erfolgreich</Badge>
+        - Inhaltliche Prüfung <Badge variant="info" style="soft">ausstehend</Badge>
+        - Veröffentlichung <Badge variant="warning">prüfen</Badge>
+
+        <Card>
+            ### Paketstatus
+
+            Diese Demo wird lokal entwickelt. <Badge variant="primary" style="outline">Entwicklung</Badge>
+        </Card>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Badge, Card } from 'astropilot/components';
+
+        - Statischer Build <Badge variant="success">erfolgreich</Badge>
+        - Inhaltliche Prüfung <Badge variant="info" style="soft">ausstehend</Badge>
+
+        <Card>
+            ### Paketstatus
+
+            Diese Demo wird lokal entwickelt. <Badge variant="primary" style="outline">Entwicklung</Badge>
+        </Card>
+        ```
+    </Tab>
+
+</Tabs>

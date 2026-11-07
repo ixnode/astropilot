@@ -79,6 +79,8 @@ src/content/
     │   ├── navigation/
     │   ├── sections/
     │   ├── alerts/
+    │   ├── badges/
+    │   ├── buttons/
     │   ├── images/
     │   └── cards/
     ├── documentation/

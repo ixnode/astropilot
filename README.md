@@ -198,6 +198,25 @@ import { Card, CardActions } from 'astropilot/components';
 </Card>
 ```
 
+`Button` renders a semantic link when `href` is provided and a real button otherwise. It accepts `variant="primary|secondary|accent|neutral|info|success|warning|error"`, `style="solid|outline|soft|ghost|link"`, `size="xs|sm|md|lg|xl"`, `type="button|submit|reset"`, and the Boolean `disabled` for button actions. Links deliberately cannot be disabled.
+
+```mdx
+import { Button } from 'astropilot/components';
+
+<Button href="/contact/">Contact</Button>
+<Button variant="secondary" style="outline">
+    Save draft
+</Button>
+```
+
+`Badge` labels compact status values or categories. It accepts `variant="default|primary|secondary|accent|neutral|info|success|warning|error"`, `style="solid|outline|soft|dash"`, and `size="xs|sm|md|lg|xl"`.
+
+```mdx
+import { Badge } from 'astropilot/components';
+
+Build status: <Badge variant="success" style="soft">ready</Badge>
+```
+
 `Tabs` and `Tab` display Markdown panels with DaisyUI styling. `Tabs` requires a non-empty accessible `label` and one or more direct `Tab` children, each with a non-empty `title`. Optional `variant` supports `border` (default), `box`, and `lift`; `initial` is a one-based index (default `1`) and must refer to an existing panel.
 
 ```mdx

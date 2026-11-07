@@ -23,6 +23,8 @@
 @import './themes/section-tones.css';
 
 /* Theme components: atoms, molecules, organisms, then layout primitives */
+@import '../components/atoms/Badge/Badge.css';
+@import '../components/atoms/Button/Button.css';
 @import '../components/atoms/ContentImage/ContentImage.css';
 @import '../components/atoms/Eyebrow/Eyebrow.css';
 @import '../components/atoms/Tab/Tab.css';

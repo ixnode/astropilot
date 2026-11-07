@@ -58,6 +58,10 @@ const contentTableImport =
     /^import\s*\{\s*ContentTable\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
 const foundationSampleImport =
     /^import\s*\{\s*FoundationSample\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
+const buttonComponentImport =
+    /^import\s*\{\s*Button\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
+const badgeComponentImport =
+    /^import\s*\{\s*Badge\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
 const localImageImport =
     /^import\s+([A-Za-z_$][\w$]*)\s+from\s+['"](?:\.\.\/|\.\/)[a-z0-9_][a-z0-9._/-]*\.(?:avif|jpe?g|png|webp)['"];?$/i;
 const imageExtensions = new Set(['.avif', '.jpeg', '.jpg', '.png', '.webp']);
@@ -125,6 +129,8 @@ function validateMdxLayout(
     let contentImageCount = 0;
     let cardCount = 0;
     let eyebrowCount = 0;
+    let buttonCount = 0;
+    let badgeCount = 0;
     const localImageImports = new Set<string>();
     const validatedColumns = new Set<MdxNode>();
     const validatedTabs = new Set<MdxNode>();
@@ -151,7 +157,9 @@ function validateMdxLayout(
                     !cardComponentImport.test(importValue) &&
                     !tabsComponentImport.test(importValue) &&
                     !foundationSampleImport.test(importValue) &&
-                    !contentTableImport.test(importValue)
+                    !contentTableImport.test(importValue) &&
+                    !buttonComponentImport.test(importValue) &&
+                    !badgeComponentImport.test(importValue)
                 )
                     fail(
                         contentRoot,
@@ -424,6 +432,125 @@ function validateMdxLayout(
                         path,
                         'Alert accepts optional variant (info, success, warning, error) and style (normal, soft, outline, dash) props',
                     );
+            } else if (mdxNode.name === 'Button') {
+                buttonCount += 1;
+                const attributes = mdxNode.attributes ?? [];
+                const variant = attributes.find(
+                    (attribute) => attribute.name === 'variant',
+                );
+                const style = attributes.find(
+                    (attribute) => attribute.name === 'style',
+                );
+                const size = attributes.find(
+                    (attribute) => attribute.name === 'size',
+                );
+                const href = attributes.find(
+                    (attribute) => attribute.name === 'href',
+                );
+                const type = attributes.find(
+                    (attribute) => attribute.name === 'type',
+                );
+                const disabled = attributes.find(
+                    (attribute) => attribute.name === 'disabled',
+                );
+                if (
+                    attributes.some(
+                        (attribute) =>
+                            attribute.type !== 'mdxJsxAttribute' ||
+                            ![
+                                'variant',
+                                'style',
+                                'size',
+                                'href',
+                                'type',
+                                'disabled',
+                            ].includes(attribute.name ?? ''),
+                    ) ||
+                    new Set(attributes.map((attribute) => attribute.name))
+                        .size !== attributes.length ||
+                    (variant &&
+                        ![
+                            'primary',
+                            'secondary',
+                            'accent',
+                            'neutral',
+                            'info',
+                            'success',
+                            'warning',
+                            'error',
+                        ].includes(String(variant.value))) ||
+                    (style &&
+                        !['solid', 'outline', 'soft', 'ghost', 'link'].includes(
+                            String(style.value),
+                        )) ||
+                    (size &&
+                        !['xs', 'sm', 'md', 'lg', 'xl'].includes(
+                            String(size.value),
+                        )) ||
+                    (href &&
+                        (typeof href.value !== 'string' ||
+                            !href.value.trim() ||
+                            /^(?:javascript:|data:|\/\/)/i.test(href.value))) ||
+                    (type &&
+                        !['button', 'submit', 'reset'].includes(
+                            String(type.value),
+                        )) ||
+                    (disabled && disabled.value !== null) ||
+                    (href && (type || disabled))
+                )
+                    fail(
+                        contentRoot,
+                        path,
+                        'Button accepts optional variant, style, size, href, type, and disabled props; links cannot also have type or disabled',
+                    );
+            } else if (mdxNode.name === 'Badge') {
+                badgeCount += 1;
+                const attributes = mdxNode.attributes ?? [];
+                const variant = attributes.find(
+                    (attribute) => attribute.name === 'variant',
+                );
+                const style = attributes.find(
+                    (attribute) => attribute.name === 'style',
+                );
+                const size = attributes.find(
+                    (attribute) => attribute.name === 'size',
+                );
+                if (
+                    attributes.some(
+                        (attribute) =>
+                            attribute.type !== 'mdxJsxAttribute' ||
+                            !['variant', 'style', 'size'].includes(
+                                attribute.name ?? '',
+                            ),
+                    ) ||
+                    new Set(attributes.map((attribute) => attribute.name))
+                        .size !== attributes.length ||
+                    (variant &&
+                        ![
+                            'default',
+                            'primary',
+                            'secondary',
+                            'accent',
+                            'neutral',
+                            'info',
+                            'success',
+                            'warning',
+                            'error',
+                        ].includes(String(variant.value))) ||
+                    (style &&
+                        !['solid', 'outline', 'soft', 'dash'].includes(
+                            String(style.value),
+                        )) ||
+                    (size &&
+                        !['xs', 'sm', 'md', 'lg', 'xl'].includes(
+                            String(size.value),
+                        ))
+                )
+                    fail(
+                        contentRoot,
+                        path,
+                        'Badge accepts optional variant, style (solid, outline, soft, dash), and size props',
+                    );
             } else if (mdxNode.name === 'Eyebrow') {
                 eyebrowCount += 1;
                 if (mdxNode.attributes?.length !== 0)
@@ -596,7 +723,9 @@ function validateMdxLayout(
             alertCount === 0 &&
             contentImageCount === 0 &&
             cardCount === 0 &&
-            eyebrowCount === 0)
+            eyebrowCount === 0 &&
+            buttonCount === 0 &&
+            badgeCount === 0)
     )
         fail(
             contentRoot,

@@ -1,0 +1,5 @@
+@layer components {
+    .ap-badge {
+        @apply m-1 font-semibold;
+    }
+}

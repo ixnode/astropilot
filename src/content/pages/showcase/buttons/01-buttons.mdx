@@ -1,0 +1,122 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Button } from 'astropilot/components';
+import { Eyebrow } from 'astropilot/components';
+import { Tabs, Tab } from 'astropilot/components';
+
+<Eyebrow>Links und Aktionen</Eyebrow>
+
+## Buttons
+
+Buttons machen eine Aktion oder einen weiterführenden Link sichtbar. `Button` rendert mit `href` ein semantisches `a`-Element für Navigation; ohne `href` entsteht ein echtes `button`-Element. Varianten, Größen und Darstellungsstile bleiben klar typisiert und von DaisyUI umgesetzt.
+
+**Atomic Design:** Atom `Button`.
+
+Komponentenpfad unter `src/themes/default/components/`: `atoms/Button/`.
+
+### Farbvarianten
+
+Die semantischen Theme-Farben stehen als Varianten zur Verfügung.
+
+<Tabs label="Farbvarianten: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Button>Primary</Button>
+        <Button variant="secondary">Secondary</Button>
+        <Button variant="accent">Accent</Button>
+        <Button variant="neutral">Neutral</Button>
+        <Button variant="info">Info</Button>
+        <Button variant="success">Success</Button>
+        <Button variant="warning">Warning</Button>
+        <Button variant="error">Error</Button>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Button } from 'astropilot/components';
+
+        <Button>Primary</Button>
+        <Button variant="secondary">Secondary</Button>
+        <Button variant="accent">Accent</Button>
+        <Button variant="neutral">Neutral</Button>
+        <Button variant="info">Info</Button>
+        <Button variant="success">Success</Button>
+        <Button variant="warning">Warning</Button>
+        <Button variant="error">Error</Button>
+        ```
+    </Tab>
+
+</Tabs>
+
+### Größen
+
+Fünf Größen helfen, die visuelle Gewichtung an den Kontext anzupassen. Die mittlere Größe ist der Standard.
+
+<Tabs label="Größen: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Button size="xs">Extra klein</Button>
+        <Button size="sm">Klein</Button>
+        <Button size="md">Mittel</Button>
+        <Button size="lg">Groß</Button>
+        <Button size="xl">Extra groß</Button>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Button } from 'astropilot/components';
+
+        <Button size="xs">Extra klein</Button>
+        <Button size="sm">Klein</Button>
+        <Button size="md">Mittel</Button>
+        <Button size="lg">Groß</Button>
+        <Button size="xl">Extra groß</Button>
+        ```
+    </Tab>
+
+</Tabs>
+
+### Darstellungsstile
+
+Outline, Soft, Ghost und Link setzen unterschiedliche Gewichtungen, ohne die semantische Farbvariante zu ändern.
+
+<Tabs label="Darstellungsstile: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Button variant="secondary" style="outline">Outline</Button>
+        <Button variant="info" style="soft">Soft</Button>
+        <Button variant="neutral" style="ghost">Ghost</Button>
+        <Button variant="primary" style="link">Link</Button>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Button } from 'astropilot/components';
+
+        <Button variant="secondary" style="outline">Outline</Button>
+        <Button variant="info" style="soft">Soft</Button>
+        <Button variant="neutral" style="ghost">Ghost</Button>
+        <Button variant="primary" style="link">Link</Button>
+        ```
+    </Tab>
+
+</Tabs>
+
+### Link, Aktion und deaktivierter Zustand
+
+Ein Link führt zu einer anderen Adresse; ein Button löst eine Aktion aus. Ohne JavaScript bleibt der Aktions-Button hier bewusst ohne Seiteneffekt.
+
+<Tabs label="Link, Aktion und deaktivierter Zustand: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Button href="/showcase/">Zum Showcase</Button>
+        <Button type="button" variant="secondary">Aktion ausführen</Button>
+        <Button variant="primary" disabled>Derzeit nicht verfügbar</Button>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Button } from 'astropilot/components';
+
+        <Button href="/showcase/">Zum Showcase</Button>
+        <Button type="button" variant="secondary">Aktion ausführen</Button>
+        <Button variant="primary" disabled>Derzeit nicht verfügbar</Button>
+        ```
+    </Tab>
+
+</Tabs>

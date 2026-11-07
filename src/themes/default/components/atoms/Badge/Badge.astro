@@ -1,0 +1,60 @@
+---
+type BadgeVariant =
+    | 'default'
+    | 'primary'
+    | 'secondary'
+    | 'accent'
+    | 'neutral'
+    | 'info'
+    | 'success'
+    | 'warning'
+    | 'error';
+type BadgeStyle = 'solid' | 'outline' | 'soft' | 'dash';
+type BadgeSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+interface Props {
+    variant?: BadgeVariant;
+    style?: BadgeStyle;
+    size?: BadgeSize;
+}
+
+const { variant = 'default', style = 'solid', size = 'md' } = Astro.props;
+
+const variantClasses: Record<BadgeVariant, string> = {
+    default: '',
+    primary: 'badge-primary',
+    secondary: 'badge-secondary',
+    accent: 'badge-accent',
+    neutral: 'badge-neutral',
+    info: 'badge-info',
+    success: 'badge-success',
+    warning: 'badge-warning',
+    error: 'badge-error',
+};
+const styleClasses: Record<BadgeStyle, string> = {
+    solid: '',
+    outline: 'badge-outline',
+    soft: 'badge-soft',
+    dash: 'badge-dash',
+};
+const sizeClasses: Record<BadgeSize, string> = {
+    xs: 'badge-xs',
+    sm: 'badge-sm',
+    md: 'badge-md',
+    lg: 'badge-lg',
+    xl: 'badge-xl',
+};
+---
+
+<span
+    class:list={[
+        'ap-badge',
+        'badge',
+        'not-prose',
+        variantClasses[variant],
+        styleClasses[style],
+        sizeClasses[size],
+    ]}
+>
+    <slot />
+</span>
