@@ -1,0 +1,48 @@
+---
+import layoutLandscape from '../../../src/content/pages/showcase/_assets/layout-landscape.png';
+import layoutPortrait from '../../../src/content/pages/showcase/_assets/layout-portrait.png';
+import ContentImage from '../../../src/themes/default/components/atoms/ContentImage/ContentImage.astro';
+
+type ImageChoice = 'landscape' | 'portrait';
+type Shape = 'rounded' | 'square';
+type Border = 'default' | 'none';
+
+/** Storybook adapter that replaces Astro image metadata with a selectable local image. */
+interface Props {
+    /** Local demonstration image. */
+    image?: ImageChoice;
+    /** Meaningful alternative text for the image. */
+    alt?: string;
+    /** Optional rendered width in pixels. */
+    width?: number;
+    /** Optional rendered height in pixels. */
+    height?: number;
+    /** Makes the image fill the available content width. */
+    fullWidth?: boolean;
+    /** Corner treatment. */
+    shape?: Shape;
+    /** Optional visible image border. */
+    border?: Border;
+}
+
+const {
+    image = 'landscape',
+    alt = 'Abstract blue representation of a modular website layout',
+    width,
+    height,
+    fullWidth = false,
+    shape = 'rounded',
+    border = 'none',
+} = Astro.props;
+const src = image === 'portrait' ? layoutPortrait : layoutLandscape;
+---
+
+<ContentImage
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    fullWidth={fullWidth}
+    shape={shape}
+    border={border}
+/>

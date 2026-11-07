@@ -1,16 +1,56 @@
-import layoutLandscape from '../../../src/content/pages/showcase/_assets/layout-landscape.png';
-import layoutPortrait from '../../../src/content/pages/showcase/_assets/layout-portrait.png';
-import ContentImage from '../../../src/themes/default/components/atoms/ContentImage/ContentImage.astro';
+import ContentImagePreview from './ContentImagePreview.astro';
 
 export default {
     title: 'Atoms/ContentImage',
-    component: ContentImage,
+    component: ContentImagePreview,
     tags: ['autodocs'],
+    argTypes: {
+        image: {
+            control: {
+                type: 'select',
+                labels: {
+                    landscape: 'Landscape image',
+                    portrait: 'Portrait image',
+                },
+            },
+            options: ['landscape', 'portrait'],
+        },
+        alt: {
+            control: 'text',
+        },
+        width: {
+            control: {
+                type: 'number',
+                min: 1,
+                max: 1600,
+                step: 1,
+            },
+        },
+        height: {
+            control: {
+                type: 'number',
+                min: 1,
+                max: 1600,
+                step: 1,
+            },
+        },
+        fullWidth: {
+            control: 'boolean',
+        },
+        shape: {
+            control: 'select',
+            options: ['rounded', 'square'],
+        },
+        border: {
+            control: 'select',
+            options: ['default', 'none'],
+        },
+    },
 };
 
 export const Standard = {
     args: {
-        src: layoutLandscape,
+        image: 'landscape',
         alt: 'Abstract blue representation of a modular website layout',
         width: 640,
     },
@@ -18,7 +58,7 @@ export const Standard = {
 
 export const CoverCrop = {
     args: {
-        src: layoutLandscape,
+        image: 'landscape',
         alt: 'Abstract blue representation of a modular website layout',
         width: 520,
         height: 220,
@@ -28,7 +68,7 @@ export const CoverCrop = {
 
 export const FullWidth = {
     args: {
-        src: layoutLandscape,
+        image: 'landscape',
         alt: 'Abstract blue representation of a modular website layout',
         fullWidth: true,
         border: 'default',
@@ -37,7 +77,7 @@ export const FullWidth = {
 
 export const SquareWithoutBorder = {
     args: {
-        src: layoutPortrait,
+        image: 'portrait',
         alt: 'Editorial representation of modular content blocks',
         width: 320,
         height: 320,
