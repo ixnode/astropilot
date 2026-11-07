@@ -84,7 +84,7 @@ npm run storybook   # isolated Astro component workshop on port 6006
 npm run build:storybook # static Storybook output to storybook-static/
 ```
 
-Storybook is a local developer tool and not part of the published website. It renders the existing `.astro` components with the default AstroPilot theme. Stories live in `stories/`, use TypeScript, and directly import their corresponding component. The initial set covers `Button`, `Badge`, `Alert`, and `Card`; add a story whenever a reusable component or meaningful variant is introduced.
+Storybook is a local developer tool and not part of the published website. It renders the existing `.astro` components with the default AstroPilot theme. Stories live in `stories/`, use TypeScript, and directly import their corresponding component. The initial set covers `Button`, `Badge`, `Alert`, `Card`, and `ContentImage`; add a story whenever a reusable component or meaningful variant is introduced. The running demo documents the workflow at `/dokumentation/storybook/`.
 
 `npm run build:demo` sets `ASTROPILOT_BASE=/demo/` only for that command; `src/content/site.yaml` remains unchanged. Before a real release, replace the `https://example.com` placeholder with the production URL and check indexability as well as any staging protection. `robots.txt` is not access control.
 

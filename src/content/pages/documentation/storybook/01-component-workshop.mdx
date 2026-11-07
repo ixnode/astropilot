@@ -1,0 +1,56 @@
+---
+tone: default
+---
+
+import { Eyebrow } from 'astropilot/components';
+
+<Eyebrow>Komponentenwerkstatt</Eyebrow>
+
+## Komponenten isoliert entwickeln
+
+Storybook zeigt die vorhandenen AstroPilot-Komponenten unabhängig von den Inhaltsseiten. Das ist besonders hilfreich, um Varianten, responsive Darstellung und Zustände einer Komponente zu vergleichen, bevor sie im Showcase oder in einer Website verwendet wird.
+
+Storybook ist ein lokales Entwicklungswerkzeug. Es gehört nicht zur veröffentlichten AstroPilot-Website und wird nicht automatisch bereitgestellt.
+
+### Storybook starten
+
+```sh
+nvm use
+npm run storybook
+```
+
+Danach ist die Komponentenwerkstatt unter [http://localhost:6006](http://localhost:6006) verfügbar. Eine globale Storybook-Installation ist nicht nötig: Das Projekt verwendet die lokale Entwicklungsabhängigkeit.
+
+### Vorhandene Stories
+
+Die ersten Stories zeigen die Komponenten `Button`, `Badge`, `Alert`, `Card` und `ContentImage`. Sie verwenden die echten `.astro`-Komponenten und das Standard-Theme. Änderungen an Komponente oder CSS werden dadurch unmittelbar in derselben Darstellung überprüfbar.
+
+Neue Stories liegen neben den bestehenden Beispielen unter `stories/components/`. Eine Story importiert immer die vorhandene Komponente; sie erstellt keine parallele TSX-Variante.
+
+```ts
+import Button from '../../../src/themes/default/components/atoms/Button/Button.astro';
+
+export default {
+    title: 'Atoms/Button',
+    component: Button,
+    tags: ['autodocs'],
+};
+
+export const Primary = {
+    args: {
+        slots: {
+            default: 'Weiter',
+        },
+    },
+};
+```
+
+Ergänze eine Story, wenn eine wiederverwendbare Komponente oder eine bedeutende Variante hinzukommt. Die Story sollte klar benennen, welchen Zustand oder welche Gestaltung sie überprüft.
+
+### Statischen Storybook-Build prüfen
+
+```sh
+npm run build:storybook
+```
+
+Der Befehl erzeugt eine statische Vorschau in `storybook-static/`. Dieser generierte Ordner ist in `.gitignore` ausgeschlossen. Der Build ist eine lokale Qualitätsprüfung und veröffentlicht nichts.

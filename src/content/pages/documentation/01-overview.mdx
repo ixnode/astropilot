@@ -9,6 +9,7 @@ import layoutImage from './_assets/layout.png';
 import themeImage from './_assets/theme.png';
 import pruefenImage from './_assets/checks.png';
 import paketImage from './_assets/package.png';
+import storybookImage from './_assets/storybook.png';
 import { Card, CardActions } from 'astropilot/components';
 import { Column, Columns } from 'astropilot/components';
 import { Eyebrow } from 'astropilot/components';
@@ -88,6 +89,18 @@ Die Dokumentation ist nach Aufgaben gegliedert. Jede Unterseite bleibt eine norm
 
             <CardActions>
                 [Paketnutzung öffnen](/dokumentation/paket/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={storybookImage} imageAlt="Abstrakte Darstellung eines Komponenten-Workshops mit Browserfenster, UI-Bausteinen und Bücherregal">
+            ### Storybook
+
+            Komponenten isoliert entwickeln, Varianten vergleichen und dokumentieren.
+
+            <CardActions>
+                [Storybook öffnen](/dokumentation/storybook/)
             </CardActions>
         </Card>
     </Column>
