@@ -5,13 +5,21 @@ import { Image } from 'astro:assets';
 type Shape = 'rounded' | 'square';
 type Border = 'default' | 'none';
 
+/** An optimized local Astro image with content-focused display options. */
 interface Props {
+    /** Imported Astro image metadata. */
     src: ImageMetadata;
+    /** Meaningful alternative text for the image. */
     alt: string;
+    /** Optional rendered width in pixels. */
     width?: number;
+    /** Optional rendered height in pixels; combines with width for a cover crop. */
     height?: number;
+    /** Makes the image fill the available content width. */
     fullWidth?: boolean;
+    /** Corner treatment. */
     shape?: Shape;
+    /** Optional visible image border. */
     border?: Border;
 }
 
