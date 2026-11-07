@@ -8,7 +8,7 @@ export default {
         layout: 'centered',
         docs: {
             story: {
-                height: '12rem',
+                height: '8rem',
             },
         },
     },
