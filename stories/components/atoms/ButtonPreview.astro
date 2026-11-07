@@ -13,6 +13,7 @@ type ButtonVariant =
 type ButtonStyle = 'solid' | 'outline' | 'soft' | 'ghost' | 'link';
 type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 type ButtonType = 'button' | 'submit' | 'reset';
+type HrefPreset = 'none' | 'showcase' | 'documentation' | 'astro';
 
 /** Storybook adapter that exposes the Button default slot as a text control. */
 interface Props {
@@ -24,7 +25,9 @@ interface Props {
     style?: ButtonStyle;
     /** Button size. */
     size?: ButtonSize;
-    /** Optional target that renders the button as a link. */
+    /** Example target that renders the button as a link. */
+    hrefPreset?: HrefPreset;
+    /** Optional custom target that overrides the selected example. */
     href?: string;
     /** Native button type for button actions. */
     type?: ButtonType;
@@ -37,17 +40,25 @@ const {
     variant = 'primary',
     style = 'solid',
     size = 'md',
-    href,
+    hrefPreset = 'none',
+    href = '',
     type = 'button',
     disabled = false,
 } = Astro.props;
+const hrefByPreset: Record<HrefPreset, string | undefined> = {
+    none: undefined,
+    showcase: '/showcase/',
+    documentation: '/dokumentation/',
+    astro: 'https://astro.build/',
+};
+const resolvedHref = href.trim() || hrefByPreset[hrefPreset];
 ---
 
 <Button
     variant={variant}
     style={style}
     size={size}
-    href={href}
+    href={resolvedHref}
     type={type}
     disabled={disabled}
 >

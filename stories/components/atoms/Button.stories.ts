@@ -6,6 +6,8 @@ export default {
     tags: ['autodocs'],
     args: {
         disabled: false,
+        hrefPreset: 'none',
+        href: '',
     },
     argTypes: {
         label: {
@@ -33,8 +35,26 @@ export default {
             control: 'select',
             options: ['xs', 'sm', 'md', 'lg', 'xl'],
         },
+        hrefPreset: {
+            name: 'Link example',
+            control: {
+                type: 'select',
+                labels: {
+                    none: 'No link',
+                    showcase: 'Showcase (/showcase/)',
+                    documentation: 'Documentation (/dokumentation/)',
+                    astro: 'Astro website (https://astro.build/)',
+                },
+            },
+            options: ['none', 'showcase', 'documentation', 'astro'],
+            description:
+                'Example target. A custom href overrides this selection.',
+        },
         href: {
+            name: 'Custom href',
             control: 'text',
+            description:
+                'Optional custom link target. Overrides the selected link example.',
         },
         type: {
             control: 'select',
@@ -63,7 +83,7 @@ export const Outline = {
 
 export const Link = {
     args: {
-        href: '/showcase/',
+        hrefPreset: 'showcase',
         label: 'Open showcase',
     },
 };
