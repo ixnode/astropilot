@@ -1,0 +1,46 @@
+---
+import layoutLandscape from '../../../src/content/pages/showcase/_assets/layout-landscape.png';
+import layoutPortrait from '../../../src/content/pages/showcase/_assets/layout-portrait.png';
+import Card from '../../../src/themes/default/components/molecules/Card/Card.astro';
+
+type ImageChoice = 'none' | 'landscape' | 'portrait';
+type ImageAltPreset = 'layout' | 'editorial' | 'content';
+
+/** Storybook adapter that exposes Card body content and local images as controls. */
+interface Props {
+    /** Optional local demonstration image. */
+    image?: ImageChoice;
+    /** Meaningful alternative text for the optional image. */
+    imageAlt?: string;
+    /** Suggested alternative text for the optional image. */
+    imageAltPreset?: ImageAltPreset;
+    /** Card heading. */
+    title?: string;
+    /** Card body copy. */
+    content?: string;
+}
+
+const {
+    image = 'none',
+    imageAlt = '',
+    imageAltPreset = 'layout',
+    title = 'Simple content card',
+    content = 'A reusable card with standard body content and no image.',
+} = Astro.props;
+const imageByChoice = {
+    landscape: layoutLandscape,
+    portrait: layoutPortrait,
+} as const;
+const src = image === 'none' ? undefined : imageByChoice[image];
+const imageAltByPreset: Record<ImageAltPreset, string> = {
+    layout: 'Abstract blue representation of a modular website layout',
+    editorial: 'Editorial representation of modular content blocks',
+    content: 'Abstract representation of structured website content',
+};
+const resolvedImageAlt = imageAlt.trim() || imageAltByPreset[imageAltPreset];
+---
+
+<Card image={src} imageAlt={src ? resolvedImageAlt : undefined}>
+    <h3>{title}</h3>
+    <p>{content}</p>
+</Card>
