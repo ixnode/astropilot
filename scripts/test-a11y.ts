@@ -73,6 +73,7 @@ const routes = [
     '/dokumentation/theme/',
     '/dokumentation/pruefen/',
     '/dokumentation/paket/',
+    '/dokumentation/storybook/',
     '/showcase/',
     '/showcase/foundations/',
     '/showcase/layout/',
@@ -80,6 +81,8 @@ const routes = [
     '/showcase/navigation/',
     '/showcase/sections/',
     '/showcase/alerts/',
+    '/showcase/badges/',
+    '/showcase/buttons/',
     '/showcase/images/',
     '/showcase/cards/',
 ] as const;
