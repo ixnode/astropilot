@@ -36,7 +36,9 @@
         "test:source": "node --import tsx scripts/check-source-files.ts",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
-        "pack:check": "npm pack --dry-run"
+        "pack:check": "npm pack --dry-run",
+        "storybook": "storybook dev --port 6006",
+        "build:storybook": "storybook build"
     },
     "peerDependencies": {
         "@astrojs/mdx": "^8.1.2",
@@ -64,11 +66,15 @@
         "@astrojs/mdx": "^8.1.2",
         "@axe-core/playwright": "^4.13.0",
         "@playwright/test": "^1.63.0",
+        "@storybook-astro/framework": "^1.15.0",
+        "@storybook/addon-docs": "^10.6.6",
+        "@storybook/builder-vite": "^10.6.6",
         "astro": "^7.4.4",
         "axe-core": "^4.13.0",
         "playwright": "^1.63.0",
         "prettier": "^3.9.10",
         "prettier-plugin-astro": "^1.1.2",
+        "storybook": "^10.6.6",
         "tsx": "^4.23.15",
         "typescript": "^6.0.3",
         "vitest": "^5.0.1"

@@ -2,8 +2,11 @@
 type AlertVariant = 'default' | 'info' | 'success' | 'warning' | 'error';
 type AlertStyle = 'normal' | 'soft' | 'outline' | 'dash';
 
+/** A DaisyUI alert with a default slot for a concise status message. */
 interface Props {
+    /** Semantic status variant. */
     variant?: AlertVariant;
+    /** Visual treatment independent of the status variant. */
     style?: AlertStyle;
 }
 
@@ -33,6 +36,7 @@ const styleClasses: Record<AlertStyle, string> = {
     ]}
 >
     <div class="ap-alert__content">
+        {/* @slot Alert message content. */}
         <slot />
     </div>
 </div>

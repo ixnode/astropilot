@@ -12,9 +12,13 @@ type BadgeVariant =
 type BadgeStyle = 'solid' | 'outline' | 'soft' | 'dash';
 type BadgeSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
+/** A compact DaisyUI status or category label with a default slot for its text. */
 interface Props {
+    /** Semantic color variant. */
     variant?: BadgeVariant;
+    /** Visual treatment independent of the color variant. */
     style?: BadgeStyle;
+    /** Badge size. */
     size?: BadgeSize;
 }
 
@@ -56,5 +60,6 @@ const sizeClasses: Record<BadgeSize, string> = {
         sizeClasses[size],
     ]}
 >
+    {/* @slot Short status or category text. */}
     <slot />
 </span>

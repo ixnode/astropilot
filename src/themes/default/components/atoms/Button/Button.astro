@@ -12,12 +12,19 @@ type ButtonStyle = 'solid' | 'outline' | 'soft' | 'ghost' | 'link';
 type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 type ButtonType = 'button' | 'submit' | 'reset';
 
+/** A DaisyUI-styled link or native button with a default slot for its label. */
 interface Props {
+    /** Semantic color variant. */
     variant?: ButtonVariant;
+    /** Visual treatment independent of the color variant. */
     style?: ButtonStyle;
+    /** Button size. */
     size?: ButtonSize;
+    /** When set, the component renders an anchor instead of a button. */
     href?: string;
+    /** Native button type for button actions. */
     type?: ButtonType;
+    /** Disables a native button. Links cannot be disabled. */
     disabled?: boolean;
 }
 
@@ -69,6 +76,7 @@ const classes = [
 
 {href ? (
     <a class:list={classes} href={href}>
+        {/* @slot Button label or other inline content. */}
         <slot />
     </a>
 ) : (

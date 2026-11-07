@@ -263,6 +263,8 @@ Provide at least these commands:
 - `npm run check`: Astro/TypeScript checking plus required content validation.
 - `npm test`: a few meaningful tests of project-owned conventions.
 - `npm run test:a11y`: reproducible browser verification of all generated demo, showcase, and documentation pages, for example with Playwright and axe-core.
+- `npm run storybook`: local isolated component workshop using Storybook Astro on port 6006.
+- `npm run build:storybook`: static Storybook build to `storybook-static/`.
 
 Use existing tools; do not build a custom test platform. Check especially sorting and duplicate numbers, deep directory association, missing page metadata, invalid tones, hero presence, H1 fallback, unique IDs, and base URL behavior. Temporary fixtures for deeper pages are sufficient; the visible demo includes the homepage, content pages, showcase, and documentation.
 

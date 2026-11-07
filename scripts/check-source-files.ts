@@ -1,7 +1,13 @@
 import { readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
-const ignored = new Set(['node_modules', 'dist', '.astro', '.git']);
+const ignored = new Set([
+    'node_modules',
+    'dist',
+    'storybook-static',
+    '.astro',
+    '.git',
+]);
 function sourceFiles(directory: string): string[] {
     return readdirSync(directory).flatMap((name) => {
         if (ignored.has(name)) return [];

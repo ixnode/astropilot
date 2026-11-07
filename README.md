@@ -80,7 +80,11 @@ npm run build       # validated static build to dist/
 npm run preview     # preview the build
 npm run test:a11y   # Playwright, axe, keyboard focus, and mobile width
 npm run build:demo  # builds once with base /demo/
+npm run storybook   # isolated Astro component workshop on port 6006
+npm run build:storybook # static Storybook output to storybook-static/
 ```
+
+Storybook is a local developer tool and not part of the published website. It renders the existing `.astro` components with the default AstroPilot theme. Stories live in `stories/`, use TypeScript, and directly import their corresponding component. The initial set covers `Button`, `Badge`, `Alert`, and `Card`; add a story whenever a reusable component or meaningful variant is introduced.
 
 `npm run build:demo` sets `ASTROPILOT_BASE=/demo/` only for that command; `src/content/site.yaml` remains unchanged. Before a real release, replace the `https://example.com` placeholder with the production URL and check indexability as well as any staging protection. `robots.txt` is not access control.
 
