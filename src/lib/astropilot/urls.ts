@@ -1,4 +1,4 @@
-import type { SiteConfig } from './types';
+import type { SiteConfig } from './types.js';
 
 export function pageDirectoryFromId(id: string): string {
     const directory = id

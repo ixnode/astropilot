@@ -9,9 +9,9 @@ import remarkParse from 'remark-parse';
 import remarkMdx from 'remark-mdx';
 import remarkGfm from 'remark-gfm';
 import { visit } from 'unist-util-visit';
-import { loadSiteConfig } from './site-config';
-import { tones } from './types';
-import { routeFromPageId } from './urls';
+import { loadSiteConfig } from './site-config.js';
+import { tones } from './types.js';
+import { routeFromPageId } from './urls.js';
 
 const pageSchema = z.object({
     title: z.string().trim().min(1),

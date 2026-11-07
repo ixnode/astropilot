@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { unified } from '@astrojs/markdown-remark';
-import { isExternalWebLink } from '../src/lib/astropilot/urls';
-import { rehypeExternalLinks } from '../src/lib/astropilot/rehype-links';
+import { isExternalWebLink } from '../src/lib/astropilot/urls.js';
+import { rehypeExternalLinks } from '../src/lib/astropilot/rehype-links.js';
 
 test('classifies external web links against the production origin', () => {
     const site = 'https://example.com';

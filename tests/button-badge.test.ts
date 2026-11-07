@@ -3,7 +3,7 @@ import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
-import { validateAstroPilotContent } from '../src/lib/astropilot/validation';
+import { validateAstroPilotContent } from '../src/lib/astropilot/validation.js';
 
 function validate(imports: string, component: string): void {
     const directory = mkdtempSync(join(tmpdir(), 'astropilot-button-badge-'));

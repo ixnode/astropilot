@@ -1,7 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
-import { tones } from '../lib/astropilot/types';
+import { tones } from '../lib/astropilot/types.js';
 
 /** Creates the two Astro collections required by the AstroPilot content contract. */
 export function createAstroPilotCollections(

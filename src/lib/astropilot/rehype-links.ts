@@ -1,6 +1,6 @@
 import type { Root } from 'hast';
 import { visit } from 'unist-util-visit';
-import { isExternalWebLink } from './urls';
+import { isExternalWebLink } from './urls.js';
 
 /** Apply the same external-link behavior after Markdown references and autolinks resolve. */
 export function rehypeExternalLinks(siteUrl: string) {

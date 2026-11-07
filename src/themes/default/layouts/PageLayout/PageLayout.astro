@@ -3,8 +3,8 @@ import '../../styles/theme.css';
 import faviconUrl from '../../assets/favicon.svg?url';
 import Header from '../../components/organisms/Header/Header.astro';
 import Footer from '../../components/organisms/Footer/Footer.astro';
-import type { SiteConfig } from '../../../../lib/astropilot/types';
-import { canonicalUrl } from '../../../../lib/astropilot/urls';
+import type { SiteConfig } from '../../../../lib/astropilot/types.js';
+import { canonicalUrl } from '../../../../lib/astropilot/urls.js';
 interface Props {
     site: SiteConfig;
     title: string;

@@ -3,7 +3,7 @@ import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
-import { validateAstroPilotContent } from '../src/lib/astropilot/validation';
+import { validateAstroPilotContent } from '../src/lib/astropilot/validation.js';
 
 test('accepts multiple rows while rejecting invalid Column spans', () => {
     const directory = mkdtempSync(join(tmpdir(), 'astropilot-columns-'));

@@ -4,8 +4,8 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
 import type { Element, Root } from 'hast';
-import { validateAstroPilotContent } from '../src/lib/astropilot/validation';
-import { rehypeContentTables } from '../src/lib/astropilot/rehype-tables';
+import { validateAstroPilotContent } from '../src/lib/astropilot/validation.js';
+import { rehypeContentTables } from '../src/lib/astropilot/rehype-tables.js';
 
 const markdownTable =
     '| Name | Count |\n| :--- | ---: |\n| First | 1 |\n| Second | 2 |';

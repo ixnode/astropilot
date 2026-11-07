@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { z } from 'zod';
 import { parse } from 'yaml';
-import type { SiteConfig } from './types';
+import type { SiteConfig } from './types.js';
 
 const linkSchema = z.object({
     label: z.string().trim().min(1),

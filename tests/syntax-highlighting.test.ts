@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createMarkdownProcessor } from '@astrojs/markdown-remark';
-import { createAstroPilotConfig } from '../src/package/config';
+import { createAstroPilotConfig } from '../src/package/config.js';
 
 test('highlights MDX imports, embedded JSX, and other fenced code languages', async () => {
     const { shikiConfig } = createAstroPilotConfig().markdown;

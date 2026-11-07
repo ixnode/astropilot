@@ -3,8 +3,8 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
-import { validateAstroPilotContent } from '../src/lib/astropilot/validation';
-import { withBase } from '../src/lib/astropilot/urls';
+import { validateAstroPilotContent } from '../src/lib/astropilot/validation.js';
+import { withBase } from '../src/lib/astropilot/urls.js';
 
 test('validates query links against their page path and preserves fragment checks', () => {
     const directory = mkdtempSync(join(tmpdir(), 'astropilot-query-links-'));

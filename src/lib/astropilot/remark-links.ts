@@ -1,7 +1,7 @@
 import type { Root } from 'mdast';
 import { visit } from 'unist-util-visit';
-import { contentHref } from './urls';
-import type { SiteConfig } from './types';
+import { contentHref } from './urls.js';
+import type { SiteConfig } from './types.js';
 
 export function remarkContentLinks(site: SiteConfig) {
     return (tree: Root) => {

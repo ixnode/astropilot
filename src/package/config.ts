@@ -7,12 +7,12 @@ import {
 } from '@astrojs/markdown-remark';
 import tailwindcss from '@tailwindcss/vite';
 import tsx from '@shikijs/langs/tsx';
-import { rehypeUniqueHeadingIds } from '../lib/astropilot/rehype-ids';
-import { rehypeContentTables } from '../lib/astropilot/rehype-tables';
-import { rehypeExternalLinks } from '../lib/astropilot/rehype-links';
-import { remarkContentLinks } from '../lib/astropilot/remark-links';
-import { loadSiteConfig } from '../lib/astropilot/site-config';
-import { validateAstroPilotContent } from '../lib/astropilot/validation';
+import { rehypeUniqueHeadingIds } from '../lib/astropilot/rehype-ids.js';
+import { rehypeContentTables } from '../lib/astropilot/rehype-tables.js';
+import { rehypeExternalLinks } from '../lib/astropilot/rehype-links.js';
+import { remarkContentLinks } from '../lib/astropilot/remark-links.js';
+import { loadSiteConfig } from '../lib/astropilot/site-config.js';
+import { validateAstroPilotContent } from '../lib/astropilot/validation.js';
 
 /** Returns the Astro configuration required by the default AstroPilot theme. */
 export function createAstroPilotConfig() {

@@ -1,6 +1,6 @@
 import type { CollectionEntry } from 'astro:content';
-import { pageDirectoryFromId, routeFromPageId } from './urls';
-import type { Tone } from './types';
+import { pageDirectoryFromId, routeFromPageId } from './urls.js';
+import type { Tone } from './types.js';
 
 type PageEntry = CollectionEntry<'pages'>;
 type DocumentEntry = CollectionEntry<'documents'>;
