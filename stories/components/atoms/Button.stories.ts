@@ -4,6 +4,9 @@ export default {
     title: 'Atoms/Button',
     component: ButtonPreview,
     tags: ['autodocs'],
+    args: {
+        disabled: false,
+    },
     argTypes: {
         label: {
             control: 'text',
@@ -38,7 +41,8 @@ export default {
             options: ['button', 'submit', 'reset'],
         },
         disabled: {
-            control: 'boolean',
+            control: 'inline-radio',
+            options: [false, true],
         },
     },
 };
