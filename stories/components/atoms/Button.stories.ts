@@ -4,6 +4,14 @@ export default {
     title: 'Atoms/Button',
     component: ButtonPreview,
     tags: ['autodocs'],
+    parameters: {
+        layout: 'centered',
+        docs: {
+            story: {
+                height: '12rem',
+            },
+        },
+    },
     args: {
         disabled: false,
         hrefPreset: 'none',
