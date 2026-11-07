@@ -1,0 +1,55 @@
+---
+import Button from '../../../src/themes/default/components/atoms/Button/Button.astro';
+
+type ButtonVariant =
+    | 'primary'
+    | 'secondary'
+    | 'accent'
+    | 'neutral'
+    | 'info'
+    | 'success'
+    | 'warning'
+    | 'error';
+type ButtonStyle = 'solid' | 'outline' | 'soft' | 'ghost' | 'link';
+type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+type ButtonType = 'button' | 'submit' | 'reset';
+
+/** Storybook adapter that exposes the Button default slot as a text control. */
+interface Props {
+    /** Visible text inside the button. */
+    label?: string;
+    /** Semantic color variant. */
+    variant?: ButtonVariant;
+    /** Visual treatment independent of the color variant. */
+    style?: ButtonStyle;
+    /** Button size. */
+    size?: ButtonSize;
+    /** Optional target that renders the button as a link. */
+    href?: string;
+    /** Native button type for button actions. */
+    type?: ButtonType;
+    /** Disables a native button. Links cannot be disabled. */
+    disabled?: boolean;
+}
+
+const {
+    label = 'Primary action',
+    variant = 'primary',
+    style = 'solid',
+    size = 'md',
+    href,
+    type = 'button',
+    disabled = false,
+} = Astro.props;
+---
+
+<Button
+    variant={variant}
+    style={style}
+    size={size}
+    href={href}
+    type={type}
+    disabled={disabled}
+>
+    {label}
+</Button>

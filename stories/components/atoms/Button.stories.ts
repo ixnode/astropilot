@@ -1,16 +1,51 @@
-import Button from '../../../src/themes/default/components/atoms/Button/Button.astro';
+import ButtonPreview from './ButtonPreview.astro';
 
 export default {
     title: 'Atoms/Button',
-    component: Button,
+    component: ButtonPreview,
     tags: ['autodocs'],
+    argTypes: {
+        label: {
+            control: 'text',
+            description: 'Visible text inside the button.',
+        },
+        variant: {
+            control: 'select',
+            options: [
+                'primary',
+                'secondary',
+                'accent',
+                'neutral',
+                'info',
+                'success',
+                'warning',
+                'error',
+            ],
+        },
+        style: {
+            control: 'select',
+            options: ['solid', 'outline', 'soft', 'ghost', 'link'],
+        },
+        size: {
+            control: 'select',
+            options: ['xs', 'sm', 'md', 'lg', 'xl'],
+        },
+        href: {
+            control: 'text',
+        },
+        type: {
+            control: 'select',
+            options: ['button', 'submit', 'reset'],
+        },
+        disabled: {
+            control: 'boolean',
+        },
+    },
 };
 
 export const Primary = {
     args: {
-        slots: {
-            default: 'Primary action',
-        },
+        label: 'Primary action',
     },
 };
 
@@ -18,26 +53,20 @@ export const Outline = {
     args: {
         variant: 'secondary',
         style: 'outline',
-        slots: {
-            default: 'Secondary action',
-        },
+        label: 'Secondary action',
     },
 };
 
 export const Link = {
     args: {
         href: '/showcase/',
-        slots: {
-            default: 'Open showcase',
-        },
+        label: 'Open showcase',
     },
 };
 
 export const Disabled = {
     args: {
         disabled: true,
-        slots: {
-            default: 'Currently unavailable',
-        },
+        label: 'Currently unavailable',
     },
 };
