@@ -4,6 +4,35 @@ export default {
     title: 'Atoms/Badge',
     component: Badge,
     tags: ['autodocs'],
+    argTypes: {
+        slots: {
+            table: {
+                disable: true,
+            },
+        },
+        variant: {
+            control: 'select',
+            options: [
+                'default',
+                'primary',
+                'secondary',
+                'accent',
+                'neutral',
+                'info',
+                'success',
+                'warning',
+                'error',
+            ],
+        },
+        style: {
+            control: 'select',
+            options: ['solid', 'outline', 'soft', 'dash'],
+        },
+        size: {
+            control: 'select',
+            options: ['xs', 'sm', 'md', 'lg', 'xl'],
+        },
+    },
 };
 
 export const Default = {
