@@ -4,6 +4,14 @@ export default {
     title: 'Atoms/Badge',
     component: BadgePreview,
     tags: ['autodocs'],
+    parameters: {
+        layout: 'centered',
+        docs: {
+            story: {
+                height: '6rem',
+            },
+        },
+    },
     argTypes: {
         label: {
             control: 'text',
