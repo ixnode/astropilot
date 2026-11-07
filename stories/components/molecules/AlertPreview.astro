@@ -1,0 +1,29 @@
+---
+import Alert from '../../../src/themes/default/components/molecules/Alert/Alert.astro';
+
+type AlertVariant = 'default' | 'info' | 'success' | 'warning' | 'error';
+type AlertStyle = 'normal' | 'soft' | 'outline' | 'dash';
+
+/** Storybook adapter that exposes the Alert default slot as a text control. */
+interface Props {
+    /** Optional emphasized lead-in for the message. */
+    heading?: string;
+    /** Concise alert message. */
+    label?: string;
+    /** Semantic status variant. */
+    variant?: AlertVariant;
+    /** Visual treatment independent of the status variant. */
+    style?: AlertStyle;
+}
+
+const {
+    heading,
+    label = 'This component is rendered from an Astro story.',
+    variant = 'default',
+    style = 'normal',
+} = Astro.props;
+---
+
+<Alert variant={variant} style={style}>
+    {heading && <strong>{heading}:</strong>} {label}
+</Alert>
