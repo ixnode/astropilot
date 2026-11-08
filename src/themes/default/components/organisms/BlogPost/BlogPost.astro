@@ -1,0 +1,54 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { SiteConfig } from '../../../../../lib/astropilot/types.js';
+import PageLayout from '../../../layouts/PageLayout/PageLayout.astro';
+import Eyebrow from '../../atoms/Eyebrow/Eyebrow.astro';
+
+interface Props {
+    post: CollectionEntry<'blog'>;
+    site: SiteConfig;
+    route: string;
+    Content: Awaited<
+        ReturnType<typeof import('astro:content').render>
+    >['Content'];
+}
+
+const { post, site, route, Content } = Astro.props;
+const dateFormatter = new Intl.DateTimeFormat(site.language, {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+});
+---
+
+<PageLayout
+    site={site}
+    title={post.data.title}
+    description={post.data.description}
+    route={route}
+>
+    <section
+        class="tone-brand ap-hero ap-blog-post__hero"
+        aria-labelledby="page-title"
+    >
+        <div class="ap-hero__inner site-shell">
+            <Eyebrow>{post.data.eyebrow}</Eyebrow>
+            <h1 id="page-title" class="ap-hero__title">
+                {post.data.title}
+            </h1>
+            <time
+                class="ap-blog-post__date"
+                datetime={post.data.pubDate.toISOString()}
+            >
+                {dateFormatter.format(post.data.pubDate)}
+            </time>
+        </div>
+    </section>
+    <article class="tone-default ap-section ap-blog-post__article">
+        <div class="ap-section__inner site-shell">
+            <div class="content-prose ap-section__content">
+                <Content />
+            </div>
+        </div>
+    </article>
+</PageLayout>

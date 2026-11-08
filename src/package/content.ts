@@ -3,9 +3,21 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { tones } from '../lib/astropilot/types.js';
 
-/** Creates the two Astro collections required by the AstroPilot content contract. */
+function blogIdFromEntry(entry: string): string {
+    const match = entry.match(
+        /^\d{4}-\d{2}-\d{2}\.([a-z0-9]+(?:-[a-z0-9]+)*)\.md$/,
+    );
+    if (!match)
+        throw new Error(
+            `Invalid blog filename ${entry}; expected YYYY-MM-DD.article-slug.md`,
+        );
+    return match[1];
+}
+
+/** Creates the Astro collections required by the AstroPilot content contract. */
 export function createAstroPilotCollections(
     contentDirectory = './src/content/pages',
+    blogDirectory = './src/content/blog',
 ) {
     const tone = z.enum(tones).default('default');
     const heroClass = z.string().regex(/^ap-[a-z0-9][a-z0-9_-]*$/, {
@@ -50,5 +62,22 @@ export function createAstroPilotCollections(
             }),
     });
 
-    return { pages, documents };
+    const blog = defineCollection({
+        loader: glob({
+            base: blogDirectory,
+            pattern: '*.md',
+            generateId: ({ entry }) => blogIdFromEntry(entry),
+        }),
+        schema: ({ image }) =>
+            z.object({
+                title: z.string().trim().min(1),
+                description: z.string().trim().min(1),
+                pubDate: z.coerce.date(),
+                eyebrow: z.string().trim().min(1),
+                image: image(),
+                imageAlt: z.string().trim().min(1),
+            }),
+    });
+
+    return { pages, documents, blog };
 }

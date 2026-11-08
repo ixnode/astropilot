@@ -3,7 +3,7 @@ import AstroPilotPage, { getAstroPilotStaticPaths } from 'astropilot/page';
 
 export const getStaticPaths = getAstroPilotStaticPaths;
 
-const { page } = Astro.props;
+const props = Astro.props;
 ---
 
-<AstroPilotPage page={page} />
+<AstroPilotPage {...props} />

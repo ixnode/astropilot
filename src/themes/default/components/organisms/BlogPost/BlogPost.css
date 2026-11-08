@@ -1,0 +1,7 @@
+@layer components {
+    .ap-blog-post__hero {
+        .ap-blog-post__date {
+            @apply mt-5 block text-sm font-semibold tracking-wide text-primary-content/80 uppercase;
+        }
+    }
+}

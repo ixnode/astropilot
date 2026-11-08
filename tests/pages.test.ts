@@ -2,7 +2,11 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { CollectionEntry } from 'astro:content';
 import { assemblePages } from '../src/lib/astropilot/pages.js';
-import { routeFromPageId, withBase } from '../src/lib/astropilot/urls.js';
+import {
+    blogRouteFromId,
+    routeFromPageId,
+    withBase,
+} from '../src/lib/astropilot/urls.js';
 
 test('derives normalized routes from page metadata paths', () => {
     assert.equal(routeFromPageId('page.yaml'), '/');
@@ -62,6 +66,12 @@ test('applies a deployment base exactly once to root-relative URLs', () => {
         withBase('https://example.com', '/demo/'),
         'https://example.com',
     );
+});
+
+test('derives safe routes for blog entry identifiers', () => {
+    assert.equal(blogRouteFromId('project-setup'), '/blog/project-setup/');
+    assert.throws(() => blogRouteFromId('milestones/component-library'));
+    assert.throws(() => blogRouteFromId('../unsafe'));
 });
 
 test('recognizes generated section IDs and sorts them numerically', () => {

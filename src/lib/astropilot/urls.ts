@@ -56,3 +56,11 @@ export function isExternalWebLink(href: string, siteUrl: string): boolean {
 export function canonicalUrl(route: string, site: SiteConfig): string {
     return new URL(withBase(route, site.base), site.url).toString();
 }
+
+/** Derives a safe static route for a Markdown entry in the blog collection. */
+export function blogRouteFromId(id: string): string {
+    const normalized = id.replace(/^\/+|\/+$/g, '');
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(normalized))
+        throw new Error(`Unsafe blog identifier: ${id}`);
+    return `/blog/${normalized}/`;
+}

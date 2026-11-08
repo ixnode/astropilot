@@ -39,6 +39,8 @@
 @import '../components/organisms/Hero/Hero.css';
 @import '../components/organisms/PageTitle/PageTitle.css';
 @import '../components/organisms/Section/Section.css';
+@import '../components/organisms/BlogIndex/BlogIndex.css';
+@import '../components/organisms/BlogPost/BlogPost.css';
 @import '../components/layout/Columns/Columns.css';
 @import '../components/layout/Column/Column.css';
 @import '../layouts/PageLayout/PageLayout.css';

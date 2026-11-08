@@ -1,8 +1,11 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import { assemblePages, type AssembledPage } from '../lib/astropilot/pages.js';
 import { loadSiteConfig } from '../lib/astropilot/site-config.js';
+import { blogRouteFromId } from '../lib/astropilot/urls.js';
 import PageLayout from '../themes/default/layouts/PageLayout/PageLayout.astro';
+import BlogIndex from '../themes/default/components/organisms/BlogIndex/BlogIndex.astro';
+import BlogPost from '../themes/default/components/organisms/BlogPost/BlogPost.astro';
 import Hero from '../themes/default/components/organisms/Hero/Hero.astro';
 import PageTitle from '../themes/default/components/organisms/PageTitle/PageTitle.astro';
 import Section from '../themes/default/components/organisms/Section/Section.astro';
@@ -12,40 +15,75 @@ export async function getAstroPilotStaticPaths() {
         await getCollection('pages'),
         await getCollection('documents'),
     );
-    return pages.map((page) => ({
+    const pagePaths = pages.map((page) => ({
         params: {
             slug: page.route === '/' ? undefined : page.route.slice(1, -1),
         },
         props: { page },
     }));
+    const posts = (await getCollection('blog')).sort(
+        (left, right) =>
+            right.data.pubDate.getTime() - left.data.pubDate.getTime(),
+    );
+    const blogPaths = [
+        {
+            params: { slug: 'blog' },
+            props: { blogIndex: true, posts },
+        },
+        ...posts.map((post) => ({
+            params: { slug: blogRouteFromId(post.id).slice(1, -1) },
+            props: { post },
+        })),
+    ];
+    return [...pagePaths, ...blogPaths];
 }
 
 interface Props {
-    page: AssembledPage;
+    page?: AssembledPage;
+    blogIndex?: boolean;
+    posts?: CollectionEntry<'blog'>[];
+    post?: CollectionEntry<'blog'>;
 }
-const { page } = Astro.props;
+const { page, blogIndex, posts, post } = Astro.props;
 const site = loadSiteConfig();
-const hero = page.hero ? await render(page.hero) : undefined;
-const sections = await Promise.all(
-    page.sections.map(async (section) => ({
-        section,
-        rendered: await render(section),
-    })),
-);
+const hero = page?.hero ? await render(page.hero) : undefined;
+const sections = page
+    ? await Promise.all(
+          page.sections.map(async (section) => ({
+              section,
+              rendered: await render(section),
+          })),
+      )
+    : [];
+const renderedPost = post ? await render(post) : undefined;
 ---
 
-<PageLayout
-    site={site}
-    title={page.entry.data.title}
-    description={page.entry.data.description}
-    route={page.route}
->
-    {hero ? (
-        <Hero hero={page.hero!} site={site} Content={hero.Content} />
-    ) : (
-        <PageTitle title={page.entry.data.title} classes={site.heroClasses} />
-    )}
-    {sections.map(({ section, rendered }) => (
-        <Section section={section} Content={rendered.Content} />
-    ))}
-</PageLayout>
+{page ? (
+    <PageLayout
+        site={site}
+        title={page.entry.data.title}
+        description={page.entry.data.description}
+        route={page.route}
+    >
+        {hero ? (
+            <Hero hero={page.hero!} site={site} Content={hero.Content} />
+        ) : (
+            <PageTitle
+                title={page.entry.data.title}
+                classes={site.heroClasses}
+            />
+        )}
+        {sections.map(({ section, rendered }) => (
+            <Section section={section} Content={rendered.Content} />
+        ))}
+    </PageLayout>
+) : blogIndex && posts ? (
+    <BlogIndex posts={posts} site={site} />
+) : post && renderedPost ? (
+    <BlogPost
+        post={post}
+        site={site}
+        route={blogRouteFromId(post.id)}
+        Content={renderedPost.Content}
+    />
+) : null}
