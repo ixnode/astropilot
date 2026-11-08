@@ -1,8 +1,14 @@
-import ColumnsPreview from './ColumnsPreview.astro';
+import Columns from '../../../src/themes/default/components/layout/Columns/Columns.astro';
+
+const column = (span: number, index: number): string =>
+    `<div class="ap-column ap-column--span-${span}"><article class="rounded-box bg-base-200 p-6"><h3 class="m-0 text-lg font-bold">Column ${index}</h3><p class="mt-3 mb-0">${span} of 12 columns on desktop, stacked on smaller screens.</p></article></div>`;
+
+const columns = (spans: number[]): string =>
+    spans.map((span, index) => column(span, index + 1)).join('');
 
 export default {
     title: 'Layout/Columns',
-    component: ColumnsPreview,
+    component: Columns,
     tags: ['autodocs'],
     parameters: {
         docs: {
@@ -11,45 +17,36 @@ export default {
             },
         },
     },
-    argTypes: {
-        layout: {
-            name: 'Layout',
-            control: {
-                type: 'select',
-                labels: {
-                    single: 'One column (12 / 12)',
-                    two: 'Two columns (6 / 6)',
-                    three: 'Three columns (4 / 4 / 4)',
-                    four: 'Four columns (3 / 3 / 3 / 3)',
-                },
-            },
-            options: ['single', 'two', 'three', 'four'],
-            description:
-                'Equal column distribution on desktop; stacked on smaller screens.',
-        },
-    },
 };
 
 export const SingleColumn = {
     args: {
-        layout: 'single',
+        slots: {
+            default: columns([12]),
+        },
     },
 };
 
 export const TwoColumns = {
     args: {
-        layout: 'two',
+        slots: {
+            default: columns([6, 6]),
+        },
     },
 };
 
 export const ThreeColumns = {
     args: {
-        layout: 'three',
+        slots: {
+            default: columns([4, 4, 4]),
+        },
     },
 };
 
 export const FourColumns = {
     args: {
-        layout: 'four',
+        slots: {
+            default: columns([3, 3, 3, 3]),
+        },
     },
 };

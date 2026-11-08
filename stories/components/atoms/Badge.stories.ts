@@ -1,8 +1,8 @@
-import BadgePreview from './BadgePreview.astro';
+import Badge from '../../../src/themes/default/components/atoms/Badge/Badge.astro';
 
 export default {
     title: 'Atoms/Badge',
-    component: BadgePreview,
+    component: Badge,
     tags: ['autodocs'],
     parameters: {
         layout: 'centered',
@@ -13,10 +13,6 @@ export default {
         },
     },
     argTypes: {
-        label: {
-            control: 'text',
-            description: 'Visible text inside the badge.',
-        },
         variant: {
             control: 'select',
             options: [
@@ -44,7 +40,9 @@ export default {
 
 export const Default = {
     args: {
-        label: 'Default',
+        slots: {
+            default: 'Default',
+        },
     },
 };
 
@@ -52,7 +50,9 @@ export const Success = {
     args: {
         variant: 'success',
         style: 'soft',
-        label: 'Build successful',
+        slots: {
+            default: 'Build successful',
+        },
     },
 };
 
@@ -61,6 +61,8 @@ export const Warning = {
         variant: 'warning',
         style: 'outline',
         size: 'lg',
-        label: 'Review required',
+        slots: {
+            default: 'Review required',
+        },
     },
 };

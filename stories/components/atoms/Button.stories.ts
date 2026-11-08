@@ -1,8 +1,8 @@
-import ButtonPreview from './ButtonPreview.astro';
+import Button from '../../../src/themes/default/components/atoms/Button/Button.astro';
 
 export default {
     title: 'Atoms/Button',
-    component: ButtonPreview,
+    component: Button,
     tags: ['autodocs'],
     parameters: {
         layout: 'centered',
@@ -14,14 +14,9 @@ export default {
     },
     args: {
         disabled: false,
-        hrefPreset: 'none',
         href: '',
     },
     argTypes: {
-        label: {
-            control: 'text',
-            description: 'Visible text inside the button.',
-        },
         variant: {
             control: 'select',
             options: [
@@ -43,26 +38,9 @@ export default {
             control: 'select',
             options: ['xs', 'sm', 'md', 'lg', 'xl'],
         },
-        hrefPreset: {
-            name: 'Link example',
-            control: {
-                type: 'select',
-                labels: {
-                    none: 'No link',
-                    showcase: 'Showcase (/showcase/)',
-                    documentation: 'Documentation (/dokumentation/)',
-                    astro: 'Astro website (https://astro.build/)',
-                },
-            },
-            options: ['none', 'showcase', 'documentation', 'astro'],
-            description:
-                'Example target. A custom href overrides this selection.',
-        },
         href: {
-            name: 'Custom href',
             control: 'text',
-            description:
-                'Optional custom link target. Overrides the selected link example.',
+            description: 'Optional link target. Renders an anchor when set.',
         },
         type: {
             control: 'select',
@@ -77,7 +55,9 @@ export default {
 
 export const Primary = {
     args: {
-        label: 'Primary action',
+        slots: {
+            default: 'Primary action',
+        },
     },
 };
 
@@ -85,20 +65,26 @@ export const Outline = {
     args: {
         variant: 'secondary',
         style: 'outline',
-        label: 'Secondary action',
+        slots: {
+            default: 'Secondary action',
+        },
     },
 };
 
 export const Link = {
     args: {
-        hrefPreset: 'showcase',
-        label: 'Open showcase',
+        href: '/showcase/',
+        slots: {
+            default: 'Open showcase',
+        },
     },
 };
 
 export const Disabled = {
     args: {
         disabled: true,
-        label: 'Currently unavailable',
+        slots: {
+            default: 'Currently unavailable',
+        },
     },
 };

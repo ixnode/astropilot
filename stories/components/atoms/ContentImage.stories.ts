@@ -1,93 +1,29 @@
-import ContentImagePreview from './ContentImagePreview.astro';
+import layoutLandscape from '../../../src/content/pages/showcase/_assets/layout-landscape.png';
+import layoutPortrait from '../../../src/content/pages/showcase/_assets/layout-portrait.png';
+import ContentImage from '../../../src/themes/default/components/atoms/ContentImage/ContentImage.astro';
 
 export default {
     title: 'Atoms/ContentImage',
-    component: ContentImagePreview,
+    component: ContentImage,
     tags: ['autodocs'],
     args: {
-        image: 'landscape',
+        src: layoutLandscape,
         alt: 'Abstract blue representation of a modular website layout',
-        width: 'auto',
-        height: 'auto',
+        width: undefined,
+        height: undefined,
         fullWidth: false,
         shape: 'rounded',
         border: 'none',
     },
     argTypes: {
-        image: {
-            control: {
-                type: 'select',
-                labels: {
-                    landscape: 'Landscape image',
-                    portrait: 'Portrait image',
-                },
-            },
-            options: ['landscape', 'portrait'],
-        },
         alt: {
             control: 'text',
         },
         width: {
-            control: {
-                type: 'select',
-                labels: {
-                    auto: 'Automatic',
-                    160: '160 px',
-                    220: '220 px',
-                    240: '240 px',
-                    320: '320 px',
-                    480: '480 px',
-                    520: '520 px',
-                    640: '640 px',
-                    768: '768 px',
-                    960: '960 px',
-                    1280: '1280 px',
-                },
-            },
-            options: [
-                'auto',
-                '160',
-                '220',
-                '240',
-                '320',
-                '480',
-                '520',
-                '640',
-                '768',
-                '960',
-                '1280',
-            ],
+            control: 'number',
         },
         height: {
-            control: {
-                type: 'select',
-                labels: {
-                    auto: 'Automatic',
-                    160: '160 px',
-                    220: '220 px',
-                    240: '240 px',
-                    320: '320 px',
-                    480: '480 px',
-                    520: '520 px',
-                    640: '640 px',
-                    768: '768 px',
-                    960: '960 px',
-                    1280: '1280 px',
-                },
-            },
-            options: [
-                'auto',
-                '160',
-                '220',
-                '240',
-                '320',
-                '480',
-                '520',
-                '640',
-                '768',
-                '960',
-                '1280',
-            ],
+            control: 'number',
         },
         fullWidth: {
             control: 'inline-radio',
@@ -106,25 +42,25 @@ export default {
 
 export const Standard = {
     args: {
-        image: 'landscape',
+        src: layoutLandscape,
         alt: 'Abstract blue representation of a modular website layout',
-        width: '640',
+        width: 640,
     },
 };
 
 export const CoverCrop = {
     args: {
-        image: 'landscape',
+        src: layoutLandscape,
         alt: 'Abstract blue representation of a modular website layout',
-        width: '520',
-        height: '220',
+        width: 520,
+        height: 220,
         border: 'default',
     },
 };
 
 export const FullWidth = {
     args: {
-        image: 'landscape',
+        src: layoutLandscape,
         alt: 'Abstract blue representation of a modular website layout',
         fullWidth: true,
         border: 'default',
@@ -133,10 +69,10 @@ export const FullWidth = {
 
 export const SquareWithoutBorder = {
     args: {
-        image: 'portrait',
+        src: layoutPortrait,
         alt: 'Editorial representation of modular content blocks',
-        width: '320',
-        height: '320',
+        width: 320,
+        height: 320,
         shape: 'square',
         border: 'none',
     },

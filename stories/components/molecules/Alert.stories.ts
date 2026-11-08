@@ -1,18 +1,10 @@
-import AlertPreview from './AlertPreview.astro';
+import Alert from '../../../src/themes/default/components/molecules/Alert/Alert.astro';
 
 export default {
     title: 'Molecules/Alert',
-    component: AlertPreview,
+    component: Alert,
     tags: ['autodocs'],
     argTypes: {
-        heading: {
-            control: 'text',
-            description: 'Optional emphasized lead-in for the message.',
-        },
-        label: {
-            control: 'text',
-            description: 'Concise alert message.',
-        },
         variant: {
             control: 'select',
             options: ['default', 'info', 'success', 'warning', 'error'],
@@ -27,8 +19,10 @@ export default {
 export const Information = {
     args: {
         variant: 'info',
-        heading: 'Information',
-        label: 'This component is rendered from an Astro story.',
+        slots: {
+            default:
+                '<strong>Information:</strong> This component is rendered from an Astro story.',
+        },
     },
 };
 
@@ -36,8 +30,9 @@ export const Success = {
     args: {
         variant: 'success',
         style: 'soft',
-        heading: 'Success',
-        label: 'The static build completed.',
+        slots: {
+            default: '<strong>Success:</strong> The static build completed.',
+        },
     },
 };
 
@@ -45,7 +40,9 @@ export const Warning = {
     args: {
         variant: 'warning',
         style: 'outline',
-        heading: 'Warning',
-        label: 'Review content and links before publishing.',
+        slots: {
+            default:
+                '<strong>Warning:</strong> Review content and links before publishing.',
+        },
     },
 };
