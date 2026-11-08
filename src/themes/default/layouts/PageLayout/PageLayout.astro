@@ -10,8 +10,9 @@ interface Props {
     title: string;
     description: string;
     route: string;
+    layout?: 'default' | 'landing';
 }
-const { site, title, description, route } = Astro.props;
+const { site, title, description, route, layout = 'default' } = Astro.props;
 const documentTitle = `${title} | ${site.name}`;
 ---
 
@@ -25,11 +26,11 @@ const documentTitle = `${title} | ${site.name}`;
         <meta name="description" content={description} />
         <link rel="canonical" href={canonicalUrl(route, site)} />
     </head>
-    <body>
+    <body class:list={{ 'ap-page--landing': layout === 'landing' }}>
         <a class="ap-skip-link" href="#main-content">
             Zum Inhalt springen
         </a>
-        <Header site={site} route={route} />
+        {layout !== 'landing' && <Header site={site} route={route} />}
         <main id="main-content">
             <slot />
         </main>

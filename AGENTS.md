@@ -160,6 +160,8 @@ url: energie
 - Do not implement additional slug overrides or translation systems beyond this single explicit URL-segment value during this phase.
 - For pages without a hero, `title` is also the visible main heading.
 
+- Explicit QR/advertising landing pages may set `layout: landing` in `page.yaml`. This omits the header and automatic H1 fallback; `hero.md` is disallowed. Exactly one visible `h1` must be supplied by the section content, which may begin with an image. Other pages keep the default layout and heading rules.
+
 ### Optional Hero: `hero.md`
 
 ```md
@@ -186,6 +188,8 @@ Eine kurze Einführung in die Inhalte dieser Seite.
 - The homepage, FAQ, and Info use the same hero component with their own content. Do not create three copied implementations.
 
 ### Blog: `src/content/blog/YYYY-MM-DD.article-slug/`
+
+The optional `blog` object in `site.yaml` configures the overview's `title`, `eyebrow`, `description`, and article-list `heading`; when provided, all four must be non-empty strings. Consumer projects use these settings instead of changing the shared BlogIndex component.
 
 Each direct article directory in `src/content/blog/` is named `YYYY-MM-DD.article-slug`. The date prefix keeps the source tree chronologically ordered; only the lowercase hyphenated `article-slug` becomes the final URL segment below `/blog/`. Every article uses the same `page.yaml`, `hero.md`, and numbered Section structure as a normal content page. The overview at `/blog/` is generated automatically and orders articles by descending `pubDate`.
 

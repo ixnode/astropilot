@@ -16,6 +16,13 @@ interface Props {
 }
 
 const { posts, site } = Astro.props;
+const blog = site.blog ?? {
+    title: 'Blog',
+    description:
+        'Projektfortschritt, Entscheidungen und Meilensteine auf dem Weg zu einem dateibasierten Content-Framework.',
+    eyebrow: 'Projektjournal',
+    heading: 'AstroPilot im Fortschritt',
+};
 const dateFormatter = new Intl.DateTimeFormat(site.language, {
     day: '2-digit',
     month: 'long',
@@ -25,14 +32,14 @@ const dateFormatter = new Intl.DateTimeFormat(site.language, {
 
 <PageLayout
     site={site}
-    title="Blog"
-    description="Projektfortschritt, Entscheidungen und Meilensteine von AstroPilot."
+    title={blog.title}
+    description={blog.description}
     route="/blog/"
 >
     <PageTitle
-        title="Blog"
-        eyebrow="Projektjournal"
-        description="Projektfortschritt, Entscheidungen und Meilensteine auf dem Weg zu einem dateibasierten Content-Framework."
+        title={blog.title}
+        eyebrow={blog.eyebrow}
+        description={blog.description}
         classes={site.heroClasses}
         variant="hero"
     />
@@ -42,7 +49,7 @@ const dateFormatter = new Intl.DateTimeFormat(site.language, {
     >
         <div class="ap-section__inner site-shell">
             <div class="content-prose ap-blog-index__content">
-                <h2 id="blog-overview">AstroPilot im Fortschritt</h2>
+                <h2 id="blog-overview">{blog.heading}</h2>
                 <div class="ap-blog-index__grid">
                     {posts.map((post) => (
                         <Card

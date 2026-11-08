@@ -12,6 +12,12 @@ export interface SiteConfig {
     base: string;
     language: string;
     heroClasses: string[];
+    blog?: {
+        title: string;
+        description: string;
+        eyebrow: string;
+        heading: string;
+    };
     header: { links: Link[] };
     footer: { text: string; links: Link[] };
 }

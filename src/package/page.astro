@@ -80,15 +80,16 @@ const postSections = post
         title={page.entry.data.title}
         description={page.entry.data.description}
         route={page.route}
+        layout={page.entry.data.layout}
     >
         {hero ? (
             <Hero hero={page.hero!} site={site} Content={hero.Content} />
-        ) : (
+        ) : page.entry.data.layout !== 'landing' ? (
             <PageTitle
                 title={page.entry.data.title}
                 classes={site.heroClasses}
             />
-        )}
+        ) : null}
         {sections.map(({ section, rendered }) => (
             <Section section={section} Content={rendered.Content} />
         ))}

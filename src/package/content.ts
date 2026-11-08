@@ -34,6 +34,7 @@ export function createAstroPilotCollections(
         schema: z.object({
             title: z.string().trim().min(1),
             description: z.string().trim().min(1),
+            layout: z.enum(['default', 'landing']).default('default'),
             url: z
                 .string()
                 .trim()
@@ -70,7 +71,7 @@ export function createAstroPilotCollections(
             pattern: '*/page.yaml',
             generateId: ({ entry }) => blogDirectoryId(entry),
         }),
-        schema: ({ image }) =>
+        schema: ({ image }: { image: ImageFunction }) =>
             z.object({
                 title: z.string().trim().min(1),
                 description: z.string().trim().min(1),

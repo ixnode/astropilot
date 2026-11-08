@@ -23,6 +23,14 @@ const siteSchema = z.object({
         .string()
         .regex(/^[a-z]{2}(?:-[A-Z]{2})?$/, 'must be a BCP 47 language tag'),
     'hero-classes': z.array(heroClass).max(8).default([]),
+    blog: z
+        .object({
+            title: z.string().trim().min(1),
+            description: z.string().trim().min(1),
+            eyebrow: z.string().trim().min(1),
+            heading: z.string().trim().min(1),
+        })
+        .optional(),
     header: z.object({ links: z.array(linkSchema).min(1) }),
     footer: z.object({
         text: z.string().trim().min(1),

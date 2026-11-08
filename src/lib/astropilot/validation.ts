@@ -16,6 +16,7 @@ import { routeFromPageId } from './urls.js';
 const pageSchema = z.object({
     title: z.string().trim().min(1),
     description: z.string().trim().min(1),
+    layout: z.enum(['default', 'landing']).default('default'),
     url: z
         .string()
         .trim()
@@ -759,6 +760,7 @@ export function validateAstroPilotContent(
     const pageDataByDirectory = new Map<string, z.infer<typeof pageSchema>>();
     const routes = new Set<string>();
     const headingsByRoute = new Map<string, Set<string>>();
+    const landingHeadings = new Map<string, number>();
 
     for (const pagePath of pageFiles) {
         const directory = contentDirectory(contentRoot, pagePath);
@@ -813,6 +815,10 @@ export function validateAstroPilotContent(
                 'invalid content filename; expected hero.md or NN-name.md(x)',
             );
         const { frontmatter, tree } = frontmatterAndTree(path);
+        const landing =
+            pageDataByDirectory.get(directory)?.layout === 'landing';
+        if (landing && filename === 'hero.md')
+            fail(contentRoot, path, 'landing pages must not contain hero.md');
         const metadata = (
             filename === 'hero.md' ? heroSchema : sectionSchema
         ).safeParse(frontmatter);
@@ -833,8 +839,13 @@ export function validateAstroPilotContent(
                 fail(contentRoot, path, 'raw HTML is not allowed in Markdown');
             if (node.type === 'heading') {
                 firstHeading ??= node.depth;
-                if (node.depth === 1)
+                if (node.depth === 1 && !landing)
                     fail(contentRoot, path, 'Markdown must not contain an h1');
+                if (node.depth === 1 && landing)
+                    landingHeadings.set(
+                        directory,
+                        (landingHeadings.get(directory) ?? 0) + 1,
+                    );
                 if (previousHeading > 0 && node.depth > previousHeading + 1)
                     fail(
                         contentRoot,
@@ -892,11 +903,24 @@ export function validateAstroPilotContent(
                 }
             }
         });
-        if (filename !== 'hero.md' && firstHeading !== 2)
+        if (
+            filename !== 'hero.md' &&
+            firstHeading !== 2 &&
+            !(landing && firstHeading === 1)
+        )
             fail(contentRoot, path, 'a section must begin with an h2');
     }
 
     for (const directory of pageDirectories) {
+        if (
+            pageDataByDirectory.get(directory)?.layout === 'landing' &&
+            landingHeadings.get(directory) !== 1
+        )
+            fail(
+                contentRoot,
+                join(contentRoot, directory, 'page.yaml'),
+                'landing pages require exactly one visible h1 in their sections',
+            );
         const sections = allFiles.filter(
             (path) =>
                 contentDirectory(contentRoot, path) === directory &&

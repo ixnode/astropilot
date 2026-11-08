@@ -74,6 +74,8 @@ The [blog](/blog/) is a small, file-based project journal. Each article lives in
 
 Additional commands:
 
+The optional `blog` setting in `site.yaml` accepts `title`, `eyebrow`, `description`, and `heading` (all non-empty strings) to customize the blog overview for a consumer website. Without this setting the demo's existing overview text applies.
+
 ```sh
 npm run check       # content contract plus Astro and TypeScript checks
 npm test            # small unit tests for URL conventions
@@ -90,6 +92,8 @@ Storybook is a local developer tool and not part of the published website. It re
 `npm run build:demo` sets `ASTROPILOT_BASE=/demo/` only for that command; `src/content/site.yaml` remains unchanged. Before a real release, replace the `https://example.com` placeholder with the production URL and check indexability as well as any staging protection. `robots.txt` is not access control.
 
 ## Maintaining Content
+
+For a compact QR or advertising entry page, set `layout: landing` in `page.yaml`, omit `hero.md`, and supply exactly one visible H1 in the section content. The content can start with an image. This layout omits the header and automatic title area; the normal footer and shared components remain available. All other pages use `layout: default` automatically.
 
 `src/content/site.yaml` contains the name, production URL, base path, language, navigation, and footer. Every page is a directory under `src/content/pages/`:
 
