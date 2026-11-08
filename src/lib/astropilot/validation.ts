@@ -663,6 +663,11 @@ function validateMdxLayout(
                         attribute.type === 'mdxJsxAttribute' &&
                         attribute.name === 'imageAlt',
                 );
+                const shadow = attributes.find(
+                    (attribute) =>
+                        attribute.type === 'mdxJsxAttribute' &&
+                        attribute.name === 'shadow',
+                );
                 const imageValue = image?.value;
                 const imageImport =
                     imageValue !== null && typeof imageValue === 'object'
@@ -675,24 +680,30 @@ function validateMdxLayout(
                 );
                 actions.forEach((action) => validatedCardActions.add(action));
                 if (
-                    attributes.length > 2 ||
+                    attributes.length > 3 ||
                     attributes.some(
                         (attribute) =>
                             attribute.type !== 'mdxJsxAttribute' ||
                             (attribute.name !== 'image' &&
-                                attribute.name !== 'imageAlt'),
+                                attribute.name !== 'imageAlt' &&
+                                attribute.name !== 'shadow'),
                     ) ||
                     Boolean(image) !== Boolean(imageAlt) ||
                     (image && !localImageImports.has(imageImport ?? '')) ||
                     (imageAlt &&
                         (typeof imageAlt.value !== 'string' ||
                             imageAlt.value.trim() === '')) ||
+                    (shadow &&
+                        (typeof shadow.value !== 'string' ||
+                            !['none', 'sm', 'md', 'lg', 'xl'].includes(
+                                shadow.value,
+                            ))) ||
                     actions.length > 1
                 )
                     fail(
                         contentRoot,
                         path,
-                        'Card accepts image and imageAlt together, or neither; it may contain one direct CardActions component',
+                        'Card accepts image and imageAlt together, or neither; optional shadow is none, sm, md, lg, or xl; it may contain one direct CardActions component',
                     );
             } else if (mdxNode.name === 'CardActions') {
                 if (

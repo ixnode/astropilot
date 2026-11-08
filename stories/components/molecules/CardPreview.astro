@@ -5,6 +5,7 @@ import Card from '../../../src/themes/default/components/molecules/Card/Card.ast
 
 type ImageChoice = 'none' | 'landscape' | 'portrait';
 type ImageAltPreset = 'layout' | 'editorial' | 'content';
+type CardShadow = 'none' | 'sm' | 'md' | 'lg' | 'xl';
 
 /** Storybook adapter that exposes Card body content and local images as controls. */
 interface Props {
@@ -18,6 +19,8 @@ interface Props {
     title?: string;
     /** Card body copy. */
     content?: string;
+    /** Elevation treatment for the card. */
+    shadow?: CardShadow;
 }
 
 const {
@@ -26,6 +29,7 @@ const {
     imageAltPreset = 'layout',
     title = 'Simple content card',
     content = 'A reusable card with standard body content and no image.',
+    shadow = 'sm',
 } = Astro.props;
 const imageByChoice = {
     landscape: layoutLandscape,
@@ -40,7 +44,7 @@ const imageAltByPreset: Record<ImageAltPreset, string> = {
 const resolvedImageAlt = imageAlt.trim() || imageAltByPreset[imageAltPreset];
 ---
 
-<Card image={src} imageAlt={src ? resolvedImageAlt : undefined}>
+<Card image={src} imageAlt={src ? resolvedImageAlt : undefined} shadow={shadow}>
     <h3>{title}</h3>
     <p>{content}</p>
 </Card>

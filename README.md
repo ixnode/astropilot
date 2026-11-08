@@ -184,13 +184,13 @@ import { ContentImage } from 'astropilot/components';
 />
 ```
 
-`Card` combines an optional local image, Markdown content, and actions. Its first direct `###` heading receives the DaisyUI card-title style. `CardActions` is optional; all Markdown links inside it render as consistent primary buttons.
+`Card` combines an optional local image, Markdown content, and actions. Its first direct `###` heading receives the DaisyUI card-title style. `CardActions` is optional; all Markdown links inside it render as consistent primary buttons. Use `shadow="none|sm|md|lg|xl"` to configure elevation; `sm` is the default.
 
 ```mdx
 import cardImage from './images/card.png';
 import { Card, CardActions } from 'astropilot/components';
 
-<Card image={cardImage} imageAlt="Description of the image content">
+<Card image={cardImage} imageAlt="Description of the image content" shadow="md">
     ### Card title
 
     Multiple Markdown paragraphs are supported.

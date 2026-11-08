@@ -44,12 +44,27 @@ export default {
             control: 'text',
             description: 'Card body copy.',
         },
+        shadow: {
+            control: {
+                type: 'select',
+                labels: {
+                    none: 'No shadow',
+                    sm: 'Small shadow',
+                    md: 'Medium shadow',
+                    lg: 'Large shadow',
+                    xl: 'Extra large shadow',
+                },
+            },
+            options: ['none', 'sm', 'md', 'lg', 'xl'],
+            description: 'Card elevation. The default is a small shadow.',
+        },
     },
 };
 
 export const TextOnly = {
     args: {
         image: 'none',
+        shadow: 'sm',
         title: 'Simple content card',
         content: 'A reusable card with standard body content and no image.',
     },
@@ -60,6 +75,7 @@ export const WithImage = {
         image: 'landscape',
         imageAltPreset: 'layout',
         imageAlt: '',
+        shadow: 'md',
         title: 'Card with image',
         content: 'Local Astro assets work directly in Storybook stories.',
     },
@@ -71,6 +87,7 @@ export const ResponsiveWithImage = {
         image: 'landscape',
         imageAltPreset: 'content',
         imageAlt: '',
+        shadow: 'lg',
         title: 'A card that remains readable on small screens',
         content:
             'This longer text makes line wrapping, image cropping, and the available content width easy to review with the Storybook viewport toolbar.',

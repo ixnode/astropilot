@@ -23,10 +23,10 @@ Komponentenpfade unter `src/themes/default/components/`: `molecules/Card/` und `
 
 <Tabs label="Bildkarte mit weiterführendem Link: Vorschau und Code" variant="border">
     <Tab title="Vorschau">
-        <Card image={layoutLandscape} imageAlt="Abstrakte blaue Darstellung eines modularen Website-Layouts">
+        <Card image={layoutLandscape} imageAlt="Abstrakte blaue Darstellung eines modularen Website-Layouts" shadow="lg">
             #### Mit Bild, Titel und Action
 
-            Die erste Überschrift der Card wird als Titel gestaltet. Das Bild wird innerhalb eines `figure`-Elements als optimiertes WebP ausgegeben.
+            Die erste Überschrift der Card wird als Titel gestaltet. Das Bild wird innerhalb eines `figure`-Elements als optimiertes WebP ausgegeben. Mit `shadow="lg"` erhält diese Card eine stärkere räumliche Betonung.
 
             <CardActions>
                 [Mehr zum Konzept](/info/)
@@ -38,10 +38,10 @@ Komponentenpfade unter `src/themes/default/components/`: `molecules/Card/` und `
         import layoutLandscape from '../_assets/layout-landscape.png';
         import { Card, CardActions } from 'astropilot/components';
 
-        <Card image={layoutLandscape} imageAlt="Abstrakte blaue Darstellung eines modularen Website-Layouts">
+        <Card image={layoutLandscape} imageAlt="Abstrakte blaue Darstellung eines modularen Website-Layouts" shadow="lg">
             #### Mit Bild, Titel und Action
 
-            Die erste Überschrift der Card wird als Titel gestaltet. Das Bild wird innerhalb eines `figure`-Elements als optimiertes WebP ausgegeben.
+            Die erste Überschrift der Card wird als Titel gestaltet. Das Bild wird innerhalb eines `figure`-Elements als optimiertes WebP ausgegeben. Mit `shadow="lg"` erhält diese Card eine stärkere räumliche Betonung.
 
             <CardActions>
                 [Mehr zum Konzept](/info/)

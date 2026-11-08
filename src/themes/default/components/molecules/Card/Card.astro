@@ -2,22 +2,41 @@
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 
+type CardShadow = 'none' | 'sm' | 'md' | 'lg' | 'xl';
+
 /** A reusable content card with an optional optimized local image and default content slot. */
 interface Props {
     /** Imported Astro image metadata for the optional figure. */
     image?: ImageMetadata;
     /** Required accessible alternative text when image is set. */
     imageAlt?: string;
+    /** Elevation treatment for the card. */
+    shadow?: CardShadow;
 }
 
-const { image, imageAlt } = Astro.props;
+const { image, imageAlt, shadow = 'sm' } = Astro.props;
+const shadowClasses: Record<CardShadow, string> = {
+    none: 'shadow-none',
+    sm: 'shadow-sm',
+    md: 'shadow-md',
+    lg: 'shadow-lg',
+    xl: 'shadow-xl',
+};
 if (Boolean(image) !== Boolean(imageAlt))
     throw new Error(
         'AstroPilot Card requires image and imageAlt together, or neither prop.',
     );
 ---
 
-<article class="ap-card card bg-base-100 shadow-sm not-prose">
+<article
+    class:list={[
+        'ap-card',
+        'card',
+        'bg-base-100',
+        shadowClasses[shadow],
+        'not-prose',
+    ]}
+>
     {image && (
         <figure class="ap-card__figure">
             <Image
