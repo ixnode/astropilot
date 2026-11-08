@@ -40,6 +40,7 @@ const heroClass = z.string().regex(/^ap-[a-z0-9][a-z0-9_-]*$/, {
 const heroSchema = markdownSchema.extend({
     title: z.string().trim().min(1),
     classes: z.array(heroClass).max(8).nullable().optional(),
+    'background-image': z.string().trim().min(1).optional(),
 });
 const sectionPattern = /^\d{2,}-[a-z0-9][a-z0-9-]*\.(?:md|mdx)$/;
 const mdxComponentImport =

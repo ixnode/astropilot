@@ -15,8 +15,11 @@ Ein `hero.md` aktiviert den gemeinsamen Hero und liefert dessen sichtbare H1, Ey
 title: Seitentitel im Hero
 eyebrow: Einordnung
 tone: brand
+background-image: ./_assets/hero-visual.png
 ---
 ```
+
+`background-image` verweist auf ein lokales Bild relativ zu `hero.md`. Astro validiert und optimiert die Datei; das Standard-Theme behandelt sie als dekorativen Hintergrund und legt automatisch ein kontrastreiches Overlay für die Hero-Typografie darüber. Inhalte, die inhaltlich erklärt werden müssen, gehören stattdessen als reguläres Bild mit Alternativtext in eine Section.
 
 ### Klassen lokal überschreiben oder entfernen
 

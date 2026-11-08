@@ -39,13 +39,15 @@ export function createAstroPilotCollections(
             pattern: '**/*.{md,mdx}',
             generateId: ({ entry }) => entry.replace(/\.(?:md|mdx)$/, ''),
         }),
-        schema: z.object({
-            title: z.string().trim().min(1).optional(),
-            eyebrow: z.string().trim().min(1).optional(),
-            classes: z.array(heroClass).max(8).nullable().optional(),
-            tone,
-            fullWidth: z.boolean().default(false),
-        }),
+        schema: ({ image }) =>
+            z.object({
+                title: z.string().trim().min(1).optional(),
+                eyebrow: z.string().trim().min(1).optional(),
+                classes: z.array(heroClass).max(8).nullable().optional(),
+                'background-image': image().optional(),
+                tone,
+                fullWidth: z.boolean().default(false),
+            }),
     });
 
     return { pages, documents };

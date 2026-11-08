@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
 import { toneOf } from '../../../../../lib/astropilot/pages.js';
 import type { SiteConfig } from '../../../../../lib/astropilot/types.js';
 import Eyebrow from '../../atoms/Eyebrow/Eyebrow.astro';
@@ -21,12 +22,30 @@ const heroClasses =
     hero.data.classes === undefined
         ? site.heroClasses
         : (hero.data.classes ?? []);
+const backgroundImage = hero.data['background-image'];
 ---
 
 <section
-    class:list={[toneClass, 'ap-hero', ...heroClasses]}
+    class:list={[
+        toneClass,
+        'ap-hero',
+        { 'ap-hero--has-background-image': Boolean(backgroundImage) },
+        ...heroClasses,
+    ]}
     aria-labelledby="page-title"
 >
+    {backgroundImage && (
+        <Image
+            class="ap-hero__background"
+            src={backgroundImage}
+            alt=""
+            format="webp"
+            quality={82}
+            loading="eager"
+            decoding="async"
+            aria-hidden="true"
+        />
+    )}
     <div class="ap-hero__inner site-shell">
         {hero.data.eyebrow && <Eyebrow>{hero.data.eyebrow}</Eyebrow>}
         <h1 id="page-title" class="ap-hero__title">

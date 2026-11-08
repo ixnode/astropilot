@@ -157,6 +157,7 @@ eyebrow: Willkommen bei AstroPilot
 tone: brand
 classes:
     - ap-hero--visual
+background-image: ./_assets/hero-visual.png
 ---
 
 Eine kurze Einführung in die Inhalte dieser Seite.
@@ -166,7 +167,8 @@ Eine kurze Einführung in die Inhalte dieser Seite.
 
 - The presence of the file activates the hero. Do not add another activation option to `page.yaml`.
 - `title` is a non-empty required field rendered as the visible `h1`; `eyebrow` is optional; `tone` has a documented default.
-- `classes` is optional and contains at most eight additional theme classes for the outer hero `section` element. Each class starts with `ap-` and may only contain lowercase letters, digits, `_`, and `-`, for example `ap-hero--visual`. When `classes` is supplied as a list, it completely overrides global `hero-classes` from `site.yaml`. `classes: null` deliberately removes global classes; when the field is absent, global classes apply. This lets theme developers add backgrounds, images, or textures without copying the hero. These classes are only intended for `hero.md`, not for sections.
+- `classes` is optional and contains at most eight additional theme classes for the outer hero `section` element. Each class starts with `ap-` and may only contain lowercase letters, digits, `_`, and `-`, for example `ap-hero--visual`. When `classes` is supplied as a list, it completely overrides global `hero-classes` from `site.yaml`. `classes: null` deliberately removes global classes; when the field is absent, global classes apply. This lets theme developers add gradients, overlays, or textures without copying the hero. These classes are only intended for `hero.md`, not for sections.
+- `background-image` is optional and names a local raster image relative to `hero.md`, for example `./_assets/hero-visual.png`. Astro validates and optimizes it; the theme renders it as a decorative background with a contrast-preserving overlay. Do not use it for information that needs alternative text; place meaningful images in regular content instead.
 - The shared hero component renders the title and Markdown content entirely from `hero.md`.
 - Without a hero, the layout renders `page.yaml.title` as a compact visible H1 fallback before the sections. It receives global `hero-classes` from `site.yaml`; without `hero.md`, there is no local override. This is the only intended visible fallback for pages without a hero.
 - The homepage, FAQ, and Info use the same hero component with their own content. Do not create three copied implementations.

@@ -1,6 +1,6 @@
 @layer components {
     .ap-hero {
-        @apply py-section-hero;
+        @apply relative isolate overflow-hidden py-section-hero;
         padding-top: max(
             var(--spacing-section-hero),
             calc(var(--spacing-header-overlay) + 4rem)
@@ -8,6 +8,8 @@
         padding-bottom: var(--spacing-section-hero-bottom);
 
         .ap-hero__inner {
+            @apply relative z-10;
+
             .ap-hero__title {
                 @apply max-w-3xl text-display font-bold tracking-tight;
             }
@@ -16,11 +18,34 @@
                 @apply mt-5 max-w-3xl;
             }
         }
+
+        .ap-hero__background {
+            @apply pointer-events-none absolute inset-0 z-0 size-full object-cover object-center;
+        }
+
+        &.ap-hero--has-background-image {
+            @apply text-primary-content;
+
+            &::before {
+                content: '';
+                @apply pointer-events-none absolute inset-0 z-[1];
+                background:
+                    linear-gradient(
+                        90deg,
+                        rgb(2 21 67 / 90%) 0%,
+                        rgb(2 21 67 / 76%) 46%,
+                        rgb(2 21 67 / 42%) 100%
+                    ),
+                    linear-gradient(
+                        180deg,
+                        rgb(2 21 67 / 24%),
+                        rgb(2 21 67 / 56%)
+                    );
+            }
+        }
     }
 
     .ap-hero--theme-1 {
-        @apply relative isolate overflow-hidden;
-
         background-image:
             radial-gradient(
                 circle at 14% 18%,
@@ -45,10 +70,6 @@
                     transparent 1px
                 );
             background-size: 0.5rem 0.5rem;
-        }
-
-        .ap-hero__inner {
-            @apply relative z-10;
         }
     }
 }
