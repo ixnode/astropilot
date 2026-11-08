@@ -5,11 +5,11 @@ import { tones } from '../lib/astropilot/types.js';
 
 function blogIdFromEntry(entry: string): string {
     const match = entry.match(
-        /^\d{4}-\d{2}-\d{2}\.([a-z0-9]+(?:-[a-z0-9]+)*)\.md$/,
+        /^\d{4}-\d{2}-\d{2}\.([a-z0-9]+(?:-[a-z0-9]+)*)\.(?:md|mdx)$/,
     );
     if (!match)
         throw new Error(
-            `Invalid blog filename ${entry}; expected YYYY-MM-DD.article-slug.md`,
+            `Invalid blog filename ${entry}; expected YYYY-MM-DD.article-slug.md(x)`,
         );
     return match[1];
 }
@@ -65,7 +65,7 @@ export function createAstroPilotCollections(
     const blog = defineCollection({
         loader: glob({
             base: blogDirectory,
-            pattern: '*.md',
+            pattern: '*.{md,mdx}',
             generateId: ({ entry }) => blogIdFromEntry(entry),
         }),
         schema: ({ image }) =>

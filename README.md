@@ -70,7 +70,7 @@ npm run dev
 The dev server deliberately starts with `--force`, so changes to Content Collections, MDX components, and local package files are checked without an outdated Astro content cache.
 
 The running demo documents itself at `/dokumentation/`: it contains setup, the content contract, layout components, theme, checks, and local package use. The visible [showcase](/showcase/) instead collects component examples.
-The [blog](/blog/) is a small, file-based project journal. Each article is one `YYYY-MM-DD.article-slug.md` file in `src/content/blog/` with validated title, description, date, eyebrow, local image, and alternative text. The date prefix orders source files while the URL only uses `article-slug`; Astro generates the overview and article routes from the collection.
+The [blog](/blog/) is a small, file-based project journal. Each article is one `YYYY-MM-DD.article-slug.md` or `.mdx` file in `src/content/blog/` with validated title, description, date, eyebrow, local image, and alternative text. The date prefix orders source files while the URL only uses `article-slug`; Astro generates the overview and article routes from the collection. Use MDX only for documented AstroPilot components inside an article.
 
 Additional commands:
 
