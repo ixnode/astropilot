@@ -29,14 +29,19 @@ const dateFormatter = new Intl.DateTimeFormat(site.language, {
     description="Projektfortschritt, Entscheidungen und Meilensteine von AstroPilot."
     route="/blog/"
 >
-    <PageTitle title="Blog" classes={site.heroClasses} />
+    <PageTitle
+        title="Blog"
+        eyebrow="Projektjournal"
+        description="Projektfortschritt, Entscheidungen und Meilensteine auf dem Weg zu einem dateibasierten Content-Framework."
+        classes={site.heroClasses}
+        variant="hero"
+    />
     <section
         class="tone-default ap-section ap-blog-index"
         aria-labelledby="blog-overview"
     >
         <div class="ap-section__inner site-shell">
             <div class="content-prose ap-blog-index__content">
-                <p class="ap-eyebrow">Projektjournal</p>
                 <h2 id="blog-overview">AstroPilot im Fortschritt</h2>
                 <div class="ap-blog-index__grid">
                     {posts.map((post) => (

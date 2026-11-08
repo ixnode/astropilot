@@ -1,19 +1,38 @@
 ---
+import Eyebrow from '../../atoms/Eyebrow/Eyebrow.astro';
+
 interface Props {
     title: string;
     classes: string[];
+    eyebrow?: string;
+    description?: string;
+    variant?: 'compact' | 'hero';
 }
 
-const { title, classes } = Astro.props;
+const {
+    title,
+    classes,
+    eyebrow,
+    description,
+    variant = 'compact',
+} = Astro.props;
 ---
 
 <section
-    class:list={['tone-brand', 'ap-hero', 'ap-page-title', ...classes]}
+    class:list={[
+        'tone-brand',
+        'ap-hero',
+        'ap-page-title',
+        `ap-page-title--${variant}`,
+        ...classes,
+    ]}
     aria-labelledby="page-title"
 >
     <div class="ap-hero__inner ap-page-title__inner site-shell">
+        {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
         <h1 id="page-title" class="ap-hero__title ap-page-title__title">
             {title}
         </h1>
+        {description && <p class="ap-page-title__description">{description}</p>}
     </div>
 </section>

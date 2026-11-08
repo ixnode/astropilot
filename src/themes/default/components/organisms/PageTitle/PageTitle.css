@@ -1,10 +1,25 @@
 @layer components {
     .ap-page-title {
-        @apply py-8;
-        padding-top: calc(var(--spacing-header-overlay) + 2rem);
+        &.ap-page-title--compact {
+            @apply py-8;
+            padding-top: calc(var(--spacing-header-overlay) + 2rem);
+        }
+
+        &.ap-page-title--hero {
+            @apply py-section-hero;
+            padding-top: max(
+                var(--spacing-section-hero),
+                calc(var(--spacing-header-overlay) + 4rem)
+            );
+            padding-bottom: var(--spacing-section-hero-bottom);
+        }
 
         .ap-page-title__title {
             @apply max-w-3xl text-display font-bold tracking-tight;
+        }
+
+        .ap-page-title__description {
+            @apply mt-5 max-w-3xl text-lg;
         }
     }
 }
