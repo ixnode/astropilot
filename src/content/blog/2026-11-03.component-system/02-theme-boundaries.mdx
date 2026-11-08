@@ -1,0 +1,13 @@
+---
+tone: muted
+---
+
+import { Eyebrow } from 'astropilot/components';
+
+<Eyebrow>Theme-Grenzen</Eyebrow>
+
+## DaisyUI bleibt austauschbar
+
+Das Standard-Theme verwendet Tailwind und DaisyUI für die sichtbaren Elemente. Semantische Daten wie `tone: muted` bleiben jedoch unabhängig davon. Ein späteres Theme kann diese Bedeutung anders gestalten, ohne dass Inhalte umgeschrieben werden müssen.
+
+Storybook zeigt die wiederverwendbaren Komponenten zusätzlich isoliert. Das erleichtert die Weiterentwicklung, ohne eine Inhaltsseite für jedes Detail umbauen zu müssen.

@@ -1,15 +1,15 @@
-import { defineCollection } from 'astro:content';
+import { defineCollection, type ImageFunction } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { tones } from '../lib/astropilot/types.js';
 
-function blogIdFromEntry(entry: string): string {
+function blogDirectoryId(entry: string): string {
     const match = entry.match(
-        /^\d{4}-\d{2}-\d{2}\.([a-z0-9]+(?:-[a-z0-9]+)*)\.(?:md|mdx)$/,
+        /^(\d{4}-\d{2}-\d{2}\.([a-z0-9]+(?:-[a-z0-9]+)*))\/page\.yaml$/,
     );
     if (!match)
         throw new Error(
-            `Invalid blog filename ${entry}; expected YYYY-MM-DD.article-slug.md(x)`,
+            `Invalid blog page path ${entry}; expected YYYY-MM-DD.article-slug/page.yaml`,
         );
     return match[1];
 }
@@ -45,39 +45,49 @@ export function createAstroPilotCollections(
         }),
     });
 
+    const documentSchema = ({ image }: { image: ImageFunction }) =>
+        z.object({
+            title: z.string().trim().min(1).optional(),
+            eyebrow: z.string().trim().min(1).optional(),
+            classes: z.array(heroClass).max(8).nullable().optional(),
+            'background-image': image().optional(),
+            tone,
+            fullWidth: z.boolean().default(false),
+        });
+
     const documents = defineCollection({
         loader: glob({
             base: contentDirectory,
             pattern: '**/*.{md,mdx}',
             generateId: ({ entry }) => entry.replace(/\.(?:md|mdx)$/, ''),
         }),
-        schema: ({ image }) =>
-            z.object({
-                title: z.string().trim().min(1).optional(),
-                eyebrow: z.string().trim().min(1).optional(),
-                classes: z.array(heroClass).max(8).nullable().optional(),
-                'background-image': image().optional(),
-                tone,
-                fullWidth: z.boolean().default(false),
-            }),
+        schema: documentSchema,
     });
 
-    const blog = defineCollection({
+    const blogPages = defineCollection({
         loader: glob({
             base: blogDirectory,
-            pattern: '*.{md,mdx}',
-            generateId: ({ entry }) => blogIdFromEntry(entry),
+            pattern: '*/page.yaml',
+            generateId: ({ entry }) => blogDirectoryId(entry),
         }),
         schema: ({ image }) =>
             z.object({
                 title: z.string().trim().min(1),
                 description: z.string().trim().min(1),
                 pubDate: z.coerce.date(),
-                eyebrow: z.string().trim().min(1),
                 image: image(),
                 imageAlt: z.string().trim().min(1),
             }),
     });
 
-    return { pages, documents, blog };
+    const blogDocuments = defineCollection({
+        loader: glob({
+            base: blogDirectory,
+            pattern: '*/*.{md,mdx}',
+            generateId: ({ entry }) => entry.replace(/\.(?:md|mdx)$/, ''),
+        }),
+        schema: documentSchema,
+    });
+
+    return { pages, documents, blogPages, blogDocuments };
 }

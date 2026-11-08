@@ -95,10 +95,14 @@ src/content/
     │   └── package/
     ├── blog/
     │   ├── _assets/
-    │   ├── 2026-10-27.project-foundation.md
-    │   ├── 2026-10-30.content-collections.md
-    │   ├── 2026-11-03.component-system.md
-    │   └── 2026-11-08.quality-workshop.md
+    │   ├── 2026-10-27.project-foundation/
+    │   │   ├── page.yaml
+    │   │   ├── hero.md
+    │   │   ├── 01-basic-idea.mdx
+    │   │   └── 02-architecture.mdx
+    │   ├── 2026-10-30.content-collections/
+    │   ├── 2026-11-03.component-system/
+    │   └── 2026-11-08.quality-workshop/
     └── contact/
         ├── page.yaml
         └── 01-contact.md
@@ -181,24 +185,20 @@ Eine kurze Einführung in die Inhalte dieser Seite.
 - Without a hero, the layout renders `page.yaml.title` as a compact visible H1 fallback before the sections. It receives global `hero-classes` from `site.yaml`; without `hero.md`, there is no local override. This is the only intended visible fallback for pages without a hero.
 - The homepage, FAQ, and Info use the same hero component with their own content. Do not create three copied implementations.
 
-### Blog: `src/content/blog/*.md(x)`
+### Blog: `src/content/blog/YYYY-MM-DD.article-slug/`
 
-Each direct Markdown or MDX file in `src/content/blog/` is named `YYYY-MM-DD.article-slug.md` or `YYYY-MM-DD.article-slug.mdx` and creates one article below `/blog/`. The date prefix keeps the source tree chronologically ordered; only the lowercase hyphenated `article-slug` becomes the final URL segment. The overview at `/blog/` is generated automatically and orders articles by descending `pubDate`.
+Each direct article directory in `src/content/blog/` is named `YYYY-MM-DD.article-slug`. The date prefix keeps the source tree chronologically ordered; only the lowercase hyphenated `article-slug` becomes the final URL segment below `/blog/`. Every article uses the same `page.yaml`, `hero.md`, and numbered Section structure as a normal content page. The overview at `/blog/` is generated automatically and orders articles by descending `pubDate`.
 
-```md
----
+```yaml
+# page.yaml
 title: A meaningful article title
 description: A short card and metadata description.
 pubDate: 2026-11-08
-eyebrow: Milestone
-image: ./_assets/article-visual.png
+image: ../_assets/article-visual.png
 imageAlt: Meaningful alternative text for the article image
----
-
-## First article section
 ```
 
-All fields are required. `image` is a local raster asset relative to the article and is optimized by Astro for the overview card. Article pages render a shared simple hero with eyebrow, title, and date followed by normal Markdown content. Use `.mdx` only when a documented AstroPilot component, such as `Eyebrow`, is needed in the article body. Do not use `h1` in article Markdown.
+All `page.yaml` fields are required. `image` is a local raster asset relative to `page.yaml` and is optimized by Astro for the overview card. `hero.md` owns the visible H1, eyebrow, tone, optional classes, and introductory Markdown; the date from `page.yaml` is rendered in this shared hero. Numbered sections support the same tones, reading width, and documented MDX components as normal content pages. Do not use `h1` in article Markdown.
 
 ### Sections: `NN-name.md` and `NN-name.mdx`
 

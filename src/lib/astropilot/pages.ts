@@ -4,24 +4,33 @@ import type { Tone } from './types.js';
 
 type PageEntry = CollectionEntry<'pages'>;
 type DocumentEntry = CollectionEntry<'documents'>;
+type PageEntryLike = { id: string; data: object };
+type DocumentEntryLike = { id: string; data: { tone: Tone } };
 
-export interface AssembledPage {
-    entry: PageEntry;
+export interface AssembledPage<
+    TPage extends PageEntryLike = PageEntry,
+    TDocument extends DocumentEntryLike = DocumentEntry,
+> {
+    entry: TPage;
     route: string;
-    hero?: DocumentEntry;
-    sections: DocumentEntry[];
+    hero?: TDocument;
+    sections: TDocument[];
 }
 
 const sectionName = /(?:^|\/)(\d{2,})-[a-z0-9][a-z0-9-]*$/;
 
-export function assemblePages(
-    pageEntries: PageEntry[],
-    documentEntries: DocumentEntry[],
-): AssembledPage[] {
+export function assemblePages<
+    TPage extends PageEntryLike,
+    TDocument extends DocumentEntryLike,
+>(
+    pageEntries: TPage[],
+    documentEntries: TDocument[],
+    routeForPage?: (entry: TPage) => string,
+): AssembledPage<TPage, TDocument>[] {
     const pageUrlByDirectory = new Map(
         pageEntries.map((entry) => [
             pageDirectoryFromId(entry.id),
-            entry.data.url,
+            (entry.data as { url?: string }).url,
         ]),
     );
     const pages = pageEntries.map((entry) => {
@@ -44,9 +53,11 @@ export function assemblePages(
             );
         return {
             entry,
-            route: routeFromPageId(entry.id, (path) =>
-                pageUrlByDirectory.get(path),
-            ),
+            route:
+                routeForPage?.(entry) ??
+                routeFromPageId(entry.id, (path) =>
+                    pageUrlByDirectory.get(path),
+                ),
             hero,
             sections,
         };
@@ -54,6 +65,6 @@ export function assemblePages(
     return pages.sort((left, right) => left.route.localeCompare(right.route));
 }
 
-export function toneOf(document: DocumentEntry): Tone {
+export function toneOf(document: DocumentEntryLike): Tone {
     return document.data.tone;
 }

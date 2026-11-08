@@ -14,6 +14,10 @@
                 @apply max-w-3xl text-display font-bold tracking-tight;
             }
 
+            .ap-hero__meta {
+                @apply mt-5 block text-sm font-semibold tracking-wide uppercase;
+            }
+
             .ap-hero__content {
                 @apply mt-5 max-w-3xl;
             }

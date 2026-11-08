@@ -21,17 +21,22 @@ export async function getAstroPilotStaticPaths() {
         },
         props: { page },
     }));
-    const posts = (await getCollection('blog')).sort(
+    const posts = (await getCollection('blogPages')).sort(
         (left, right) =>
             right.data.pubDate.getTime() - left.data.pubDate.getTime(),
+    );
+    const assembledPosts = assemblePages(
+        posts,
+        await getCollection('blogDocuments'),
+        (entry) => blogRouteFromId(entry.id),
     );
     const blogPaths = [
         {
             params: { slug: 'blog' },
             props: { blogIndex: true, posts },
         },
-        ...posts.map((post) => ({
-            params: { slug: blogRouteFromId(post.id).slice(1, -1) },
+        ...assembledPosts.map((post) => ({
+            params: { slug: post.route.slice(1, -1) },
             props: { post },
         })),
     ];
@@ -41,8 +46,11 @@ export async function getAstroPilotStaticPaths() {
 interface Props {
     page?: AssembledPage;
     blogIndex?: boolean;
-    posts?: CollectionEntry<'blog'>[];
-    post?: CollectionEntry<'blog'>;
+    posts?: CollectionEntry<'blogPages'>[];
+    post?: AssembledPage<
+        CollectionEntry<'blogPages'>,
+        CollectionEntry<'blogDocuments'>
+    >;
 }
 const { page, blogIndex, posts, post } = Astro.props;
 const site = loadSiteConfig();
@@ -55,7 +63,15 @@ const sections = page
           })),
       )
     : [];
-const renderedPost = post ? await render(post) : undefined;
+const postHero = post?.hero ? await render(post.hero) : undefined;
+const postSections = post
+    ? await Promise.all(
+          post.sections.map(async (section) => ({
+              section,
+              Content: (await render(section)).Content,
+          })),
+      )
+    : [];
 ---
 
 {page ? (
@@ -79,11 +95,11 @@ const renderedPost = post ? await render(post) : undefined;
     </PageLayout>
 ) : blogIndex && posts ? (
     <BlogIndex posts={posts} site={site} />
-) : post && renderedPost ? (
+) : post && postHero ? (
     <BlogPost
         post={post}
         site={site}
-        route={blogRouteFromId(post.id)}
-        Content={renderedPost.Content}
+        HeroContent={postHero.Content}
+        sections={postSections}
     />
 ) : null}

@@ -6,7 +6,7 @@ import type { SiteConfig } from '../../../../../lib/astropilot/types.js';
 import Eyebrow from '../../atoms/Eyebrow/Eyebrow.astro';
 
 interface Props {
-    hero: CollectionEntry<'documents'>;
+    hero: CollectionEntry<'documents' | 'blogDocuments'>;
     site: SiteConfig;
     Content: Awaited<
         ReturnType<typeof import('astro:content').render>
@@ -51,6 +51,7 @@ const backgroundImage = hero.data['background-image'];
         <h1 id="page-title" class="ap-hero__title">
             {hero.data.title}
         </h1>
+        <slot name="meta" />
         <div class="ap-hero__content content-prose">
             <Content />
         </div>

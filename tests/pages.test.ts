@@ -69,7 +69,11 @@ test('applies a deployment base exactly once to root-relative URLs', () => {
 });
 
 test('derives safe routes for blog entry identifiers', () => {
-    assert.equal(blogRouteFromId('project-setup'), '/blog/project-setup/');
+    assert.equal(
+        blogRouteFromId('2026-11-08.project-setup'),
+        '/blog/project-setup/',
+    );
+    assert.throws(() => blogRouteFromId('project-setup'));
     assert.throws(() => blogRouteFromId('milestones/component-library'));
     assert.throws(() => blogRouteFromId('../unsafe'));
 });

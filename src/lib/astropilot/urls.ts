@@ -57,10 +57,12 @@ export function canonicalUrl(route: string, site: SiteConfig): string {
     return new URL(withBase(route, site.base), site.url).toString();
 }
 
-/** Derives a safe static route for a Markdown entry in the blog collection. */
+/** Derives a safe static route for a dated blog directory identifier. */
 export function blogRouteFromId(id: string): string {
     const normalized = id.replace(/^\/+|\/+$/g, '');
-    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(normalized))
-        throw new Error(`Unsafe blog identifier: ${id}`);
-    return `/blog/${normalized}/`;
+    const match = normalized.match(
+        /^\d{4}-\d{2}-\d{2}\.([a-z0-9]+(?:-[a-z0-9]+)*)$/,
+    );
+    if (!match) throw new Error(`Unsafe blog identifier: ${id}`);
+    return `/blog/${match[1]}/`;
 }

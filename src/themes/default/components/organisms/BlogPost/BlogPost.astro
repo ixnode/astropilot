@@ -1,19 +1,25 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import type { AssembledPage } from '../../../../../lib/astropilot/pages.js';
 import type { SiteConfig } from '../../../../../lib/astropilot/types.js';
 import PageLayout from '../../../layouts/PageLayout/PageLayout.astro';
-import Eyebrow from '../../atoms/Eyebrow/Eyebrow.astro';
+import Hero from '../Hero/Hero.astro';
+import Section from '../Section/Section.astro';
+
+type BlogPage = CollectionEntry<'blogPages'>;
+type BlogDocument = CollectionEntry<'blogDocuments'>;
+type RenderedContent = Awaited<
+    ReturnType<typeof import('astro:content').render>
+>['Content'];
 
 interface Props {
-    post: CollectionEntry<'blog'>;
+    post: AssembledPage<BlogPage, BlogDocument>;
     site: SiteConfig;
-    route: string;
-    Content: Awaited<
-        ReturnType<typeof import('astro:content').render>
-    >['Content'];
+    HeroContent: RenderedContent;
+    sections: { section: BlogDocument; Content: RenderedContent }[];
 }
 
-const { post, site, route, Content } = Astro.props;
+const { post, site, HeroContent, sections } = Astro.props;
 const dateFormatter = new Intl.DateTimeFormat(site.language, {
     day: '2-digit',
     month: 'long',
@@ -23,32 +29,22 @@ const dateFormatter = new Intl.DateTimeFormat(site.language, {
 
 <PageLayout
     site={site}
-    title={post.data.title}
-    description={post.data.description}
-    route={route}
+    title={post.entry.data.title}
+    description={post.entry.data.description}
+    route={post.route}
 >
-    <section
-        class="tone-brand ap-hero ap-blog-post__hero"
-        aria-labelledby="page-title"
-    >
-        <div class="ap-hero__inner site-shell">
-            <Eyebrow>{post.data.eyebrow}</Eyebrow>
-            <h1 id="page-title" class="ap-hero__title">
-                {post.data.title}
-            </h1>
+    <div class="ap-blog-post">
+        <Hero hero={post.hero!} site={site} Content={HeroContent}>
             <time
-                class="ap-blog-post__date"
-                datetime={post.data.pubDate.toISOString()}
+                slot="meta"
+                class="ap-hero__meta"
+                datetime={post.entry.data.pubDate.toISOString()}
             >
-                {dateFormatter.format(post.data.pubDate)}
+                {dateFormatter.format(post.entry.data.pubDate)}
             </time>
-        </div>
-    </section>
-    <article class="tone-default ap-section ap-blog-post__article">
-        <div class="ap-section__inner site-shell">
-            <div class="content-prose ap-section__content">
-                <Content />
-            </div>
-        </div>
-    </article>
+        </Hero>
+        {sections.map(({ section, Content }) => (
+            <Section section={section} Content={Content} />
+        ))}
+    </div>
 </PageLayout>

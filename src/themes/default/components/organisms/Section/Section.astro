@@ -3,7 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import { toneOf } from '../../../../../lib/astropilot/pages.js';
 
 interface Props {
-    section: CollectionEntry<'documents'>;
+    section: CollectionEntry<'documents' | 'blogDocuments'>;
     Content: Awaited<
         ReturnType<typeof import('astro:content').render>
     >['Content'];
