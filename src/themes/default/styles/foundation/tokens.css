@@ -1,5 +1,13 @@
 /* Shared typography, spacing, radius, and elevation tokens for the default theme. */
 @theme {
+    /* Sproutsite identity; separate from the existing semantic UI palette. */
+    --color-brand-navy: #0b1f3a;
+    --color-brand-blue: #0875c9;
+    --color-brand-cyan: #0aa9d6;
+    --color-brand-turquoise: #20d5c1;
+    --color-brand-green: #65d82f;
+    --color-brand-light-green: #8bed43;
+    --color-brand-white: #ffffff;
     --font-sans: ui-sans-serif, system-ui, sans-serif;
     --font-heading: 'Nunito', var(--font-sans);
     --text-display: clamp(2.25rem, 5vw, 4rem);

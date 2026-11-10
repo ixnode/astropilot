@@ -1,0 +1,18 @@
+@layer components {
+    .ss-brand-logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.625rem;
+        font-family: var(--font-heading);
+        font-size: 1.5rem;
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.025em;
+
+        img {
+            flex: none;
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+    }
+}

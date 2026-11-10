@@ -3,7 +3,14 @@ import '../../styles/theme.css';
 import Header from '../../components/organisms/Header/Header.astro';
 import Footer from '../../components/organisms/Footer/Footer.astro';
 import type { SiteConfig } from '../../../../lib/sproutsite/types.js';
-import { canonicalUrl } from '../../../../lib/sproutsite/urls.js';
+import { canonicalUrl, withBase } from '../../../../lib/sproutsite/urls.js';
+import favicon from '../../assets/branding/favicon.svg?url&no-inline';
+import faviconIco from '../../assets/branding/favicon.ico?url&no-inline';
+import favicon16 from '../../assets/branding/favicon-16x16.png';
+import favicon32 from '../../assets/branding/favicon-32x32.png';
+import favicon48 from '../../assets/branding/favicon-48x48.png';
+import appleIcon from '../../assets/branding/apple-touch-icon.png';
+import socialCard from '../../assets/branding/social-card.png';
 interface Props {
     site: SiteConfig;
     title: string;
@@ -14,6 +21,8 @@ interface Props {
 const { site, title, description, route, layout = 'default' } = Astro.props;
 const documentTitle = `${title} | ${site.name}`;
 const canonical = canonicalUrl(route, site);
+const productSite = site.name === 'Sproutsite';
+const socialImage = new URL(socialCard.src, site.url).href;
 ---
 
 <!doctype html>
@@ -24,12 +33,48 @@ const canonical = canonicalUrl(route, site);
         <title>{documentTitle}</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={canonical} />
+        <link rel="icon" type="image/svg+xml" href={favicon} />
+        <link
+            rel="icon"
+            type="image/x-icon"
+            sizes="16x16 32x32 48x48"
+            href={faviconIco}
+        />
+        {[favicon16, favicon32, favicon48].map((icon) => (
+            <link
+                rel="icon"
+                type="image/png"
+                sizes={`${icon.width}x${icon.height}`}
+                href={icon.src}
+            />
+        ))}
+        <link rel="apple-touch-icon" sizes="180x180" href={appleIcon.src} />
+        <link rel="manifest" href={withBase('/site.webmanifest', site.base)} />
         <meta property="og:title" content={documentTitle} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={canonical} />
         <meta property="og:site_name" content={site.name} />
         <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary" />
+        {productSite && (
+            <>
+                <meta property="og:image" content={socialImage} />
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="630" />
+                <meta
+                    property="og:image:alt"
+                    content="Sproutsite — The Agent-Ready Static CMS"
+                />
+                <meta name="twitter:image" content={socialImage} />
+                <meta
+                    name="twitter:image:alt"
+                    content="Sproutsite — The Agent-Ready Static CMS"
+                />
+            </>
+        )}
+        <meta
+            name="twitter:card"
+            content={productSite ? 'summary_large_image' : 'summary'}
+        />
         <meta name="twitter:title" content={documentTitle} />
         <meta name="twitter:description" content={description} />
     </head>

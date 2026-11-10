@@ -98,7 +98,15 @@ Storybook is a local developer tool and not part of the published website. It re
 
 `npm run build:demo` sets `SPROUTSITE_BASE=/demo/` only for that command; `src/content/site.yaml` remains unchanged. The product website uses `https://sproutsite.dev`; consumer projects must configure their own production URL. Before deployment, check indexability and any staging protection. `robots.txt` is not access control.
 
-The product identity is consistently Sproutsite: package imports use `sproutsite/*`, public helpers use `createSproutsiteCollections()`, `createSproutsiteConfig()` and `getSproutsiteStaticPaths()`, and theme classes use the `ss-` prefix. Update local consumers' dependency, imports, environment variables and custom theme overrides together. Header and footer currently use a typographic wordmark; the previous icon and favicon have been removed pending a new visual identity.
+The product identity is consistently Sproutsite: package imports use `sproutsite/*`, public helpers use `createSproutsiteCollections()`, `createSproutsiteConfig()` and `getSproutsiteStaticPaths()`, and theme classes use the `ss-` prefix. Update local consumers' dependency, imports, environment variables and custom theme overrides together.
+
+### Logo and icons
+
+The reference-based sprout and three-layer symbol lives in `src/themes/default/assets/branding/`. `logo.svg` (navy wordmark), `logo-dark.svg` (white wordmark), `logo-monochrome.svg`, `icon.svg`, and `icon-monochrome.svg` are standalone vector assets with transparent backgrounds and outlined Nunito lettering. They need no external font. The shared `BrandLogo` atom uses the existing locally hosted Nunito font, inherits the light/dark text color, and is used in the header and footer. Consumer sites with a different `site.name` retain their own text wordmark.
+
+`favicon.svg` uses flat colors for small displays. The ICO contains native 16, 32, and 48 pixel frames; separate PNGs provide those sizes too. The Apple touch icon is 180 pixels; web app icons are 192 and 512 pixels, with navy backgrounds and safe internal padding. `PageLayout` links the icons and the static `/site.webmanifest` endpoint registered by `createSproutsiteConfig()` through Astro's standard `injectRoute()` API. Imported asset URLs and the configured base are respected; no CMS runtime or service worker is added. These are the default theme's icons; a differently branded consumer should replace them when replacing the theme. The Sproutsite social card is emitted only for the product site (`site.name: Sproutsite`).
+
+Brand colors are separate `--color-brand-*` tokens in `styles/foundation/tokens.css`; the existing semantic UI palette is unchanged. Run `npm run branding:generate` after changing the vector geometry or brand tokens, then `npm run format`. The TypeScript generator uses `fontkit` and `sharp` only during development. Its local source font is `scripts/assets/nunito-variable.ttf` from the [official Nunito distribution](https://github.com/google/fonts/tree/main/ofl/nunito), covered by the adjacent SIL Open Font License. Generated assets are committed and ordinary builds do not regenerate or download them.
 
 ## Maintaining Content
 

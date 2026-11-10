@@ -53,6 +53,10 @@
                     @apply !text-base-content;
                 }
 
+                .ss-header__brand {
+                    color: var(--color-brand-navy) !important;
+                }
+
                 .ss-header__link {
                     &:not([aria-current='page']):hover {
                         --btn-bg: color-mix(

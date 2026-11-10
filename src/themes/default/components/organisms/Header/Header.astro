@@ -1,4 +1,5 @@
 ---
+import BrandLogo from '../../atoms/BrandLogo/BrandLogo.astro';
 import type { Link, SiteConfig } from '../../../../../lib/sproutsite/types.js';
 import {
     contentHref,
@@ -16,7 +17,7 @@ const isActive = (link: Link) => link.href === route;
 <header class="ss-header">
     <div class="ss-header__inner site-shell">
         <a class="ss-header__brand" href={contentHref('/', site)}>
-            {site.name}
+            <BrandLogo name={site.name} />
         </a>
         <nav class="ss-header__nav" aria-label="Hauptnavigation">
             <ul class="ss-header__links">

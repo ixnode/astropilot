@@ -1,4 +1,5 @@
 ---
+import BrandLogo from '../../atoms/BrandLogo/BrandLogo.astro';
 import type { SiteConfig } from '../../../../../lib/sproutsite/types.js';
 import {
     contentHref,
@@ -12,9 +13,15 @@ const { site } = Astro.props;
 
 <footer class="ss-footer">
     <div class="ss-footer__inner site-shell">
-        <p class="ss-footer__text">
+        <div class="ss-footer__text">
+            <a
+                href={contentHref('/', site)}
+                aria-label={`${site.name}: Startseite`}
+            >
+                <BrandLogo name={site.name} />
+            </a>
             <span>{site.footer.text}</span>
-        </p>
+        </div>
         <nav aria-label="Fußnavigation">
             <ul class="ss-footer__links">
                 {site.footer.links.map((link) => {

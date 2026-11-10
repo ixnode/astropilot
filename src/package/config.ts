@@ -1,4 +1,5 @@
 import mdx from '@astrojs/mdx';
+import type { AstroIntegration } from 'astro';
 import sitemap from '@astrojs/sitemap';
 import {
     rehypeHeadingIds,
@@ -22,7 +23,25 @@ export function createSproutsiteConfig() {
     return {
         site: site.url,
         base: site.base,
-        integrations: [mdx(), sitemap()],
+        integrations: [
+            mdx(),
+            sitemap(),
+            {
+                name: 'sproutsite/manifest',
+                hooks: {
+                    'astro:config:setup': ({ injectRoute }) => {
+                        injectRoute({
+                            pattern: '/site.webmanifest',
+                            entrypoint: new URL(
+                                './manifest.ts',
+                                import.meta.url,
+                            ),
+                            prerender: true,
+                        });
+                    },
+                },
+            } satisfies AstroIntegration,
+        ],
         vite: { plugins: [tailwindcss()] },
         markdown: {
             // A high-contrast Shiki theme keeps code comments readable in the

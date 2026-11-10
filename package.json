@@ -30,6 +30,7 @@
         "postcss-selector-parser": "6.1.5"
     },
     "scripts": {
+        "branding:generate": "node --import tsx scripts/generate-branding.ts",
         "dev": "astro dev --force",
         "build": "npm run validate && astro build && node --import tsx scripts/verify-build.ts",
         "build:demo": "SPROUTSITE_BASE=/demo/ npm run build",
@@ -74,11 +75,14 @@
         "@storybook-astro/framework": "^1.15.0",
         "@storybook/addon-docs": "^10.6.6",
         "@storybook/builder-vite": "^10.6.6",
+        "@types/fontkit": "^2.0.9",
         "astro": "^7.4.4",
         "axe-core": "^4.13.0",
+        "fontkit": "^2.0.4",
         "playwright": "^1.63.0",
         "prettier": "^3.9.10",
         "prettier-plugin-astro": "^1.1.2",
+        "sharp": "^0.35.5",
         "storybook": "^10.6.6",
         "tsx": "^4.23.15",
         "typescript": "^6.0.3",

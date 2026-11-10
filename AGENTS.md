@@ -144,7 +144,7 @@ footer:
 
 Website name, language, production URL, base path, global `hero-classes`, navigation, and footer are maintained here. `hero-classes` is optional, contains at most eight theme classes with the `ss-` prefix, and applies to every hero and H1 fallback view without `hero.md`; `classes` in an individual `hero.md` overrides this value completely. Use the same validated values for Astro configuration, links, canonicals, and the sitemap; do not duplicate configuration. Astro configuration must not import Content APIs that are only available within the Astro runtime. Use a small Node-compatible loader for singleton configuration needed in more than one place.
 
-`https://sproutsite.dev` is the canonical product website. Consumer sites configure their own production URL. The demo does not require external fonts, tracking, or services. Until a new logo is supplied, use the typographic wordmark `Sproutsite`; do not reintroduce an obsolete logo.
+`https://sproutsite.dev` is the canonical product website. Consumer sites configure their own production URL. The demo does not require external fonts, tracking, or services. Use the approved Sproutsite sprout-and-layers logo in `src/themes/default/assets/branding/`; do not reintroduce an obsolete logo. Brand colors are separate tokens in `foundation/tokens.css`. Reproduce derived assets with `npm run branding:generate`; keep SVGs standalone and preserve the local font's license. The shared `BrandLogo` atom adapts to header and footer text colors. The default theme registers a static web app manifest via Astro's `injectRoute()` API; this is a metadata endpoint, not a content page or a custom router.
 
 ### Page: `page.yaml`
 

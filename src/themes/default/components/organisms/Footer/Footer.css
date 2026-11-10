@@ -6,7 +6,12 @@
             @apply flex flex-wrap items-center justify-between gap-4 py-10 text-sm;
 
             .ss-footer__text {
-                @apply flex items-center gap-3;
+                @apply flex flex-wrap items-center gap-x-6 gap-y-3;
+
+                > a {
+                    color: var(--color-brand-navy);
+                    text-decoration: none;
+                }
             }
 
             .ss-footer__links {

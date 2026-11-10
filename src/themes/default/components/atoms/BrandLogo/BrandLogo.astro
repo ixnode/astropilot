@@ -1,0 +1,13 @@
+---
+import icon from '../../../assets/branding/icon.svg?url&no-inline';
+
+interface Props {
+    name: string;
+}
+const { name } = Astro.props;
+---
+
+<span class="ss-brand-logo">
+    {name === 'Sproutsite' && <img src={icon} width="40" height="40" alt="" />}
+    <span>{name}</span>
+</span>

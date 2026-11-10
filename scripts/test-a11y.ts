@@ -762,7 +762,15 @@ try {
                         .count(),
                     1,
                 );
-                assert.equal(await page.locator('main table').count(), 6);
+                const tokenReference = page
+                    .locator('main section.ss-section')
+                    .filter({
+                        has: page.getByRole('heading', {
+                            name: 'Token-Referenz des Default-Themes',
+                            exact: true,
+                        }),
+                    });
+                assert.equal(await tokenReference.locator('table').count(), 6);
                 assert.equal(
                     await page.locator('.ss-foundation-sample').count(),
                     0,
