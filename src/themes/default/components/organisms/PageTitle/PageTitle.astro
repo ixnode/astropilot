@@ -21,18 +21,18 @@ const {
 <section
     class:list={[
         'tone-brand',
-        'ap-hero',
-        'ap-page-title',
-        `ap-page-title--${variant}`,
+        'ss-hero',
+        'ss-page-title',
+        `ss-page-title--${variant}`,
         ...classes,
     ]}
     aria-labelledby="page-title"
 >
-    <div class="ap-hero__inner ap-page-title__inner site-shell">
+    <div class="ss-hero__inner ss-page-title__inner site-shell">
         {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-        <h1 id="page-title" class="ap-hero__title ap-page-title__title">
+        <h1 id="page-title" class="ss-hero__title ss-page-title__title">
             {title}
         </h1>
-        {description && <p class="ap-page-title__description">{description}</p>}
+        {description && <p class="ss-page-title__description">{description}</p>}
     </div>
 </section>

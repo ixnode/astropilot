@@ -3,9 +3,9 @@ tone: muted
 fullWidth: true
 ---
 
-import { Eyebrow } from 'astropilot/components';
-import { Tabs, Tab } from 'astropilot/components';
-import { ContentTable } from 'astropilot/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { ContentTable } from 'sproutsite/components';
 
 <Eyebrow>Daten verständlich darstellen</Eyebrow>
 
@@ -68,7 +68,7 @@ Eine sichtbare Tabellenbeschriftung benennt den Inhalt. Die erste Zeile enthält
     <Tab title="Code">
 
         ````mdx
-        import { ContentTable } from 'astropilot/components';
+        import { ContentTable } from 'sproutsite/components';
 
         <ContentTable caption="Dateien im Seitenverzeichnis">
 
@@ -106,7 +106,7 @@ Die Doppelpunkte in der Markdown-Trennzeile bestimmen die Ausrichtung: links fü
     <Tab title="Code">
 
         ````mdx
-        import { ContentTable } from 'astropilot/components';
+        import { ContentTable } from 'sproutsite/components';
 
         <ContentTable caption="Beispielprojekte und Seitenumfang">
 
@@ -145,7 +145,7 @@ Dezente Streifen erleichtern es, einer Zeile über mehrere Spalten zu folgen. Di
     <Tab title="Code">
 
         ````mdx
-        import { ContentTable } from 'astropilot/components';
+        import { ContentTable } from 'sproutsite/components';
 
         <ContentTable caption="Arbeitsschritte im Überblick" variant="striped">
 
@@ -184,7 +184,7 @@ highlight zählt Datenzeilen ab eins, ohne die Kopfzeile. Die zweite Zeile erhä
     <Tab title="Code">
 
         ````mdx
-        import { ContentTable } from 'astropilot/components';
+        import { ContentTable } from 'sproutsite/components';
 
         <ContentTable caption="Bearbeitungsstand – Beispieldaten" highlight={2}>
 
@@ -222,7 +222,7 @@ Weniger Zellabstand schafft Platz für größere Datenmengen. Inhalt und Beschri
     <Tab title="Code">
 
         ````mdx
-        import { ContentTable } from 'astropilot/components';
+        import { ContentTable } from 'sproutsite/components';
 
         <ContentTable caption="Dateien im Seitenverzeichnis – kompakt" density="compact">
 
@@ -260,7 +260,7 @@ Die Tabelle behält ihre Spaltenbreite und scrollt innerhalb ihres eigenen Berei
     <Tab title="Code">
 
         ````mdx
-        import { ContentTable } from 'astropilot/components';
+        import { ContentTable } from 'sproutsite/components';
 
         <ContentTable caption="Redaktionsplan – Beispieldaten" variant="striped" density="compact" wide>
 

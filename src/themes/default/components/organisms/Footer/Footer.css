@@ -1,19 +1,15 @@
 @layer components {
-    .ap-footer {
+    .ss-footer {
         @apply border-t border-base-300 bg-base-200;
 
-        .ap-footer__inner {
+        .ss-footer__inner {
             @apply flex flex-wrap items-center justify-between gap-4 py-10 text-sm;
 
-            .ap-footer__text {
+            .ss-footer__text {
                 @apply flex items-center gap-3;
-
-                .ap-footer__logo {
-                    @apply size-6 shrink-0;
-                }
             }
 
-            .ap-footer__links {
+            .ss-footer__links {
                 @apply flex flex-wrap gap-4;
             }
         }

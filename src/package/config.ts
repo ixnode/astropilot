@@ -7,16 +7,16 @@ import {
 } from '@astrojs/markdown-remark';
 import tailwindcss from '@tailwindcss/vite';
 import tsx from '@shikijs/langs/tsx';
-import { rehypeUniqueHeadingIds } from '../lib/astropilot/rehype-ids.js';
-import { rehypeContentTables } from '../lib/astropilot/rehype-tables.js';
-import { rehypeExternalLinks } from '../lib/astropilot/rehype-links.js';
-import { remarkContentLinks } from '../lib/astropilot/remark-links.js';
-import { loadSiteConfig } from '../lib/astropilot/site-config.js';
-import { validateAstroPilotContent } from '../lib/astropilot/validation.js';
+import { rehypeUniqueHeadingIds } from '../lib/sproutsite/rehype-ids.js';
+import { rehypeContentTables } from '../lib/sproutsite/rehype-tables.js';
+import { rehypeExternalLinks } from '../lib/sproutsite/rehype-links.js';
+import { remarkContentLinks } from '../lib/sproutsite/remark-links.js';
+import { loadSiteConfig } from '../lib/sproutsite/site-config.js';
+import { validateSproutsiteContent } from '../lib/sproutsite/validation.js';
 
-/** Returns the Astro configuration required by the default AstroPilot theme. */
-export function createAstroPilotConfig() {
-    validateAstroPilotContent();
+/** Returns the Astro configuration required by the default Sproutsite theme. */
+export function createSproutsiteConfig() {
+    validateSproutsiteContent();
     const site = loadSiteConfig();
 
     return {

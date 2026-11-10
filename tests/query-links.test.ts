@@ -3,11 +3,11 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
-import { validateAstroPilotContent } from '../src/lib/astropilot/validation.js';
-import { withBase } from '../src/lib/astropilot/urls.js';
+import { validateSproutsiteContent } from '../src/lib/sproutsite/validation.js';
+import { withBase } from '../src/lib/sproutsite/urls.js';
 
 test('validates query links against their page path and preserves fragment checks', () => {
-    const directory = mkdtempSync(join(tmpdir(), 'astropilot-query-links-'));
+    const directory = mkdtempSync(join(tmpdir(), 'sproutsite-query-links-'));
     try {
         writeFileSync(
             join(directory, 'page.yaml'),
@@ -23,7 +23,7 @@ test('validates query links against their page path and preserves fragment check
             section,
             '## Links\n\n[FAQ](/faq/?ref=showcase)\n\n[FAQ title](/faq?ref=showcase#page-title)\n',
         );
-        assert.doesNotThrow(() => validateAstroPilotContent(directory));
+        assert.doesNotThrow(() => validateSproutsiteContent(directory));
         assert.equal(
             withBase('/faq/?ref=showcase#page-title', '/demo/'),
             '/demo/faq/?ref=showcase#page-title',
@@ -33,7 +33,7 @@ test('validates query links against their page path and preserves fragment check
             '## Links\n\n[Missing page](/missing/?ref=showcase)\n',
         );
         assert.throws(
-            () => validateAstroPilotContent(directory),
+            () => validateSproutsiteContent(directory),
             /internal link target does not exist/,
         );
         writeFileSync(
@@ -41,7 +41,7 @@ test('validates query links against their page path and preserves fragment check
             '## Links\n\n[Missing fragment](/faq/?ref=showcase#missing)\n',
         );
         assert.throws(
-            () => validateAstroPilotContent(directory),
+            () => validateSproutsiteContent(directory),
             /internal link fragment does not exist/,
         );
     } finally {

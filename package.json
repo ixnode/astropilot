@@ -1,11 +1,16 @@
 {
-    "name": "astropilot",
+    "name": "sproutsite",
     "version": "0.3.0",
     "private": true,
-    "description": "Dateibasiertes Content-Framework mit Standard-Theme für Astro.",
+    "description": "Agent-ready, Markdown-first Static CMS powered by Astro and TypeScript.",
+    "homepage": "https://sproutsite.dev",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sproutsite/sproutsite.git"
+    },
     "type": "module",
     "files": [
-        "src/lib/astropilot/",
+        "src/lib/sproutsite/",
         "src/package/",
         "src/themes/default/",
         "README.md"
@@ -27,7 +32,7 @@
     "scripts": {
         "dev": "astro dev --force",
         "build": "npm run validate && astro build && node --import tsx scripts/verify-build.ts",
-        "build:demo": "ASTROPILOT_BASE=/demo/ npm run build",
+        "build:demo": "SPROUTSITE_BASE=/demo/ npm run build",
         "preview": "astro preview",
         "check": "npm run validate && astro check",
         "validate": "node --import tsx scripts/validate-content.ts",

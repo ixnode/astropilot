@@ -4,14 +4,14 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
 import type { Element, Root } from 'hast';
-import { validateAstroPilotContent } from '../src/lib/astropilot/validation.js';
-import { rehypeContentTables } from '../src/lib/astropilot/rehype-tables.js';
+import { validateSproutsiteContent } from '../src/lib/sproutsite/validation.js';
+import { rehypeContentTables } from '../src/lib/sproutsite/rehype-tables.js';
 
 const markdownTable =
     '| Name | Count |\n| :--- | ---: |\n| First | 1 |\n| Second | 2 |';
 
 test('validates ContentTable options and an actual Markdown table', () => {
-    const directory = mkdtempSync(join(tmpdir(), 'astropilot-table-'));
+    const directory = mkdtempSync(join(tmpdir(), 'sproutsite-table-'));
     try {
         writeFileSync(
             join(directory, 'page.yaml'),
@@ -20,9 +20,9 @@ test('validates ContentTable options and an actual Markdown table', () => {
         const validate = (props: string, children = markdownTable) => {
             writeFileSync(
                 join(directory, '01-tables.mdx'),
-                `import { ContentTable } from 'astropilot/components';\n\n## Tables\n\n<ContentTable ${props}>\n\n${children}\n\n</ContentTable>\n`,
+                `import { ContentTable } from 'sproutsite/components';\n\n## Tables\n\n<ContentTable ${props}>\n\n${children}\n\n</ContentTable>\n`,
             );
-            validateAstroPilotContent(directory);
+            validateSproutsiteContent(directory);
         };
         assert.doesNotThrow(() => validate('caption="Example"'));
         assert.doesNotThrow(() =>

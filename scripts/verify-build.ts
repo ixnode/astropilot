@@ -1,7 +1,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
-import { loadSiteConfig } from '../src/lib/astropilot/site-config.js';
-import { canonicalUrl, withBase } from '../src/lib/astropilot/urls.js';
+import { loadSiteConfig } from '../src/lib/sproutsite/site-config.js';
+import { canonicalUrl, withBase } from '../src/lib/sproutsite/urls.js';
 
 const site = loadSiteConfig();
 const routes = ['/', '/faq/', '/info/', '/showcase/', '/kontakt/'];

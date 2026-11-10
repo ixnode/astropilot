@@ -3,9 +3,9 @@ tone: default
 fullWidth: true
 ---
 
-import { Eyebrow } from 'astropilot/components';
-import { Tabs, Tab } from 'astropilot/components';
-import { Card, CardActions } from 'astropilot/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { Card, CardActions } from 'sproutsite/components';
 
 <Eyebrow>Verbindungen im Projekt</Eyebrow>
 
@@ -21,20 +21,20 @@ Komponentenpfade unter `src/themes/default/components/`: `organisms/Header/` und
 
 ### Direkte Seitenlinks
 
-Eine kurze Liste bietet direkte Einstiege zu wichtigen Seiten. Interne Ziele werden ohne Deployment-Unterpfad geschrieben; AstroPilot ergänzt ihn automatisch.
+Eine kurze Liste bietet direkte Einstiege zu wichtigen Seiten. Interne Ziele werden ohne Deployment-Unterpfad geschrieben; Sproutsite ergänzt ihn automatisch.
 
 <Tabs label="Direkte Seitenlinks: Vorschau und Code" variant="border">
     <Tab title="Vorschau">
 
         - [Antworten auf häufige Fragen](/faq/)
-        - [Das AstroPilot-Konzept kennenlernen](/info/)
+        - [Das Sproutsite-Konzept kennenlernen](/info/)
         - [Kontakt aufnehmen](/kontakt/)
 
     </Tab>
     <Tab title="Code">
         ````markdown
         - [Antworten auf häufige Fragen](/faq/)
-        - [Das AstroPilot-Konzept kennenlernen](/info/)
+        - [Das Sproutsite-Konzept kennenlernen](/info/)
         - [Kontakt aufnehmen](/kontakt/)
         ````
     </Tab>
@@ -43,7 +43,7 @@ Eine kurze Liste bietet direkte Einstiege zu wichtigen Seiten. Interne Ziele wer
 
 ### Verlinktes Inhaltsverzeichnis
 
-Fragmentlinks führen zu einer Überschrift auf derselben Seite. AstroPilot setzt den Dateinamen vor die Überschriften-ID. Der Code bezieht sich auf diese Datei, 01-navigation.mdx; bei einem anderen Dateinamen muss der Präfix angepasst werden.
+Fragmentlinks führen zu einer Überschrift auf derselben Seite. Sproutsite setzt den Dateinamen vor die Überschriften-ID. Der Code bezieht sich auf diese Datei, 01-navigation.mdx; bei einem anderen Dateinamen muss der Präfix angepasst werden.
 
 <Tabs label="Verlinktes Inhaltsverzeichnis: Vorschau und Code" variant="border">
     <Tab title="Vorschau">
@@ -140,7 +140,7 @@ CardActions stellt Navigationslinks innerhalb einer Card als Schaltflächen dar.
     </Tab>
     <Tab title="Code">
         ````mdx
-        import { Card, CardActions } from 'astropilot/components';
+        import { Card, CardActions } from 'sproutsite/components';
 
         <Card>
             #### Das Layout kennenlernen

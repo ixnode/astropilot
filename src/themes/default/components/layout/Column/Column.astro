@@ -8,11 +8,11 @@ interface Props {
 const { span = 12 } = Astro.props;
 if (!Number.isInteger(span) || span < 1 || span > 12)
     throw new Error(
-        `Unsupported AstroPilot column span: ${span}. Expected an integer from 1 to 12.`,
+        `Unsupported Sproutsite column span: ${span}. Expected an integer from 1 to 12.`,
     );
-const columnClass = `ap-column--span-${span}`;
+const columnClass = `ss-column--span-${span}`;
 ---
 
-<div class:list={['ap-column', columnClass]}>
+<div class:list={['ss-column', columnClass]}>
     <slot />
 </div>

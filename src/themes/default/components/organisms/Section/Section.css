@@ -1,8 +1,8 @@
 @layer components {
-    .ap-section {
+    .ss-section {
         @apply py-section;
 
-        .ap-section__content {
+        .ss-section__content {
             @apply max-w-4xl;
         }
     }

@@ -1,8 +1,8 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content';
-import { assemblePages, type AssembledPage } from '../lib/astropilot/pages.js';
-import { loadSiteConfig } from '../lib/astropilot/site-config.js';
-import { blogRouteFromId } from '../lib/astropilot/urls.js';
+import { assemblePages, type AssembledPage } from '../lib/sproutsite/pages.js';
+import { loadSiteConfig } from '../lib/sproutsite/site-config.js';
+import { blogRouteFromId } from '../lib/sproutsite/urls.js';
 import PageLayout from '../themes/default/layouts/PageLayout/PageLayout.astro';
 import BlogIndex from '../themes/default/components/organisms/BlogIndex/BlogIndex.astro';
 import BlogPost from '../themes/default/components/organisms/BlogPost/BlogPost.astro';
@@ -10,7 +10,7 @@ import Hero from '../themes/default/components/organisms/Hero/Hero.astro';
 import PageTitle from '../themes/default/components/organisms/PageTitle/PageTitle.astro';
 import Section from '../themes/default/components/organisms/Section/Section.astro';
 
-export async function getAstroPilotStaticPaths() {
+export async function getSproutsiteStaticPaths() {
     const pages = assemblePages(
         await getCollection('pages'),
         await getCollection('documents'),

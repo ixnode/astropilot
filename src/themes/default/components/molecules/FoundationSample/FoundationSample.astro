@@ -55,19 +55,19 @@ const shadows = [
 
 <div
     class:list={[
-        'ap-foundation-sample',
-        `ap-foundation-sample--${kind}`,
+        'ss-foundation-sample',
+        `ss-foundation-sample--${kind}`,
         'not-prose',
     ]}
 >
     {kind === 'colors' && (
-        <ul class="ap-foundation-sample__palette">
+        <ul class="ss-foundation-sample__palette">
             {colors.map(([name, label]) => (
-                <li class="ap-foundation-sample__color">
+                <li class="ss-foundation-sample__color">
                     <div
                         class:list={[
-                            'ap-foundation-sample__swatch',
-                            `ap-foundation-sample__swatch--${name}`,
+                            'ss-foundation-sample__swatch',
+                            `ss-foundation-sample__swatch--${name}`,
                         ]}
                         aria-hidden="true"
                     />
@@ -78,30 +78,30 @@ const shadows = [
         </ul>
     )}
     {kind === 'type' && (
-        <div class="ap-foundation-sample__type">
-            <p class="ap-foundation-sample__label">Nunito · große Schrift</p>
-            <p class="ap-foundation-sample__display">Klare Gedanken.</p>
-            <p class="ap-foundation-sample__label">Nunito · mittlere Schrift</p>
-            <p class="ap-foundation-sample__heading">
+        <div class="ss-foundation-sample__type">
+            <p class="ss-foundation-sample__label">Nunito · große Schrift</p>
+            <p class="ss-foundation-sample__display">Klare Gedanken.</p>
+            <p class="ss-foundation-sample__label">Nunito · mittlere Schrift</p>
+            <p class="ss-foundation-sample__heading">
                 Eine gemeinsame Formensprache.
             </p>
-            <p class="ap-foundation-sample__label">Systemschrift · Fließtext</p>
-            <p class="ap-foundation-sample__body">
+            <p class="ss-foundation-sample__label">Systemschrift · Fließtext</p>
+            <p class="ss-foundation-sample__body">
                 Gut lesbare Texte geben Inhalten Raum. Die Systemschrift ergänzt
                 die weicheren Formen der Überschrift.
             </p>
         </div>
     )}
     {kind === 'spacing' && (
-        <ul class="ap-foundation-sample__spaces">
+        <ul class="ss-foundation-sample__spaces">
             {spaces.map(([step, size]) => (
-                <li class="ap-foundation-sample__space-row">
+                <li class="ss-foundation-sample__space-row">
                     <span>{size}</span>
-                    <div class="ap-foundation-sample__track" aria-hidden="true">
+                    <div class="ss-foundation-sample__track" aria-hidden="true">
                         <span
                             class:list={[
-                                'ap-foundation-sample__space',
-                                `ap-foundation-sample__space--${step}`,
+                                'ss-foundation-sample__space',
+                                `ss-foundation-sample__space--${step}`,
                             ]}
                         />
                     </div>
@@ -110,13 +110,13 @@ const shadows = [
         </ul>
     )}
     {kind === 'radius' && (
-        <ul class="ap-foundation-sample__tiles">
+        <ul class="ss-foundation-sample__tiles">
             {radii.map(([name, label, token]) => (
-                <li class="ap-foundation-sample__tile">
+                <li class="ss-foundation-sample__tile">
                     <div
                         class:list={[
-                            'ap-foundation-sample__shape',
-                            `ap-foundation-sample__shape--${name}`,
+                            'ss-foundation-sample__shape',
+                            `ss-foundation-sample__shape--${name}`,
                         ]}
                         aria-hidden="true"
                     />
@@ -127,13 +127,13 @@ const shadows = [
         </ul>
     )}
     {kind === 'shadow' && (
-        <ul class="ap-foundation-sample__tiles">
+        <ul class="ss-foundation-sample__tiles">
             {shadows.map(([name, label, token]) => (
-                <li class="ap-foundation-sample__tile">
+                <li class="ss-foundation-sample__tile">
                     <div
                         class:list={[
-                            'ap-foundation-sample__elevation',
-                            `ap-foundation-sample__elevation--${name}`,
+                            'ss-foundation-sample__elevation',
+                            `ss-foundation-sample__elevation--${name}`,
                         ]}
                         aria-hidden="true"
                     />
@@ -144,13 +144,13 @@ const shadows = [
         </ul>
     )}
     {kind === 'focus' && (
-        <div class="ap-foundation-sample__focus-area">
+        <div class="ss-foundation-sample__focus-area">
             <p>
                 Wechsle mit der Tabulatortaste zum Link. Die Kontur zeigt das
                 aktive Tastaturziel; der Link führt zum Hauptinhalt dieser
                 Seite.
             </p>
-            <a class="ap-foundation-sample__focus" href="#main-content">
+            <a class="ss-foundation-sample__focus" href="#main-content">
                 Zum Hauptinhalt
             </a>
         </div>

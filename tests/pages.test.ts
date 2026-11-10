@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { CollectionEntry } from 'astro:content';
-import { assemblePages } from '../src/lib/astropilot/pages.js';
+import { assemblePages } from '../src/lib/sproutsite/pages.js';
 import {
     blogRouteFromId,
     routeFromPageId,
     withBase,
-} from '../src/lib/astropilot/urls.js';
+} from '../src/lib/sproutsite/urls.js';
 
 test('derives normalized routes from page metadata paths', () => {
     assert.equal(routeFromPageId('page.yaml'), '/');

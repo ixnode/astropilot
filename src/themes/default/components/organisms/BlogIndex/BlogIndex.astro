@@ -3,8 +3,8 @@ import type { CollectionEntry } from 'astro:content';
 import {
     blogRouteFromId,
     contentHref,
-} from '../../../../../lib/astropilot/urls.js';
-import type { SiteConfig } from '../../../../../lib/astropilot/types.js';
+} from '../../../../../lib/sproutsite/urls.js';
+import type { SiteConfig } from '../../../../../lib/sproutsite/types.js';
 import PageLayout from '../../../layouts/PageLayout/PageLayout.astro';
 import Card from '../../molecules/Card/Card.astro';
 import CardActions from '../../molecules/CardActions/CardActions.astro';
@@ -21,7 +21,7 @@ const blog = site.blog ?? {
     description:
         'Projektfortschritt, Entscheidungen und Meilensteine auf dem Weg zu einem dateibasierten Content-Framework.',
     eyebrow: 'Projektjournal',
-    heading: 'AstroPilot im Fortschritt',
+    heading: 'Sproutsite im Fortschritt',
 };
 const dateFormatter = new Intl.DateTimeFormat(site.language, {
     day: '2-digit',
@@ -44,20 +44,20 @@ const dateFormatter = new Intl.DateTimeFormat(site.language, {
         variant="hero"
     />
     <section
-        class="tone-default ap-section ap-blog-index"
+        class="tone-default ss-section ss-blog-index"
         aria-labelledby="blog-overview"
     >
-        <div class="ap-section__inner site-shell">
-            <div class="content-prose ap-blog-index__content">
+        <div class="ss-section__inner site-shell">
+            <div class="content-prose ss-blog-index__content">
                 <h2 id="blog-overview">{blog.heading}</h2>
-                <div class="ap-blog-index__grid">
+                <div class="ss-blog-index__grid">
                     {posts.map((post) => (
                         <Card
                             image={post.data.image}
                             imageAlt={post.data.imageAlt}
                         >
                             <time
-                                class="ap-blog-index__date"
+                                class="ss-blog-index__date"
                                 datetime={post.data.pubDate.toISOString()}
                             >
                                 {dateFormatter.format(post.data.pubDate)}

@@ -3,7 +3,7 @@
  *
  * Import order is intentional: Tailwind and DaisyUI establish the framework,
  * foundation files establish shared behavior, semantic tones map content
- * values, and component/layout files add the AstroPilot presentation. Keep
+ * values, and component/layout files add the Sproutsite presentation. Keep
  * this order stable unless the
  * resulting cascade is verified.
  */
@@ -49,7 +49,7 @@
     themes: false;
 }
 @plugin "daisyui/theme" {
-    name: 'astropilot';
+    name: 'sproutsite';
     default: true;
     prefersdark: false;
     color-scheme: light;

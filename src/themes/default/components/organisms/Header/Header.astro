@@ -1,10 +1,9 @@
 ---
-import logoUrl from '../../../assets/favicon.svg?url';
-import type { Link, SiteConfig } from '../../../../../lib/astropilot/types.js';
+import type { Link, SiteConfig } from '../../../../../lib/sproutsite/types.js';
 import {
     contentHref,
     isExternalWebLink,
-} from '../../../../../lib/astropilot/urls.js';
+} from '../../../../../lib/sproutsite/urls.js';
 
 interface Props {
     site: SiteConfig;
@@ -14,26 +13,19 @@ const { site, route } = Astro.props;
 const isActive = (link: Link) => link.href === route;
 ---
 
-<header class="ap-header">
-    <div class="ap-header__inner site-shell">
-        <a class="ap-header__brand" href={contentHref('/', site)}>
-            <img
-                class="ap-header__logo"
-                src={logoUrl}
-                alt=""
-                width="32"
-                height="32"
-            />
+<header class="ss-header">
+    <div class="ss-header__inner site-shell">
+        <a class="ss-header__brand" href={contentHref('/', site)}>
             {site.name}
         </a>
-        <nav class="ap-header__nav" aria-label="Hauptnavigation">
-            <ul class="ap-header__links">
+        <nav class="ss-header__nav" aria-label="Hauptnavigation">
+            <ul class="ss-header__links">
                 {site.header.links.map((link) => {
                     const external = isExternalWebLink(link.href, site.url);
                     return (
                         <li>
                             <a
-                                class="ap-header__link btn btn-ghost btn-sm"
+                                class="ss-header__link btn btn-ghost btn-sm"
                                 href={contentHref(link.href, site)}
                                 target={external ? '_blank' : undefined}
                                 rel={
@@ -55,12 +47,12 @@ const isActive = (link: Link) => link.href === route;
 
 <script>
     const scrollThreshold = 6;
-    const header = document.querySelector<HTMLElement>('.ap-header');
+    const header = document.querySelector<HTMLElement>('.ss-header');
 
     if (header) {
         const updateHeaderState = () => {
             header.classList.toggle(
-                'ap-header--scrolled',
+                'ss-header--scrolled',
                 window.scrollY >= scrollThreshold,
             );
         };

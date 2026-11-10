@@ -1,20 +1,20 @@
 @layer components {
-    .ap-content-image {
+    .ss-content-image {
         @apply block max-w-full object-cover;
 
-        &.ap-content-image--full {
+        &.ss-content-image--full {
             @apply w-full;
         }
 
-        &.ap-content-image--rounded {
+        &.ss-content-image--rounded {
             @apply rounded-box;
         }
 
-        &.ap-content-image--square {
+        &.ss-content-image--square {
             @apply rounded-none;
         }
 
-        &.ap-content-image--bordered {
+        &.ss-content-image--bordered {
             @apply border border-base-300;
         }
     }

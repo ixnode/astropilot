@@ -34,9 +34,9 @@ const markdownSchema = z
 const sectionSchema = markdownSchema.extend({
     fullWidth: z.boolean().optional(),
 });
-const heroClass = z.string().regex(/^ap-[a-z0-9][a-z0-9_-]*$/, {
+const heroClass = z.string().regex(/^ss-[a-z0-9][a-z0-9_-]*$/, {
     message:
-        'must start with ap- and contain only lowercase letters, digits, underscores, or hyphens',
+        'must start with ss- and contain only lowercase letters, digits, underscores, or hyphens',
 });
 const heroSchema = markdownSchema.extend({
     title: z.string().trim().min(1),
@@ -45,25 +45,25 @@ const heroSchema = markdownSchema.extend({
 });
 const sectionPattern = /^\d{2,}-[a-z0-9][a-z0-9-]*\.(?:md|mdx)$/;
 const mdxComponentImport =
-    /^import\s*\{\s*Column\s*,\s*Columns(?:\s*,\s*Eyebrow)?\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
+    /^import\s*\{\s*Column\s*,\s*Columns(?:\s*,\s*Eyebrow)?\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
 const eyebrowComponentImport =
-    /^import\s*\{\s*Eyebrow\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
+    /^import\s*\{\s*Eyebrow\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
 const alertComponentImport =
-    /^import\s*\{\s*Alert\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
+    /^import\s*\{\s*Alert\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
 const contentImageComponentImport =
-    /^import\s*\{\s*ContentImage\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
+    /^import\s*\{\s*ContentImage\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
 const cardComponentImport =
-    /^import\s*\{\s*Card(?:\s*,\s*CardActions)?\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
+    /^import\s*\{\s*Card(?:\s*,\s*CardActions)?\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
 const tabsComponentImport =
-    /^import\s*\{\s*Tabs\s*,\s*Tab\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
+    /^import\s*\{\s*Tabs\s*,\s*Tab\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
 const contentTableImport =
-    /^import\s*\{\s*ContentTable\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
+    /^import\s*\{\s*ContentTable\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
 const foundationSampleImport =
-    /^import\s*\{\s*FoundationSample\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
+    /^import\s*\{\s*FoundationSample\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
 const buttonComponentImport =
-    /^import\s*\{\s*Button\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
+    /^import\s*\{\s*Button\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
 const badgeComponentImport =
-    /^import\s*\{\s*Badge\s*\}\s*from\s*['"]astropilot\/components['"];?$/;
+    /^import\s*\{\s*Badge\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
 const localImageImport =
     /^import\s+([A-Za-z_$][\w$]*)\s+from\s+['"](?:\.\.\/|\.\/)[a-z0-9_][a-z0-9._/-]*\.(?:avif|jpe?g|png|webp)['"];?$/i;
 const imageExtensions = new Set(['.avif', '.jpeg', '.jpg', '.png', '.webp']);
@@ -166,7 +166,7 @@ function validateMdxLayout(
                     fail(
                         contentRoot,
                         path,
-                        'MDX may only import supported components from astropilot/components and local relative images',
+                        'MDX may only import supported components from sproutsite/components and local relative images',
                     );
                 hasComponentImport = true;
             }
@@ -743,12 +743,12 @@ function validateMdxLayout(
         fail(
             contentRoot,
             path,
-            'MDX section requires a supported AstroPilot component and its import',
+            'MDX section requires a supported Sproutsite component and its import',
         );
 }
 
-/** Validates AstroPilot's file-based content contract in the current Astro project. */
-export function validateAstroPilotContent(
+/** Validates Sproutsite's file-based content contract in the current Astro project. */
+export function validateSproutsiteContent(
     contentRoot = resolve(process.cwd(), 'src/content/pages'),
 ): void {
     const site = loadSiteConfig();

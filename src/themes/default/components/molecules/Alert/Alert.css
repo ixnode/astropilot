@@ -1,8 +1,8 @@
 @layer components {
-    .ap-alert {
+    .ss-alert {
         @apply my-4 flex min-h-24 items-center;
 
-        .ap-alert__content {
+        .ss-alert__content {
             @apply min-w-0;
 
             strong {

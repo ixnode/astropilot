@@ -1,5 +1,5 @@
 @layer components {
-    .ap-hero {
+    .ss-hero {
         @apply relative isolate overflow-hidden py-section-hero;
         padding-top: max(
             var(--spacing-section-hero),
@@ -7,27 +7,27 @@
         );
         padding-bottom: var(--spacing-section-hero-bottom);
 
-        .ap-hero__inner {
+        .ss-hero__inner {
             @apply relative z-10;
 
-            .ap-hero__title {
+            .ss-hero__title {
                 @apply max-w-3xl text-display font-bold tracking-tight;
             }
 
-            .ap-hero__meta {
+            .ss-hero__meta {
                 @apply mt-5 block text-sm font-semibold tracking-wide uppercase;
             }
 
-            .ap-hero__content {
+            .ss-hero__content {
                 @apply mt-5 max-w-3xl;
             }
         }
 
-        .ap-hero__background {
+        .ss-hero__background {
             @apply pointer-events-none absolute inset-0 z-0 size-full object-cover object-center;
         }
 
-        &.ap-hero--has-background-image {
+        &.ss-hero--has-background-image {
             @apply text-primary-content;
 
             &::before {
@@ -49,7 +49,7 @@
         }
     }
 
-    .ap-hero--theme-1 {
+    .ss-hero--theme-1 {
         background-image:
             radial-gradient(
                 circle at 14% 18%,

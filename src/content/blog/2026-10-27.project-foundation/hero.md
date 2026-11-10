@@ -1,5 +1,5 @@
 ---
-title: AstroPilot startet als dateibasiertes Astro-Projekt
+title: Sproutsite startet als dateibasiertes Astro-Projekt
 eyebrow: Projektstart
 tone: brand
 ---

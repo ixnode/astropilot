@@ -1,12 +1,12 @@
 @layer components {
-    .ap-tabs {
+    .ss-tabs {
         @apply my-6 min-w-0 text-base-content;
 
         :where(.tone-brand) & {
             @apply rounded-box bg-base-100 p-4;
         }
 
-        .ap-tabs__list {
+        .ss-tabs__list {
             @apply mb-2 flex max-w-full !flex-nowrap overflow-x-auto;
             scrollbar-width: none;
 
@@ -14,7 +14,7 @@
                 display: none;
             }
 
-            .ap-tabs__button {
+            .ss-tabs__button {
                 @apply min-h-11 shrink-0 whitespace-nowrap font-semibold !text-base-content;
 
                 &:focus-visible {
@@ -25,12 +25,12 @@
         }
 
         &[data-variant='lift'][data-enhanced='true'] {
-            .ap-tabs__list {
+            .ss-tabs__list {
                 @apply relative z-10;
                 margin-bottom: -1px;
             }
 
-            > .ap-tab {
+            > .ss-tab {
                 @apply mt-0 rounded-tl-none;
             }
         }

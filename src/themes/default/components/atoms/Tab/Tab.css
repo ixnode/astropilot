@@ -1,16 +1,16 @@
 @layer components {
-    .ap-tab {
+    .ss-tab {
         @apply rounded-box border border-base-300 bg-base-100 p-5 sm:p-6;
 
         &[hidden] {
             display: none;
         }
 
-        & + .ap-tab {
+        & + .ss-tab {
             @apply mt-2;
         }
 
-        .ap-tab__label {
+        .ss-tab__label {
             @apply mt-0 font-bold;
 
             &[hidden] {
@@ -18,7 +18,7 @@
             }
         }
 
-        .ap-tab__content {
+        .ss-tab__content {
             @apply min-w-0;
             overflow-wrap: anywhere;
 

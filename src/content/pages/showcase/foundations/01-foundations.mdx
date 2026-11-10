@@ -3,9 +3,9 @@ tone: default
 fullWidth: true
 ---
 
-import { Eyebrow } from 'astropilot/components';
-import { Tabs, Tab } from 'astropilot/components';
-import { FoundationSample } from 'astropilot/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { FoundationSample } from 'sproutsite/components';
 
 <Eyebrow>Gestaltung sehen und ausprobieren</Eyebrow>
 
@@ -29,7 +29,7 @@ Die Palette zeigt neutrale Flächen, Markenfarben und Statusfarben direkt nebene
     </Tab>
     <Tab title="Code">
         ````mdx
-        import { FoundationSample } from 'astropilot/components';
+        import { FoundationSample } from 'sproutsite/components';
 
         <FoundationSample kind="colors" />
         ````
@@ -37,15 +37,15 @@ Die Palette zeigt neutrale Flächen, Markenfarben und Statusfarben direkt nebene
         Die Darstellung verwendet unter anderem diesen CSS-Ausschnitt:
 
         ````css
-        .ap-foundation-sample__swatch--primary {
+        .ss-foundation-sample__swatch--primary {
             background-color: var(--color-primary);
         }
 
-        .ap-foundation-sample__swatch--secondary {
+        .ss-foundation-sample__swatch--secondary {
             background-color: var(--color-secondary);
         }
 
-        .ap-foundation-sample__swatch--accent {
+        .ss-foundation-sample__swatch--accent {
             background-color: var(--color-accent);
         }
         ````
@@ -63,7 +63,7 @@ Die weicheren Formen von Nunito und die Systemschrift lassen sich direkt verglei
     </Tab>
     <Tab title="Code">
         ````mdx
-        import { FoundationSample } from 'astropilot/components';
+        import { FoundationSample } from 'sproutsite/components';
 
         <FoundationSample kind="type" />
         ````
@@ -71,21 +71,21 @@ Die weicheren Formen von Nunito und die Systemschrift lassen sich direkt verglei
         Die Darstellung verwendet unter anderem diesen CSS-Ausschnitt:
 
         ````css
-        .ap-foundation-sample__display {
+        .ss-foundation-sample__display {
             font-family: var(--font-heading);
             font-size: var(--text-display);
             font-weight: 700;
             line-height: 1.2;
         }
 
-        .ap-foundation-sample__heading {
+        .ss-foundation-sample__heading {
             font-family: var(--font-heading);
             font-size: var(--text-heading-2);
             font-weight: 500;
             line-height: 1.2;
         }
 
-        .ap-foundation-sample__body {
+        .ss-foundation-sample__body {
             font-family: var(--font-sans);
             line-height: 1.75;
         }
@@ -104,7 +104,7 @@ Die blauen Balken zeigen fünf Größen der gemeinsamen Abstandsskala. Ihre Brei
     </Tab>
     <Tab title="Code">
         ````mdx
-        import { FoundationSample } from 'astropilot/components';
+        import { FoundationSample } from 'sproutsite/components';
 
         <FoundationSample kind="spacing" />
         ````
@@ -112,23 +112,23 @@ Die blauen Balken zeigen fünf Größen der gemeinsamen Abstandsskala. Ihre Brei
         Die Darstellung verwendet unter anderem diesen CSS-Ausschnitt:
 
         ````css
-        .ap-foundation-sample__space--1 {
+        .ss-foundation-sample__space--1 {
             width: calc(var(--spacing) * 1);
         }
 
-        .ap-foundation-sample__space--2 {
+        .ss-foundation-sample__space--2 {
             width: calc(var(--spacing) * 2);
         }
 
-        .ap-foundation-sample__space--4 {
+        .ss-foundation-sample__space--4 {
             width: calc(var(--spacing) * 4);
         }
 
-        .ap-foundation-sample__space--6 {
+        .ss-foundation-sample__space--6 {
             width: calc(var(--spacing) * 6);
         }
 
-        .ap-foundation-sample__space--8 {
+        .ss-foundation-sample__space--8 {
             width: calc(var(--spacing) * 8);
         }
         ````
@@ -146,7 +146,7 @@ Drei gleich große Flächen zeigen den Unterschied zwischen eckigen Kanten und d
     </Tab>
     <Tab title="Code">
         ````mdx
-        import { FoundationSample } from 'astropilot/components';
+        import { FoundationSample } from 'sproutsite/components';
 
         <FoundationSample kind="radius" />
         ````
@@ -154,15 +154,15 @@ Drei gleich große Flächen zeigen den Unterschied zwischen eckigen Kanten und d
         Die Darstellung verwendet unter anderem diesen CSS-Ausschnitt:
 
         ````css
-        .ap-foundation-sample__shape--none {
+        .ss-foundation-sample__shape--none {
             border-radius: 0;
         }
 
-        .ap-foundation-sample__shape--field {
+        .ss-foundation-sample__shape--field {
             border-radius: var(--radius-field);
         }
 
-        .ap-foundation-sample__shape--box {
+        .ss-foundation-sample__shape--box {
             border-radius: var(--radius-box);
         }
         ````
@@ -180,7 +180,7 @@ Gleich große Flächen machen die Wirkung unterschiedlicher Schatten sichtbar. N
     </Tab>
     <Tab title="Code">
         ````mdx
-        import { FoundationSample } from 'astropilot/components';
+        import { FoundationSample } from 'sproutsite/components';
 
         <FoundationSample kind="shadow" />
         ````
@@ -188,19 +188,19 @@ Gleich große Flächen machen die Wirkung unterschiedlicher Schatten sichtbar. N
         Die Darstellung verwendet unter anderem diesen CSS-Ausschnitt:
 
         ````css
-        .ap-foundation-sample__elevation--none {
+        .ss-foundation-sample__elevation--none {
             box-shadow: none;
         }
 
-        .ap-foundation-sample__elevation--sm {
+        .ss-foundation-sample__elevation--sm {
             box-shadow: var(--shadow-sm);
         }
 
-        .ap-foundation-sample__elevation--soft {
+        .ss-foundation-sample__elevation--soft {
             box-shadow: var(--shadow-soft);
         }
 
-        .ap-foundation-sample__elevation--raised {
+        .ss-foundation-sample__elevation--raised {
             box-shadow: var(--shadow-raised);
         }
         ````
@@ -218,7 +218,7 @@ Wähle den Vorschau-Reiter und drücke zweimal die Tabulatortaste: zuerst zum Pa
     </Tab>
     <Tab title="Code">
         ````mdx
-        import { FoundationSample } from 'astropilot/components';
+        import { FoundationSample } from 'sproutsite/components';
 
         <FoundationSample kind="focus" />
         ````
@@ -226,7 +226,7 @@ Wähle den Vorschau-Reiter und drücke zweimal die Tabulatortaste: zuerst zum Pa
         Die Darstellung verwendet unter anderem diesen CSS-Ausschnitt:
 
         ````css
-        .ap-foundation-sample__focus {
+        .ss-foundation-sample__focus {
             &:focus-visible {
                 outline: 3px solid var(--color-primary);
                 outline-offset: 3px;

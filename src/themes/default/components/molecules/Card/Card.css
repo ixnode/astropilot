@@ -1,16 +1,16 @@
 @layer components {
-    .ap-card {
+    .ss-card {
         @apply my-5 flex flex-1 flex-col overflow-hidden;
 
-        .ap-card__figure {
+        .ss-card__figure {
             @apply overflow-hidden;
 
-            .ap-card__image {
+            .ss-card__image {
                 @apply h-56 w-full object-cover;
             }
         }
 
-        .ap-card__body {
+        .ss-card__body {
             @apply flex flex-1 flex-col;
 
             > h3:first-child {

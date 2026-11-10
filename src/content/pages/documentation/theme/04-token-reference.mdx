@@ -3,8 +3,8 @@ tone: default
 fullWidth: true
 ---
 
-import { Eyebrow } from 'astropilot/components';
-import { Tabs, Tab } from 'astropilot/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
 
 <Eyebrow>Referenz für Theme-Entwicklung</Eyebrow>
 
@@ -46,7 +46,7 @@ Quelle: styles/theme.css. Die Namen in der Tabelle erhalten den Präfix --color-
         ````css
         /* styles/theme.css: Farbausschnitt des vorhandenen Themes */
         @plugin "daisyui/theme" {
-            name: "astropilot";
+            name: "sproutsite";
             --color-base-100: #ffffff;
             --color-base-200: #f5f7fa;
             --color-base-300: #e2e8f0;
@@ -211,7 +211,7 @@ Radien werden in styles/theme.css festgelegt. Die zusätzlichen Schattenwerte st
         ````css
         /* styles/theme.css: Ausschnitt */
         @plugin "daisyui/theme" {
-            name: "astropilot";
+            name: "sproutsite";
             --radius-selector: 0.5rem;
             --radius-field: 0.5rem;
             --radius-box: 0.75rem;
@@ -262,9 +262,9 @@ Quellen: styles/foundation/focus.css und components/molecules/Tabs/Tabs.css. Der
         }
 
         /* components/molecules/Tabs/Tabs.css: Ausschnitt */
-        .ap-tabs {
-            .ap-tabs__list {
-                .ap-tabs__button {
+        .ss-tabs {
+            .ss-tabs__list {
+                .ss-tabs__button {
                     &:focus-visible {
                         outline: 3px solid var(--color-primary) !important;
                         outline-offset: -3px !important;

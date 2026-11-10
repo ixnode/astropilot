@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import type { AssembledPage } from '../../../../../lib/astropilot/pages.js';
-import type { SiteConfig } from '../../../../../lib/astropilot/types.js';
+import type { AssembledPage } from '../../../../../lib/sproutsite/pages.js';
+import type { SiteConfig } from '../../../../../lib/sproutsite/types.js';
 import PageLayout from '../../../layouts/PageLayout/PageLayout.astro';
 import Hero from '../Hero/Hero.astro';
 import Section from '../Section/Section.astro';
@@ -33,11 +33,11 @@ const dateFormatter = new Intl.DateTimeFormat(site.language, {
     description={post.entry.data.description}
     route={post.route}
 >
-    <div class="ap-blog-post">
+    <div class="ss-blog-post">
         <Hero hero={post.hero!} site={site} Content={HeroContent}>
             <time
                 slot="meta"
-                class="ap-hero__meta"
+                class="ss-hero__meta"
                 datetime={post.entry.data.pubDate.toISOString()}
             >
                 {dateFormatter.format(post.entry.data.pubDate)}

@@ -1,12 +1,12 @@
 /** Enhance readable static panels into independently keyboard-operable tabs. */
 export function initializeTabs(root: ParentNode = document): void {
-    for (const group of root.querySelectorAll<HTMLElement>('.ap-tabs')) {
+    for (const group of root.querySelectorAll<HTMLElement>('.ss-tabs')) {
         if (group.dataset.enhanced) continue;
         const list = group.querySelector<HTMLElement>(
-            ':scope > .ap-tabs__list',
+            ':scope > .ss-tabs__list',
         );
         const panels = Array.from(
-            group.querySelectorAll<HTMLElement>(':scope > .ap-tab'),
+            group.querySelectorAll<HTMLElement>(':scope > .ss-tab'),
         );
         if (!list || panels.length === 0) continue;
         const initial = Number(group.dataset.initial) - 1;
@@ -18,15 +18,15 @@ export function initializeTabs(root: ParentNode = document): void {
             throw new Error('Tabs initial exceeds the number of Tab panels.');
 
         let sequence = 1;
-        while (document.getElementById(`ap-tabs-${sequence}`)) sequence += 1;
-        group.id = `ap-tabs-${sequence}`;
+        while (document.getElementById(`ss-tabs-${sequence}`)) sequence += 1;
+        group.id = `ss-tabs-${sequence}`;
         list.setAttribute('role', 'tablist');
         list.setAttribute('aria-label', list.dataset.label ?? 'Tabs');
 
         const buttons = panels.map((panel, index) => {
             const button = document.createElement('button');
             button.type = 'button';
-            button.className = 'ap-tabs__button tab';
+            button.className = 'ss-tabs__button tab';
             button.id = `${group.id}-tab-${index + 1}`;
             button.textContent = panel.dataset.title ?? '';
             button.setAttribute('role', 'tab');
@@ -36,7 +36,7 @@ export function initializeTabs(root: ParentNode = document): void {
             panel.tabIndex = 0;
             button.setAttribute('aria-controls', panel.id);
             const label = panel.querySelector<HTMLElement>(
-                ':scope > .ap-tab__label',
+                ':scope > .ss-tab__label',
             );
             if (label) label.hidden = true;
             list.append(button);

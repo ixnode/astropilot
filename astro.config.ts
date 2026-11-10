@@ -1,4 +1,4 @@
 import { defineConfig } from 'astro/config';
-import { createAstroPilotConfig } from 'astropilot/config';
+import { createSproutsiteConfig } from 'sproutsite/config';
 
-export default defineConfig(createAstroPilotConfig());
+export default defineConfig(createSproutsiteConfig());

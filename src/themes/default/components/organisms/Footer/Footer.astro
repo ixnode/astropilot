@@ -1,30 +1,22 @@
 ---
-import logoUrl from '../../../assets/favicon.svg?url';
-import type { SiteConfig } from '../../../../../lib/astropilot/types.js';
+import type { SiteConfig } from '../../../../../lib/sproutsite/types.js';
 import {
     contentHref,
     isExternalWebLink,
-} from '../../../../../lib/astropilot/urls.js';
+} from '../../../../../lib/sproutsite/urls.js';
 interface Props {
     site: SiteConfig;
 }
 const { site } = Astro.props;
 ---
 
-<footer class="ap-footer">
-    <div class="ap-footer__inner site-shell">
-        <p class="ap-footer__text">
-            <img
-                class="ap-footer__logo"
-                src={logoUrl}
-                alt=""
-                width="24"
-                height="24"
-            />
+<footer class="ss-footer">
+    <div class="ss-footer__inner site-shell">
+        <p class="ss-footer__text">
             <span>{site.footer.text}</span>
         </p>
         <nav aria-label="Fußnavigation">
-            <ul class="ap-footer__links">
+            <ul class="ss-footer__links">
                 {site.footer.links.map((link) => {
                     const external = isExternalWebLink(link.href, site.url);
                     return (

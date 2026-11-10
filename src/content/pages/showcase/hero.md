@@ -1,5 +1,5 @@
 ---
-title: AstroPilot Showcase
+title: Sproutsite Showcase
 eyebrow: Bausteine im Einsatz
 tone: brand
 ---

@@ -3,10 +3,10 @@ import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
-import { validateAstroPilotContent } from '../src/lib/astropilot/validation.js';
+import { validateSproutsiteContent } from '../src/lib/sproutsite/validation.js';
 
 function validate(imports: string, component: string): void {
-    const directory = mkdtempSync(join(tmpdir(), 'astropilot-button-badge-'));
+    const directory = mkdtempSync(join(tmpdir(), 'sproutsite-button-badge-'));
     try {
         writeFileSync(
             join(directory, 'page.yaml'),
@@ -16,7 +16,7 @@ function validate(imports: string, component: string): void {
             join(directory, '01-components.mdx'),
             `${imports}\n\n## Components\n\n${component}\n`,
         );
-        validateAstroPilotContent(directory);
+        validateSproutsiteContent(directory);
     } finally {
         rmSync(directory, { recursive: true, force: true });
     }
@@ -25,7 +25,7 @@ function validate(imports: string, component: string): void {
 test('accepts documented Button variants, styles, sizes, links, and actions', () => {
     assert.doesNotThrow(() =>
         validate(
-            "import { Button } from 'astropilot/components';",
+            "import { Button } from 'sproutsite/components';",
             '<Button variant="success" style="soft" size="lg">Save</Button>\n\n<Button href="/contact/">Contact</Button>\n\n<Button type="submit" disabled>Send</Button>',
         ),
     );
@@ -43,7 +43,7 @@ test('rejects unsupported or conflicting Button props', () => {
         assert.throws(
             () =>
                 validate(
-                    "import { Button } from 'astropilot/components';",
+                    "import { Button } from 'sproutsite/components';",
                     component,
                 ),
             /Button accepts optional/,
@@ -53,7 +53,7 @@ test('rejects unsupported or conflicting Button props', () => {
 test('accepts documented Badge variants, styles, and sizes', () => {
     assert.doesNotThrow(() =>
         validate(
-            "import { Badge } from 'astropilot/components';",
+            "import { Badge } from 'sproutsite/components';",
             '<Badge variant="success" style="soft" size="lg">Ready</Badge>',
         ),
     );
@@ -69,7 +69,7 @@ test('rejects unsupported Badge props', () => {
         assert.throws(
             () =>
                 validate(
-                    "import { Badge } from 'astropilot/components';",
+                    "import { Badge } from 'sproutsite/components';",
                     component,
                 ),
             /Badge accepts optional/,

@@ -1,3 +1,3 @@
-export { createAstroPilotCollections } from './content.js';
-export { createAstroPilotConfig } from './config.js';
-export type { Link, SiteConfig, Tone } from '../lib/astropilot/types.js';
+export { createSproutsiteCollections } from './content.js';
+export { createSproutsiteConfig } from './config.js';
+export type { Link, SiteConfig, Tone } from '../lib/sproutsite/types.js';

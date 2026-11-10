@@ -3,10 +3,10 @@ import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
-import { validateAstroPilotContent } from '../src/lib/astropilot/validation.js';
+import { validateSproutsiteContent } from '../src/lib/sproutsite/validation.js';
 
 test('landing pages require one content H1 and reject a hero', () => {
-    const directory = mkdtempSync(join(tmpdir(), 'astropilot-landing-'));
+    const directory = mkdtempSync(join(tmpdir(), 'sproutsite-landing-'));
     try {
         writeFileSync(
             join(directory, 'page.yaml'),
@@ -14,21 +14,21 @@ test('landing pages require one content H1 and reject a hero', () => {
         );
         const section = join(directory, '01-welcome.md');
         writeFileSync(section, '# Welcome\n\n## Offer\n\nPersonal training.\n');
-        assert.doesNotThrow(() => validateAstroPilotContent(directory));
+        assert.doesNotThrow(() => validateSproutsiteContent(directory));
         writeFileSync(section, '## Offer\n');
         assert.throws(
-            () => validateAstroPilotContent(directory),
+            () => validateSproutsiteContent(directory),
             /exactly one visible h1/,
         );
         writeFileSync(section, '# Welcome\n\n# Duplicate\n');
         assert.throws(
-            () => validateAstroPilotContent(directory),
+            () => validateSproutsiteContent(directory),
             /exactly one visible h1/,
         );
         writeFileSync(section, '# Welcome\n');
         writeFileSync(join(directory, 'hero.md'), '---\ntitle: Hero\n---\n');
         assert.throws(
-            () => validateAstroPilotContent(directory),
+            () => validateSproutsiteContent(directory),
             /must not contain hero/,
         );
     } finally {

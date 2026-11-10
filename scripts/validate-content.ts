@@ -1,4 +1,4 @@
-import { validateAstroPilotContent } from '../src/lib/astropilot/validation.js';
+import { validateSproutsiteContent } from '../src/lib/sproutsite/validation.js';
 
-validateAstroPilotContent();
+validateSproutsiteContent();
 console.log('Content contract valid.');

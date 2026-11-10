@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { toneOf } from '../../../../../lib/astropilot/pages.js';
+import { toneOf } from '../../../../../lib/sproutsite/pages.js';
 
 interface Props {
     section: CollectionEntry<'documents' | 'blogDocuments'>;
@@ -16,12 +16,12 @@ const toneClass = {
 }[toneOf(section)];
 ---
 
-<section class:list={[toneClass, 'ap-section']}>
-    <div class="ap-section__inner site-shell">
+<section class:list={[toneClass, 'ss-section']}>
+    <div class="ss-section__inner site-shell">
         <div
             class:list={[
                 'content-prose',
-                !section.data.fullWidth && 'ap-section__content',
+                !section.data.fullWidth && 'ss-section__content',
             ]}
         >
             <Content />

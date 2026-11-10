@@ -1,9 +1,9 @@
-name: AstroPilot
-url: https://example.com
+name: Sproutsite
+url: https://sproutsite.dev
 base: /
 language: de
 hero-classes:
-    - ap-hero--theme-1
+    - ss-hero--theme-1
 header:
     links:
         - label: Startseite
@@ -21,7 +21,7 @@ header:
         - label: Kontakt
           href: /kontakt/
 footer:
-    text: Eine Beispielwebsite mit AstroPilot.
+    text: Sproutsite — The Agent-Ready Static CMS
     links:
         - label: Dokumentation
           href: /dokumentation/

@@ -1,5 +1,5 @@
 @layer components {
-    .ap-blog-post {
+    .ss-blog-post {
         @apply bg-base-100;
     }
 }

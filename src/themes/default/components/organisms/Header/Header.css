@@ -1,23 +1,19 @@
 @layer components {
-    .ap-header {
+    .ss-header {
         @apply absolute inset-x-0 top-0 z-40 border-b border-transparent bg-transparent text-primary-content transition-[background-color,border-color,box-shadow,backdrop-filter] duration-200;
 
-        .ap-header__inner {
+        .ss-header__inner {
             @apply flex flex-wrap items-center justify-between gap-x-8 gap-y-3 py-[2.1875rem] transition-[padding] duration-200;
 
-            .ap-header__brand {
+            .ss-header__brand {
                 @apply inline-flex items-center gap-3 text-lg font-bold text-primary-content no-underline hover:no-underline;
-
-                .ap-header__logo {
-                    @apply size-8 shrink-0;
-                }
             }
 
-            .ap-header__links {
+            .ss-header__links {
                 @apply flex flex-wrap items-center gap-x-2 gap-y-1;
             }
 
-            .ap-header__link {
+            .ss-header__link {
                 @apply relative !text-lg !text-primary-content no-underline hover:no-underline;
 
                 &:hover {
@@ -46,18 +42,18 @@
             }
         }
 
-        &.ap-header--scrolled {
+        &.ss-header--scrolled {
             @apply fixed border-base-300 bg-base-100/40 text-base-content shadow-sm backdrop-blur-md;
 
-            .ap-header__inner {
+            .ss-header__inner {
                 @apply py-5;
 
-                .ap-header__brand,
-                .ap-header__link {
+                .ss-header__brand,
+                .ss-header__link {
                     @apply !text-base-content;
                 }
 
-                .ap-header__link {
+                .ss-header__link {
                     &:not([aria-current='page']):hover {
                         --btn-bg: color-mix(
                             in oklab,
@@ -71,8 +67,8 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-        .ap-header,
-        .ap-header .ap-header__inner {
+        .ss-header,
+        .ss-header .ss-header__inner {
             @apply transition-none;
         }
     }

@@ -29,13 +29,13 @@ const styleClasses: Record<AlertStyle, string> = {
 <div
     role="alert"
     class:list={[
-        'ap-alert',
+        'ss-alert',
         'alert',
         variantClasses[variant],
         styleClasses[style],
     ]}
 >
-    <div class="ap-alert__content">
+    <div class="ss-alert__content">
         {/* @slot Alert message content. */}
         <slot />
     </div>

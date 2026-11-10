@@ -24,13 +24,13 @@ const shadowClasses: Record<CardShadow, string> = {
 };
 if (Boolean(image) !== Boolean(imageAlt))
     throw new Error(
-        'AstroPilot Card requires image and imageAlt together, or neither prop.',
+        'Sproutsite Card requires image and imageAlt together, or neither prop.',
     );
 ---
 
 <article
     class:list={[
-        'ap-card',
+        'ss-card',
         'card',
         'bg-base-100',
         shadowClasses[shadow],
@@ -38,7 +38,7 @@ if (Boolean(image) !== Boolean(imageAlt))
     ]}
 >
     {image && (
-        <figure class="ap-card__figure">
+        <figure class="ss-card__figure">
             <Image
                 src={image}
                 alt={imageAlt!}
@@ -46,11 +46,11 @@ if (Boolean(image) !== Boolean(imageAlt))
                 quality={80}
                 loading="lazy"
                 decoding="async"
-                class="ap-card__image"
+                class="ss-card__image"
             />
         </figure>
     )}
-    <div class="ap-card__body card-body">
+    <div class="ss-card__body card-body">
         {/* @slot Markdown-compatible card body content. */}
         <slot />
     </div>

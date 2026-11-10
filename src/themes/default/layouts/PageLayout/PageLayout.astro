@@ -1,10 +1,9 @@
 ---
 import '../../styles/theme.css';
-import faviconUrl from '../../assets/favicon.svg?url';
 import Header from '../../components/organisms/Header/Header.astro';
 import Footer from '../../components/organisms/Footer/Footer.astro';
-import type { SiteConfig } from '../../../../lib/astropilot/types.js';
-import { canonicalUrl } from '../../../../lib/astropilot/urls.js';
+import type { SiteConfig } from '../../../../lib/sproutsite/types.js';
+import { canonicalUrl } from '../../../../lib/sproutsite/urls.js';
 interface Props {
     site: SiteConfig;
     title: string;
@@ -14,20 +13,28 @@ interface Props {
 }
 const { site, title, description, route, layout = 'default' } = Astro.props;
 const documentTitle = `${title} | ${site.name}`;
+const canonical = canonicalUrl(route, site);
 ---
 
 <!doctype html>
-<html lang={site.language} data-theme="astropilot">
+<html lang={site.language} data-theme="sproutsite">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" type="image/svg+xml" sizes="any" href={faviconUrl} />
         <title>{documentTitle}</title>
         <meta name="description" content={description} />
-        <link rel="canonical" href={canonicalUrl(route, site)} />
+        <link rel="canonical" href={canonical} />
+        <meta property="og:title" content={documentTitle} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={canonical} />
+        <meta property="og:site_name" content={site.name} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={documentTitle} />
+        <meta name="twitter:description" content={description} />
     </head>
-    <body class:list={{ 'ap-page--landing': layout === 'landing' }}>
-        <a class="ap-skip-link" href="#main-content">
+    <body class:list={{ 'ss-page--landing': layout === 'landing' }}>
+        <a class="ss-skip-link" href="#main-content">
             Zum Inhalt springen
         </a>
         {layout !== 'landing' && <Header site={site} route={route} />}

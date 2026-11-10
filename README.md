@@ -1,17 +1,25 @@
-# AstroPilot
+# Sproutsite
 
-[![GitHub Release](https://img.shields.io/github/v/release/ixnode/astropilot?display_name=tag&sort=semver)](https://github.com/ixnode/astropilot/releases)
+[![GitHub Release](https://img.shields.io/github/v/release/sproutsite/sproutsite?display_name=tag&sort=semver)](https://github.com/sproutsite/sproutsite/releases)
 
-AstroPilot is currently a locally developed, file-based content framework built on Astro. This repository is a working demo website, **not a published npm package** and not a statement about package-name availability.
+**Sproutsite — The Agent-Ready Static CMS**
+
+Agent-ready, Markdown-first Static CMS powered by Astro and TypeScript.
+
+Sproutsite is an npm-based developer tool for file-based content, page structures, and reusable components. External coding agents such as Codex or Claude Code can edit the repository; **Sproutsite itself contains no AI agent**. There is no traditional CMS administration backend. Astro generates a static website that needs no CMS server runtime, while Git keeps content changes reviewable.
+
+_Plant an idea. Grow your website._
+
+This repository is a working demo and local package development state. The package remains private and has not been published; registry availability is not implied. Official website: [sproutsite.dev](https://sproutsite.dev). Repository: [sproutsite/sproutsite](https://github.com/sproutsite/sproutsite).
 
 ## Preparing Local Package Use
 
-AstroPilot provides a small public package surface:
+Sproutsite provides a small public package surface:
 
-- `astropilot/content` with `createAstroPilotCollections()`
-- `astropilot/config` with `createAstroPilotConfig()`
-- `astropilot/page` with the shared route and `getAstroPilotStaticPaths()`
-- `astropilot/components` with documented MDX layout components
+- `sproutsite/content` with `createSproutsiteCollections()`
+- `sproutsite/config` with `createSproutsiteConfig()`
+- `sproutsite/page` with the shared route and `getSproutsiteStaticPaths()`
+- `sproutsite/components` with documented MDX layout components
 
 The demo itself already uses these imports. A future local consumer uses a tarball created with `npm pack` and installs it there. The package remains `private` and is not published to the npm registry until an explicit publishing request is made.
 
@@ -19,39 +27,38 @@ A consumer project needs its own content plus these three small integrations:
 
 ```ts
 // src/content.config.ts
-import { createAstroPilotCollections } from 'astropilot/content';
+import { createSproutsiteCollections } from 'sproutsite/content';
 
-export const collections = createAstroPilotCollections();
+export const collections = createSproutsiteCollections();
 ```
 
 ```ts
 // astro.config.ts
 import { defineConfig } from 'astro/config';
-import { createAstroPilotConfig } from 'astropilot/config';
+import { createSproutsiteConfig } from 'sproutsite/config';
 
-export default defineConfig(createAstroPilotConfig());
+export default defineConfig(createSproutsiteConfig());
 ```
 
 ```astro
 ---
 // src/pages/[...slug].astro
-import AstroPilotPage, { getAstroPilotStaticPaths } from 'astropilot/page';
+import SproutsitePage, { getSproutsiteStaticPaths } from 'sproutsite/page';
 
-export const getStaticPaths = getAstroPilotStaticPaths;
-const { page } = Astro.props;
+export const getStaticPaths = getSproutsiteStaticPaths;
 ---
 
-<AstroPilotPage page={page} />
+<SproutsitePage {...Astro.props} />
 ```
 
 Content files belong exclusively to the consumer project. Test the installable state without publishing to a registry:
 
 ```sh
-# in the AstroPilot repository
+# in the Sproutsite repository
 npm pack
 
 # in the separate Astro consumer project
-npm install /absolute/path/to/astropilot-0.1.0.tgz
+npm install /absolute/path/to/sproutsite-0.3.0.tgz
 npm run check
 npm run build
 ```
@@ -87,9 +94,11 @@ npm run storybook   # isolated Astro component workshop on port 6006
 npm run build:storybook # static Storybook output to storybook-static/
 ```
 
-Storybook is a local developer tool and not part of the published website. It renders the existing `.astro` components with the default AstroPilot theme. Stories live in `stories/`, use TypeScript, and directly import their corresponding component. The initial set covers `Button`, `Badge`, `Alert`, `Card`, and `ContentImage`; add a story whenever a reusable component or meaningful variant is introduced. The running demo documents the workflow at `/dokumentation/storybook/`.
+Storybook is a local developer tool and not part of the published website. It renders the existing `.astro` components with the default Sproutsite theme. Stories live in `stories/`, use TypeScript, and directly import their corresponding component. The initial set covers `Button`, `Badge`, `Alert`, `Card`, and `ContentImage`; add a story whenever a reusable component or meaningful variant is introduced. The running demo documents the workflow at `/dokumentation/storybook/`.
 
-`npm run build:demo` sets `ASTROPILOT_BASE=/demo/` only for that command; `src/content/site.yaml` remains unchanged. Before a real release, replace the `https://example.com` placeholder with the production URL and check indexability as well as any staging protection. `robots.txt` is not access control.
+`npm run build:demo` sets `SPROUTSITE_BASE=/demo/` only for that command; `src/content/site.yaml` remains unchanged. The product website uses `https://sproutsite.dev`; consumer projects must configure their own production URL. Before deployment, check indexability and any staging protection. `robots.txt` is not access control.
+
+The product identity is consistently Sproutsite: package imports use `sproutsite/*`, public helpers use `createSproutsiteCollections()`, `createSproutsiteConfig()` and `getSproutsiteStaticPaths()`, and theme classes use the `ss-` prefix. Update local consumers' dependency, imports, environment variables and custom theme overrides together. Header and footer currently use a typographic wordmark; the previous icon and favicon have been removed pending a new visual identity.
 
 ## Maintaining Content
 
@@ -109,14 +118,14 @@ pages/
 
 `page.yaml` requires a non-empty `title` and `description`. Both values are used for HTML metadata: `title` becomes the `<title>` tag and `description` becomes the meta description. Without `url`, its directory becomes the URL directly: `faq/page.yaml` becomes `/faq/`; a deeper `services/monitoring/page.yaml` becomes `/services/monitoring/`. The optional single URL segment `url` lets an English source path retain a localized public URL: `documentation/page.yaml` with `url: dokumentation` produces `/dokumentation/`. URL segments of parent pages are also considered for child pages.
 
-A `hero.md` activates the shared hero and requires a frontmatter `title`, rendered as the visible `h1`. `hero-classes` in `site.yaml` may optionally set up to eight theme classes for each hero and for the H1 fallback view without `hero.md`. A `classes` list in an individual `hero.md` completely overrides that global list; `classes: null` removes global classes for that hero. Classes must begin with `ap-`, for example `ap-hero--visual`, so a theme can add gradients, overlays, or textures. `background-image` optionally references a local image relative to `hero.md`; Astro validates it and emits an optimized decorative hero image. If both settings are omitted, the hero receives no additional theme class or image. Delete the file to render `page.yaml.title` as a compact visible H1 fallback above the sections; it still receives global `hero-classes`. Sections must be named `NN-name.md`, begin with an `h2`, and may set `tone: default`, `muted`, or `brand` in frontmatter. By default, `ap-section__content` constrains content to a readable width. `fullWidth: true` in section frontmatter removes this inner constraint; the shared outer `site-shell` and Markdown typography remain active. Internal links always stay website-root-relative, for example `/faq/`; AstroPilot applies `base` exactly once. Heading IDs are derived from file names and headings, for example `01-introduction-inhalte-direkt-im-projekt-pflegen`, so anchor links remain unique across assembled Markdown files.
+A `hero.md` activates the shared hero and requires a frontmatter `title`, rendered as the visible `h1`. `hero-classes` in `site.yaml` may optionally set up to eight theme classes for each hero and for the H1 fallback view without `hero.md`. A `classes` list in an individual `hero.md` completely overrides that global list; `classes: null` removes global classes for that hero. Classes must begin with `ss-`, for example `ss-hero--visual`, so a theme can add gradients, overlays, or textures. `background-image` optionally references a local image relative to `hero.md`; Astro validates it and emits an optimized decorative hero image. If both settings are omitted, the hero receives no additional theme class or image. Delete the file to render `page.yaml.title` as a compact visible H1 fallback above the sections; it still receives global `hero-classes`. Sections must be named `NN-name.md`, begin with an `h2`, and may set `tone: default`, `muted`, or `brand` in frontmatter. By default, `ss-section__content` constrains content to a readable width. `fullWidth: true` in section frontmatter removes this inner constraint; the shared outer `site-shell` and Markdown typography remain active. Internal links always stay website-root-relative, for example `/faq/`; Sproutsite applies `base` exactly once. Heading IDs are derived from file names and headings, for example `01-introduction-inhalte-direkt-im-projekt-pflegen`, so anchor links remain unique across assembled Markdown files.
 
 ```md
 ---
 title: Beispiel-Hero
 tone: brand
 classes:
-    - ap-hero--visual
+    - ss-hero--visual
 background-image: ./_assets/hero-visual.png
 ---
 ```
@@ -130,7 +139,7 @@ classes: null
 ---
 ```
 
-For tested layout building blocks, AstroPilot also supports MDX sections with the `.mdx` extension. Install this direct peer dependency in the consumer project:
+For tested layout building blocks, Sproutsite also supports MDX sections with the `.mdx` extension. Install this direct peer dependency in the consumer project:
 
 ```bash
 npm install @astrojs/mdx
@@ -139,7 +148,7 @@ npm install @astrojs/mdx
 The first standard building block is a responsive 12-column layout:
 
 ```mdx
-import { Column, Columns } from 'astropilot/components';
+import { Column, Columns } from 'sproutsite/components';
 
 <Columns>
     <Column span={8}>
@@ -166,7 +175,7 @@ Common balanced distributions are `12` (one column), `6 + 6` (two columns), `4 +
 The first DaisyUI component is `Alert`. Import it in an MDX section; it accepts optional `variant="info|success|warning|error"` and `style="normal|soft|outline|dash"` props:
 
 ```mdx
-import { Alert } from 'astropilot/components';
+import { Alert } from 'sproutsite/components';
 
 <Alert variant="success" style="soft">
     **Gespeichert:** Die Änderungen wurden übernommen.
@@ -177,7 +186,7 @@ Local content images belong beside their page or in a shared local `_assets/` di
 
 ```mdx
 import layoutImage from '../_assets/layout.png';
-import { ContentImage } from 'astropilot/components';
+import { ContentImage } from 'sproutsite/components';
 
 <ContentImage
     src={layoutImage}
@@ -194,7 +203,7 @@ import { ContentImage } from 'astropilot/components';
 
 ```mdx
 import cardImage from './images/card.png';
-import { Card, CardActions } from 'astropilot/components';
+import { Card, CardActions } from 'sproutsite/components';
 
 <Card image={cardImage} imageAlt="Description of the image content" shadow="md">
     ### Card title
@@ -211,7 +220,7 @@ import { Card, CardActions } from 'astropilot/components';
 `Button` renders a semantic link when `href` is provided and a real button otherwise. It accepts `variant="primary|secondary|accent|neutral|info|success|warning|error"`, `style="solid|outline|soft|ghost|link"`, `size="xs|sm|md|lg|xl"`, `type="button|submit|reset"`, and the Boolean `disabled` for button actions. Links deliberately cannot be disabled.
 
 ```mdx
-import { Button } from 'astropilot/components';
+import { Button } from 'sproutsite/components';
 
 <Button href="/contact/">Contact</Button>
 <Button variant="secondary" style="outline">
@@ -222,7 +231,7 @@ import { Button } from 'astropilot/components';
 `Badge` labels compact status values or categories. It accepts `variant="default|primary|secondary|accent|neutral|info|success|warning|error"`, `style="solid|outline|soft|dash"`, and `size="xs|sm|md|lg|xl"`.
 
 ```mdx
-import { Badge } from 'astropilot/components';
+import { Badge } from 'sproutsite/components';
 
 Build status: <Badge variant="success" style="soft">ready</Badge>
 ```
@@ -230,7 +239,7 @@ Build status: <Badge variant="success" style="soft">ready</Badge>
 `Tabs` and `Tab` display Markdown panels with DaisyUI styling. `Tabs` requires a non-empty accessible `label` and one or more direct `Tab` children, each with a non-empty `title`. Optional `variant` supports `border` (default), `box`, and `lift`; `initial` is a one-based index (default `1`) and must refer to an existing panel.
 
 ```mdx
-import { Tabs, Tab } from 'astropilot/components';
+import { Tabs, Tab } from 'sproutsite/components';
 
 <Tabs label="Product information" variant="border" initial={1}>
     <Tab title="Overview">
@@ -258,7 +267,7 @@ External HTTP(S) links automatically receive `target="_blank"` and `rel="noopene
 `ContentTable` wraps exactly one Markdown table in an MDX section. Its required `caption` becomes a native table caption. Optional props are `variant="plain|striped"`, `density="comfortable|compact"`, a boolean `wide` flag, and a one-based `highlight={2}` body-row index. Keep blank lines between the component tags and Markdown table. Column alignment uses standard Markdown colons. `wide` preserves a minimum table width of 60rem inside a keyboard-focusable horizontal scroll region.
 
 ```mdx
-import { ContentTable } from 'astropilot/components';
+import { ContentTable } from 'sproutsite/components';
 
 <ContentTable caption="Example projects" variant="striped">
 
@@ -270,13 +279,13 @@ import { ContentTable } from 'astropilot/components';
 </ContentTable>
 ```
 
-This MDX component requires the AstroPilot configuration: a small rehype transform adds the caption, column-header scopes, and optional row marker to Astro's existing table AST. Validation uses `remark-gfm` to inspect the same Markdown table structure. No custom table parser or browser JavaScript is needed. Plain Markdown tables remain supported; `/showcase/tabellen/` demonstrates the enhanced component.
+This MDX component requires the Sproutsite configuration: a small rehype transform adds the caption, column-header scopes, and optional row marker to Astro's existing table AST. Validation uses `remark-gfm` to inspect the same Markdown table structure. No custom table parser or browser JavaScript is needed. Plain Markdown tables remain supported; `/showcase/tabellen/` demonstrates the enhanced component.
 
-`FoundationSample` is a fixed visual theme specimen exported from `astropilot/components`. Its required `kind` prop accepts `colors`, `type`, `spacing`, `radius`, `shadow`, or `focus`; it accepts no other props or children. For example, `<FoundationSample kind="colors" />` displays labeled swatches using the actual theme variables. It illustrates the theme rather than providing a general layout language. `/showcase/foundations/` contains live specimens and usage/CSS examples; the detailed token reference lives on `/dokumentation/theme/`.
+`FoundationSample` is a fixed visual theme specimen exported from `sproutsite/components`. Its required `kind` prop accepts `colors`, `type`, `spacing`, `radius`, `shadow`, or `focus`; it accepts no other props or children. For example, `<FoundationSample kind="colors" />` displays labeled swatches using the actual theme variables. It illustrates the theme rather than providing a general layout language. `/showcase/foundations/` contains live specimens and usage/CSS examples; the detailed token reference lives on `/dokumentation/theme/`.
 
-The small reusable content and URL logic lives in `src/lib/astropilot/`. It knows neither demo text nor Tailwind or DaisyUI classes. The default theme lives in `src/themes/default/` and includes the layout, header, hero, sections, and footer. DaisyUI is actively used there for navigation and theme elements.
+The small reusable content and URL logic lives in `src/lib/sproutsite/`. It knows neither demo text nor Tailwind or DaisyUI classes. The default theme lives in `src/themes/default/` and includes the layout, header, hero, sections, and footer. DaisyUI is actively used there for navigation and theme elements.
 
-The entry point for the default theme is `src/themes/default/styles/theme.css`. It documents the import order and remains the only central import. Global foundations live in `styles/foundation/`, semantic content variants in `styles/themes/`. Components follow Atomic Design: `atoms/`, `molecules/`, `organisms/`, and `layout/` for technical layout primitives. Every visible building block is organized locally as a pair, for example `components/organisms/Header/Header.astro` and `components/organisms/Header/Header.css`; `layouts/PageLayout/` follows the same pattern. Theme-owned classes begin with `ap-`, for example `ap-header` and `ap-header__inner`. The default theme is named `astropilot`, intentionally light, and centrally defines semantic DaisyUI tokens, font sizes, spacing, radii, and shadows in its theme and foundation files.
+The entry point for the default theme is `src/themes/default/styles/theme.css`. It documents the import order and remains the only central import. Global foundations live in `styles/foundation/`, semantic content variants in `styles/themes/`. Components follow Atomic Design: `atoms/`, `molecules/`, `organisms/`, and `layout/` for technical layout primitives. Every visible building block is organized locally as a pair, for example `components/organisms/Header/Header.astro` and `components/organisms/Header/Header.css`; `layouts/PageLayout/` follows the same pattern. Theme-owned classes begin with `ss-`, for example `ss-header` and `ss-header__inner`. The default theme is named `sproutsite`, intentionally light, and centrally defines semantic DaisyUI tokens, font sizes, spacing, radii, and shadows in its theme and foundation files.
 
 Another theme can replace these components and the technical CSS integration without migrating Markdown or YAML. This is not yet a configurable theme loader and deliberately does not claim every UI library can be switched through a setting.
 

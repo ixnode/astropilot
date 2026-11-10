@@ -1,15 +1,15 @@
 @layer components {
-    .ap-foundation-sample {
+    .ss-foundation-sample {
         @apply min-w-0 text-base-content;
 
-        .ap-foundation-sample__palette,
-        .ap-foundation-sample__spaces,
-        .ap-foundation-sample__tiles {
+        .ss-foundation-sample__palette,
+        .ss-foundation-sample__spaces,
+        .ss-foundation-sample__tiles {
             @apply m-0 list-none p-0;
         }
 
-        .ap-foundation-sample__color,
-        .ap-foundation-sample__tile {
+        .ss-foundation-sample__color,
+        .ss-foundation-sample__tile {
             @apply m-0 flex min-w-0 flex-col gap-2 p-0 text-sm;
 
             code {
@@ -18,81 +18,81 @@
             }
         }
 
-        .ap-foundation-sample__label {
+        .ss-foundation-sample__label {
             @apply m-0 text-sm font-semibold;
         }
     }
 
-    .ap-foundation-sample--colors {
-        .ap-foundation-sample__palette {
+    .ss-foundation-sample--colors {
+        .ss-foundation-sample__palette {
             @apply grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4;
         }
 
-        .ap-foundation-sample__swatch {
+        .ss-foundation-sample__swatch {
             @apply h-20 rounded-box border border-base-300;
 
-            &.ap-foundation-sample__swatch--base-100 {
+            &.ss-foundation-sample__swatch--base-100 {
                 background-color: var(--color-base-100);
             }
-            &.ap-foundation-sample__swatch--base-200 {
+            &.ss-foundation-sample__swatch--base-200 {
                 background-color: var(--color-base-200);
             }
-            &.ap-foundation-sample__swatch--base-300 {
+            &.ss-foundation-sample__swatch--base-300 {
                 background-color: var(--color-base-300);
             }
-            &.ap-foundation-sample__swatch--base-content {
+            &.ss-foundation-sample__swatch--base-content {
                 background-color: var(--color-base-content);
             }
-            &.ap-foundation-sample__swatch--primary {
+            &.ss-foundation-sample__swatch--primary {
                 background-color: var(--color-primary);
             }
-            &.ap-foundation-sample__swatch--secondary {
+            &.ss-foundation-sample__swatch--secondary {
                 background-color: var(--color-secondary);
             }
-            &.ap-foundation-sample__swatch--accent {
+            &.ss-foundation-sample__swatch--accent {
                 background-color: var(--color-accent);
             }
-            &.ap-foundation-sample__swatch--neutral {
+            &.ss-foundation-sample__swatch--neutral {
                 background-color: var(--color-neutral);
             }
-            &.ap-foundation-sample__swatch--info {
+            &.ss-foundation-sample__swatch--info {
                 background-color: var(--color-info);
             }
-            &.ap-foundation-sample__swatch--success {
+            &.ss-foundation-sample__swatch--success {
                 background-color: var(--color-success);
             }
-            &.ap-foundation-sample__swatch--warning {
+            &.ss-foundation-sample__swatch--warning {
                 background-color: var(--color-warning);
             }
-            &.ap-foundation-sample__swatch--error {
+            &.ss-foundation-sample__swatch--error {
                 background-color: var(--color-error);
             }
         }
     }
 
-    .ap-foundation-sample--type {
-        .ap-foundation-sample__type {
+    .ss-foundation-sample--type {
+        .ss-foundation-sample__type {
             @apply grid gap-3;
 
-            .ap-foundation-sample__display,
-            .ap-foundation-sample__heading {
+            .ss-foundation-sample__display,
+            .ss-foundation-sample__heading {
                 @apply m-0 mb-4;
                 font-family: var(--font-heading);
                 line-height: 1.2;
                 overflow-wrap: anywhere;
             }
 
-            .ap-foundation-sample__display {
+            .ss-foundation-sample__display {
                 font-size: var(--text-display);
                 font-weight: 700;
             }
 
-            .ap-foundation-sample__heading {
+            .ss-foundation-sample__heading {
                 font-size: var(--text-heading-2);
                 font-weight: 500;
             }
 
-            .ap-foundation-sample__body {
+            .ss-foundation-sample__body {
                 @apply m-0;
                 font-family: var(--font-sans);
                 line-height: 1.75;
@@ -100,95 +100,95 @@
         }
     }
 
-    .ap-foundation-sample--spacing {
-        .ap-foundation-sample__spaces {
+    .ss-foundation-sample--spacing {
+        .ss-foundation-sample__spaces {
             @apply grid gap-4;
         }
 
-        .ap-foundation-sample__space-row {
+        .ss-foundation-sample__space-row {
             @apply m-0 grid grid-cols-[6rem_1fr] items-center gap-4 text-sm;
 
-            .ap-foundation-sample__track {
+            .ss-foundation-sample__track {
                 @apply rounded-field bg-base-200;
             }
 
-            .ap-foundation-sample__space {
+            .ss-foundation-sample__space {
                 @apply block h-6 bg-primary;
 
-                &.ap-foundation-sample__space--1 {
+                &.ss-foundation-sample__space--1 {
                     width: calc(var(--spacing) * 1);
                 }
-                &.ap-foundation-sample__space--2 {
+                &.ss-foundation-sample__space--2 {
                     width: calc(var(--spacing) * 2);
                 }
-                &.ap-foundation-sample__space--4 {
+                &.ss-foundation-sample__space--4 {
                     width: calc(var(--spacing) * 4);
                 }
-                &.ap-foundation-sample__space--6 {
+                &.ss-foundation-sample__space--6 {
                     width: calc(var(--spacing) * 6);
                 }
-                &.ap-foundation-sample__space--8 {
+                &.ss-foundation-sample__space--8 {
                     width: calc(var(--spacing) * 8);
                 }
             }
         }
     }
 
-    .ap-foundation-sample--radius,
-    .ap-foundation-sample--shadow {
-        .ap-foundation-sample__tiles {
+    .ss-foundation-sample--radius,
+    .ss-foundation-sample--shadow {
+        .ss-foundation-sample__tiles {
             @apply grid grid-cols-1 gap-8 p-3 sm:grid-cols-3;
         }
     }
 
-    .ap-foundation-sample--radius {
-        .ap-foundation-sample__shape {
+    .ss-foundation-sample--radius {
+        .ss-foundation-sample__shape {
             @apply h-24 border-2 border-primary bg-base-200;
 
-            &.ap-foundation-sample__shape--none {
+            &.ss-foundation-sample__shape--none {
                 border-radius: 0;
             }
-            &.ap-foundation-sample__shape--field {
+            &.ss-foundation-sample__shape--field {
                 border-radius: var(--radius-field);
             }
-            &.ap-foundation-sample__shape--box {
+            &.ss-foundation-sample__shape--box {
                 border-radius: var(--radius-box);
             }
         }
     }
 
-    .ap-foundation-sample--shadow {
-        .ap-foundation-sample__tiles {
+    .ss-foundation-sample--shadow {
+        .ss-foundation-sample__tiles {
             @apply sm:grid-cols-2 lg:grid-cols-4;
         }
 
-        .ap-foundation-sample__elevation {
+        .ss-foundation-sample__elevation {
             @apply h-24 rounded-box border border-base-300 bg-base-100;
 
-            &.ap-foundation-sample__elevation--none {
+            &.ss-foundation-sample__elevation--none {
                 box-shadow: none;
             }
-            &.ap-foundation-sample__elevation--sm {
+            &.ss-foundation-sample__elevation--sm {
                 box-shadow: var(--shadow-sm);
             }
-            &.ap-foundation-sample__elevation--soft {
+            &.ss-foundation-sample__elevation--soft {
                 box-shadow: var(--shadow-soft);
             }
-            &.ap-foundation-sample__elevation--raised {
+            &.ss-foundation-sample__elevation--raised {
                 box-shadow: var(--shadow-raised);
             }
         }
     }
 
-    .ap-foundation-sample--focus {
-        .ap-foundation-sample__focus-area {
+    .ss-foundation-sample--focus {
+        .ss-foundation-sample__focus-area {
             @apply p-2;
 
             p {
                 @apply m-0 mb-5;
             }
 
-            .ap-foundation-sample__focus {
+            .ss-foundation-sample__focus {
                 @apply inline-flex min-h-11 items-center rounded-field border border-base-300 bg-base-100 px-4 py-3 text-base-content;
 
                 &:focus-visible {

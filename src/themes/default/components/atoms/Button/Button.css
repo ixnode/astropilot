@@ -1,5 +1,5 @@
 @layer components {
-    .ap-button {
+    .ss-button {
         @apply m-1 font-semibold;
     }
 }

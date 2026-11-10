@@ -1,3 +1,3 @@
-import { createAstroPilotCollections } from 'astropilot/content';
+import { createSproutsiteCollections } from 'sproutsite/content';
 
-export const collections = createAstroPilotCollections();
+export const collections = createSproutsiteCollections();

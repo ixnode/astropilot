@@ -1,5 +1,5 @@
 @layer components {
-    .ap-content-table {
+    .ss-content-table {
         @apply my-5 max-w-full overflow-x-auto rounded-box border border-base-300 bg-base-100 text-base-content;
         overscroll-behavior-inline: contain;
 
@@ -38,19 +38,19 @@
             }
         }
 
-        &.ap-content-table--striped {
+        &.ss-content-table--striped {
             table {
                 @apply table-zebra;
             }
         }
 
-        &.ap-content-table--compact {
+        &.ss-content-table--compact {
             table {
                 @apply table-sm;
             }
         }
 
-        &.ap-content-table--wide {
+        &.ss-content-table--wide {
             table {
                 min-width: 60rem;
             }

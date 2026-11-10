@@ -3,11 +3,11 @@ import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
-import { validateAstroPilotContent } from '../src/lib/astropilot/validation.js';
+import { validateSproutsiteContent } from '../src/lib/sproutsite/validation.js';
 
 test('accepts documented FoundationSample kinds and rejects arbitrary props or children', () => {
     const directory = mkdtempSync(
-        join(tmpdir(), 'astropilot-foundation-sample-'),
+        join(tmpdir(), 'sproutsite-foundation-sample-'),
     );
     try {
         writeFileSync(
@@ -18,9 +18,9 @@ test('accepts documented FoundationSample kinds and rejects arbitrary props or c
         const validate = (component: string) => {
             writeFileSync(
                 section,
-                `import { FoundationSample } from 'astropilot/components';\n\n## Samples\n\n${component}\n`,
+                `import { FoundationSample } from 'sproutsite/components';\n\n## Samples\n\n${component}\n`,
             );
-            validateAstroPilotContent(directory);
+            validateSproutsiteContent(directory);
         };
         for (const kind of [
             'colors',

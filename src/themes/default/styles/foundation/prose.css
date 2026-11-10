@@ -36,13 +36,13 @@
             @apply mt-0;
         }
 
-        > .ap-eyebrow + :is(h1, h2, h3, h4, h5, h6) {
+        > .ss-eyebrow + :is(h1, h2, h3, h4, h5, h6) {
             @apply mt-0;
         }
     }
 
-    .ap-section > .site-shell > .content-prose,
-    .ap-hero > .site-shell > .content-prose {
+    .ss-section > .site-shell > .content-prose,
+    .ss-hero > .site-shell > .content-prose {
         > :first-child {
             @apply mt-0;
         }

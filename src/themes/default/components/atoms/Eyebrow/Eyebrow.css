@@ -1,5 +1,5 @@
 @layer components {
-    .ap-eyebrow {
+    .ss-eyebrow {
         @apply mb-1.5 text-sm font-bold tracking-wider uppercase;
         font-family: var(--font-heading);
     }

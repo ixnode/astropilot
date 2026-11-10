@@ -1,10 +1,10 @@
-# AstroPilot – Rules for Coding Agents
+# Sproutsite – Rules for Coding Agents
 
 ## Goal and Current Development Status
 
-AstroPilot is a lean, file-based content framework built on Astro. Developers provide layouts and tested building blocks; authors and agents maintain content in Markdown and YAML. Its output consists of static websites and landing pages without a CMS backend.
+Sproutsite — The Agent-Ready Static CMS. It is an agent-ready, Markdown-first Static CMS powered by Astro and TypeScript. Developers provide layouts and tested building blocks; authors and external coding agents such as Codex or Claude Code maintain versioned content, components and page structures in the repository. Sproutsite itself contains no AI agent and no traditional CMS administration backend. Astro generates static websites requiring no CMS server runtime.
 
-The long-term goal is installation as an npm package named `astropilot` with a usable base layout. A project generator and optional extensions may follow later. The package name is a working name; availability has not been verified. During this initial phase, development happens directly in this repository. Do NOT install a potentially unrelated `astropilot` package from the registry.
+The product name is exclusively `Sproutsite`, its technical name is `sproutsite`, its official website is `https://sproutsite.dev`, and its repository is `https://github.com/sproutsite/sproutsite`. Use `sproutsite` for the package and `@sproutsite/` only for actual standalone packages when appropriate and available. Do not invent additional packages. Development happens directly in this repository; the local package remains private. Do NOT install a potentially unrelated `sproutsite` package from the registry or imply that npm publication has already happened.
 
 After installing its development dependencies, this repository must run immediately as a demo website with `npm run dev`. This is a functional development state, not a finished published npm product.
 
@@ -17,13 +17,13 @@ After installing its development dependencies, this repository must run immediat
 - Briefly document deviations from Astro conventions. Maintainability matters more than a minimal line count.
 - Separate the content model and page assembly from presentation. The core must not know DaisyUI classes or assume concrete demo pages.
 - Load Markdown through Astro. For YAML, use existing loaders or a small established YAML parser where singleton configuration requires it. Do not parse YAML yourself.
-- Keep reusable logic in `src/lib/astropilot/` and the default theme in `src/themes/default/`. Small standard files connect them to Astro. These are internal boundaries, not a theme platform yet.
+- Keep reusable logic in `src/lib/sproutsite/` and the default theme in `src/themes/default/`. Small standard files connect them to Astro. These are internal boundaries, not a theme platform yet.
 - The only style entry point for the default theme is `src/themes/default/styles/theme.css`. Its documented import order is part of the cascade and may only change after subsequent verification.
 - Structure theme styles clearly: `styles/foundation/` contains only global foundations without concrete Astro components (tokens, base styles, focus, layout helpers, and prose); `styles/themes/` contains only semantic mappings such as content tones.
 - Theme components follow Atomic Design: use `components/atoms/` for small UI building blocks, `components/molecules/` for composed UI building blocks, `components/organisms/` for larger website areas, and `components/layout/` for technical layout primitives. Do not create empty categories; choose the smallest suitable category for each new component.
 - Each default-theme component lives in its category within its own PascalCase directory, containing an `.astro` and `.css` file with the same name, for example `components/organisms/Header/Header.astro` and `components/organisms/Header/Header.css`. The CSS file contains only the presentation of that building block; empty or unrelated CSS files are not allowed.
-- Theme-owned CSS classes use the `ap-` prefix and clear block-element naming within a building block, for example `ap-header` and `ap-header__inner`. DaisyUI classes remain allowed for their actual UI components.
-- Use native CSS nesting consistently for theme components: a block encapsulates its elements, for example `.ap-hero { .ap-hero__inner { .ap-hero__title { … } } }`; a modifier encapsulates its pseudo-elements and differing elements, for example `.ap-hero--theme-1 { &::before { … } .ap-hero__inner { … } }`. Do not split related selectors into separate blocks. This project uses CSS with Tailwind, not SCSS.
+- Theme-owned CSS classes use the `ss-` prefix and clear block-element naming within a building block, for example `ss-header` and `ss-header__inner`. DaisyUI classes remain allowed for their actual UI components.
+- Use native CSS nesting consistently for theme components: a block encapsulates its elements, for example `.ss-hero { .ss-hero__inner { .ss-hero__title { … } } }`; a modifier encapsulates its pseudo-elements and differing elements, for example `.ss-hero--theme-1 { &::before { … } .ss-hero__inner { … } }`. Do not split related selectors into separate blocks. This project uses CSS with Tailwind, not SCSS.
 - Use the same outer content edge via `site-shell` for the header, footer, hero, sections, and H1 fallback view. Constrain reading width inside this container where needed; differing outer indents for these standard areas are not allowed.
 - Demo content remains in `src/content/`; it must not become a fixed part of the framework core later.
 - At the beginning, verify compatible stable versions in the official documentation. Use a supported Node LTS version, document it, and commit a lockfile. Do not guess version numbers.
@@ -60,7 +60,7 @@ src/content/
     ├── info/
     │   ├── page.yaml
     │   ├── hero.md
-    │   ├── 01-about-astropilot.md
+    │   ├── 01-about-sproutsite.md
     │   └── 02-workflow.md
     ├── showcase/
     │   ├── page.yaml
@@ -113,12 +113,12 @@ src/content/
 At a minimum:
 
 ```yaml
-name: AstroPilot
-url: https://example.com
+name: Sproutsite
+url: https://sproutsite.dev
 base: /
 language: de
 hero-classes:
-    - ap-hero--theme-1
+    - ss-hero--theme-1
 header:
     links:
         - label: Startseite
@@ -136,15 +136,15 @@ header:
         - label: Kontakt
           href: /kontakt/
 footer:
-    text: Eine Beispielwebsite mit AstroPilot.
+    text: Eine Beispielwebsite mit Sproutsite.
     links:
         - label: Kontakt
           href: /kontakt/
 ```
 
-Website name, language, production URL, base path, global `hero-classes`, navigation, and footer are maintained here. `hero-classes` is optional, contains at most eight theme classes with the `ap-` prefix, and applies to every hero and H1 fallback view without `hero.md`; `classes` in an individual `hero.md` overrides this value completely. Use the same validated values for Astro configuration, links, canonicals, and the sitemap; do not duplicate configuration. Astro configuration must not import Content APIs that are only available within the Astro runtime. Use a small Node-compatible loader for singleton configuration needed in more than one place.
+Website name, language, production URL, base path, global `hero-classes`, navigation, and footer are maintained here. `hero-classes` is optional, contains at most eight theme classes with the `ss-` prefix, and applies to every hero and H1 fallback view without `hero.md`; `classes` in an individual `hero.md` overrides this value completely. Use the same validated values for Astro configuration, links, canonicals, and the sitemap; do not duplicate configuration. Astro configuration must not import Content APIs that are only available within the Astro runtime. Use a small Node-compatible loader for singleton configuration needed in more than one place.
 
-`example.com` is a documented placeholder. Document its replacement before a real release. The demo does not require external fonts, tracking, or services.
+`https://sproutsite.dev` is the canonical product website. Consumer sites configure their own production URL. The demo does not require external fonts, tracking, or services. Until a new logo is supplied, use the typographic wordmark `Sproutsite`; do not reintroduce an obsolete logo.
 
 ### Page: `page.yaml`
 
@@ -167,10 +167,10 @@ url: energie
 ```md
 ---
 title: Energie verstehen und gezielt optimieren
-eyebrow: Willkommen bei AstroPilot
+eyebrow: Willkommen bei Sproutsite
 tone: brand
 classes:
-    - ap-hero--visual
+    - ss-hero--visual
 background-image: ./_assets/hero-visual.png
 ---
 
@@ -181,7 +181,7 @@ Eine kurze Einführung in die Inhalte dieser Seite.
 
 - The presence of the file activates the hero. Do not add another activation option to `page.yaml`.
 - `title` is a non-empty required field rendered as the visible `h1`; `eyebrow` is optional; `tone` has a documented default.
-- `classes` is optional and contains at most eight additional theme classes for the outer hero `section` element. Each class starts with `ap-` and may only contain lowercase letters, digits, `_`, and `-`, for example `ap-hero--visual`. When `classes` is supplied as a list, it completely overrides global `hero-classes` from `site.yaml`. `classes: null` deliberately removes global classes; when the field is absent, global classes apply. This lets theme developers add gradients, overlays, or textures without copying the hero. These classes are only intended for `hero.md`, not for sections.
+- `classes` is optional and contains at most eight additional theme classes for the outer hero `section` element. Each class starts with `ss-` and may only contain lowercase letters, digits, `_`, and `-`, for example `ss-hero--visual`. When `classes` is supplied as a list, it completely overrides global `hero-classes` from `site.yaml`. `classes: null` deliberately removes global classes; when the field is absent, global classes apply. This lets theme developers add gradients, overlays, or textures without copying the hero. These classes are only intended for `hero.md`, not for sections.
 - `background-image` is optional and names a local raster image relative to `hero.md`, for example `./_assets/hero-visual.png`. Astro validates and optimizes it; the theme renders it as a decorative background with a contrast-preserving overlay. Do not use it for information that needs alternative text; place meaningful images in regular content instead.
 - The shared hero component renders the title and Markdown content entirely from `hero.md`.
 - Without a hero, the layout renders `page.yaml.title` as a compact visible H1 fallback before the sections. It receives global `hero-classes` from `site.yaml`; without `hero.md`, there is no local override. This is the only intended visible fallback for pages without a hero.
@@ -222,15 +222,15 @@ Hier steht normaler Markdown-Inhalt.
 - Only files directly in a page directory belong to that page; do not mix them with child pages.
 - Use numeric prefixes of at least two digits and a descriptive lowercase hyphenated name; sort numerically. Duplicate numbers are errors. Gaps are allowed. Standard sections use `.md`; an `.mdx` file is allowed only for documented MDX layout components.
 - `tone`: only `default`, `muted`, or `brand`; an omitted value means `default`.
-- `fullWidth`: an optional Boolean for sections; an omitted value means `false` and constrains content to the reading column. With `true`, only `ap-section__content` is omitted; `content-prose` and the outer `site-shell` remain active. The area therefore uses the full content width but not the browser edge.
+- `fullWidth`: an optional Boolean for sections; an omitted value means `false` and constrains content to the reading column. With `true`, only `ss-section__content` is omitted; `content-prose` and the outer `site-shell` remain active. The area therefore uses the full content width but not the browser edge.
 - One file renders one semantic content section. It starts with a meaningful `h2`; further levels must follow logically. Do not use `h1` in hero or section Markdown.
-- Do not use custom section directives, control comments, CSS classes, or inline styles in content files. MDX is allowed only in `.mdx` sections and may import only documented AstroPilot components and relative local images; do not use browser scripts or arbitrary JSX elements.
+- Do not use custom section directives, control comments, CSS classes, or inline styles in content files. MDX is allowed only in `.mdx` sections and may import only documented Sproutsite components and relative local images; do not use browser scripts or arbitrary JSX elements.
 - For the MVP, the content contract supports normal Markdown without raw HTML or executable code. Check disallowed constructs using the existing Markdown AST; do not recreate a regex parser. Fenced code blocks remain normal content.
 - Heading IDs must be unique within the assembled page, including equal headings in different files. Use a small deterministic strategy and document anchor links.
 
 ### MDX Layout Components
 
-- When using MDX in a consumer project, install `@astrojs/mdx` as a direct dependency. AstroPilot configuration includes the official MDX integration.
+- When using MDX in a consumer project, install `@astrojs/mdx` as a direct dependency. Sproutsite configuration includes the official MDX integration.
 - The first standard building block is a 12-column layout: `Columns` contains exactly the requested `Column span={8}` and `Column span={4}` areas. It renders stacked on mobile and side by side from desktop widths upward.
 - New components are developer work: they require a tested Astro component, a documented export, and clear MDX usage. Do not develop an unrestricted layout language.
 
@@ -309,6 +309,6 @@ README in English: setup, Node version, commands, project structure, adding page
 
 Keep core and base layout separated so they can later be extracted into an npm package. Do not use absolute developer paths or core imports from demo content. Briefly document the planned public surface without implementing unused APIs now.
 
-This milestone does not yet include: npm publishing, installation testing of a finished AstroPilot package, a project generator, a custom MCP server, extensions/marketplace, multisite, multilingual support, CMS, authentication, form backend, deployment, or a complex layout language.
+This milestone does not yet include: npm publishing, installation testing of a finished Sproutsite package, a project generator, a custom MCP server, extensions/marketplace, multisite, multilingual support, a CMS administration backend, integrated AI agents, authentication, form backend, deployment, or a complex layout language.
 
 Do not publish or deploy anything without the corresponding request. Do not treat an invented license or package-name availability as resolved.

@@ -115,7 +115,7 @@ try {
         for (const route of routes) {
             const page = await context.newPage();
             await page.goto(`${baseUrl}${route}`, { waitUntil: 'networkidle' });
-            const header = page.locator('.ap-header');
+            const header = page.locator('.ss-header');
             const initialHeaderPosition = await header.evaluate(
                 (element) => getComputedStyle(element).position,
             );
@@ -141,7 +141,7 @@ try {
                     `${viewport.name} ${route}: viewport overflows horizontally`,
                 );
             if (route === '/showcase/tabellen/') {
-                const examples = page.locator('.content-prose > .ap-tabs');
+                const examples = page.locator('.content-prose > .ss-tabs');
                 assert.equal(await examples.count(), 7);
                 const basic = examples.first();
                 const basicPreview = basic.getByRole('tab', {
@@ -162,7 +162,7 @@ try {
                 assert.equal(await basicTable.count(), 1);
                 assert.equal(await basicTable.locator('caption').count(), 0);
                 assert.equal(
-                    await basic.locator('.ap-content-table').count(),
+                    await basic.locator('.ss-content-table').count(),
                     0,
                 );
                 const basicRows = await basicTable
@@ -184,7 +184,7 @@ try {
                     'true',
                 );
                 const groups = examples.filter({
-                    has: page.locator('.ap-content-table'),
+                    has: page.locator('.ss-content-table'),
                 });
                 assert.equal(await groups.count(), 6);
                 assert.deepEqual(
@@ -326,7 +326,7 @@ try {
                             await page.keyboard.press('ArrowRight');
                             await page.waitForFunction(() => {
                                 const element = document.querySelector(
-                                    '.ap-content-table--wide',
+                                    '.ss-content-table--wide',
                                 );
                                 return (
                                     element !== null && element.scrollLeft > 0
@@ -344,7 +344,7 @@ try {
                         .innerText();
                     assert(
                         source.includes(
-                            "import { ContentTable } from 'astropilot/components';",
+                            "import { ContentTable } from 'sproutsite/components';",
                         ),
                     );
                     assert(source.includes(caption));
@@ -367,23 +367,23 @@ try {
                 await page.screenshot({
                     path: join(
                         tmpdir(),
-                        `astropilot-tables-${viewport.name}.png`,
+                        `sproutsite-tables-${viewport.name}.png`,
                     ),
                     fullPage: true,
                 });
             }
             if (route === '/showcase/tabs/') {
-                const examples = page.locator('.content-prose > .ap-tabs');
+                const examples = page.locator('.content-prose > .ss-tabs');
                 assert.equal(await examples.count(), 3);
-                assert.equal(await page.locator('.ap-tabs').count(), 6);
+                assert.equal(await page.locator('.ss-tabs').count(), 6);
                 const groups = examples.locator(
-                    ':scope > .ap-tab > .ap-tab__content > .ap-tabs',
+                    ':scope > .ss-tab > .ss-tab__content > .ss-tabs',
                 );
                 assert.equal(await groups.count(), 3);
                 for (let index = 0; index < 3; index += 1) {
                     const example = examples.nth(index);
                     const outerTabs = example
-                        .locator(':scope > .ap-tabs__list')
+                        .locator(':scope > .ss-tabs__list')
                         .getByRole('tab');
                     assert.equal(await outerTabs.count(), 2);
                     assert.equal(
@@ -392,12 +392,12 @@ try {
                     );
                     const group = groups.nth(index);
                     const tabs = group.locator(
-                        ':scope > .ap-tabs__list > [role="tab"]',
+                        ':scope > .ss-tabs__list > [role="tab"]',
                     );
                     assert.equal(await tabs.count(), 3);
                     assert.equal(
                         await group
-                            .locator('.ap-tabs__list')
+                            .locator('.ss-tabs__list')
                             .evaluate(
                                 (element) => getComputedStyle(element).flexWrap,
                             ),
@@ -426,7 +426,7 @@ try {
                         assert.equal(await panel.isVisible(), true);
                         if (index === 2) {
                             const listBounds = await group
-                                .locator('.ap-tabs__list')
+                                .locator('.ss-tabs__list')
                                 .boundingBox();
                             const panelBounds = await panel.boundingBox();
                             const tabBounds = await button.boundingBox();
@@ -498,14 +498,14 @@ try {
                     await outerTabs.nth(1).click();
                     assert.equal(await group.isVisible(), false);
                     const code = example
-                        .locator(':scope > .ap-tab')
+                        .locator(':scope > .ss-tab')
                         .nth(1)
                         .locator('pre[data-language="mdx"]');
                     assert.equal(await code.isVisible(), true);
                     const source = await code.innerText();
                     assert(
                         source.includes(
-                            "import { Tabs, Tab } from 'astropilot/components';",
+                            "import { Tabs, Tab } from 'sproutsite/components';",
                         ),
                     );
                     assert(!source.includes('Vorschau und Code'));
@@ -563,15 +563,15 @@ try {
                     'shadow',
                     'focus',
                 ];
-                const groups = page.locator('.content-prose > .ap-tabs');
+                const groups = page.locator('.content-prose > .ss-tabs');
                 assert.equal(await groups.count(), kinds.length);
                 assert.equal(
-                    await page.locator('.ap-foundation-sample').count(),
+                    await page.locator('.ss-foundation-sample').count(),
                     kinds.length,
                 );
                 assert.equal(
                     await page
-                        .locator('main table, main .ap-card, main .ap-alert')
+                        .locator('main table, main .ss-card, main .ss-alert')
                         .count(),
                     0,
                 );
@@ -591,18 +591,18 @@ try {
                     );
                     const panel = group.getByRole('tabpanel');
                     const sample = panel.locator(
-                        `.ap-foundation-sample--${kinds[index]}`,
+                        `.ss-foundation-sample--${kinds[index]}`,
                     );
                     assert.equal(await sample.isVisible(), true);
                     if (index === 0) {
                         const swatches = sample.locator(
-                            '.ap-foundation-sample__swatch',
+                            '.ss-foundation-sample__swatch',
                         );
                         assert.equal(await swatches.count(), 12);
                         assert.equal(
                             await sample
                                 .locator(
-                                    '.ap-foundation-sample__swatch--primary',
+                                    '.ss-foundation-sample__swatch--primary',
                                 )
                                 .evaluate(
                                     (element) =>
@@ -616,7 +616,7 @@ try {
                         assert(
                             (
                                 await sample
-                                    .locator('.ap-foundation-sample__display')
+                                    .locator('.ss-foundation-sample__display')
                                     .evaluate(
                                         (element) =>
                                             getComputedStyle(element)
@@ -627,7 +627,7 @@ try {
                         assert(
                             !(
                                 await sample
-                                    .locator('.ap-foundation-sample__body')
+                                    .locator('.ss-foundation-sample__body')
                                     .evaluate(
                                         (element) =>
                                             getComputedStyle(element)
@@ -638,7 +638,7 @@ try {
                     }
                     if (index === 2) {
                         const widths = await sample
-                            .locator('.ap-foundation-sample__space')
+                            .locator('.ss-foundation-sample__space')
                             .evaluateAll((elements) =>
                                 elements.map(
                                     (element) =>
@@ -649,7 +649,7 @@ try {
                     }
                     if (index === 3) {
                         const radii = await sample
-                            .locator('.ap-foundation-sample__shape')
+                            .locator('.ss-foundation-sample__shape')
                             .evaluateAll((elements) =>
                                 elements.map(
                                     (element) =>
@@ -661,7 +661,7 @@ try {
                     }
                     if (index === 4) {
                         const shadows = await sample
-                            .locator('.ap-foundation-sample__elevation')
+                            .locator('.ss-foundation-sample__elevation')
                             .evaluateAll((elements) =>
                                 elements.map(
                                     (element) =>
@@ -747,7 +747,7 @@ try {
                 await page.screenshot({
                     path: join(
                         tmpdir(),
-                        `astropilot-foundations-${viewport.name}.png`,
+                        `sproutsite-foundations-${viewport.name}.png`,
                     ),
                     fullPage: true,
                 });
@@ -764,12 +764,12 @@ try {
                 );
                 assert.equal(await page.locator('main table').count(), 6);
                 assert.equal(
-                    await page.locator('.ap-foundation-sample').count(),
+                    await page.locator('.ss-foundation-sample').count(),
                     0,
                 );
             }
             if (route === '/showcase/sections/') {
-                const groups = page.locator('.ap-tabs');
+                const groups = page.locator('.ss-tabs');
                 const tones = ['default', 'muted', 'brand', 'muted', 'default'];
                 const fullWidths = [true, true, true, false, true];
                 const widths: number[] = [];
@@ -789,7 +789,7 @@ try {
                         'true',
                     );
                     const sectionState = await group.evaluate((element) => {
-                        const section = element.closest('.ap-section');
+                        const section = element.closest('.ss-section');
                         const content =
                             section?.querySelector('.content-prose');
                         if (!section || !content)
@@ -797,7 +797,7 @@ try {
                         return {
                             classes: Array.from(section.classList),
                             constrained: content.classList.contains(
-                                'ap-section__content',
+                                'ss-section__content',
                             ),
                             width: content.getBoundingClientRect().width,
                         };
@@ -851,8 +851,8 @@ try {
             await page.evaluate(() => window.scrollTo(0, 10));
             await page.waitForFunction(() =>
                 document
-                    .querySelector('.ap-header')
-                    ?.classList.contains('ap-header--scrolled'),
+                    .querySelector('.ss-header')
+                    ?.classList.contains('ss-header--scrolled'),
             );
             const scrolledHeader = await header.evaluate((element) => {
                 const styles = getComputedStyle(element);
@@ -878,20 +878,20 @@ try {
     });
     const staticPage = await staticContext.newPage();
     await staticPage.goto(`${baseUrl}/showcase/tabs/`);
-    assert.equal(await staticPage.locator('.ap-tab:visible').count(), 15);
+    assert.equal(await staticPage.locator('.ss-tab:visible').count(), 15);
     assert.equal(
-        await staticPage.locator('.ap-tab__label:visible').count(),
+        await staticPage.locator('.ss-tab__label:visible').count(),
         15,
     );
-    assert.equal(await staticPage.locator('.ap-tabs__list:visible').count(), 0);
+    assert.equal(await staticPage.locator('.ss-tabs__list:visible').count(), 0);
     await staticPage.goto(`${baseUrl}/showcase/foundations/`);
     assert.equal(
-        await staticPage.locator('.ap-foundation-sample:visible').count(),
+        await staticPage.locator('.ss-foundation-sample:visible').count(),
         6,
     );
     await staticPage.goto(`${baseUrl}/showcase/tabellen/`);
     assert.equal(
-        await staticPage.locator('.ap-content-table:visible').count(),
+        await staticPage.locator('.ss-content-table:visible').count(),
         6,
     );
     assert.equal(await staticPage.locator('caption:visible').count(), 6);

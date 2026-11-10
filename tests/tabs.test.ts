@@ -3,10 +3,10 @@ import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
-import { validateAstroPilotContent } from '../src/lib/astropilot/validation.js';
+import { validateSproutsiteContent } from '../src/lib/sproutsite/validation.js';
 
 function validate(body: string): void {
-    const directory = mkdtempSync(join(tmpdir(), 'astropilot-tabs-'));
+    const directory = mkdtempSync(join(tmpdir(), 'sproutsite-tabs-'));
     try {
         writeFileSync(
             join(directory, 'page.yaml'),
@@ -14,9 +14,9 @@ function validate(body: string): void {
         );
         writeFileSync(
             join(directory, '01-tabs.mdx'),
-            `import { Tabs, Tab } from 'astropilot/components';\n\n## Tab examples\n\n${body}\n`,
+            `import { Tabs, Tab } from 'sproutsite/components';\n\n## Tab examples\n\n${body}\n`,
         );
-        validateAstroPilotContent(directory);
+        validateSproutsiteContent(directory);
     } finally {
         rmSync(directory, { recursive: true, force: true });
     }

@@ -1,9 +1,9 @@
 ---
-title: Statische Websites mit AstroPilot gestalten
-eyebrow: Willkommen bei AstroPilot
+title: Sproutsite — The Agent-Ready Static CMS
+eyebrow: Plant an idea. Grow your website.
 tone: brand
 classes: null
-background-image: ./_assets/hero-astropilot.png
+background-image: ./_assets/hero-sproutsite.png
 ---
 
-AstroPilot verbindet nachvollziehbar gepflegte Inhalte, ein gemeinsames Theme und wiederverwendbare Komponenten in einem schlanken Astro-Projekt.
+Ein agentenbereites, Markdown-first Static CMS auf Basis von Astro und TypeScript. Pflege Inhalte und Seitenstrukturen als Dateien und verbinde sie mit wiederverwendbaren Komponenten.

@@ -8,9 +8,9 @@ const linkSchema = z.object({
     label: z.string().trim().min(1),
     href: z.string().trim().min(1),
 });
-const heroClass = z.string().regex(/^ap-[a-z0-9][a-z0-9_-]*$/, {
+const heroClass = z.string().regex(/^ss-[a-z0-9][a-z0-9_-]*$/, {
     message:
-        'must start with ap- and contain only lowercase letters, digits, underscores, or hyphens',
+        'must start with ss- and contain only lowercase letters, digits, underscores, or hyphens',
 });
 
 const siteSchema = z.object({
@@ -49,12 +49,12 @@ export function loadSiteConfig(): SiteConfig {
     }
     const { 'hero-classes': heroClasses, ...site } = parsed.data;
     const config: SiteConfig = { ...site, heroClasses };
-    const environmentBase = process.env.ASTROPILOT_BASE;
+    const environmentBase = process.env.SPROUTSITE_BASE;
     if (environmentBase === undefined) return config;
     const base = siteSchema.shape.base.safeParse(environmentBase);
     if (!base.success)
         throw new Error(
-            `Invalid ASTROPILOT_BASE: ${base.error.issues[0]?.message}`,
+            `Invalid SPROUTSITE_BASE: ${base.error.issues[0]?.message}`,
         );
     return { ...config, base: base.data };
 }
