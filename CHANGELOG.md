@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.1] - 2026-11-10
+
+### Added
+
+- Added the reference-based Sproutsite sprout-and-layers identity: standalone light, dark, monochrome, and icon SVGs, locally outlined Nunito lettering, and separate brand color tokens.
+- Added a reproducible TypeScript asset generator, SVG/ICO/PNG favicons, Apple and web app icons, a static base-aware manifest, and a product Open Graph card.
+
+### Changed
+
+- Integrated the shared logo in the responsive header and footer, with white and navy wordmark states, while retaining the existing page design and consumer site names.
+
 ## [0.4.0] - 2026-11-10
 
 ### Changed
