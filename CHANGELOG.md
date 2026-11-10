@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-11-10
+
+### Changed
+
+- Established Sproutsite — The Agent-Ready Static CMS as the product identity across the website, package, documentation, examples, tests, and Storybook.
+- Renamed package imports and public helpers to Sproutsite, moved the core to `src/lib/sproutsite/`, and aligned theme classes (`ss-`) and the base-path environment variable (`SPROUTSITE_BASE`). Consumer imports and custom theme overrides must be updated together.
+- Set the canonical product URL to `https://sproutsite.dev` and repository links to `sproutsite/sproutsite`; added consistent Open Graph and summary-card metadata.
+- Replaced the previous product icon with a typographic wordmark and removed the favicon pending a new visual identity. Existing page URLs, component behavior, and visual theme remain intact.
+
+### Fixed
+
+- Applied the configured deployment base to Button navigation links, as uncovered by the full internal-link check under `/demo/`.
+
 ## [0.3.0] - 2026-11-01
 
 ### Added
@@ -23,7 +36,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Added
 
-- Added a dedicated light AstroPilot DaisyUI theme with semantic colors, typography, spacing, radius, and elevation tokens.
+- Added a dedicated light Sproutsite DaisyUI theme with semantic colors, typography, spacing, radius, and elevation tokens.
 
 ### Changed
 
@@ -58,5 +71,5 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Added
 
-- Introduced the initial AstroPilot file-based content framework, default DaisyUI theme, validated content contract, static routing, SEO metadata, sitemap, tests, and accessibility checks.
+- Introduced the initial Sproutsite file-based content framework, default DaisyUI theme, validated content contract, static routing, SEO metadata, sitemap, tests, and accessibility checks.
 - Added the installable package surface for content collections, Astro configuration, and the shared page route, together with local tarball verification.

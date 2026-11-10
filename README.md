@@ -58,7 +58,7 @@ Content files belong exclusively to the consumer project. Test the installable s
 npm pack
 
 # in the separate Astro consumer project
-npm install /absolute/path/to/sproutsite-0.3.0.tgz
+npm install /absolute/path/to/sproutsite-0.4.0.tgz
 npm run check
 npm run build
 ```
