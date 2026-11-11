@@ -87,7 +87,10 @@
             /* Fill wide heroes proportionally so the lower blue contours
              * reach the middle; bottom alignment preserves their layering. */
             background-size: cover;
-            background-position: right bottom, right bottom, right top;
+            background-position:
+                right bottom,
+                right bottom,
+                right top;
             background-repeat: no-repeat;
         }
 
