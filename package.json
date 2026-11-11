@@ -1,6 +1,6 @@
 {
     "name": "sproutsite",
-    "version": "0.4.2",
+    "version": "0.4.3",
     "private": true,
     "description": "Agent-ready, Markdown-first Static CMS powered by Astro and TypeScript.",
     "homepage": "https://sproutsite.dev",

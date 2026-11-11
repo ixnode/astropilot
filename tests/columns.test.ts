@@ -17,6 +17,8 @@ test('accepts multiple rows while rejecting invalid Column spans', () => {
         const sectionPath = join(directory, '01-columns.mdx');
         writeFileSync(sectionPath, section(4));
         assert.doesNotThrow(() => validateSproutsiteContent(directory));
+        writeFileSync(sectionPath, section(6));
+        assert.doesNotThrow(() => validateSproutsiteContent(directory));
         writeFileSync(sectionPath, section(13));
         assert.throws(
             () => validateSproutsiteContent(directory),

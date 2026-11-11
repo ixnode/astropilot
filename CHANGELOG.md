@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.3] - 2026-11-12
+
+### Changed
+
+- Refined the public homepage around the Sproutsite working model, including balanced content columns, clearer next steps, and alternating section surfaces.
+- Improved the default theme's primary typography, tone-aware eyebrows, and dark hero-inspired footer treatment with accessible link and focus colors.
+- Documented the user-facing content writing style and added the Sproutsite brand update to the project journal.
+
 ## [0.4.2] - 2026-11-11
 
 ### Changed
