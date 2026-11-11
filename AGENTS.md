@@ -41,6 +41,22 @@ After installing its development dependencies, this repository must run immediat
 - Markdown, YAML, CSS, JSON, and HTML templates inside `.astro` remain allowed for content, styles, data, and markup. npm scripts may invoke existing CLI tools; project-owned validation logic belongs in TypeScript files.
 - During acceptance, check that no project-owned JavaScript source files exist. Exclude generated directories and dependencies from this check.
 
+## Writing Style for User-Facing Content
+
+These rules apply to content primarily intended for prospective users or users, including the homepage, hero sections, product pages, the showcase, and comparable page copy. They do not apply to technical documentation, the README, API or configuration references, the changelog, validation errors, or code comments. For those, precision, completeness, and established technical writing conventions take precedence.
+
+- Write naturally, directly, and clearly. Copy should sound like it was written by an experienced person, not generated automatically.
+- Use short, precise sentences and everyday language instead of abstract technical or marketing language.
+- Avoid typical AI phrases, artificial storytelling, exaggerated enthusiasm, and empty statements.
+- Do not repeat information unnecessarily: every statement must add information or meaningfully develop the thought.
+- Be specific instead of general. Use understandable examples, numbers, and real relationships when available.
+- Prefer natural statements over constructions such as “X makes Y visible”, “More than just X”, or “Not only X, but also Y”.
+- Headings should state the content clearly instead of manufacturing curiosity.
+- Write from the audience's perspective: name the concrete problem, its practical effect, and the next helpful step.
+- Do not explain the obvious or repeat in body copy what headings or illustrations already convey.
+- Do not claim benefits, causes, or outcomes that cannot be substantiated.
+- Review every finished text: does it sound natural, and does it contain unnecessary repetition or interchangeable phrasing? If so, revise it.
+
 ## Binding Content Contract
 
 ```text
