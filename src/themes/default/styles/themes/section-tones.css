@@ -2,12 +2,15 @@
 @layer components {
     .tone-default {
         @apply bg-base-100;
+        --ss-eyebrow-color: var(--color-primary);
     }
     .tone-muted {
         @apply bg-base-200;
+        --ss-eyebrow-color: var(--color-primary);
     }
     .tone-brand {
         @apply bg-primary text-primary-content;
+        --ss-eyebrow-color: var(--color-primary-content);
 
         .content-prose {
             &,
