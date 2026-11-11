@@ -1,6 +1,23 @@
 @layer components {
     .ss-footer {
-        @apply border-t border-base-300 bg-base-200;
+        @apply border-t text-primary-content;
+        border-color: color-mix(
+            in srgb,
+            var(--color-hero-ocean) 55%,
+            var(--color-hero-navy)
+        );
+        background-color: var(--color-hero-navy);
+        background-image:
+            radial-gradient(
+                ellipse at 88% 100%,
+                color-mix(in srgb, var(--color-hero-ocean) 32%, transparent),
+                transparent 65%
+            ),
+            linear-gradient(
+                110deg,
+                var(--color-hero-navy) 32%,
+                var(--color-hero-midnight)
+            );
 
         .ss-footer__inner {
             @apply flex flex-wrap items-center justify-between gap-4 py-10 text-sm;
@@ -9,13 +26,21 @@
                 @apply flex flex-wrap items-center gap-x-6 gap-y-3;
 
                 > a {
-                    color: var(--color-brand-navy);
+                    color: var(--color-primary-content);
                     text-decoration: none;
                 }
             }
 
             .ss-footer__links {
                 @apply flex flex-wrap gap-4;
+
+                a {
+                    color: var(--color-primary-content);
+                }
+            }
+
+            a:focus-visible {
+                outline-color: var(--color-hero-green);
             }
         }
     }

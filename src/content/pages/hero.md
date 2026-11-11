@@ -4,4 +4,4 @@ eyebrow: Plant an idea. Grow your website.
 tone: brand
 ---
 
-Ein agentenbereites, Markdown-first Static CMS auf Basis von Astro und TypeScript. Pflege Inhalte und Seitenstrukturen als Dateien und verbinde sie mit wiederverwendbaren Komponenten.
+Pflege Inhalte und Seiten direkt im Repository. Sproutsite verbindet Markdown mit getesteten Komponenten, damit dein Team konsistent arbeitet – auch wenn Coding-Agenten mitwirken.

@@ -247,7 +247,7 @@ Hier steht normaler Markdown-Inhalt.
 ### MDX Layout Components
 
 - When using MDX in a consumer project, install `@astrojs/mdx` as a direct dependency. Sproutsite configuration includes the official MDX integration.
-- The first standard building block is a 12-column layout: `Columns` contains exactly the requested `Column span={8}` and `Column span={4}` areas. It renders stacked on mobile and side by side from desktop widths upward.
+- The first standard building block is a 12-column layout: `Columns` contains one or more direct `Column` areas with spans from 1 to 12. Common distributions include `6 + 6`, `8 + 4`, and `4 + 4 + 4`. It renders stacked on mobile and side by side from desktop widths upward.
 - New components are developer work: they require a tested Astro component, a documented export, and clear MDX usage. Do not develop an unrestricted layout language.
 
 ## Validation, Routing, and Development
