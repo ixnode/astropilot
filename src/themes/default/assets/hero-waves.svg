@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="640" viewBox="0 0 1600 640" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="back-wave" x1="740" y1="580" x2="1540" y2="130" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B294A" stop-opacity="0"/>
+      <stop offset="0.38" stop-color="#10476B" stop-opacity="0.50"/>
+      <stop offset="0.78" stop-color="#0B6075" stop-opacity="0.76"/>
+      <stop offset="1" stop-color="#087B78" stop-opacity="0.88"/>
+    </linearGradient>
+    <linearGradient id="crest-base" x1="1030" y1="390" x2="1550" y2="-20" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0D2B50" stop-opacity="0.10"/>
+      <stop offset="0.35" stop-color="#125B86" stop-opacity="0.62"/>
+      <stop offset="0.7" stop-color="#078481" stop-opacity="0.90"/>
+      <stop offset="1" stop-color="#159A70" stop-opacity="0.92"/>
+    </linearGradient>
+    <radialGradient id="crest-green" cx="0" cy="0" r="1" gradientTransform="translate(1510 20) rotate(155) scale(350 225)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#73DF48" stop-opacity="0.92"/>
+      <stop offset="0.24" stop-color="#40BF61" stop-opacity="0.72"/>
+      <stop offset="0.58" stop-color="#159C78" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#159C78" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="middle-wave" x1="900" y1="450" x2="1540" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0D3458" stop-opacity="0.12"/>
+      <stop offset="0.48" stop-color="#15567B" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#0B365C" stop-opacity="0.84"/>
+    </linearGradient>
+    <linearGradient id="front-wave" x1="1040" y1="565" x2="1530" y2="680" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B2B4E" stop-opacity="0.18"/>
+      <stop offset="0.5" stop-color="#10446C" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#092947" stop-opacity="0.88"/>
+    </linearGradient>
+    <path id="crest-shape" d="M 820 690 C 970 620 1072 504 1166 378 C 1260 252 1334 115 1478 22 C 1544 -20 1611 -36 1680 -40 L 1680 700 Z"/>
+  </defs>
+  <!-- The SVG is transparent so the hero's existing navy background remains visible. -->
+  <path d="M 620 700 C 794 558 898 442 1086 390 C 1272 338 1456 395 1680 265 L 1680 700 Z" fill="url(#back-wave)"/>
+  <!-- Organic upper crest with a localized green highlight, not a green wall. -->
+  <use href="#crest-shape" fill="url(#crest-base)"/>
+  <use href="#crest-shape" fill="url(#crest-green)"/>
+  <!-- Low, flowing blue folds. Their curved edges stay inside the visible canvas. -->
+  <path d="M 670 700 C 832 621 956 543 1106 532 C 1242 522 1322 579 1458 524 C 1548 488 1618 477 1680 496 L 1680 700 Z" fill="url(#middle-wave)"/>
+  <path d="M 880 700 C 1050 653 1168 617 1304 628 C 1440 639 1544 568 1680 596 L 1680 700 Z" fill="url(#front-wave)"/>
+</svg>

@@ -8,6 +8,12 @@
     --color-brand-green: #65d82f;
     --color-brand-light-green: #8bed43;
     --color-brand-white: #ffffff;
+    --color-hero-navy: #071a36;
+    --color-hero-midnight: #0d2b50;
+    --color-hero-ocean: #125b86;
+    --color-hero-teal: #087f80;
+    --color-hero-green: #74e33d;
+    --color-hero-cyan: #70c6df;
     --font-sans: ui-sans-serif, system-ui, sans-serif;
     --font-heading: 'Nunito', var(--font-sans);
     --text-display: clamp(2.25rem, 5vw, 4rem);

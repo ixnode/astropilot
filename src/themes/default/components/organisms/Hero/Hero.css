@@ -50,30 +50,57 @@
     }
 
     .ss-hero--theme-1 {
+        background-color: var(--color-hero-navy);
         background-image:
             radial-gradient(
-                circle at 14% 18%,
-                rgb(255 255 255 / 18%),
-                transparent 30rem
+                ellipse at 88% 12%,
+                color-mix(in srgb, var(--color-hero-ocean) 22%, transparent),
+                transparent 65%
             ),
             linear-gradient(
-                125deg,
-                rgb(255 255 255 / 10%),
-                transparent 48%,
-                rgb(15 118 110 / 28%)
+                110deg,
+                var(--color-hero-navy) 32%,
+                var(--color-hero-midnight)
             );
 
         &::before {
             content: '';
             @apply pointer-events-none absolute inset-0;
             background-image:
-                linear-gradient(rgb(255 255 255 / 10%) 1px, transparent 1px),
                 linear-gradient(
                     90deg,
-                    rgb(255 255 255 / 10%) 1px,
-                    transparent 1px
-                );
-            background-size: 0.5rem 0.5rem;
+                    var(--color-hero-navy) 16%,
+                    color-mix(in srgb, var(--color-hero-navy) 80%, transparent)
+                        36%,
+                    color-mix(in srgb, var(--color-hero-navy) 36%, transparent)
+                        52%,
+                    transparent 72%
+                ),
+                linear-gradient(
+                    180deg,
+                    color-mix(in srgb, var(--color-hero-navy) 65%, transparent),
+                    color-mix(in srgb, var(--color-hero-navy) 35%, transparent)
+                        5rem,
+                    transparent 10rem
+                ),
+                url('../../../assets/hero-waves.svg');
+            /* Fill wide heroes proportionally so the lower blue contours
+             * reach the middle; bottom alignment preserves their layering. */
+            background-size: cover;
+            background-position: right bottom, right bottom, right top;
+            background-repeat: no-repeat;
+        }
+
+        /* Keep waves quiet behind the wider text and wrapping navigation on
+         * tablets and phones; preserve the full SVG height to avoid seams. */
+        @media (max-width: 63.999rem) {
+            &::before {
+                opacity: 0.5;
+                background-size:
+                    cover,
+                    cover,
+                    auto 100%;
+            }
         }
     }
 }
