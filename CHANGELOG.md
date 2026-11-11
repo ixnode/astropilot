@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.2] - 2026-11-11
+
+### Changed
+
+- Replaced the homepage's technical hero illustration and the shared hero grid with responsive organic SVG waves in navy, blue, teal, and green, supported by dedicated hero color tokens and updated theme documentation.
+- Extended the waves toward the center on desktop, aligned the illustration to the top, and refined the color gradients and text/navigation overlays. Tablet and mobile views retain reduced intensity; content, typography, and hero height remain unchanged.
+
 ## [0.4.1] - 2026-11-10
 
 ### Added
