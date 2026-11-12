@@ -38,11 +38,39 @@ const heroClass = z.string().regex(/^ss-[a-z0-9][a-z0-9_-]*$/, {
     message:
         'must start with ss- and contain only lowercase letters, digits, underscores, or hyphens',
 });
-const heroSchema = markdownSchema.extend({
-    title: z.string().trim().min(1),
-    classes: z.array(heroClass).max(8).nullable().optional(),
-    'background-image': z.string().trim().min(1).optional(),
-});
+const heroAction = z
+    .object({
+        label: z.string().trim().min(1),
+        href: z.string().trim().min(1),
+        variant: z.enum(['primary', 'secondary']),
+    })
+    .strict();
+const heroSchema = markdownSchema
+    .extend({
+        title: z.string().trim().min(1),
+        titleHighlight: z
+            .string()
+            .trim()
+            .min(1)
+            .refine((value) => !value.includes('\n'), {
+                message: 'must not contain a line break',
+            })
+            .optional(),
+        classes: z.array(heroClass).max(8).nullable().optional(),
+        'background-image': z.string().trim().min(1).optional(),
+        actions: z.array(heroAction).min(1).max(2).optional(),
+        claim: z.string().trim().min(1).optional(),
+        tagline: z.string().trim().min(1).optional(),
+    })
+    .superRefine((hero, context) => {
+        if (hero.titleHighlight && !hero.title.includes(hero.titleHighlight)) {
+            context.addIssue({
+                code: 'custom',
+                path: ['titleHighlight'],
+                message: 'must occur in title',
+            });
+        }
+    });
 const sectionPattern = /^\d{2,}-[a-z0-9][a-z0-9-]*\.(?:md|mdx)$/;
 const mdxComponentImport =
     /^import\s*\{\s*Column\s*,\s*Columns(?:\s*,\s*Eyebrow)?\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
@@ -828,6 +856,36 @@ export function validateSproutsiteContent(
                 path,
                 `invalid frontmatter: ${metadata.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join('; ')}`,
             );
+        if (filename === 'hero.md') {
+            const heroMetadata = heroSchema.parse(frontmatter);
+            for (const action of heroMetadata.actions ?? []) {
+                if (
+                    /^(?:javascript:|data:)/i.test(action.href) ||
+                    action.href.startsWith('//')
+                )
+                    fail(
+                        contentRoot,
+                        path,
+                        `disallowed hero action link protocol: ${action.href}`,
+                    );
+                if (action.href.startsWith('/')) {
+                    const [targetWithQuery] = action.href.split('#', 1);
+                    const [target] = targetWithQuery.split('?', 1);
+                    const normalized =
+                        target === ''
+                            ? '/'
+                            : target.endsWith('/')
+                              ? target
+                              : `${target}/`;
+                    if (!routes.has(normalized))
+                        fail(
+                            contentRoot,
+                            path,
+                            `hero action target does not exist: ${action.href}`,
+                        );
+                }
+            }
+        }
         if (path.endsWith('.mdx')) validateMdxLayout(contentRoot, path, tree);
         const route = routeForDirectory(directory);
         const seen = headingsByRoute.get(route)!;

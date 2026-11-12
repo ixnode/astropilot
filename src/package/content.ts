@@ -24,6 +24,13 @@ export function createSproutsiteCollections(
         message:
             'Hero classes must start with ss- and contain only lowercase letters, digits, underscores, or hyphens',
     });
+    const heroAction = z
+        .object({
+            label: z.string().trim().min(1),
+            href: z.string().trim().min(1),
+            variant: z.enum(['primary', 'secondary']),
+        })
+        .strict();
 
     const pages = defineCollection({
         loader: glob({
@@ -49,9 +56,13 @@ export function createSproutsiteCollections(
     const documentSchema = ({ image }: { image: ImageFunction }) =>
         z.object({
             title: z.string().trim().min(1).optional(),
+            titleHighlight: z.string().trim().min(1).optional(),
             eyebrow: z.string().trim().min(1).optional(),
             classes: z.array(heroClass).max(8).nullable().optional(),
             'background-image': image().optional(),
+            actions: z.array(heroAction).min(1).max(2).optional(),
+            claim: z.string().trim().min(1).optional(),
+            tagline: z.string().trim().min(1).optional(),
             tone,
             fullWidth: z.boolean().default(false),
         });

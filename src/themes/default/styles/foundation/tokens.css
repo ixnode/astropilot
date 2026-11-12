@@ -14,17 +14,21 @@
     --color-hero-teal: #087f80;
     --color-hero-green: #74e33d;
     --color-hero-cyan: #70c6df;
+
     --font-sans: ui-sans-serif, system-ui, sans-serif;
     --font-heading: 'Nunito', var(--font-sans);
+
     --text-display: clamp(2.25rem, 5vw, 4rem);
     --text-display--line-height: 1.08;
     --text-heading: clamp(1.75rem, 3vw, 2.5rem);
     --text-heading--line-height: 1.15;
+
     --spacing-gutter: clamp(1rem, 4vw, 2rem);
     --spacing-section: clamp(1.875rem, 3.75vw, 3.375rem);
     --spacing-section-hero: clamp(4.5rem, 9vw, 7.5rem);
     --spacing-section-hero-bottom: clamp(2rem, 4vw, 3.5rem);
     --spacing-header-overlay: 10rem;
+
     --shadow-soft: 0 1px 2px rgb(23 32 51 / 8%), 0 8px 24px rgb(23 32 51 / 6%);
     --shadow-raised:
         0 8px 24px rgb(23 32 51 / 12%), 0 2px 6px rgb(23 32 51 / 8%);

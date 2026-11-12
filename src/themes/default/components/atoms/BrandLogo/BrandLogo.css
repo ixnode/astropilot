@@ -14,5 +14,9 @@
             width: 2.5rem;
             height: 2.5rem;
         }
+
+        .ss-brand-logo__highlight {
+            color: var(--color-hero-cyan);
+        }
     }
 }

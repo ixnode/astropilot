@@ -1,7 +1,18 @@
 ---
-title: Sproutsite — The Agent-Ready Static CMS
-eyebrow: Plant an idea. Grow your website.
+title: Sproutsite
+titleHighlight: site
+eyebrow: AGENT-READY STATIC CMS
 tone: brand
+claim: Your ideas. Your agent. Your website.
+actions:
+    - label: Loslegen
+      href: /dokumentation/einstieg/
+      variant: primary
+    - label: Auf GitHub ansehen
+      href: https://github.com/sproutsite/sproutsite
+      variant: secondary
+tagline: Plant an idea. Grow your website.
 ---
 
-Pflege Inhalte und Seiten direkt im Repository. Sproutsite verbindet Markdown mit getesteten Komponenten, damit dein Team konsistent arbeitet – auch wenn Coding-Agenten mitwirken.
+Erstelle und pflege Websites mit deinem bevorzugten Coding-Agenten. Sproutsite verwandelt Markdown und
+wiederverwendbare Komponenten in schnelle, statische Websites – auf Basis von Astro.

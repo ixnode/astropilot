@@ -8,14 +8,21 @@ import { Eyebrow } from 'sproutsite/components';
 
 ## Seiteneinstieg mit hero.md
 
-Ein `hero.md` aktiviert den gemeinsamen Hero und liefert dessen sichtbare H1, Eyebrow, Tone und Markdown-Einführung.
+Ein `hero.md` aktiviert den gemeinsamen Hero und liefert dessen sichtbare H1, Eyebrow, Tone und Markdown-Einführung. Optional ergänzt `claim` eine hervorgehobene Zeile unter der H1; `actions` ergänzen ein oder zwei Buttons, `tagline` erscheint dezent darunter.
 
 ```yaml
 ---
 title: Seitentitel im Hero
+titleHighlight: Hero
 eyebrow: Einordnung
 tone: brand
 background-image: ./_assets/hero-visual.png
+claim: Eine einprägsame Aussage.
+actions:
+    - label: Einstieg öffnen
+      href: /dokumentation/einstieg/
+      variant: primary
+tagline: Ein kurzer unterstützender Claim.
 ---
 ```
 
@@ -24,6 +31,10 @@ background-image: ./_assets/hero-visual.png
 ### Klassen lokal überschreiben oder entfernen
 
 `classes` als Liste überschreibt `hero-classes` aus `site.yaml`. Mit `classes: null` entfernt eine Seite die globalen Klassen bewusst.
+
+### Aktionen im Hero
+
+Jede Aktion benötigt einen nicht leeren `label`, einen internen oder externen `href` und `variant: primary` oder `secondary`. Der Hero verwendet dafür die gemeinsame Button-Komponente. Interne Ziele bleiben root-relativ und werden wie andere Content-Links mit `base` ausgeliefert.
 
 ```yaml
 classes: null

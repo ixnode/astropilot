@@ -21,7 +21,7 @@ header:
         - label: Kontakt
           href: /kontakt/
 footer:
-    text: Sproutsite — The Agent-Ready Static CMS
+    text: Agent-ready static CMS for Astro and TypeScript.
     links:
         - label: Dokumentation
           href: /dokumentation/

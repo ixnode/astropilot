@@ -5,9 +5,22 @@ interface Props {
     name: string;
 }
 const { name } = Astro.props;
+const highlight = name === 'Sproutsite' ? 'site' : undefined;
+const highlightStart = highlight ? name.indexOf(highlight) : -1;
+const hasHighlight = highlightStart >= 0 && highlight !== undefined;
+const nameBeforeHighlight = hasHighlight ? name.slice(0, highlightStart) : name;
+const nameAfterHighlight = hasHighlight
+    ? name.slice(highlightStart + highlight.length)
+    : undefined;
 ---
 
 <span class="ss-brand-logo">
     {name === 'Sproutsite' && <img src={icon} width="40" height="40" alt="" />}
-    <span>{name}</span>
+    <span class="ss-brand-logo__name">
+        {nameBeforeHighlight}
+        {hasHighlight && (
+            <span class="ss-brand-logo__highlight">{highlight}</span>
+        )}
+        {nameAfterHighlight}
+    </span>
 </span>

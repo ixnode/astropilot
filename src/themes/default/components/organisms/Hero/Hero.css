@@ -3,15 +3,40 @@
         @apply relative isolate overflow-hidden py-section-hero;
         padding-top: max(
             var(--spacing-section-hero),
-            calc(var(--spacing-header-overlay) + 4rem)
+            calc(var(--spacing-header-overlay) + 2.5rem)
         );
         padding-bottom: var(--spacing-section-hero-bottom);
 
         .ss-hero__inner {
             @apply relative z-10;
 
+            .ss-eyebrow {
+                margin-bottom: clamp(1rem, 1.5vw, 1.25rem);
+                font-size: clamp(0.75rem, 0.85vw, 0.875rem);
+            }
+
             .ss-hero__title {
-                @apply max-w-3xl text-display font-bold tracking-tight;
+                @apply max-w-3xl font-bold tracking-tight;
+                font-size: clamp(3.25rem, 6vw, 6rem);
+                line-height: 1.06;
+
+                .ss-hero__title-line {
+                    display: block;
+                }
+
+                .ss-hero__title-highlight {
+                    color: var(--color-hero-cyan);
+                }
+            }
+
+            .ss-hero__claim {
+                margin-top: clamp(1rem, 1.5vw, 1.25rem);
+                max-width: 42rem;
+                color: var(--color-primary-content);
+                font-family: var(--font-heading);
+                font-size: clamp(1.75rem, 2.5vw, 2.25rem);
+                font-weight: 700;
+                line-height: 1.12;
             }
 
             .ss-hero__meta {
@@ -19,7 +44,49 @@
             }
 
             .ss-hero__content {
-                @apply mt-5 max-w-3xl;
+                margin-top: clamp(1.5rem, 2.25vw, 2rem);
+                max-width: 40.625rem;
+                font-size: clamp(1rem, 1.25vw, 1.25rem);
+                line-height: 1.55;
+            }
+
+            .ss-hero__actions {
+                @apply flex flex-wrap gap-3;
+                margin-top: clamp(1.75rem, 2.5vw, 2.25rem);
+
+                .ss-button {
+                    @apply m-0;
+                }
+
+                .btn-outline {
+                    --btn-color: color-mix(
+                        in srgb,
+                        var(--color-primary-content) 56%,
+                        transparent
+                    );
+                    --btn-rest-fg: var(--color-primary-content);
+
+                    &:hover {
+                        --btn-color: var(--color-primary-content);
+                        --btn-bg: color-mix(
+                            in srgb,
+                            var(--color-primary-content) 12%,
+                            transparent
+                        );
+                    }
+                }
+            }
+
+            .ss-hero__tagline {
+                margin-top: 1.5rem;
+                color: color-mix(
+                    in srgb,
+                    var(--color-primary-content) 72%,
+                    transparent
+                );
+                font-family: var(--font-heading);
+                font-size: 0.9375rem;
+                font-style: italic;
             }
         }
 

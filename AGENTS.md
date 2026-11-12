@@ -57,6 +57,14 @@ These rules apply to content primarily intended for prospective users or users, 
 - Do not claim benefits, causes, or outcomes that cannot be substantiated.
 - Review every finished text: does it sound natural, and does it contain unnecessary repetition or interchangeable phrasing? If so, revise it.
 
+## Brand, Design, and Product Experience
+
+- Describe Sproutsite accurately: it is an agent-ready, Markdown-first Static CMS for Astro and TypeScript. External coding agents edit content and pages; Sproutsite does not include an AI agent.
+- Preserve the modern, calm, organic, and confident visual language. Use existing navy, blue, teal, and green tokens; green is an accent, not a dominant surface. Reuse organic waves and soft gradients where appropriate.
+- Prefer existing components and layout primitives. Keep typography, spacing, hierarchy, responsive behavior, contrast, and focus states clear; avoid visual clutter, glow effects, glassmorphism, and unnecessary animation.
+- User-facing copy explains a concrete benefit without inventing features, commands, causes, or outcomes. Keep UI and explanatory copy in the active locale; established English brand claims are permitted on the German website. Preserve the information architecture unless a change is requested.
+- On the Sproutsite homepage, brand precedes claim, explanation, and action. A product or landing-page hero needs this distinct hierarchy, a concise description, and a clear next action. Limit text width, keep decorative backgrounds readable, and make primary and secondary actions visibly distinct.
+
 ## Binding Content Contract
 
 ```text
@@ -196,9 +204,10 @@ Eine kurze Einführung in die Inhalte dieser Seite.
 ```
 
 - The presence of the file activates the hero. Do not add another activation option to `page.yaml`.
-- `title` is a non-empty required field rendered as the visible `h1`; `eyebrow` is optional; `tone` has a documented default.
+- `title` is a non-empty required field rendered as the visible `h1`; `titleHighlight` is an optional text fragment from `title` rendered with the theme highlight class; `eyebrow` is optional; `tone` has a documented default.
 - `classes` is optional and contains at most eight additional theme classes for the outer hero `section` element. Each class starts with `ss-` and may only contain lowercase letters, digits, `_`, and `-`, for example `ss-hero--visual`. When `classes` is supplied as a list, it completely overrides global `hero-classes` from `site.yaml`. `classes: null` deliberately removes global classes; when the field is absent, global classes apply. This lets theme developers add gradients, overlays, or textures without copying the hero. These classes are only intended for `hero.md`, not for sections.
 - `background-image` is optional and names a local raster image relative to `hero.md`, for example `./_assets/hero-visual.png`. Astro validates and optimizes it; the theme renders it as a decorative background with a contrast-preserving overlay. Do not use it for information that needs alternative text; place meaningful images in regular content instead.
+- `claim` is an optional prominent line rendered below the H1. `actions` is optional and contains one or two `{ label, href, variant }` entries. `variant` is `primary` or `secondary`; the shared hero renders them with the existing Button component. `tagline` is an optional short line rendered below the actions.
 - The shared hero component renders the title and Markdown content entirely from `hero.md`.
 - Without a hero, the layout renders `page.yaml.title` as a compact visible H1 fallback before the sections. It receives global `hero-classes` from `site.yaml`; without `hero.md`, there is no local override. This is the only intended visible fallback for pages without a hero.
 - The homepage, FAQ, and Info use the same hero component with their own content. Do not create three copied implementations.

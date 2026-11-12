@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import { toneOf } from '../../../../../lib/sproutsite/pages.js';
 import type { SiteConfig } from '../../../../../lib/sproutsite/types.js';
+import Button from '../../atoms/Button/Button.astro';
 import Eyebrow from '../../atoms/Eyebrow/Eyebrow.astro';
 
 interface Props {
@@ -23,6 +24,21 @@ const heroClasses =
         ? site.heroClasses
         : (hero.data.classes ?? []);
 const backgroundImage = hero.data['background-image'];
+const heroTitle = hero.data.title;
+if (!heroTitle) throw new Error('Sproutsite Hero requires a title.');
+const titleHighlight = hero.data.titleHighlight;
+const titleLines = heroTitle.split('\n').map((line) => {
+    const highlightStart = titleHighlight ? line.indexOf(titleHighlight) : -1;
+    const hasHighlight = highlightStart >= 0 && titleHighlight !== undefined;
+
+    return {
+        before: hasHighlight ? line.slice(0, highlightStart) : line,
+        highlighted: hasHighlight ? titleHighlight : undefined,
+        after: hasHighlight
+            ? line.slice(highlightStart + titleHighlight.length)
+            : undefined,
+    };
+});
 ---
 
 <section
@@ -49,11 +65,41 @@ const backgroundImage = hero.data['background-image'];
     <div class="ss-hero__inner site-shell">
         {hero.data.eyebrow && <Eyebrow>{hero.data.eyebrow}</Eyebrow>}
         <h1 id="page-title" class="ss-hero__title">
-            {hero.data.title}
+            {titleLines.map((line) => (
+                <span class="ss-hero__title-line">
+                    {line.before}
+                    {line.highlighted && (
+                        <span class="ss-hero__title-highlight">
+                            {line.highlighted}
+                        </span>
+                    )}
+                    {line.after}
+                </span>
+            ))}
         </h1>
+        {hero.data.claim && <p class="ss-hero__claim">{hero.data.claim}</p>}
         <slot name="meta" />
         <div class="ss-hero__content content-prose">
             <Content />
         </div>
+        {hero.data.actions && (
+            <div class="ss-hero__actions">
+                {hero.data.actions.map((action) => (
+                    <Button
+                        href={action.href}
+                        variant={action.variant}
+                        style={
+                            action.variant === 'secondary' ? 'outline' : 'solid'
+                        }
+                        size="lg"
+                    >
+                        {action.label}
+                    </Button>
+                ))}
+            </div>
+        )}
+        {hero.data.tagline && (
+            <p class="ss-hero__tagline">{hero.data.tagline}</p>
+        )}
     </div>
 </section>
