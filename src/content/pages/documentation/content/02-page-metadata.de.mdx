@@ -1,0 +1,19 @@
+---
+tone: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Routing und Metadaten</Eyebrow>
+
+## Seitenmetadaten und URLs
+
+Ein Ordner mit `page.yaml` definiert eine Seite. Ohne `url` wird sein Ordnerpfad zur URL. Mit einem optionalen `url`-Segment bleibt die öffentliche URL unabhängig vom englischen Quellpfad: `documentation/content/page.yaml` mit `url: dokumentation` und `url: inhalte` erzeugt `/dokumentation/inhalte/`.
+
+```yaml
+title: Inhalte und Frontmatter
+description: Der Inhaltsvertrag von Sproutsite für globale Einstellungen, Seiten, Heroes und Sections.
+url: inhalte
+```
+
+`title` und `description` werden für den HTML-Titel und die Meta-Description verwendet. Ohne `hero.md` erscheint `title` zusätzlich als sichtbare H1.

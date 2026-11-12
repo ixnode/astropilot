@@ -1,12 +1,15 @@
 name: Sproutsite
 url: https://sproutsite.dev
 base: /
-language: de
+language: en
+locales:
+    - en
+    - de
 hero-classes:
     - ss-hero--theme-1
 header:
     links:
-        - label: Startseite
+        - label: Home
           href: /
         - label: FAQ
           href: /faq/
@@ -14,16 +17,16 @@ header:
           href: /info/
         - label: Showcase
           href: /showcase/
-        - label: Dokumentation
-          href: /dokumentation/
+        - label: Documentation
+          href: /documentation/
         - label: Blog
           href: /blog/
-        - label: Kontakt
-          href: /kontakt/
+        - label: Contact
+          href: /contact/
 footer:
     text: Agent-ready static CMS for Astro and TypeScript.
     links:
-        - label: Dokumentation
-          href: /dokumentation/
-        - label: Kontakt
-          href: /kontakt/
+        - label: Documentation
+          href: /documentation/
+        - label: Contact
+          href: /contact/

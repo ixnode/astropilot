@@ -1,0 +1,279 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Referenz für Theme-Entwicklung</Eyebrow>
+
+## Token-Referenz des Default-Themes
+
+Diese Referenz dokumentiert die gemeinsamen Gestaltungswerte des Default-Themes: Farben, Schriften, Abstände, Radien, Schatten und Fokusregeln. „Vorschau“ zeigt die kompakte Referenz, „Code“ die zugehörigen CSS-Ausschnitte. Die Ausschnitte erläutern den bestehenden Stand; sie sind keine zusätzlichen Styles für Inhaltsdateien.
+
+Alle Projektpfade beziehen sich auf `src/themes/default/`. Werte werden in den jeweiligen Theme-Dateien gepflegt; diese Referenz wird bei Änderungen mit aktualisiert. Das Theme wird ausschließlich über `styles/theme.css` eingebunden. Seine dokumentierte Importreihenfolge bleibt maßgeblich.
+
+Die [visuelle Foundations-Seite](/showcase/foundations/) zeigt die Gestaltung in Aktion. Die Anwendung einzelner Bausteine zeigen die Detailseiten: [Typografie](/showcase/typografie/), [Layout](/showcase/layout/), [Sections](/showcase/sections/), [Cards](/showcase/cards/), [Alerts](/showcase/alerts/) und [Tabs](/showcase/tabs/).
+
+### Farbtokens
+
+Quelle: styles/theme.css. Die Namen in der Tabelle erhalten den Präfix --color-. Sie beschreiben Aufgaben innerhalb der Palette; nicht jeder definierte Farbton wird bereits von einem Baustein verwendet.
+
+<Tabs label="Farbtokens: Referenz und CSS" variant="border">
+    <Tab title="Vorschau">
+
+        | Name | Wert | Zweck |
+        | --- | --- | --- |
+        | `base-100` | `#ffffff` | Standardfläche |
+        | `base-200` | `#f5f7fa` | Gedämpfte Fläche |
+        | `base-300` | `#e2e8f0` | Rahmen und Trennlinien |
+        | `base-content` | `#172033` | Text auf neutralen Flächen |
+        | `primary` | `#1e5aa8` | Primäre Links und Aktionen |
+        | `secondary` | `#0f766e` | Ergänzender Markenfarbton |
+        | `accent` | `#b45309` | Zusätzlicher Akzent |
+        | `neutral` | `#26334a` | Dunkle neutrale Fläche |
+        | `info` | `#1769aa` | Information |
+        | `success` | `#19764b` | Erfolg |
+        | `warning` | `#9a5b00` | Warnung |
+        | `error` | `#b42318` | Fehler |
+
+        `primary-content`, `secondary-content`, `accent-content`, `neutral-content` und die vier Status-Gegenfarben sind jeweils `#ffffff`. Sie sind für Text auf der entsprechenden Farbfläche vorgesehen. Für neutrale Flächen gilt `base-content`.
+
+    </Tab>
+    <Tab title="Code">
+
+        ````css
+        /* styles/theme.css: Farbausschnitt des vorhandenen Themes */
+        @plugin "daisyui/theme" {
+            name: "sproutsite";
+            --color-base-100: #ffffff;
+            --color-base-200: #f5f7fa;
+            --color-base-300: #e2e8f0;
+            --color-base-content: #172033;
+            --color-primary: #1e5aa8;
+            --color-primary-content: #ffffff;
+            --color-secondary: #0f766e;
+            --color-secondary-content: #ffffff;
+            --color-accent: #b45309;
+            --color-accent-content: #ffffff;
+            --color-neutral: #26334a;
+            --color-neutral-content: #ffffff;
+            --color-info: #1769aa;
+            --color-info-content: #ffffff;
+            --color-success: #19764b;
+            --color-success-content: #ffffff;
+            --color-warning: #9a5b00;
+            --color-warning-content: #ffffff;
+            --color-error: #b42318;
+            --color-error-content: #ffffff;
+        }
+        ````
+
+    </Tab>
+
+</Tabs>
+
+### Schriftfamilien
+
+Quellen: styles/foundation/tokens.css und fonts.css. Nunito wird lokal geladen. Der Fließtext verwendet die verfügbare Systemschrift; zusätzliche externe Schriftanfragen sind nicht erforderlich.
+
+<Tabs label="Schriftfamilien: Referenz und CSS" variant="border">
+    <Tab title="Vorschau">
+
+        | Token | Wert | Einsatz |
+        | --- | --- | --- |
+        | `--font-heading` | Nunito mit System-Fallback | Überschriften und Eyebrows |
+        | `--font-sans` | `ui-sans-serif`, `system-ui`, `sans-serif` | Fließtext |
+
+    </Tab>
+    <Tab title="Code">
+
+        ````css
+        /* styles/foundation/tokens.css */
+        @theme {
+            --font-sans: ui-sans-serif, system-ui, sans-serif;
+            --font-heading: 'Nunito', var(--font-sans);
+        }
+
+        /* styles/foundation/fonts.css */
+        @layer base {
+            :is(h1, h2, h3, h4, h5, h6) {
+                font-family: var(--font-heading);
+            }
+        }
+        ````
+
+    </Tab>
+
+</Tabs>
+
+### Schriftgrößen
+
+Quelle: styles/foundation/tokens.css. Die Tabelle verwendet die kurzen Tokennamen mit dem Präfix --text-. Die Größen von Seitentiteln und h2 wachsen mit der Bildschirmbreite innerhalb der angegebenen Grenzen.
+
+<Tabs label="Schriftgrößen: Referenz und CSS" variant="border">
+    <Tab title="Vorschau">
+
+        | Einsatz | Token | Größe |
+        | --- | --- | --- |
+        | Seitentitel | `display` | 2,25–4rem |
+        | h2 | `heading-2` | 1,75–2,5rem |
+        | h3 | `heading-3` | 1,5rem |
+        | h4 | `heading-4` | 1,25rem |
+        | h5 | `heading-5` | 1,125rem |
+        | h6 | `heading-6` | 1rem |
+
+        `heading-1` entspricht der Größenskala von `display`; `heading` der von `heading-2`. In der Markdown-Prosa sind h1 und h2 fett, h3 bis h6 mittelstark. Einzelne Komponenten können eigene Regeln verwenden. Die sichtbare h1 wird vom Seitenlayout erzeugt.
+
+    </Tab>
+    <Tab title="Code">
+
+        ````css
+        /* styles/foundation/tokens.css */
+        @theme {
+            --text-display: clamp(2.25rem, 5vw, 4rem);
+            --text-display--line-height: 1.08;
+            --text-heading: clamp(1.75rem, 3vw, 2.5rem);
+            --text-heading--line-height: 1.15;
+            --text-heading-1: clamp(2.25rem, 5vw, 4rem);
+            --text-heading-2: clamp(1.75rem, 3vw, 2.5rem);
+            --text-heading-3: 1.5rem;
+            --text-heading-4: 1.25rem;
+            --text-heading-5: 1.125rem;
+            --text-heading-6: 1rem;
+        }
+        ````
+
+    </Tab>
+
+</Tabs>
+
+### Abstandstokens
+
+Quelle: styles/foundation/tokens.css. Die Tabellennamen erhalten den Präfix --spacing-. Die Grenzen beziehen sich auf die Tokenwerte; Headerüberlagerung und Komponentenregeln können den tatsächlich sichtbaren Abstand ergänzen.
+
+<Tabs label="Abstandstokens: Referenz und CSS" variant="border">
+    <Tab title="Vorschau">
+
+        | Token | Bereich | Zweck |
+        | --- | --- | --- |
+        | `gutter` | 1–2rem | Seitlicher Inhaltsabstand |
+        | `section` | 1,875–3,375rem | Section oben und unten |
+        | `section-hero` | 4,5–7,5rem | Hero-Grundabstand |
+        | `section-hero-bottom` | 2–3,5rem | Hero unten |
+
+        `header-overlay` reserviert `10rem` für den Header; ab `48rem` Bildschirmbreite gilt `5.5rem`. Komponenten verwenden zusätzlich Tailwind-Abstände, beispielsweise `gap-8` für `2rem` im Spaltenraster. Die Tokens ersetzen diese Regeln nicht vollständig.
+
+    </Tab>
+    <Tab title="Code">
+
+        ````css
+        /* styles/foundation/tokens.css */
+        @theme {
+            --spacing-gutter: clamp(1rem, 4vw, 2rem);
+            --spacing-section: clamp(1.875rem, 3.75vw, 3.375rem);
+            --spacing-section-hero: clamp(4.5rem, 9vw, 7.5rem);
+            --spacing-section-hero-bottom: clamp(2rem, 4vw, 3.5rem);
+            --spacing-header-overlay: 10rem;
+        }
+
+        @media (min-width: 48rem) {
+            :root {
+                --spacing-header-overlay: 5.5rem;
+            }
+        }
+        ````
+
+    </Tab>
+
+</Tabs>
+
+### Radien und Schatten
+
+Radien werden in styles/theme.css festgelegt. Die zusätzlichen Schattenwerte stehen in styles/foundation/tokens.css. Definierte Tokens und tatsächlich eingesetzte Schatten sind hier bewusst getrennt.
+
+<Tabs label="Radien und Schatten: Referenz und CSS" variant="border">
+    <Tab title="Vorschau">
+
+        | Token | Wert | Einsatz |
+        | --- | --- | --- |
+        | `--radius-selector` | 0,5rem | Auswahl-Elemente |
+        | `--radius-field` | 0,5rem | Felder und Reiter |
+        | `--radius-box` | 0,75rem | Cards, Panels und gerundete Bilder |
+        | `--border` | 1px | Standard-Rahmenstärke |
+
+        Die projektspezifischen Tokens `--shadow-soft` und `--shadow-raised` werden im visuellen FoundationSample verglichen. Cards und der gescrollte Header nutzen Tailwinds `shadow-sm`; der Skip-Link nutzt `shadow-lg`. Die genauen Werte stehen im Code-Tab.
+
+    </Tab>
+    <Tab title="Code">
+
+        ````css
+        /* styles/theme.css: Ausschnitt */
+        @plugin "daisyui/theme" {
+            name: "sproutsite";
+            --radius-selector: 0.5rem;
+            --radius-field: 0.5rem;
+            --radius-box: 0.75rem;
+            --border: 1px;
+        }
+
+        /* styles/foundation/tokens.css: zusätzliche Schatten für Gestaltungsproben */
+        @theme {
+            --shadow-soft: 0 1px 2px rgb(23 32 51 / 8%), 0 8px 24px rgb(23 32 51 / 6%);
+            --shadow-raised: 0 8px 24px rgb(23 32 51 / 12%), 0 2px 6px rgb(23 32 51 / 8%);
+        }
+
+        /* Aktive Tailwind-Basiswerte aus tailwindcss/theme.css */
+        @theme {
+            --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        ````
+
+    </Tab>
+
+</Tabs>
+
+### Fokusdarstellung
+
+Quellen: styles/foundation/focus.css und components/molecules/Tabs/Tabs.css. Der Fokus markiert das aktuelle Tastaturziel. In Reiterleisten liegt die Kontur innen, damit sie beim horizontalen Scrollen nicht abgeschnitten wird.
+
+<Tabs label="Fokusdarstellung: Referenz und CSS" variant="border">
+    <Tab title="Vorschau">
+
+        | Eigenschaft | Allgemein | Reiter |
+        | --- | --- | --- |
+        | Kontur | 3px durchgezogen | 3px durchgezogen |
+        | Farbe | `primary` | `primary` |
+        | Versatz | 3px nach außen | 3px nach innen |
+
+        Wähle diesen Vorschau-Reiter und drücke zweimal die Tabulatortaste: zuerst zum Panel, dann zu diesem [Link zur Theme-Dokumentation](/dokumentation/theme/). Der Link verwendet die allgemeine Fokusregel.
+
+    </Tab>
+    <Tab title="Code">
+
+        ````css
+        /* One visible keyboard-focus treatment across theme components and content. */
+        @layer base {
+            :focus-visible {
+                @apply outline-3 outline-offset-3 outline-primary;
+            }
+        }
+
+        /* components/molecules/Tabs/Tabs.css: Ausschnitt */
+        .ss-tabs {
+            .ss-tabs__list {
+                .ss-tabs__button {
+                    &:focus-visible {
+                        outline: 3px solid var(--color-primary) !important;
+                        outline-offset: -3px !important;
+                    }
+                }
+            }
+        }
+        ````
+
+    </Tab>
+
+</Tabs>

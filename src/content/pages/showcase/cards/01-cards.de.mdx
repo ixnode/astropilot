@@ -1,0 +1,114 @@
+---
+tone: default
+fullWidth: true
+---
+
+import layoutLandscape from '../_assets/layout-landscape.png';
+import layoutPortrait from '../_assets/layout-portrait.png';
+import { Card, CardActions } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Wiederverwendbare Container</Eyebrow>
+
+## Cards
+
+Cards fassen Bild, Markdown-Inhalt und einen optionalen nächsten Schritt in einem wiederverwendbaren Baustein zusammen. Jedes Beispiel zeigt zunächst die Vorschau. Im Reiter „Code“ findest du den dazugehörigen MDX-Code einschließlich der benötigten Imports. Die relativen Bildpfade beziehen sich auf diese Showcase-Datei; für eigene Seiten passt du sie an den Speicherort deiner Bilder an.
+
+**Atomic Design:** Molecules `Card` und `CardActions`.
+
+Komponentenpfade unter `src/themes/default/components/`: `molecules/Card/` und `molecules/CardActions/`.
+
+### Bildkarte mit weiterführendem Link
+
+<Tabs label="Bildkarte mit weiterführendem Link: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Card image={layoutLandscape} imageAlt="Abstrakte blaue Darstellung eines modularen Website-Layouts" shadow="lg">
+            #### Mit Bild, Titel und Action
+
+            Die erste Überschrift der Card wird als Titel gestaltet. Das Bild wird innerhalb eines `figure`-Elements als optimiertes WebP ausgegeben. Mit `shadow="lg"` erhält diese Card eine stärkere räumliche Betonung.
+
+            <CardActions>
+                [Mehr zum Konzept](/info/)
+            </CardActions>
+        </Card>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import layoutLandscape from '../_assets/layout-landscape.png';
+        import { Card, CardActions } from 'sproutsite/components';
+
+        <Card image={layoutLandscape} imageAlt="Abstrakte blaue Darstellung eines modularen Website-Layouts" shadow="lg">
+            #### Mit Bild, Titel und Action
+
+            Die erste Überschrift der Card wird als Titel gestaltet. Das Bild wird innerhalb eines `figure`-Elements als optimiertes WebP ausgegeben. Mit `shadow="lg"` erhält diese Card eine stärkere räumliche Betonung.
+
+            <CardActions>
+                [Mehr zum Konzept](/info/)
+            </CardActions>
+        </Card>
+        ```
+    </Tab>
+
+</Tabs>
+
+### Textkarte mit mehreren Links
+
+<Tabs label="Textkarte mit mehreren Links: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Card>
+            #### Ohne Bild mit mehreren Actions
+
+            Der Body unterstützt gewöhnliches Markdown mit mehreren Absätzen.
+
+            Inhalt und Darstellung bleiben dabei voneinander getrennt.
+
+            <CardActions>
+                [FAQ](/faq/) [Kontakt](/kontakt/)
+            </CardActions>
+        </Card>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Card, CardActions } from 'sproutsite/components';
+
+        <Card>
+            #### Ohne Bild mit mehreren Actions
+
+            Der Body unterstützt gewöhnliches Markdown mit mehreren Absätzen.
+
+            Inhalt und Darstellung bleiben dabei voneinander getrennt.
+
+            <CardActions>
+                [FAQ](/faq/) [Kontakt](/kontakt/)
+            </CardActions>
+        </Card>
+        ```
+    </Tab>
+
+</Tabs>
+
+### Bildkarte ohne Titel und Links
+
+<Tabs label="Bildkarte ohne Titel und Links: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Card image={layoutPortrait} imageAlt="Editorial-Darstellung von modularen Inhaltsblöcken">
+            Diese Card beginnt ohne Überschrift und hat keinen Actions-Bereich.
+
+            So bleibt sie für rein visuelle oder ergänzende Inhalte bewusst schlicht.
+        </Card>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import layoutPortrait from '../_assets/layout-portrait.png';
+        import { Card } from 'sproutsite/components';
+
+        <Card image={layoutPortrait} imageAlt="Editorial-Darstellung von modularen Inhaltsblöcken">
+            Diese Card beginnt ohne Überschrift und hat keinen Actions-Bereich.
+
+            So bleibt sie für rein visuelle oder ergänzende Inhalte bewusst schlicht.
+        </Card>
+        ```
+    </Tab>
+
+</Tabs>

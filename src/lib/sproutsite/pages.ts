@@ -26,36 +26,37 @@ export function assemblePages<
     pageEntries: TPage[],
     documentEntries: TDocument[],
     routeForPage?: (entry: TPage) => string,
+    idForEntry: (entry: TPage | TDocument) => string = (entry) => entry.id,
 ): AssembledPage<TPage, TDocument>[] {
     const pageUrlByDirectory = new Map(
         pageEntries.map((entry) => [
-            pageDirectoryFromId(entry.id),
+            pageDirectoryFromId(idForEntry(entry)),
             (entry.data as { url?: string }).url,
         ]),
     );
     const pages = pageEntries.map((entry) => {
-        const directory = pageDirectoryFromId(entry.id);
+        const directory = pageDirectoryFromId(idForEntry(entry));
         const prefix = directory === '' ? '' : `${directory}/`;
         const ownDocuments = documentEntries.filter(
             (document) =>
-                document.id.startsWith(prefix) &&
-                !document.id.slice(prefix.length).includes('/'),
+                idForEntry(document).startsWith(prefix) &&
+                !idForEntry(document).slice(prefix.length).includes('/'),
         );
         const hero = ownDocuments.find(
-            (document) => document.id === `${prefix}hero`,
+            (document) => idForEntry(document) === `${prefix}hero`,
         );
         const sections = ownDocuments
-            .filter((document) => sectionName.test(document.id))
+            .filter((document) => sectionName.test(idForEntry(document)))
             .sort(
                 (left, right) =>
-                    Number(sectionName.exec(left.id)?.[1]) -
-                    Number(sectionName.exec(right.id)?.[1]),
+                    Number(sectionName.exec(idForEntry(left))?.[1]) -
+                    Number(sectionName.exec(idForEntry(right))?.[1]),
             );
         return {
             entry,
             route:
                 routeForPage?.(entry) ??
-                routeFromPageId(entry.id, (path) =>
+                routeFromPageId(idForEntry(entry), (path) =>
                     pageUrlByDirectory.get(path),
                 ),
             hero,

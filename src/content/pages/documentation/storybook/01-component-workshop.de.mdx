@@ -1,0 +1,62 @@
+---
+tone: default
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Komponentenwerkstatt</Eyebrow>
+
+## Komponenten isoliert entwickeln
+
+Storybook zeigt die vorhandenen Sproutsite-Komponenten unabhängig von den Inhaltsseiten. Das ist besonders hilfreich, um Varianten, responsive Darstellung und Zustände einer Komponente zu vergleichen, bevor sie im Showcase oder in einer Website verwendet wird.
+
+Storybook ist ein lokales Entwicklungswerkzeug. Es gehört nicht zur veröffentlichten Sproutsite-Website und wird nicht automatisch bereitgestellt.
+
+### Storybook starten
+
+```sh
+nvm use
+npm run storybook
+```
+
+Danach ist die Komponentenwerkstatt unter [http://localhost:6006](http://localhost:6006) verfügbar. Eine globale Storybook-Installation ist nicht nötig: Das Projekt verwendet die lokale Entwicklungsabhängigkeit.
+
+### Vorhandene Stories
+
+Die ersten Stories zeigen die Komponenten `Button`, `Badge`, `Alert`, `Card` und `ContentImage`. Sie verwenden die echten `.astro`-Komponenten und das Standard-Theme. Änderungen an Komponente oder CSS werden dadurch unmittelbar in derselben Darstellung überprüfbar.
+
+Neue Stories liegen neben den bestehenden Beispielen unter `stories/components/`. Eine Story importiert immer die vorhandene Komponente; sie erstellt keine parallele TSX-Variante.
+
+```ts
+import Button from '../../../src/themes/default/components/atoms/Button/Button.astro';
+
+export default {
+    title: 'Atoms/Button',
+    component: Button,
+    tags: ['autodocs'],
+};
+
+export const Primary = {
+    args: {
+        slots: {
+            default: 'Weiter',
+        },
+    },
+};
+```
+
+Ergänze eine Story, wenn eine wiederverwendbare Komponente oder eine bedeutende Variante hinzukommt. Die Story sollte klar benennen, welchen Zustand oder welche Gestaltung sie überprüft.
+
+### Responsive Varianten prüfen
+
+Die Toolbar enthält vier fest konfigurierte Standardgrößen: **Small mobile** (320 px), **Large mobile** (414 px), **Tablet** (834 px) und **Desktop** (1280 px). Wähle sie für jede relevante Story nacheinander aus. Prüfe insbesondere Umbrüche, ausreichende Touch-Ziele, Bildausschnitte sowie horizontales Überlaufen.
+
+Die Stories für `Card` und `Columns` enthalten gezielte responsive Beispiele. Ihre Breite wird nicht im Code festgesetzt, damit sie über die Viewport-Toolbar frei kontrolliert werden kann.
+
+### Statischen Storybook-Build prüfen
+
+```sh
+npm run build:storybook
+```
+
+Der Befehl erzeugt eine statische Vorschau in `storybook-static/`. Dieser generierte Ordner ist in `.gitignore` ausgeschlossen. Der Build ist eine lokale Qualitätsprüfung und veröffentlicht nichts.

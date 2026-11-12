@@ -1,7 +1,7 @@
 ---
-title: Content Collections machen Inhalte verlässlich
-eyebrow: Meilenstein 1
+title: Content Collections make content reliable
+eyebrow: Milestone 1
 tone: brand
 ---
 
-Strenge Schemas verbinden frei pflegbare Markdown-Dateien mit sicheren Seiten und Metadaten.
+Strict schemas connect editable Markdown files with reliable pages and metadata.

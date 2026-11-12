@@ -1,0 +1,18 @@
+---
+tone: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Verlässliche Ausgabe</Eyebrow>
+
+## Qualität automatisiert prüfen
+
+```sh
+npm run test:a11y
+npm run test:source
+npm run format:check
+npm run pack:check
+```
+
+Die Barrierefreiheitsprüfung kontrolliert Axe-Regeln, sichtbaren Tastaturfokus und horizontalen Overflow auf Mobile und Desktop. `test:source` stellt sicher, dass keine eigenen JavaScript-Quelldateien entstanden sind. `pack:check` zeigt den späteren npm-Paketinhalt ohne Veröffentlichung an.

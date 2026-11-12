@@ -22,6 +22,10 @@ const siteSchema = z.object({
     language: z
         .string()
         .regex(/^[a-z]{2}(?:-[A-Z]{2})?$/, 'must be a BCP 47 language tag'),
+    locales: z
+        .array(z.string().regex(/^[a-z]{2}$/))
+        .min(1)
+        .default(['en']),
     'hero-classes': z.array(heroClass).max(8).default([]),
     blog: z
         .object({
@@ -38,8 +42,10 @@ const siteSchema = z.object({
     }),
 });
 
-export function loadSiteConfig(): SiteConfig {
-    const source = resolve(process.cwd(), 'src/content/site.yaml');
+export function loadSiteConfig(locale?: string): SiteConfig {
+    const filename =
+        locale && locale !== 'en' ? `site.${locale}.yaml` : 'site.yaml';
+    const source = resolve(process.cwd(), 'src/content', filename);
     const raw = parse(readFileSync(source, 'utf8'));
     const parsed = siteSchema.safeParse(raw);
     if (!parsed.success) {

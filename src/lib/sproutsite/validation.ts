@@ -72,6 +72,7 @@ const heroSchema = markdownSchema
         }
     });
 const sectionPattern = /^\d{2,}-[a-z0-9][a-z0-9-]*\.(?:md|mdx)$/;
+const localizedContentFile = /\.de\.(?:md|mdx|yaml)$/;
 const mdxComponentImport =
     /^import\s*\{\s*Column\s*,\s*Columns(?:\s*,\s*Eyebrow)?\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
 const eyebrowComponentImport =
@@ -826,6 +827,7 @@ export function validateSproutsiteContent(
     }
 
     for (const path of allFiles) {
+        if (localizedContentFile.test(path)) continue;
         if (imageExtensions.has(extname(path).toLowerCase())) continue;
         const filename = path.split('/').at(-1)!;
         if (filename === 'page.yaml') continue;

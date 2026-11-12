@@ -1,7 +1,7 @@
 ---
-title: Ein Komponenten-System für wiederverwendbare Inhalte
-eyebrow: Meilenstein 2
+title: A component system for reusable content
+eyebrow: Milestone 2
 tone: brand
 ---
 
-Wie MDX-Bausteine redaktionelle Inhalte mit geprüften Layout- und UI-Komponenten verbinden.
+How MDX building blocks connect editorial content with tested layout and UI components.

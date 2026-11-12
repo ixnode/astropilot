@@ -23,6 +23,14 @@ export function createSproutsiteConfig() {
     return {
         site: site.url,
         base: site.base,
+        i18n:
+            site.locales.length > 1
+                ? {
+                      locales: site.locales,
+                      defaultLocale: site.language,
+                      routing: { prefixDefaultLocale: false },
+                  }
+                : undefined,
         integrations: [
             mdx(),
             sitemap(),

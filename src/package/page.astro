@@ -10,40 +10,62 @@ import Hero from '../themes/default/components/organisms/Hero/Hero.astro';
 import PageTitle from '../themes/default/components/organisms/PageTitle/PageTitle.astro';
 import Section from '../themes/default/components/organisms/Section/Section.astro';
 
-export async function getSproutsiteStaticPaths() {
+type Locale = 'en' | 'de';
+
+export function localeOf(id: string): Locale {
+    return id.endsWith('.de') ? 'de' : 'en';
+}
+
+export function logicalId(id: string): string {
+    return id.replace(/\.de$/, '');
+}
+
+export async function getSproutsiteStaticPaths(locale: Locale = 'en') {
     const pages = assemblePages(
-        await getCollection('pages'),
-        await getCollection('documents'),
+        (await getCollection('pages')).filter(
+            (entry) => localeOf(entry.id) === locale,
+        ),
+        (await getCollection('documents')).filter(
+            (entry) => localeOf(entry.id) === locale,
+        ),
+        undefined,
+        (entry) => logicalId(entry.id),
     );
     const pagePaths = pages.map((page) => ({
         params: {
             slug: page.route === '/' ? undefined : page.route.slice(1, -1),
         },
-        props: { page },
+        props: { page, locale },
     }));
-    const posts = (await getCollection('blogPages')).sort(
-        (left, right) =>
-            right.data.pubDate.getTime() - left.data.pubDate.getTime(),
-    );
+    const posts = (await getCollection('blogPages'))
+        .filter((entry) => localeOf(entry.id) === locale)
+        .sort(
+            (left, right) =>
+                right.data.pubDate.getTime() - left.data.pubDate.getTime(),
+        );
     const assembledPosts = assemblePages(
         posts,
-        await getCollection('blogDocuments'),
-        (entry) => blogRouteFromId(entry.id),
+        (await getCollection('blogDocuments')).filter(
+            (entry) => localeOf(entry.id) === locale,
+        ),
+        (entry) => blogRouteFromId(logicalId(entry.id)),
+        (entry) => logicalId(entry.id),
     );
     const blogPaths = [
         {
             params: { slug: 'blog' },
-            props: { blogIndex: true, posts },
+            props: { blogIndex: true, posts, locale },
         },
         ...assembledPosts.map((post) => ({
             params: { slug: post.route.slice(1, -1) },
-            props: { post },
+            props: { post, locale },
         })),
     ];
     return [...pagePaths, ...blogPaths];
 }
 
 interface Props {
+    locale: Locale;
     page?: AssembledPage;
     blogIndex?: boolean;
     posts?: CollectionEntry<'blogPages'>[];
@@ -52,8 +74,8 @@ interface Props {
         CollectionEntry<'blogDocuments'>
     >;
 }
-const { page, blogIndex, posts, post } = Astro.props;
-const site = loadSiteConfig();
+const { page, blogIndex, posts, post, locale } = Astro.props;
+const site = loadSiteConfig(locale);
 const hero = page?.hero ? await render(page.hero) : undefined;
 const sections = page
     ? await Promise.all(

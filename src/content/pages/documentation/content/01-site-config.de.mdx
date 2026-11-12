@@ -1,0 +1,27 @@
+---
+tone: default
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Zentrale Konfiguration</Eyebrow>
+
+## Globale Website-Einstellungen
+
+`src/content/site.yaml` enthält Name, Produktions-URL, Base-Pfad, Sprache, Navigation und Footer. Diese Werte werden für Layout, Links, Canonicals und Sitemap wiederverwendet.
+
+```yaml
+name: Sproutsite
+url: https://sproutsite.dev
+base: /
+language: de
+```
+
+### Globale Hero-Klassen
+
+Mit `hero-classes` können Theme-Klassen für alle Heroes und die kompakte H1-Fallback-Ansicht ohne `hero.md` gesetzt werden. Die Klassen beginnen mit `ss-` und bleiben damit Theme-Details statt Inhaltslayout.
+
+```yaml
+hero-classes:
+    - ss-hero--theme-1
+```

@@ -1,0 +1,17 @@
+---
+tone: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Gestaltungsvarianten</Eyebrow>
+
+## Hero-Varianten im Theme
+
+Hero-Klassen beginnen mit `ss-` und werden im Theme gestylt. `ss-hero--theme-1` ergänzt einen tiefen Navy-Hintergrund mit organischen Wellen in Blau und Teal. Die linke Seite bleibt für den Text ruhig; auf kleinen Bildschirmen werden die Wellen zusätzlich zurückgenommen. Der semantische Tone bleibt unverändert. Die Startseite übernimmt diese globale Hero-Klasse aus `site.yaml`, ohne ein zusätzliches Hintergrundbild.
+
+Die Gestaltung liegt zusammenhängend in `components/organisms/Hero/Hero.css`, die Vektorformen in `assets/hero-waves.svg`. Die Farbtokens `--color-hero-*` stehen in `styles/foundation/tokens.css`; die eigenständige SVG-Datei verwendet dieselbe Palette für ihre Verläufe. Bei einer Änderung der Wellenfarben werden beide Stellen angepasst. Die Wellen sind rein dekorativ und enthalten keine zusätzlichen Texte oder Logos.
+
+Die obere Welle ist als großzügige Bézier-Kontur angelegt. Ein lokal begrenzter radialer Verlauf ergänzt dort Grün; darunter liegen unterschiedlich geschwungene blaue Ebenen. Auf Desktop füllt das SVG den Hero proportional mit `cover` und wird rechts unten ausgerichtet. So reichen die Wellen bis in die mittlere Bildhälfte; der grüne Verlauf ist auf den dabei entstehenden Ausschnitt abgestimmt. Sanfte dunkle Überblendungen schützen den linken Textbereich und die Navigation. Auf Tablets und Smartphones wird das SVG auf die volle Hero-Höhe skaliert und seine Deckkraft reduziert. Die Wellenpfade bleiben in allen Ansichten unverändert.
+
+Zusammengehörige Block-, Element- und Modifier-Regeln liegen in der CSS-Datei verschachtelt. So bleiben Varianten wie `ss-hero--theme-1` samt Pseudoelementen direkt zusammen editierbar.

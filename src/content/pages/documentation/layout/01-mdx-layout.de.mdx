@@ -1,0 +1,22 @@
+---
+tone: default
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Strukturierte Inhalte</Eyebrow>
+
+## MDX für geprüfte Layouts
+
+Normale Inhalte bleiben Markdown. Eine `.mdx`-Section ist sinnvoll, wenn ein dokumentierter Sproutsite-Baustein ein Layout übernimmt, zum Beispiel das 12-Spalten-Raster.
+
+```mdx
+import { Column, Columns } from 'sproutsite/components';
+
+<Columns>
+    <Column span={8}>Hauptinhalt</Column>
+    <Column span={4}>Ergänzung</Column>
+</Columns>
+```
+
+Auf mobilen Ansichten werden die Bereiche untereinander ausgegeben. Ab Desktopbreite stehen zwölf Rasterspalten pro Reihe zur Verfügung. Sobald ein weiterer Bereich nicht mehr in die Reihe passt, beginnt er automatisch in der nächsten Reihe. Ein gemeinsamer `Columns`-Block kann dadurch beliebig viele Bereiche enthalten: Acht Bereiche mit `span={4}` ergeben beispielsweise Reihen mit drei, drei und zwei Elementen. Die Abstände zwischen Spalten und Reihen sind einheitlich.

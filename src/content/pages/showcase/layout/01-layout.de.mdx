@@ -1,0 +1,395 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Column, Columns } from 'sproutsite/components';
+import { Card } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Responsive Struktur</Eyebrow>
+
+## Ein Raster, unterschiedliche Aufteilungen
+
+Jede Karte macht einen Spaltenbereich sichtbar. Ab 64rem Bildschirmbreite stehen zwölf Rasterspalten zur Verfügung. Darunter werden alle Bereiche in ihrer Lesereihenfolge untereinander angezeigt. Verkleinere das Browserfenster, um den Wechsel zu sehen. Jedes Beispiel zeigt zunächst die Vorschau. Unter „Code“ findest du den vollständigen MDX-Code der jeweiligen Aufteilung einschließlich der benötigten Imports.
+
+**Atomic Design:** Technische Layout-Primitiven `Columns` und `Column` in der ergänzenden Kategorie `layout`.
+
+Komponentenpfade unter `src/themes/default/components/`: `layout/Columns/` und `layout/Column/`.
+
+### Volle Breite: 12
+
+Ohne `span` nutzt eine Spalte die gesamte Inhaltsbreite.
+
+<Tabs label="Volle Breite: 12: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Columns>
+            <Column>
+                <Card>
+                    #### 12 von 12
+
+                    Platz für einen Überblick oder einen längeren Inhalt. Die Breite endet am gemeinsamen Inhaltsrand der Seite.
+                </Card>
+            </Column>
+
+        </Columns>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Column, Columns } from 'sproutsite/components';
+        import { Card } from 'sproutsite/components';
+
+        <Columns>
+            <Column>
+                <Card>
+                    #### 12 von 12
+
+                    Platz für einen Überblick oder einen längeren Inhalt. Die Breite endet am gemeinsamen Inhaltsrand der Seite.
+                </Card>
+            </Column>
+
+        </Columns>
+        ```
+    </Tab>
+
+</Tabs>
+
+### Zwei gleiche Bereiche: 6 + 6
+
+Beide Karten teilen sich eine Reihe. Überschrift und Text bleiben innerhalb jeder Spalte untereinander.
+
+<Tabs label="Zwei gleiche Bereiche: 6 + 6: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Columns>
+            <Column span={6}>
+                <Card>
+                    #### Linke Hälfte
+
+                    `span={6}` belegt die ersten sechs Rasterspalten.
+                </Card>
+            </Column>
+            <Column span={6}>
+                <Card>
+                    #### Rechte Hälfte
+
+                    `span={6}` belegt die übrigen sechs Rasterspalten.
+                </Card>
+            </Column>
+
+        </Columns>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Column, Columns } from 'sproutsite/components';
+        import { Card } from 'sproutsite/components';
+
+        <Columns>
+            <Column span={6}>
+                <Card>
+                    #### Linke Hälfte
+
+                    `span={6}` belegt die ersten sechs Rasterspalten.
+                </Card>
+            </Column>
+            <Column span={6}>
+                <Card>
+                    #### Rechte Hälfte
+
+                    `span={6}` belegt die übrigen sechs Rasterspalten.
+                </Card>
+            </Column>
+
+        </Columns>
+        ```
+    </Tab>
+
+</Tabs>
+
+### Drei gleiche Bereiche: 4 + 4 + 4
+
+Drei Karten stehen nebeneinander. Die Abstände zwischen ihnen bleiben genauso groß wie bei zwei Spalten.
+
+<Tabs label="Drei gleiche Bereiche: 4 + 4 + 4: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Columns>
+            <Column span={4}>
+                <Card>
+                    #### Erstes Drittel
+
+                    `span={4}` eignet sich beispielsweise für einen Vorteil.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    #### Zweites Drittel
+
+                    Auch mit etwas mehr Text bleibt die Karte innerhalb ihrer Spalte. Die Karten einer Reihe werden auf dieselbe Höhe gestreckt.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    #### Drittes Drittel
+
+                    Die Reihe ist mit zwölf Rasterspalten vollständig gefüllt.
+                </Card>
+            </Column>
+
+        </Columns>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Column, Columns } from 'sproutsite/components';
+        import { Card } from 'sproutsite/components';
+
+        <Columns>
+            <Column span={4}>
+                <Card>
+                    #### Erstes Drittel
+
+                    `span={4}` eignet sich beispielsweise für einen Vorteil.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    #### Zweites Drittel
+
+                    Auch mit etwas mehr Text bleibt die Karte innerhalb ihrer Spalte. Die Karten einer Reihe werden auf dieselbe Höhe gestreckt.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    #### Drittes Drittel
+
+                    Die Reihe ist mit zwölf Rasterspalten vollständig gefüllt.
+                </Card>
+            </Column>
+
+        </Columns>
+        ```
+    </Tab>
+
+</Tabs>
+
+### Vier gleiche Bereiche: 3 + 3 + 3 + 3
+
+Viertel eignen sich für kurze Inhalte. Auf kleinen Bildschirmen erhalten auch diese Karten die volle Inhaltsbreite.
+
+<Tabs label="Vier gleiche Bereiche: 3 + 3 + 3 + 3: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Columns>
+            <Column span={3}>
+                <Card>
+                    #### Viertel 1
+
+                    `span={3}`
+                </Card>
+            </Column>
+            <Column span={3}>
+                <Card>
+                    #### Viertel 2
+
+                    `span={3}`
+                </Card>
+            </Column>
+            <Column span={3}>
+                <Card>
+                    #### Viertel 3
+
+                    `span={3}`
+                </Card>
+            </Column>
+            <Column span={3}>
+                <Card>
+                    #### Viertel 4
+
+                    `span={3}`
+                </Card>
+            </Column>
+
+        </Columns>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Column, Columns } from 'sproutsite/components';
+        import { Card } from 'sproutsite/components';
+
+        <Columns>
+            <Column span={3}>
+                <Card>
+                    #### Viertel 1
+
+                    `span={3}`
+                </Card>
+            </Column>
+            <Column span={3}>
+                <Card>
+                    #### Viertel 2
+
+                    `span={3}`
+                </Card>
+            </Column>
+            <Column span={3}>
+                <Card>
+                    #### Viertel 3
+
+                    `span={3}`
+                </Card>
+            </Column>
+            <Column span={3}>
+                <Card>
+                    #### Viertel 4
+
+                    `span={3}`
+                </Card>
+            </Column>
+
+        </Columns>
+        ```
+    </Tab>
+
+</Tabs>
+
+### Unterschiedliche Breiten: 8 + 4
+
+Ein Hauptbereich erhält zwei Drittel der Breite, ein ergänzender Bereich ein Drittel. Auf mobilen Ansichten steht der Hauptbereich zuerst.
+
+<Tabs label="Unterschiedliche Breiten: 8 + 4: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Columns>
+            <Column span={8}>
+                <Card>
+                    #### Hauptinhalt: 8 von 12
+
+                    Der breitere Bereich bietet Platz für ausführliche Erklärungen. Die Aufteilung entsteht allein durch `span={8}`.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    #### Ergänzung: 4 von 12
+
+                    `span={4}` schafft Platz für einen begleitenden Hinweis.
+                </Card>
+            </Column>
+
+        </Columns>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Column, Columns } from 'sproutsite/components';
+        import { Card } from 'sproutsite/components';
+
+        <Columns>
+            <Column span={8}>
+                <Card>
+                    #### Hauptinhalt: 8 von 12
+
+                    Der breitere Bereich bietet Platz für ausführliche Erklärungen. Die Aufteilung entsteht allein durch `span={8}`.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    #### Ergänzung: 4 von 12
+
+                    `span={4}` schafft Platz für einen begleitenden Hinweis.
+                </Card>
+            </Column>
+
+        </Columns>
+        ```
+    </Tab>
+
+</Tabs>
+
+### Automatischer Umbruch: fünf Karten in einem Block
+
+Alle fünf Karten gehören zum selben `Columns`-Block und verwenden `span={4}`. Nach der dritten Karte beginnt automatisch eine neue Reihe. Die letzten beiden Karten bleiben linksbündig und behalten ihre Breite; der letzte Platz bleibt frei.
+
+<Tabs label="Automatischer Umbruch: fünf Karten in einem Block: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Columns>
+            <Column span={4}>
+                <Card>
+                    #### Karte 1
+
+                    Erste Reihe, erster Platz.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    #### Karte 2
+
+                    Erste Reihe, zweiter Platz.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    #### Karte 3
+
+                    Erste Reihe, dritter Platz. Die zwölf Rasterspalten sind belegt.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    #### Karte 4
+
+                    Zweite Reihe, erster Platz. Der Umbruch benötigt keinen weiteren Layout-Block.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    #### Karte 5
+
+                    Zweite Reihe, zweiter Platz. Der Abstand zur oberen Reihe entspricht dem Abstand zwischen den Spalten.
+                </Card>
+            </Column>
+
+        </Columns>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Column, Columns } from 'sproutsite/components';
+        import { Card } from 'sproutsite/components';
+
+        <Columns>
+            <Column span={4}>
+                <Card>
+                    #### Karte 1
+
+                    Erste Reihe, erster Platz.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    #### Karte 2
+
+                    Erste Reihe, zweiter Platz.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    #### Karte 3
+
+                    Erste Reihe, dritter Platz. Die zwölf Rasterspalten sind belegt.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    #### Karte 4
+
+                    Zweite Reihe, erster Platz. Der Umbruch benötigt keinen weiteren Layout-Block.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    #### Karte 5
+
+                    Zweite Reihe, zweiter Platz. Der Abstand zur oberen Reihe entspricht dem Abstand zwischen den Spalten.
+                </Card>
+            </Column>
+
+        </Columns>
+        ```
+    </Tab>
+
+</Tabs>

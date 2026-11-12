@@ -1,7 +1,7 @@
 ---
-title: Kontakt zur Sproutsite-Demo
-eyebrow: Fragen und Austausch
+title: Contact the Sproutsite demo
+eyebrow: Questions and conversation
 tone: brand
 ---
 
-Sie haben Fragen zu Sproutsite oder möchten sich über ein Astro-Projekt austauschen? Hier finden Sie die beispielhafte Kontaktmöglichkeit dieser Demo.
+Do you have questions about Sproutsite or want to discuss an Astro project? This demo provides an example contact option.

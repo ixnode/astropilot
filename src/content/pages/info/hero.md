@@ -1,7 +1,7 @@
 ---
-title: Eine klare Grundlage für Astro-Projekte
-eyebrow: Das Konzept
+title: A clear foundation for Astro projects
+eyebrow: The concept
 tone: brand
 ---
 
-Sproutsite nutzt die erprobten Mechanismen von Astro und ergänzt nur die Regeln, die für konsistente Inhaltsseiten und wiederverwendbare Komponenten nötig sind.
+Sproutsite uses Astro's proven mechanisms and adds only the rules needed for consistent content pages and reusable components.

@@ -5,14 +5,13 @@ eyebrow: AGENT-READY STATIC CMS
 tone: brand
 claim: Your ideas. Your agent. Your website.
 actions:
-    - label: Loslegen
-      href: /dokumentation/einstieg/
+    - label: Get started
+      href: /documentation/getting-started/
       variant: primary
-    - label: Auf GitHub ansehen
+    - label: View on GitHub
       href: https://github.com/sproutsite/sproutsite
       variant: secondary
 tagline: Plant an idea. Grow your website.
 ---
 
-Erstelle und pflege Websites mit deinem bevorzugten Coding-Agenten. Sproutsite verwandelt Markdown und
-wiederverwendbare Komponenten in schnelle, statische Websites – auf Basis von Astro.
+Create and maintain websites with your preferred coding agent. Sproutsite transforms Markdown and reusable components into fast, static websites — powered by Astro.

@@ -1,0 +1,108 @@
+---
+tone: default
+fullWidth: true
+---
+
+import einstiegImage from './_assets/getting-started.png';
+import inhalteImage from './_assets/content.png';
+import layoutImage from './_assets/layout.png';
+import themeImage from './_assets/theme.png';
+import pruefenImage from './_assets/checks.png';
+import paketImage from './_assets/package.png';
+import storybookImage from './_assets/storybook.png';
+import { Card, CardActions } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Orientierung</Eyebrow>
+
+## Themen der Dokumentation
+
+Die Dokumentation ist nach Aufgaben gegliedert. Jede Unterseite bleibt eine normale Inhaltsseite und lässt sich wie alle anderen Seiten im Repository pflegen.
+
+<Columns>
+    <Column span={4}>
+        <Card image={einstiegImage} imageAlt="Abstrakte Darstellung eines Browserfensters, Terminals und Startpfeils">
+            ### Einstieg
+
+            Voraussetzungen, Installation und der erste lokale Start.
+
+            <CardActions>
+                [Einstieg öffnen](/dokumentation/einstieg/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={inhalteImage} imageAlt="Abstrakte Darstellung von strukturierten Inhalts- und Konfigurationsdateien">
+            ### Inhalte
+
+            `site.yaml`, `page.yaml`, Hero-Frontmatter und Sections.
+
+            <CardActions>
+                [Inhalte öffnen](/dokumentation/inhalte/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={layoutImage} imageAlt="Abstrakte Darstellung eines responsiven Rasters mit modularen Inhaltskarten">
+            ### Layout und Komponenten
+
+            MDX-Layouts sowie verfügbare Sproutsite-Komponenten.
+
+            <CardActions>
+                [Layout öffnen](/dokumentation/layout/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={themeImage} imageAlt="Abstrakte Darstellung von Farbwerten, Typografie und Design-Tokens">
+            ### Theme
+
+            Semantische Tones, Theme-Klassen und die CSS-Struktur.
+
+            <CardActions>
+                [Theme öffnen](/dokumentation/theme/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={pruefenImage} imageAlt="Abstrakte Darstellung einer Website-Prüfung mit Schild und Fokusmarkierung">
+            ### Prüfen
+
+            Entwicklungsbefehle, Tests, Build und Barrierefreiheitsprüfung.
+
+            <CardActions>
+                [Prüfungen öffnen](/dokumentation/pruefen/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={paketImage} imageAlt="Abstrakte Darstellung eines wiederverwendbaren Moduls zwischen zwei Projekten">
+            ### Paket
+
+            Das Framework lokal in einem separaten Astro-Projekt testen.
+
+            <CardActions>
+                [Paketnutzung öffnen](/dokumentation/paket/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={storybookImage} imageAlt="Abstrakte Darstellung eines Komponenten-Workshops mit Browserfenster, UI-Bausteinen und Bücherregal">
+            ### Storybook
+
+            Komponenten isoliert entwickeln, Varianten vergleichen und dokumentieren.
+
+            <CardActions>
+                [Storybook öffnen](/dokumentation/storybook/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>

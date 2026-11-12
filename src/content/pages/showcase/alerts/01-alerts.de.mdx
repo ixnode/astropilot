@@ -1,0 +1,194 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Alert } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Status und Hinweise</Eyebrow>
+
+## Alerts
+
+Alerts heben Hinweise, Informationen und Statusmeldungen hervor. Jedes Beispiel zeigt zunächst die Vorschau. Unter „Code“ findest du den passenden MDX-Code mit dem benötigten Import. Farbvarianten und Darstellungsstile werden über die Props `variant` und `style` gewählt; die Meldung bleibt normales Markdown.
+
+**Atomic Design:** Molecule `Alert`.
+
+Komponentenpfad unter `src/themes/default/components/`: `molecules/Alert/`.
+
+### Neutraler Hinweis
+
+Ohne Farbvariante eignet sich der Alert für allgemeine Hinweise.
+
+<Tabs label="Neutraler Hinweis: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Alert>
+            **Alert:** Eine neutrale Meldung ohne zusätzliche Farbvariante.
+        </Alert>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Alert } from 'sproutsite/components';
+
+        <Alert>
+            **Alert:** Eine neutrale Meldung ohne zusätzliche Farbvariante.
+        </Alert>
+        ```
+    </Tab>
+
+</Tabs>
+
+### Information
+
+Eine ergänzende Information zum aktuellen Inhalt.
+
+<Tabs label="Information: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Alert variant="info">
+            **Info:** Diese Seite zeigt aktuell verfügbare Sproutsite-Bausteine.
+        </Alert>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Alert } from 'sproutsite/components';
+
+        <Alert variant="info">
+            **Info:** Diese Seite zeigt aktuell verfügbare Sproutsite-Bausteine.
+        </Alert>
+        ```
+    </Tab>
+
+</Tabs>
+
+### Erfolgsmeldung
+
+Bestätigt einen erfolgreich abgeschlossenen Vorgang.
+
+<Tabs label="Erfolgsmeldung: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Alert variant="success">
+            **Success:** Der statische Build wurde erfolgreich erstellt.
+        </Alert>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Alert } from 'sproutsite/components';
+
+        <Alert variant="success">
+            **Success:** Der statische Build wurde erfolgreich erstellt.
+        </Alert>
+        ```
+    </Tab>
+
+</Tabs>
+
+### Warnung
+
+Lenkt die Aufmerksamkeit auf einen notwendigen Prüfschritt.
+
+<Tabs label="Warnung: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Alert variant="warning">
+            **Warning:** Prüfe Inhalte und Links vor einer Veröffentlichung.
+        </Alert>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Alert } from 'sproutsite/components';
+
+        <Alert variant="warning">
+            **Warning:** Prüfe Inhalte und Links vor einer Veröffentlichung.
+        </Alert>
+        ```
+    </Tab>
+
+</Tabs>
+
+### Fehlermeldung
+
+Kennzeichnet ein Problem, das Aufmerksamkeit erfordert.
+
+<Tabs label="Fehlermeldung: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Alert variant="error">
+            **Error:** Dieses Beispiel demonstriert eine Fehlermeldung ohne echte Störung.
+        </Alert>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Alert } from 'sproutsite/components';
+
+        <Alert variant="error">
+            **Error:** Dieses Beispiel demonstriert eine Fehlermeldung ohne echte Störung.
+        </Alert>
+        ```
+    </Tab>
+
+</Tabs>
+
+### Sanfte Fläche: Soft
+
+Eine zurückhaltende Hintergrundfläche für weniger dominante Hinweise.
+
+<Tabs label="Sanfte Fläche: Soft: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Alert variant="info" style="soft">
+            **Info, soft:** Eine zurückhaltende Informationsmeldung.
+        </Alert>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Alert } from 'sproutsite/components';
+
+        <Alert variant="info" style="soft">
+            **Info, soft:** Eine zurückhaltende Informationsmeldung.
+        </Alert>
+        ```
+    </Tab>
+
+</Tabs>
+
+### Klare Kontur: Outline
+
+Ein Rahmen betont die Meldung, während die Fläche dezent bleibt.
+
+<Tabs label="Klare Kontur: Outline: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Alert variant="success" style="outline">
+            **Success, outline:** Eine erfolgreiche Aktion mit klarer Kontur.
+        </Alert>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Alert } from 'sproutsite/components';
+
+        <Alert variant="success" style="outline">
+            **Success, outline:** Eine erfolgreiche Aktion mit klarer Kontur.
+        </Alert>
+        ```
+    </Tab>
+
+</Tabs>
+
+### Gestrichelter Rahmen: Dash
+
+Eine alternative Rahmengestaltung für optisch abgesetzte Hinweise.
+
+<Tabs label="Gestrichelter Rahmen: Dash: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Alert variant="warning" style="dash">
+            **Warning, dash:** Eine Warnung mit gestricheltem Rahmen.
+        </Alert>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Alert } from 'sproutsite/components';
+
+        <Alert variant="warning" style="dash">
+            **Warning, dash:** Eine Warnung mit gestricheltem Rahmen.
+        </Alert>
+        ```
+    </Tab>
+
+</Tabs>

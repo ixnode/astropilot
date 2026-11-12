@@ -11,6 +11,7 @@ export interface SiteConfig {
     url: string;
     base: string;
     language: string;
+    locales: string[];
     heroClasses: string[];
     blog?: {
         title: string;

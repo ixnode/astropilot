@@ -1,7 +1,9 @@
 ---
 import SproutsitePage, { getSproutsiteStaticPaths } from 'sproutsite/page';
 
-export const getStaticPaths = getSproutsiteStaticPaths;
+export async function getStaticPaths() {
+    return getSproutsiteStaticPaths('en');
+}
 
 const props = Astro.props;
 ---

@@ -1,7 +1,7 @@
 ---
-title: Aus AstroPilot wird Sproutsite
-eyebrow: Neuer Markenauftritt
+title: AstroPilot becomes Sproutsite
+eyebrow: A new brand identity
 tone: brand
 ---
 
-Am 10. November 2026 fiel die Entscheidung für den neuen Namen Sproutsite. Mit sproutsite.dev, einem eigenen Logo und einer klaren Farbwelt erhält das Projekt eine neue Identität.
+On 10 November 2026, Sproutsite was chosen as the new name. With sproutsite.dev, its own logo, and a clear colour system, the project gains a new identity.

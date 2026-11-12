@@ -1,0 +1,82 @@
+---
+tone: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Öffentliche Bausteine</Eyebrow>
+
+## Verfügbare Komponenten
+
+Sproutsite exportiert geprüfte Komponenten aus `sproutsite/components`. Aktuell gehören dazu `Columns`, `Column`, `Eyebrow`, `Alert`, `ContentImage`, `ContentTable`, `Card`, `CardActions`, `Tabs`, `Tab` und `FoundationSample`.
+
+### Eyebrow vor einer Überschrift
+
+`Eyebrow` ergänzt eine Überschrift um eine kurze Einordnung. Die Komponente nimmt keine Props entgegen und ihr Text sollte die Überschrift präzisieren, statt sie zu wiederholen.
+
+```mdx
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Einordnung</Eyebrow>
+
+## Die eigentliche Überschrift
+```
+
+### Inhalte mit Tabs gliedern
+
+`Tabs` enthält direkt einen oder mehrere `Tab`-Bausteine mit Markdown-Inhalten. Die Gruppe benötigt ein beschreibendes `label`, jeder Reiter einen `title`. Optional wählt `variant` zwischen `border` (Standard), `box` und `lift`; `initial` bestimmt den anfangs geöffneten Reiter, ab eins gezählt.
+
+```mdx
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Tabs label="Informationen" variant="box" initial={1}>
+    <Tab title="Überblick">
+
+        Ein kurzer **Überblick**.
+
+    </Tab>
+    <Tab title="Details">
+
+        Die ausführliche Erklärung.
+
+    </Tab>
+
+</Tabs>
+```
+
+Die Reiter sind mit Pfeiltasten sowie Pos1 und Ende bedienbar. Ohne JavaScript bleiben die Inhalte untereinander sichtbar. Die [Tabs-Beispiele](/showcase/tabs/) zeigen alle drei Darstellungen.
+
+Der [Showcase](/showcase/) zeigt alle verfügbaren Varianten als sichtbare Beispiele. Neue Komponenten werden dort ergänzt, bevor sie als dokumentierter MDX-Baustein verwendet werden.
+
+### Gestaltungsproben für Foundations
+
+`FoundationSample` zeigt die Gestaltung des aktiven Default-Themes. Die erforderliche Prop `kind` wählt eine fest definierte Probe: `colors`, `type`, `spacing`, `radius`, `shadow` oder `focus`. Der Baustein nimmt keine weiteren Props und keine Kinder entgegen. Er dient der visuellen Theme-Vorschau und ist kein allgemeiner Layout-Baustein.
+
+```mdx
+import { FoundationSample } from 'sproutsite/components';
+
+<FoundationSample kind="colors" />
+```
+
+Die [Foundations-Seite](/showcase/foundations/) zeigt alle sechs Proben mit Einbindungscode und den zugehörigen CSS-Ausschnitten.
+
+### Tabellen mit Beschriftung und Varianten
+
+`ContentTable` enthält genau eine normale Markdown-Tabelle. `caption` ist eine erforderliche, sichtbare Tabellenbeschriftung. Optional sind `variant="plain|striped"`, `density="comfortable|compact"`, die boolesche Prop `wide` und `highlight={2}` zum Hervorheben einer vorhandenen Datenzeile. Datenzeilen zählen ab eins; die Kopfzeile zählt nicht mit.
+
+```mdx
+import { ContentTable } from 'sproutsite/components';
+
+<ContentTable caption="Beispielprojekte" variant="striped">
+
+    | Projekt | Status | Seiten |
+    | :--- | :---: | ---: |
+    | Nord | In Arbeit | 12 |
+    | Süd | Geprüft | 8 |
+
+</ContentTable>
+```
+
+Leerzeilen vor und nach der Tabelle trennen das Markdown vom MDX-Baustein. Die Markdown-Trennzeile steuert die Spaltenausrichtung. Eine kleine Transformation im bestehenden Markdown-AST ergänzt die native Beschriftung, `scope="col"` für die Kopfzellen und gegebenenfalls die Zeilenmarkierung. Der Baustein setzt Sproutsites MDX-Konfiguration voraus; ein eigener Tabellenparser wird nicht verwendet.
+
+Mit `wide` bleibt die Tabelle mindestens 60rem breit und lässt sich innerhalb ihres fokussierbaren Bereichs horizontal scrollen. Der Seiteninhalt selbst wird nicht verbreitert. Die [Tabellen-Beispiele](/showcase/tabellen/) zeigen alle Varianten mit Vorschau und vollständigem Code.

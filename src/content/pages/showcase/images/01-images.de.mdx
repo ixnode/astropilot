@@ -1,0 +1,144 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import layoutLandscape from '../_assets/layout-landscape.png';
+import layoutPortrait from '../_assets/layout-portrait.png';
+import { ContentImage } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Lokale Asset-Pipeline</Eyebrow>
+
+## Bilder
+
+`ContentImage` nutzt Astros lokale Asset-Pipeline. Die PNG-Quellen werden beim Build als WebP mit Qualität 80 ausgegeben. Jedes Beispiel zeigt zunächst die Vorschau. Im Reiter „Code“ findest du den vollständigen MDX-Code mit Bildimport, Alternativtext und den jeweiligen Einstellungen. Die relativen Bildpfade beziehen sich auf diese Showcase-Datei; für eigene Seiten passt du sie an den Speicherort deiner Bilder an.
+
+**Atomic Design:** Atom `ContentImage`.
+
+Komponentenpfad unter `src/themes/default/components/`: `atoms/ContentImage/`.
+
+### Feste Breite, runde Ecken und Rahmen
+
+Das Bild erhält eine Breite von 360 Pixeln. Die Höhe folgt dem ursprünglichen Seitenverhältnis. Abgerundete Ecken und ein dezenter Rahmen schließen die Darstellung ab.
+
+<Tabs label="Feste Breite, runde Ecken und Rahmen: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <ContentImage
+            src={layoutLandscape}
+            alt="Abstrakte blaue Darstellung eines modularen Website-Layouts"
+            width={360}
+            shape="rounded"
+            border="default"
+        />
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import layoutLandscape from '../_assets/layout-landscape.png';
+        import { ContentImage } from 'sproutsite/components';
+
+        <ContentImage
+            src={layoutLandscape}
+            alt="Abstrakte blaue Darstellung eines modularen Website-Layouts"
+            width={360}
+            shape="rounded"
+            border="default"
+        />
+        ```
+    </Tab>
+
+</Tabs>
+
+### Feste Höhe, eckig und ohne Rahmen
+
+Die Hochformatquelle wird mit einer Höhe von 360 Pixeln ausgegeben. Die Breite ergibt sich aus dem Seitenverhältnis; Ecken und Rahmen bleiben bewusst schlicht.
+
+<Tabs label="Feste Höhe, eckig und ohne Rahmen: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <ContentImage
+            src={layoutPortrait}
+            alt="Editorial-Darstellung von modularen Inhaltsblöcken"
+            height={360}
+            shape="square"
+            border="none"
+        />
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import layoutPortrait from '../_assets/layout-portrait.png';
+        import { ContentImage } from 'sproutsite/components';
+
+        <ContentImage
+            src={layoutPortrait}
+            alt="Editorial-Darstellung von modularen Inhaltsblöcken"
+            height={360}
+            shape="square"
+            border="none"
+        />
+        ```
+    </Tab>
+
+</Tabs>
+
+### Volle Breite
+
+Das Bild füllt die gesamte verfügbare Breite des Vorschau-Panels. Es bleibt innerhalb des Inhaltsbereichs und behält sein Seitenverhältnis.
+
+<Tabs label="Volle Breite: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <ContentImage
+            src={layoutLandscape}
+            alt="Breite abstrakte Darstellung eines responsiven Layouts"
+            fullWidth
+            shape="rounded"
+        />
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import layoutLandscape from '../_assets/layout-landscape.png';
+        import { ContentImage } from 'sproutsite/components';
+
+        <ContentImage
+            src={layoutLandscape}
+            alt="Breite abstrakte Darstellung eines responsiven Layouts"
+            fullWidth
+            shape="rounded"
+        />
+        ```
+    </Tab>
+
+</Tabs>
+
+### Feste Breite und Höhe mit Cover-Ausschnitt
+
+Mit 720 × 260 Pixeln entsteht ein breites Bildformat. Die Quelle füllt dieses Format mit einem Cover-Ausschnitt, ohne das Motiv zu verzerren.
+
+<Tabs label="Feste Breite und Höhe mit Cover-Ausschnitt: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <ContentImage
+            src={layoutLandscape}
+            alt="Auf einen breiten Ausschnitt zugeschnittene Layout-Illustration"
+            width={720}
+            height={260}
+            shape="rounded"
+            border="default"
+        />
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import layoutLandscape from '../_assets/layout-landscape.png';
+        import { ContentImage } from 'sproutsite/components';
+
+        <ContentImage
+            src={layoutLandscape}
+            alt="Auf einen breiten Ausschnitt zugeschnittene Layout-Illustration"
+            width={720}
+            height={260}
+            shape="rounded"
+            border="default"
+        />
+        ```
+    </Tab>
+
+</Tabs>

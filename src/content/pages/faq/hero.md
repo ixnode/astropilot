@@ -1,7 +1,7 @@
 ---
-title: Häufige Fragen zu Astro
-eyebrow: Fragen und Antworten
+title: Frequently asked questions about Astro
+eyebrow: Questions and answers
 tone: brand
 ---
 
-Hier finden Sie die wichtigsten Hinweise zur Arbeit mit statischen Seiten, Markdown-Inhalten und wiederverwendbaren Komponenten.
+Find the key information about working with static pages, Markdown content, and reusable components.

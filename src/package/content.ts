@@ -5,13 +5,13 @@ import { tones } from '../lib/sproutsite/types.js';
 
 function blogDirectoryId(entry: string): string {
     const match = entry.match(
-        /^(\d{4}-\d{2}-\d{2}\.([a-z0-9]+(?:-[a-z0-9]+)*))\/page\.yaml$/,
+        /^(\d{4}-\d{2}-\d{2}\.([a-z0-9]+(?:-[a-z0-9]+)*))\/page(?:\.([a-z]{2}))?\.yaml$/,
     );
     if (!match)
         throw new Error(
             `Invalid blog page path ${entry}; expected YYYY-MM-DD.article-slug/page.yaml`,
         );
-    return match[1];
+    return `${match[1]}${match[3] ? `.${match[3]}` : ''}`;
 }
 
 /** Creates the Astro collections required by the Sproutsite content contract. */
@@ -35,7 +35,7 @@ export function createSproutsiteCollections(
     const pages = defineCollection({
         loader: glob({
             base: contentDirectory,
-            pattern: '**/page.yaml',
+            pattern: '**/page*.yaml',
             generateId: ({ entry }) => entry.replace(/\.yaml$/, ''),
         }),
         schema: z.object({
@@ -79,7 +79,7 @@ export function createSproutsiteCollections(
     const blogPages = defineCollection({
         loader: glob({
             base: blogDirectory,
-            pattern: '*/page.yaml',
+            pattern: '*/page*.yaml',
             generateId: ({ entry }) => blogDirectoryId(entry),
         }),
         schema: ({ image }: { image: ImageFunction }) =>

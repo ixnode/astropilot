@@ -4,8 +4,17 @@ import { loadSiteConfig } from '../src/lib/sproutsite/site-config.js';
 import { canonicalUrl, withBase } from '../src/lib/sproutsite/urls.js';
 
 const site = loadSiteConfig();
-const routes = ['/', '/faq/', '/info/', '/showcase/', '/kontakt/'];
-for (const route of routes) {
+const germanSite = loadSiteConfig('de');
+const pages = [
+    { route: '/', site },
+    { route: '/faq/', site },
+    { route: '/info/', site },
+    { route: '/showcase/', site },
+    { route: '/contact/', site },
+    { route: '/de/', site: germanSite },
+    { route: '/de/kontakt/', site: germanSite },
+];
+for (const { route, site: pageSite } of pages) {
     const relativeFile =
         route === '/' ? 'index.html' : join(route, 'index.html');
     const path = join('dist', relativeFile);
@@ -13,7 +22,7 @@ for (const route of routes) {
     const html = readFileSync(path, 'utf8');
     if (
         !html.includes(
-            `<link rel="canonical" href="${canonicalUrl(route, site)}"`,
+            `<link rel="canonical" href="${canonicalUrl(route, pageSite)}"`,
         )
     )
         throw new Error(`Missing canonical for ${route}`);

@@ -40,7 +40,18 @@ export function withBase(pathname: string, base: string): string {
 
 export function contentHref(href: string, site: SiteConfig): string {
     if (!href.startsWith('/') || href.startsWith('//')) return href;
-    return withBase(href, site.base);
+    const defaultLocale = site.locales[0];
+    const localePrefix =
+        site.language === defaultLocale ? '' : `/${site.language}`;
+    const localizedHref =
+        localePrefix === '' ||
+        href === localePrefix ||
+        href.startsWith(`${localePrefix}/`)
+            ? href
+            : href === '/'
+              ? `${localePrefix}/`
+              : `${localePrefix}${href}`;
+    return withBase(localizedHref, site.base);
 }
 
 /** Compare web links with the validated production origin, including in preview builds. */
@@ -54,12 +65,12 @@ export function isExternalWebLink(href: string, siteUrl: string): boolean {
 }
 
 export function canonicalUrl(route: string, site: SiteConfig): string {
-    return new URL(withBase(route, site.base), site.url).toString();
+    return new URL(contentHref(route, site), site.url).toString();
 }
 
 /** Derives a safe static route for a dated blog directory identifier. */
 export function blogRouteFromId(id: string): string {
-    const normalized = id.replace(/^\/+|\/+$/g, '');
+    const normalized = id.replace(/^\/+|\/+$/g, '').replace(/\.de$/, '');
     const match = normalized.match(
         /^\d{4}-\d{2}-\d{2}\.([a-z0-9]+(?:-[a-z0-9]+)*)$/,
     );
